@@ -20,7 +20,8 @@ The write-up is [`report/report.pdf`](report/report.pdf) (LaTeX source `report/r
   - 259 source episodes remain after pose, gripper and gate filtering
   - 561 bimanual segments of 65 frames each
 - **Pose:** MASt3R-SLAM gives the RGB-only wrist-camera pose. Metric scale comes from a per-episode IMU visual-inertial
-  fit (`cp6_scale.imu_vi`). The camera-to-TCP transform is `handumi_camera_tcp_v2`.
+  fit (`cp6_scale.imu_vi`). On a separate 14-episode ArUco benchmark (10 tracks held out) the scale error is
+  4.6 / 17.0 % (p50 / p90) and the 16-step relative position error p90 is 11.3 mm (`results/pose_benchmark/`). The camera-to-TCP transform is `handumi_camera_tcp_v2`.
 - **Retargeting:** trajectories are anchored at the robot start pose and retargeted to reBot B601 pseudo-joints with
   continuity IK. Segments then pass workspace, metric, IK/FK and inter-arm collision gates. Sessions with inconsistent
   IMU and camera rotation are quarantined (`results/c8_quarantine.json`).
@@ -49,7 +50,7 @@ were not systematically randomised. None of the results here are claims about ge
 - Aggregate errors are dominated by static phases; on static samples the policy predicts spurious motion.
 - Prompt swap: the 6 order instructions move the k=30 prediction by 4.8 mm (≈8 % of the 62 mm predicted displacement),
   and the true instruction is no closer to the recorded motion than a wrong one (mean rank 3.55 of 6, chance 3.5).
-  The model does not use the task-order instruction.
+  The instruction measurably changes predictions but does not make them more accurate.
 
 ## Repository map
 
@@ -65,10 +66,22 @@ were not systematically randomised. None of the results here are claims about ge
 | `pipeline/dataset/` | Segment rows -> LeRobot v3 dataset (`c8old_build_dataset.py`, `write_stage.py`), post-build and gripper-semantics gates |
 | `training/` | `train_bi.py` (LeRobot X-VLA entry point with install hooks), `humanik_delta.py` (Δq target, EEF aux and FK losses), `c8old_chain.sh` (smoke -> 300k pretrain -> integrity -> robot fine-tune), `c8old_launch.sh`, and `robot/` (reBot URDF, numpy/torch FK) |
 | `evaluation/` | Offline checkpoint evaluator (`c8old_mac_eval.py`), frame cache and checkpoint selection |
-| `results/` | Census/funnel JSONs, domain manifest, quarantine list, gripper census, split index, run provenance/summary, per-checkpoint eval JSONs (`eval/`, `eval_gated/`) and `selection.json` |
+| `results/` | `episode_manifest.csv` (349 episodes: session, order, time, domain, funnel outcome, split), `model_config/` (X-VLA `config.json`, `train_config.json`), `pose_benchmark/`, census/funnel JSONs, domain manifest, quarantine list, gripper census, split index, run provenance/summary, per-checkpoint eval JSONs (`eval/`, `eval_gated/`) and `selection.json` |
 | `sample_data/` | 3 episodes (see below) |
-| `analysis/` | Post-hoc analyses of the final checkpoint: `prompt_swap.py` (6 order instructions, same noise seed, + 2 extra seeds), `summarize_prompt_swap.py`, `per_order_breakdown.py`; summaries in `analysis/out/*.json` |
+| `analysis/` | `verify_claims.py` recomputes every number in the report from the files in this repo (177 checks; table in `analysis/out/claim_audit.md`). Post-hoc analyses of the final checkpoint: `prompt_swap.py` (6 order instructions, same noise seed, + 2 extra seeds), `summarize_prompt_swap.py`, `per_order_breakdown.py`; summaries in `analysis/out/*.json` |
 | `report/` | Technical report (PDF + LaTeX) and figure script |
+
+## Verifying the numbers
+
+```bash
+python3 analysis/verify_claims.py --md analysis/out/claim_audit.md   # needs pyyaml; exits 1 on any mismatch
+```
+
+## Not included
+
+- `training/robot/reBot_B601_DM_dualarm.urdf` (vendor robot model) and `pipeline/mast3r_pose/build_compat_5090.patch`
+  (a diff against MASt3R-SLAM) are withheld until their licences are confirmed. The FK code in `training/robot/`
+  expects the URDF at that path.
 
 ## Running it
 

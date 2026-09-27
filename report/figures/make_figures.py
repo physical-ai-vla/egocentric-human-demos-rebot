@@ -44,20 +44,20 @@ fig, axs = plt.subplots(1, ncol, figsize=(7.16, 1.75), gridspec_kw=dict(wspace=0
 ax = axs[0]; k = steps / 1e3
 ax.plot(k, g("geo"), color=BLUE, lw=1.5, label="all samples (pre-registered)")
 ax.plot(k, g("mgeo_tcp"), color=ORANGE, lw=1.5, label="moving samples ($\\geq$20 mm)")
-ax.axvline(160, color=INK2, lw=0.6, ls=":"); ax.text(163, 26, "selected\n(160k)", fontsize=6, color=INK2, va="top")
+ax.axvline(160, color=INK2, lw=0.6, ls=":"); ax.text(165, 17, "selected\n(160k)", fontsize=6, color=INK2, va="top")
 ax.set_xlabel("pretraining step (k)"); ax.set_ylabel("geo score: mean FK TCP err. (mm)"); ax.legend(fontsize=6.3, loc="upper center", bbox_to_anchor=(0.5, -0.3))
 ax.set_title("(a) held-out error vs. training", fontsize=7.5, loc="left")
 ax = axs[1]
 ax.plot(k, g("k30_mae_tcp"), color=ORANGE, lw=1.5, label="policy, moving")
 ax.plot(k, g("k30_zero_tcp"), color=INK2, lw=1.2, ls="--", label="zero-motion baseline, moving")
 ax.set_xlabel("pretraining step (k)"); ax.set_ylabel("joint MAE at k=30 (deg)"); ax.set_ylim(0, 10); ax.legend(fontsize=6.3, loc="upper center", bbox_to_anchor=(0.5, -0.3))
-ax.set_title("(b) 1-s horizon vs. no-motion", fontsize=7.5, loc="left")
+ax.set_title("(b) $k{=}30$ ($\\approx$1.2 s) vs. no-motion", fontsize=7.5, loc="left")
 if PS:
     ax = axs[2]; KS = (1, 4, 8, 16, 30); kk = np.array(KS); M = lambda key: [PS[f"k{q}"]["moving"][key] for q in KS]
     ax.plot(kk, M("pred_disp_mm_p50"), color=INK2, lw=1.2, marker="s", ms=3, label="predicted displacement")
     ax.plot(kk, M("prompt_spread_mm_p50"), color=ORANGE, lw=1.5, marker="o", ms=3.5, label="spread over 6 order prompts")
     ax.plot(kk, M("noise_spread_mm_p50"), color=BLUE, lw=1.2, ls="--", marker="o", ms=3, label="spread over 3 noise seeds")
-    ax.set_yscale("log"); ax.set_xlabel("horizon k (steps of 1/30 s)"); ax.set_ylabel("median, moving samples (mm)")
+    ax.set_yscale("log"); ax.set_xlabel("horizon k (steps of 1/30 s)"); ax.set_ylabel("median (mm), moving")
     ax.legend(fontsize=5.8, loc="upper center", bbox_to_anchor=(0.45, -0.3), ncol=1); ax.set_title("(c) prompt swap", fontsize=7.5, loc="left")
 fig.savefig(F / "fig4_eval.pdf", bbox_inches="tight"); plt.close(fig)
 print("ok")

@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx,booktabs,amsmath,amssymb,multirow,xcolor,url,xspace}
 \usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Egocentric Human Demonstrations for Robot Manipulation: Dataset Design, Processing, and an Offline Learnability Analysis}, pdfauthor={Jeong Hwan Lee}}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,fit,backgrounds}
 \newcommand{\mm}{\,mm\xspace}
@@ -26,14 +27,15 @@ joint-space action chunks, and evaluate it offline on 26 held-out episodes. The 
 0.2--1.2\,s horizon. This figure is dominated by static phases: on the 23\% of samples in which the target moves at least
 20\mm, the error at 1.2\,s is 39.9\mm, direction cosine 0.90, and the policy reduces joint error by 24\% relative to a
 zero-motion predictor. Swapping the order instruction changes the predicted motion measurably but by only ${\sim}8\%$ of its
-magnitude, and the true instruction predicts the human motion no better than the five wrong ones: the model does not
-exploit the task-order instruction.
+magnitude, and the true instruction predicts the human motion no better than the five wrong ones, so the model makes no
+task-useful use of the order instruction in this evaluation.
 We report no closed-loop robot results, and our split tests neither new spatial layouts nor unseen stacking orders; we state
 explicitly which generalization claims this data can and cannot support.
 \end{abstract}
 
 \section{Introduction}
-Robot demonstrations are expensive: each one needs a robot, an operator and a teleoperation rig. Egocentric human
+Collecting robot demonstrations is often expensive, requiring access to a physical robot, an operator and task-specific
+teleoperation infrastructure. Egocentric human
 demonstrations can be collected faster, with less hardware, in natural settings, and hand-worn grippers such as UMI~\cite{chi2024umi}
 make the human's end-effector look like the robot's, reducing the embodiment gap at the gripper. Whether such data
 transfers to a specific robot depends on a chain of steps that is rarely audited end to end: sensor calibration, metric pose
@@ -109,12 +111,11 @@ layout varies between episodes through the manual reset, around a nominal layout
 was not recorded; there is no per-episode layout label.
 
 \textbf{Collection.} One operator recorded 349 episodes in 15 sessions over three days (15--17 September 2026), 2.20\,h in
-total (median episode 23.05\,s). Per order: RBP 64, RPB 62, BRP 61, BPR 56, PRB 55, PBR 51 (Fig.~\ref{fig:dataset}b). Episodes
-from five early sessions (55 episodes) are tracked as a separate provenance domain (``early'') from the main 294, because
+total (median episode 23.05\,s). Per order: RBP 64, RPB 62, BRP 61, BPR 56, PRB 55, PBR 51 (Fig.~\ref{fig:dataset}b). Episodes from ten early sessions (55 episodes) are tracked as a separate provenance domain (``early'') from the main 294, because
 their gripper anchors were derived afterwards; after filtering the two domains behave alike.
 
 \textbf{Calibration.} Wrist cameras use a Kannala--Brandt fisheye model (left $f_x{=}789$, right $f_x{=}791$\,px). Kalibr
-camera--IMU calibration gives time offsets of 30.2 and 32.8\,ms with mean reprojection errors of 6.1 and 5.6\,px, which is
+camera--IMU calibration gives time offsets of 30.2 and 32.8\,ms with mean reprojection errors of 6.0 and 5.6\,px, which is
 high and one reason pose accuracy is validated separately (Sec.~\ref{sec:proc}). The camera-to-TCP transform is a caliper
 measurement, $t=[0, 55.3, 122.5]$\mm with a fixed axis permutation, following UMI's use of a CAD constant; it was measured on
 one unit and applied to both. The jaw-width scale (aperture $67.5\pm5$\mm) is estimated from video of 50\mm-cube grasps; a
@@ -130,11 +131,11 @@ caliper check is pending.
 
 \section{Processing and Splits}\label{sec:proc}
 \textbf{Wrist poses.} UMI localizes all demonstrations in one ORB-SLAM3 map per scene. On our data this failed: maps built
-before a scene change did not relocalize, and the tracks that did had high-frequency position reversals (median reversal rate
-0.25 versus 0.0 for robot teleoperation). We therefore run MASt3R-SLAM on the RGB wrist video alone and recover metric scale
+before a scene change did not relocalize, and on a marker benchmark (below) its tracks cover a median of 3\% of each demonstration, with frequent position
+reversals (median reversal rate 0.24 versus 0.07 for the method we adopt). We therefore run MASt3R-SLAM on the RGB wrist video alone and recover metric scale
 per episode from the IMU (visual--inertial fit over a 15-frame window). On a separate benchmark of 14 ArUco-marker episodes
-(28 hand trajectories; 10 held out), this gives coverage 1.00 versus 0.09 for ORB-SLAM3, scale error p50/p90 of 4.6/16.5\%
-(versus 20.8/23.8\% for one global constant), rotation error p50/p90 0.84/2.13\textdegree{} and a UMI-style 16-step relative
+(28 hand trajectories; 10 held out), run on the same GPU as the dataset, this gives median tracking coverage 1.00 versus 0.03
+for ORB-SLAM3 with a stored map, scale error p50/p90 of 4.6/17.0\% (versus 18.5/23.8\% for one global constant), rotation error p50/p90 0.84/2.13\textdegree{} and a UMI-style 16-step relative
 position error p90 of 11.3\mm. The 349 episodes themselves have no ground truth.
 
 \textbf{Retargeting.} Each TCP trajectory is mapped to a reBot B601 6-DoF arm by inverse kinematics on its URDF. Absolute
@@ -184,7 +185,7 @@ $\mathrm{FK}(q_t+\hat a_i)$ and the measured TCP position (weight 20). Targets a
 relabelled robot commands.
 
 \textbf{Optimization.} 300k steps, batch 4, AdamW (lr $10^{-4}$, weight decay $10^{-4}$, 1k warm-up, cosine decay to
-$2.5\times10^{-6}$), gradient clipping 10, fp32, one RTX~4090 (about one day). A checkpoint is saved every 10k steps.
+$2.5\times10^{-6}$), gradient clipping 10, fp32, one RTX~4090. A checkpoint is saved every 10k steps.
 The checkpoint selection rule, minimum geo score (below) on all validation samples, was fixed before training.
 
 \section{Evaluation Protocol}\label{sec:eval}
@@ -238,15 +239,14 @@ samples.
 
 \textbf{(2) On moving samples the policy predicts the direction of motion and beats a no-motion baseline.} The direction
 cosine rises from 0.72 at $k{=}1$ to 0.90 at $k{=}30$, and joint MAE is 13--32\% lower than the zero-motion predictor across
-horizons (6.59 versus 8.68\textdegree{} at $k{=}30$; Fig.~\ref{fig:eval}b). The model has learned where the arm is going,
-not only that it moves.
+horizons (6.59 versus 8.68\textdegree{} at $k{=}30$; Fig.~\ref{fig:eval}b). The model captures the direction of the upcoming motion, not only its presence.
 
 \textbf{(3) On all samples, the policy is worse than predicting no motion.} Joint MAE is about twice the zero-motion MAE at
 every horizon (0.30 versus 0.15\textdegree{} at $k{=}1$): during static phases the policy predicts small spurious motion, and the
 median predicted-to-measured displacement ratio is 1.41 at $k{=}1$. At $k{=}30$ the spread of predictions is 0.77 of the spread
 of targets, so the long horizon is somewhat under-dispersed rather than collapsed.
 
-\textbf{(4) The order instruction changes predictions but carries no usable information.} In the prompt swap
+\textbf{(4) The order instruction changes predictions but does not improve them.} In the prompt swap
 (Fig.~\ref{fig:eval}c), the six instructions move the predicted TCP by a median of 4.8\mm at $k{=}30$ on moving samples, about
 50$\times$ the sampling-noise spread (0.09\mm) but only 8\% of the predicted displacement (62\mm). The true instruction is not
 closer to the recorded motion than the wrong ones: its error is 39.9\mm versus 39.5\mm for the mean wrong instruction, and its
@@ -268,7 +268,8 @@ checkpoint: prediction spread across the six order instructions (same seed) vers
 \end{figure*}
 
 \section{Failure Analysis}\label{sec:fail}
-\textbf{Instruction blindness.} The policy's motion is driven by the images and state, not by the order instruction (finding 4).
+\textbf{Weak use of the task-order instruction.} The order prompt measurably changes the prediction, but this variation does
+not improve agreement with the recorded motion (finding 4).
 In this dataset the order is also partly visible from the scene once stacking has begun, so the instruction is only necessary
 at the start of an episode; nothing in training forces the model to use it.
 
@@ -284,8 +285,7 @@ removals (91\%), and in 531 of those (78\%) only one arm leaves the robot worksp
 their extent, the kept set is likely biased towards compact motions; we have not yet quantified this bias.
 
 \textbf{Upstream failures that shaped the design.} ORB-SLAM3 with a stored map failed to relocalize across scene changes and
-produced position jitter; a camera-orientation convention error in an earlier export corrupted rotations by up to 128\textdegree{}
-p95 until it was found by a frame-regression test; and 65 episodes (19\%) fail synchronisation. Each was found by an explicit gate,
+produced position jitter; a camera-orientation convention error in an earlier export corrupted rotations until it was found by a frame-regression test; and 65 episodes (19\%) fail synchronisation. Each was found by an explicit gate,
 not by training loss.
 
 \section{Limitations and Future Work}\label{sec:lim}
@@ -308,9 +308,10 @@ bottleneck is as much in pose recovery, filtering and evaluation design as in th
 
 \section{Conclusion}
 We collected 349 bimanual egocentric demonstrations of three-cube stacking, processed them into 561 robot joint-space segments
-through a gated pipeline, and fine-tuned a 0.9B VLA on the result. Offline, the model predicts the direction and magnitude of
-held-out human motion better than a no-motion baseline when the arm moves, but it drifts when the arm is still, aggregate
-metrics hide this, and it does not use the task-order instruction. Spatial and task-order generalization and closed-loop transfer remain open and require the controlled
+through a gated pipeline, and fine-tuned a 0.9B VLA on the result. Offline, on moving samples the model predicts the
+direction of held-out human motion reliably (cosine 0.90 at $k{=}30$) and reduces joint-space error relative to a zero-motion
+baseline (by 13--32\% across horizons); on static samples it predicts spurious motion, aggregate metrics hide this, and
+swapping the order instruction does not make predictions more accurate. Spatial and task-order generalization and closed-loop transfer remain open and require the controlled
 experiments listed above.
 
 \begin{thebibliography}{99}\footnotesize
