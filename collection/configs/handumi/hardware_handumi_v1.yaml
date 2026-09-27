@@ -1,0 +1,40 @@
+# PRODUCTION TARGET — HandUMI V1: head C922 (policy obs) + LEFT/RIGHT wrist fisheye (SLAM) + L/R Teensy IMU + L/R Feetech jaw. RGB only, no depth.
+# HandUMI V1 hardware. Device identity is resolved at start-up (never hard-coded indices in code).
+# Cameras: `match_name` + `ordinal` are looked up in the AVFoundation device list (same order as OpenCV indices on macOS);
+# set `index` to force a specific OpenCV index. Confirm the mapping in the UI preview before recording.
+hardware_version: handumi_v1
+profile: handumi_v1
+calibration_version: uncalibrated          # bump when camera->TCP / intrinsics change; never change mid-session
+cameras:
+  # HEAD = C922 RGB (2026-09-15). This reverses the 2026-09-11 switch to the Orbbec, and for the same reason it was
+  # made: matching the human head to the reBot head, which is a C922. Depth was never the V1 policy input, and the
+  # Orbbec cannot share a host with the wrist cameras -- opening it breaks a UVC camera that is already streaming,
+  # and opening it FIRST stops the next UVC camera from opening at all. 0/3 thirty-second takes survived either
+  # ordering, with all three cameras on separate host controllers. Without it the same rig is 3/3 with both wrists
+  # at 1920x1080 and clean validate_episode. 640x480 is the frozen shared human/robot policy observation.
+  # RGB-D lives on in hardware_handumi_rgbd.yaml; the depth code paths stay, entered only by the RGB-D tools.
+  # strict_identity (2026-09-22): the two wrist units share the factory serial "UC684", so the product name is the
+  # only discriminator and it is a name programmed into one unit -- a reflash or a swap breaks the L/R binding with
+  # no error. strict makes verify_identity REFUSE to record unless exactly one device matches, instead of opening
+  # whatever it finds. Optical settings (AF/AE/WB) are deliberately left alone.
+  - {name: left_wrist, role: pose_estimation, backend: uvc, match_name: "FisheyeCamLeft", ordinal: 0, width: 1920, height: 1080, fps: 30, fourcc: MJPG, required: true, strict_identity: true}          # product name, not ordinal: AVFoundation order changes between calls
+  - {name: right_wrist, role: pose_estimation, backend: uvc, match_name: "Arducam 1080P Low Light", ordinal: 0, width: 1920, height: 1080, fps: 30, fourcc: MJPG, required: true, strict_identity: true}  # the two units share USB serial UC684; only the product name separates them
+  - {name: head, role: policy_obs, backend: uvc, match_name: "C922", ordinal: 0, width: 640, height: 480,
+     fps: 30, fourcc: MJPG, required: true,
+     # 2026-09-15: autofocus made this a DIFFERENT LENS every session -- fx came out 417 / 531 / 501 across
+     # three calibration batches that each fitted themselves to rms 0.19-0.26, and no single K could fit them
+     # together (rms went to 1.06). Locked at the sharpest focus measured on the real scene, which is also
+     # where autofocus settled. The register does not report what autofocus chose, so it had to be measured.
+     uvc_controls: {auto-focus: false, focus-abs: 20}}
+imus:
+  - {side: left,  backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "20540160", baud: 2000000, rate_hz: 200, required: true}         # side assignment is physical: confirm when the unit is mounted
+  - {side: right, backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "20778070", baud: 2000000, rate_hz: 200, required: true}         # bench-verified 2026-09-14, 8/8 gates
+grippers:
+  # Real ports, verified answering 2026-09-15 at 100 Hz with no servo error bits. The HANDUMI_L/R names
+  # these used to carry are udev-style aliases that do not exist on macOS -- the CH343 adapters enumerate
+  # as /dev/cu.usbmodem<adapter serial>1, and the adapter serial is the only stable part.
+  - {side: left,  backend: feetech, port: "/dev/cu.usbmodem5B3D0480821", servo_id: 1, baud: 1000000, sample_hz: 100, norm_one_is: open, required: true}
+  - {side: right, backend: feetech, port: "/dev/cu.usbmodem5B3D0497471", servo_id: 1, baud: 1000000, sample_hz: 100, norm_one_is: open, required: true}
+# Gripper calibration (ticks_closed / ticks_open per side) is NOT here: it lives in versioned files
+# configs/calibration/gripper_vNNN.yaml (latest wins; written by the UI SET CLOSED / SET OPEN buttons).
+gripper_calibration: latest

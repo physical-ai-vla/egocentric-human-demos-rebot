@@ -1,0 +1,4190 @@
+{
+ "20260916_140419_000001_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000001",
+  "side": "left"
+ },
+ "20260916_140419_000001_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000001",
+  "side": "right"
+ },
+ "20260916_140419_000002_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000002",
+  "side": "left"
+ },
+ "20260916_140419_000002_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000002",
+  "side": "right"
+ },
+ "20260916_140419_000003_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000003",
+  "side": "left"
+ },
+ "20260916_140419_000003_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000003",
+  "side": "right"
+ },
+ "20260916_140419_000004_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000004",
+  "side": "left"
+ },
+ "20260916_140419_000004_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000004",
+  "side": "right"
+ },
+ "20260916_140419_000005_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000005",
+  "side": "left"
+ },
+ "20260916_140419_000005_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000005",
+  "side": "right"
+ },
+ "20260916_140419_000006_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000006",
+  "side": "left"
+ },
+ "20260916_140419_000006_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000006",
+  "side": "right"
+ },
+ "20260916_140419_000007_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000007",
+  "side": "left"
+ },
+ "20260916_140419_000007_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000007",
+  "side": "right"
+ },
+ "20260916_140419_000008_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000008",
+  "side": "left"
+ },
+ "20260916_140419_000008_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000008",
+  "side": "right"
+ },
+ "20260916_140419_000009_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000009",
+  "side": "left"
+ },
+ "20260916_140419_000009_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000009",
+  "side": "right"
+ },
+ "20260916_140419_000010_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000010",
+  "side": "left"
+ },
+ "20260916_140419_000010_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000010",
+  "side": "right"
+ },
+ "20260916_140419_000011_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000011",
+  "side": "left"
+ },
+ "20260916_140419_000011_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000011",
+  "side": "right"
+ },
+ "20260916_140419_000012_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000012",
+  "side": "left"
+ },
+ "20260916_140419_000012_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000012",
+  "side": "right"
+ },
+ "20260916_140419_000013_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000013",
+  "side": "left"
+ },
+ "20260916_140419_000013_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000013",
+  "side": "right"
+ },
+ "20260916_140419_000014_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000014",
+  "side": "left"
+ },
+ "20260916_140419_000014_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000014",
+  "side": "right"
+ },
+ "20260916_140419_000015_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000015",
+  "side": "left"
+ },
+ "20260916_140419_000015_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000015",
+  "side": "right"
+ },
+ "20260916_140419_000016_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000016",
+  "side": "left"
+ },
+ "20260916_140419_000016_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000016",
+  "side": "right"
+ },
+ "20260916_140419_000017_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000017",
+  "side": "left"
+ },
+ "20260916_140419_000017_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000017",
+  "side": "right"
+ },
+ "20260916_140419_000018_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000018",
+  "side": "left"
+ },
+ "20260916_140419_000018_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_140419_000018",
+  "side": "right"
+ },
+ "20260916_170333_000001_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000001",
+  "side": "left"
+ },
+ "20260916_170333_000001_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000001",
+  "side": "right"
+ },
+ "20260916_170333_000002_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000002",
+  "side": "left"
+ },
+ "20260916_170333_000002_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000002",
+  "side": "right"
+ },
+ "20260916_170333_000003_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000003",
+  "side": "left"
+ },
+ "20260916_170333_000003_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000003",
+  "side": "right"
+ },
+ "20260916_170333_000004_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000004",
+  "side": "left"
+ },
+ "20260916_170333_000004_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000004",
+  "side": "right"
+ },
+ "20260916_170333_000005_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000005",
+  "side": "left"
+ },
+ "20260916_170333_000005_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000005",
+  "side": "right"
+ },
+ "20260916_170333_000006_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000006",
+  "side": "left"
+ },
+ "20260916_170333_000006_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000006",
+  "side": "right"
+ },
+ "20260916_170333_000007_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000007",
+  "side": "left"
+ },
+ "20260916_170333_000007_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000007",
+  "side": "right"
+ },
+ "20260916_170333_000008_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000008",
+  "side": "left"
+ },
+ "20260916_170333_000008_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000008",
+  "side": "right"
+ },
+ "20260916_170333_000009_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000009",
+  "side": "left"
+ },
+ "20260916_170333_000009_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000009",
+  "side": "right"
+ },
+ "20260916_170333_000010_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000010",
+  "side": "left"
+ },
+ "20260916_170333_000010_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000010",
+  "side": "right"
+ },
+ "20260916_170333_000011_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000011",
+  "side": "left"
+ },
+ "20260916_170333_000011_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000011",
+  "side": "right"
+ },
+ "20260916_170333_000012_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000012",
+  "side": "left"
+ },
+ "20260916_170333_000012_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000012",
+  "side": "right"
+ },
+ "20260916_170333_000013_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000013",
+  "side": "left"
+ },
+ "20260916_170333_000013_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000013",
+  "side": "right"
+ },
+ "20260916_170333_000014_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000014",
+  "side": "left"
+ },
+ "20260916_170333_000014_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000014",
+  "side": "right"
+ },
+ "20260916_170333_000015_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000015",
+  "side": "left"
+ },
+ "20260916_170333_000015_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000015",
+  "side": "right"
+ },
+ "20260916_170333_000016_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000016",
+  "side": "left"
+ },
+ "20260916_170333_000016_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000016",
+  "side": "right"
+ },
+ "20260916_170333_000017_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000017",
+  "side": "left"
+ },
+ "20260916_170333_000017_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000017",
+  "side": "right"
+ },
+ "20260916_170333_000018_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000018",
+  "side": "left"
+ },
+ "20260916_170333_000018_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000018",
+  "side": "right"
+ },
+ "20260916_170333_000019_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000019",
+  "side": "left"
+ },
+ "20260916_170333_000019_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000019",
+  "side": "right"
+ },
+ "20260916_170333_000020_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000020",
+  "side": "left"
+ },
+ "20260916_170333_000020_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000020",
+  "side": "right"
+ },
+ "20260916_170333_000022_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000022",
+  "side": "left"
+ },
+ "20260916_170333_000022_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000022",
+  "side": "right"
+ },
+ "20260916_170333_000023_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000023",
+  "side": "left"
+ },
+ "20260916_170333_000023_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000023",
+  "side": "right"
+ },
+ "20260916_170333_000024_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000024",
+  "side": "left"
+ },
+ "20260916_170333_000024_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000024",
+  "side": "right"
+ },
+ "20260916_170333_000025_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000025",
+  "side": "left"
+ },
+ "20260916_170333_000025_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000025",
+  "side": "right"
+ },
+ "20260916_170333_000026_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000026",
+  "side": "left"
+ },
+ "20260916_170333_000026_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000026",
+  "side": "right"
+ },
+ "20260916_170333_000027_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000027",
+  "side": "left"
+ },
+ "20260916_170333_000027_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000027",
+  "side": "right"
+ },
+ "20260916_170333_000028_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000028",
+  "side": "left"
+ },
+ "20260916_170333_000028_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000028",
+  "side": "right"
+ },
+ "20260916_170333_000029_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000029",
+  "side": "left"
+ },
+ "20260916_170333_000029_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000029",
+  "side": "right"
+ },
+ "20260916_170333_000030_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000030",
+  "side": "left"
+ },
+ "20260916_170333_000030_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000030",
+  "side": "right"
+ },
+ "20260916_170333_000031_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000031",
+  "side": "left"
+ },
+ "20260916_170333_000031_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000031",
+  "side": "right"
+ },
+ "20260916_170333_000032_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000032",
+  "side": "left"
+ },
+ "20260916_170333_000032_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000032",
+  "side": "right"
+ },
+ "20260916_170333_000033_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000033",
+  "side": "left"
+ },
+ "20260916_170333_000033_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000033",
+  "side": "right"
+ },
+ "20260916_170333_000034_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000034",
+  "side": "left"
+ },
+ "20260916_170333_000034_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000034",
+  "side": "right"
+ },
+ "20260916_170333_000035_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000035",
+  "side": "left"
+ },
+ "20260916_170333_000035_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000035",
+  "side": "right"
+ },
+ "20260916_170333_000036_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000036",
+  "side": "left"
+ },
+ "20260916_170333_000036_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000036",
+  "side": "right"
+ },
+ "20260916_170333_000037_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000037",
+  "side": "left"
+ },
+ "20260916_170333_000037_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000037",
+  "side": "right"
+ },
+ "20260916_170333_000038_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000038",
+  "side": "left"
+ },
+ "20260916_170333_000038_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000038",
+  "side": "right"
+ },
+ "20260916_170333_000039_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000039",
+  "side": "left"
+ },
+ "20260916_170333_000039_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000039",
+  "side": "right"
+ },
+ "20260916_170333_000040_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000040",
+  "side": "left"
+ },
+ "20260916_170333_000040_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000040",
+  "side": "right"
+ },
+ "20260916_170333_000041_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000041",
+  "side": "left"
+ },
+ "20260916_170333_000041_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000041",
+  "side": "right"
+ },
+ "20260916_170333_000042_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000042",
+  "side": "left"
+ },
+ "20260916_170333_000042_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000042",
+  "side": "right"
+ },
+ "20260916_170333_000043_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000043",
+  "side": "left"
+ },
+ "20260916_170333_000043_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000043",
+  "side": "right"
+ },
+ "20260916_170333_000044_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000044",
+  "side": "left"
+ },
+ "20260916_170333_000044_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260916_170333_000044",
+  "side": "right"
+ },
+ "20260917_100511_000001_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000001",
+  "side": "left"
+ },
+ "20260917_100511_000001_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000001",
+  "side": "right"
+ },
+ "20260917_100511_000002_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000002",
+  "side": "left"
+ },
+ "20260917_100511_000002_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000002",
+  "side": "right"
+ },
+ "20260917_100511_000003_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000003",
+  "side": "left"
+ },
+ "20260917_100511_000003_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000003",
+  "side": "right"
+ },
+ "20260917_100511_000004_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000004",
+  "side": "left"
+ },
+ "20260917_100511_000004_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000004",
+  "side": "right"
+ },
+ "20260917_100511_000005_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000005",
+  "side": "left"
+ },
+ "20260917_100511_000005_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000005",
+  "side": "right"
+ },
+ "20260917_100511_000006_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000006",
+  "side": "left"
+ },
+ "20260917_100511_000006_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000006",
+  "side": "right"
+ },
+ "20260917_100511_000007_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000007",
+  "side": "left"
+ },
+ "20260917_100511_000007_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000007",
+  "side": "right"
+ },
+ "20260917_100511_000008_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000008",
+  "side": "left"
+ },
+ "20260917_100511_000008_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000008",
+  "side": "right"
+ },
+ "20260917_100511_000009_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000009",
+  "side": "left"
+ },
+ "20260917_100511_000009_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000009",
+  "side": "right"
+ },
+ "20260917_100511_000010_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000010",
+  "side": "left"
+ },
+ "20260917_100511_000010_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000010",
+  "side": "right"
+ },
+ "20260917_100511_000011_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000011",
+  "side": "left"
+ },
+ "20260917_100511_000011_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000011",
+  "side": "right"
+ },
+ "20260917_100511_000012_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000012",
+  "side": "left"
+ },
+ "20260917_100511_000012_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000012",
+  "side": "right"
+ },
+ "20260917_100511_000013_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000013",
+  "side": "left"
+ },
+ "20260917_100511_000013_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000013",
+  "side": "right"
+ },
+ "20260917_100511_000014_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000014",
+  "side": "left"
+ },
+ "20260917_100511_000014_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000014",
+  "side": "right"
+ },
+ "20260917_100511_000015_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000015",
+  "side": "left"
+ },
+ "20260917_100511_000015_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000015",
+  "side": "right"
+ },
+ "20260917_100511_000016_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000016",
+  "side": "left"
+ },
+ "20260917_100511_000016_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000016",
+  "side": "right"
+ },
+ "20260917_100511_000017_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000017",
+  "side": "left"
+ },
+ "20260917_100511_000017_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000017",
+  "side": "right"
+ },
+ "20260917_100511_000018_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000018",
+  "side": "left"
+ },
+ "20260917_100511_000018_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000018",
+  "side": "right"
+ },
+ "20260917_100511_000019_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000019",
+  "side": "left"
+ },
+ "20260917_100511_000019_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000019",
+  "side": "right"
+ },
+ "20260917_100511_000020_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000020",
+  "side": "left"
+ },
+ "20260917_100511_000020_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000020",
+  "side": "right"
+ },
+ "20260917_100511_000021_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000021",
+  "side": "left"
+ },
+ "20260917_100511_000021_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000021",
+  "side": "right"
+ },
+ "20260917_100511_000022_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000022",
+  "side": "left"
+ },
+ "20260917_100511_000022_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000022",
+  "side": "right"
+ },
+ "20260917_100511_000023_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000023",
+  "side": "left"
+ },
+ "20260917_100511_000023_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000023",
+  "side": "right"
+ },
+ "20260917_100511_000024_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000024",
+  "side": "left"
+ },
+ "20260917_100511_000024_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000024",
+  "side": "right"
+ },
+ "20260917_100511_000025_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000025",
+  "side": "left"
+ },
+ "20260917_100511_000025_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000025",
+  "side": "right"
+ },
+ "20260917_100511_000026_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000026",
+  "side": "left"
+ },
+ "20260917_100511_000026_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000026",
+  "side": "right"
+ },
+ "20260917_100511_000027_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000027",
+  "side": "left"
+ },
+ "20260917_100511_000027_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000027",
+  "side": "right"
+ },
+ "20260917_100511_000028_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000028",
+  "side": "left"
+ },
+ "20260917_100511_000028_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000028",
+  "side": "right"
+ },
+ "20260917_100511_000029_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000029",
+  "side": "left"
+ },
+ "20260917_100511_000029_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000029",
+  "side": "right"
+ },
+ "20260917_100511_000030_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000030",
+  "side": "left"
+ },
+ "20260917_100511_000030_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000030",
+  "side": "right"
+ },
+ "20260917_100511_000031_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000031",
+  "side": "left"
+ },
+ "20260917_100511_000031_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000031",
+  "side": "right"
+ },
+ "20260917_100511_000032_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000032",
+  "side": "left"
+ },
+ "20260917_100511_000032_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000032",
+  "side": "right"
+ },
+ "20260917_100511_000033_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000033",
+  "side": "left"
+ },
+ "20260917_100511_000033_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000033",
+  "side": "right"
+ },
+ "20260917_100511_000034_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000034",
+  "side": "left"
+ },
+ "20260917_100511_000034_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000034",
+  "side": "right"
+ },
+ "20260917_100511_000035_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000035",
+  "side": "left"
+ },
+ "20260917_100511_000035_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000035",
+  "side": "right"
+ },
+ "20260917_100511_000036_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000036",
+  "side": "left"
+ },
+ "20260917_100511_000036_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000036",
+  "side": "right"
+ },
+ "20260917_100511_000037_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000037",
+  "side": "left"
+ },
+ "20260917_100511_000037_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000037",
+  "side": "right"
+ },
+ "20260917_100511_000038_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000038",
+  "side": "left"
+ },
+ "20260917_100511_000038_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000038",
+  "side": "right"
+ },
+ "20260917_100511_000039_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000039",
+  "side": "left"
+ },
+ "20260917_100511_000039_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000039",
+  "side": "right"
+ },
+ "20260917_100511_000040_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000040",
+  "side": "left"
+ },
+ "20260917_100511_000040_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000040",
+  "side": "right"
+ },
+ "20260917_100511_000041_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000041",
+  "side": "left"
+ },
+ "20260917_100511_000041_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000041",
+  "side": "right"
+ },
+ "20260917_100511_000042_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000042",
+  "side": "left"
+ },
+ "20260917_100511_000042_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000042",
+  "side": "right"
+ },
+ "20260917_100511_000043_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000043",
+  "side": "left"
+ },
+ "20260917_100511_000043_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000043",
+  "side": "right"
+ },
+ "20260917_100511_000044_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000044",
+  "side": "left"
+ },
+ "20260917_100511_000044_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000044",
+  "side": "right"
+ },
+ "20260917_100511_000045_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000045",
+  "side": "left"
+ },
+ "20260917_100511_000045_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000045",
+  "side": "right"
+ },
+ "20260917_100511_000047_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000047",
+  "side": "left"
+ },
+ "20260917_100511_000047_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000047",
+  "side": "right"
+ },
+ "20260917_100511_000048_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000048",
+  "side": "left"
+ },
+ "20260917_100511_000048_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000048",
+  "side": "right"
+ },
+ "20260917_100511_000050_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000050",
+  "side": "left"
+ },
+ "20260917_100511_000050_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000050",
+  "side": "right"
+ },
+ "20260917_100511_000051_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000051",
+  "side": "left"
+ },
+ "20260917_100511_000051_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000051",
+  "side": "right"
+ },
+ "20260917_100511_000052_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000052",
+  "side": "left"
+ },
+ "20260917_100511_000052_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000052",
+  "side": "right"
+ },
+ "20260917_100511_000053_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000053",
+  "side": "left"
+ },
+ "20260917_100511_000053_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000053",
+  "side": "right"
+ },
+ "20260917_100511_000054_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000054",
+  "side": "left"
+ },
+ "20260917_100511_000054_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000054",
+  "side": "right"
+ },
+ "20260917_100511_000055_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000055",
+  "side": "left"
+ },
+ "20260917_100511_000055_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000055",
+  "side": "right"
+ },
+ "20260917_100511_000056_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000056",
+  "side": "left"
+ },
+ "20260917_100511_000056_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000056",
+  "side": "right"
+ },
+ "20260917_100511_000057_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000057",
+  "side": "left"
+ },
+ "20260917_100511_000057_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000057",
+  "side": "right"
+ },
+ "20260917_100511_000058_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000058",
+  "side": "left"
+ },
+ "20260917_100511_000058_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000058",
+  "side": "right"
+ },
+ "20260917_100511_000059_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000059",
+  "side": "left"
+ },
+ "20260917_100511_000059_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000059",
+  "side": "right"
+ },
+ "20260917_100511_000060_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000060",
+  "side": "left"
+ },
+ "20260917_100511_000060_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000060",
+  "side": "right"
+ },
+ "20260917_100511_000061_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000061",
+  "side": "left"
+ },
+ "20260917_100511_000061_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000061",
+  "side": "right"
+ },
+ "20260917_100511_000062_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000062",
+  "side": "left"
+ },
+ "20260917_100511_000062_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000062",
+  "side": "right"
+ },
+ "20260917_100511_000063_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000063",
+  "side": "left"
+ },
+ "20260917_100511_000063_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000063",
+  "side": "right"
+ },
+ "20260917_100511_000064_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000064",
+  "side": "left"
+ },
+ "20260917_100511_000064_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000064",
+  "side": "right"
+ },
+ "20260917_100511_000065_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000065",
+  "side": "left"
+ },
+ "20260917_100511_000065_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000065",
+  "side": "right"
+ },
+ "20260917_100511_000066_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000066",
+  "side": "left"
+ },
+ "20260917_100511_000066_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000066",
+  "side": "right"
+ },
+ "20260917_100511_000067_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000067",
+  "side": "left"
+ },
+ "20260917_100511_000067_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000067",
+  "side": "right"
+ },
+ "20260917_100511_000068_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000068",
+  "side": "left"
+ },
+ "20260917_100511_000068_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000068",
+  "side": "right"
+ },
+ "20260917_100511_000069_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000069",
+  "side": "left"
+ },
+ "20260917_100511_000069_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000069",
+  "side": "right"
+ },
+ "20260917_100511_000070_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000070",
+  "side": "left"
+ },
+ "20260917_100511_000070_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000070",
+  "side": "right"
+ },
+ "20260917_100511_000071_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000071",
+  "side": "left"
+ },
+ "20260917_100511_000071_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000071",
+  "side": "right"
+ },
+ "20260917_100511_000072_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000072",
+  "side": "left"
+ },
+ "20260917_100511_000072_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000072",
+  "side": "right"
+ },
+ "20260917_100511_000073_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000073",
+  "side": "left"
+ },
+ "20260917_100511_000073_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000073",
+  "side": "right"
+ },
+ "20260917_100511_000074_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000074",
+  "side": "left"
+ },
+ "20260917_100511_000074_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000074",
+  "side": "right"
+ },
+ "20260917_100511_000075_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000075",
+  "side": "left"
+ },
+ "20260917_100511_000075_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000075",
+  "side": "right"
+ },
+ "20260917_100511_000076_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000076",
+  "side": "left"
+ },
+ "20260917_100511_000076_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000076",
+  "side": "right"
+ },
+ "20260917_100511_000077_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000077",
+  "side": "left"
+ },
+ "20260917_100511_000077_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_100511_000077",
+  "side": "right"
+ },
+ "20260917_135136_000001_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000001",
+  "side": "left"
+ },
+ "20260917_135136_000001_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000001",
+  "side": "right"
+ },
+ "20260917_135136_000002_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000002",
+  "side": "left"
+ },
+ "20260917_135136_000002_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000002",
+  "side": "right"
+ },
+ "20260917_135136_000003_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000003",
+  "side": "left"
+ },
+ "20260917_135136_000003_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000003",
+  "side": "right"
+ },
+ "20260917_135136_000004_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000004",
+  "side": "left"
+ },
+ "20260917_135136_000004_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000004",
+  "side": "right"
+ },
+ "20260917_135136_000005_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000005",
+  "side": "left"
+ },
+ "20260917_135136_000005_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000005",
+  "side": "right"
+ },
+ "20260917_135136_000006_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000006",
+  "side": "left"
+ },
+ "20260917_135136_000006_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000006",
+  "side": "right"
+ },
+ "20260917_135136_000007_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000007",
+  "side": "left"
+ },
+ "20260917_135136_000007_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000007",
+  "side": "right"
+ },
+ "20260917_135136_000008_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000008",
+  "side": "left"
+ },
+ "20260917_135136_000008_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000008",
+  "side": "right"
+ },
+ "20260917_135136_000009_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000009",
+  "side": "left"
+ },
+ "20260917_135136_000009_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000009",
+  "side": "right"
+ },
+ "20260917_135136_000010_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000010",
+  "side": "left"
+ },
+ "20260917_135136_000010_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000010",
+  "side": "right"
+ },
+ "20260917_135136_000011_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000011",
+  "side": "left"
+ },
+ "20260917_135136_000011_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000011",
+  "side": "right"
+ },
+ "20260917_135136_000012_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000012",
+  "side": "left"
+ },
+ "20260917_135136_000012_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000012",
+  "side": "right"
+ },
+ "20260917_135136_000013_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000013",
+  "side": "left"
+ },
+ "20260917_135136_000013_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000013",
+  "side": "right"
+ },
+ "20260917_135136_000014_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000014",
+  "side": "left"
+ },
+ "20260917_135136_000014_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000014",
+  "side": "right"
+ },
+ "20260917_135136_000016_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000016",
+  "side": "left"
+ },
+ "20260917_135136_000016_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000016",
+  "side": "right"
+ },
+ "20260917_135136_000017_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000017",
+  "side": "left"
+ },
+ "20260917_135136_000017_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000017",
+  "side": "right"
+ },
+ "20260917_135136_000018_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000018",
+  "side": "left"
+ },
+ "20260917_135136_000018_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000018",
+  "side": "right"
+ },
+ "20260917_135136_000019_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000019",
+  "side": "left"
+ },
+ "20260917_135136_000019_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000019",
+  "side": "right"
+ },
+ "20260917_135136_000021_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000021",
+  "side": "left"
+ },
+ "20260917_135136_000021_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000021",
+  "side": "right"
+ },
+ "20260917_135136_000022_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000022",
+  "side": "left"
+ },
+ "20260917_135136_000022_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000022",
+  "side": "right"
+ },
+ "20260917_135136_000023_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000023",
+  "side": "left"
+ },
+ "20260917_135136_000023_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000023",
+  "side": "right"
+ },
+ "20260917_135136_000024_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000024",
+  "side": "left"
+ },
+ "20260917_135136_000024_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000024",
+  "side": "right"
+ },
+ "20260917_135136_000025_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000025",
+  "side": "left"
+ },
+ "20260917_135136_000025_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000025",
+  "side": "right"
+ },
+ "20260917_135136_000026_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000026",
+  "side": "left"
+ },
+ "20260917_135136_000026_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000026",
+  "side": "right"
+ },
+ "20260917_135136_000027_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000027",
+  "side": "left"
+ },
+ "20260917_135136_000027_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000027",
+  "side": "right"
+ },
+ "20260917_135136_000029_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000029",
+  "side": "left"
+ },
+ "20260917_135136_000029_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000029",
+  "side": "right"
+ },
+ "20260917_135136_000030_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000030",
+  "side": "left"
+ },
+ "20260917_135136_000030_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000030",
+  "side": "right"
+ },
+ "20260917_135136_000031_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000031",
+  "side": "left"
+ },
+ "20260917_135136_000031_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000031",
+  "side": "right"
+ },
+ "20260917_135136_000032_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000032",
+  "side": "left"
+ },
+ "20260917_135136_000032_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000032",
+  "side": "right"
+ },
+ "20260917_135136_000033_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000033",
+  "side": "left"
+ },
+ "20260917_135136_000033_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000033",
+  "side": "right"
+ },
+ "20260917_135136_000034_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000034",
+  "side": "left"
+ },
+ "20260917_135136_000034_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000034",
+  "side": "right"
+ },
+ "20260917_135136_000035_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000035",
+  "side": "left"
+ },
+ "20260917_135136_000035_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000035",
+  "side": "right"
+ },
+ "20260917_135136_000036_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000036",
+  "side": "left"
+ },
+ "20260917_135136_000036_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000036",
+  "side": "right"
+ },
+ "20260917_135136_000037_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000037",
+  "side": "left"
+ },
+ "20260917_135136_000037_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000037",
+  "side": "right"
+ },
+ "20260917_135136_000038_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000038",
+  "side": "left"
+ },
+ "20260917_135136_000038_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_135136_000038",
+  "side": "right"
+ },
+ "20260917_150545_000001_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000001",
+  "side": "left"
+ },
+ "20260917_150545_000001_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000001",
+  "side": "right"
+ },
+ "20260917_150545_000002_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000002",
+  "side": "left"
+ },
+ "20260917_150545_000002_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000002",
+  "side": "right"
+ },
+ "20260917_150545_000003_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000003",
+  "side": "left"
+ },
+ "20260917_150545_000003_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000003",
+  "side": "right"
+ },
+ "20260917_150545_000004_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000004",
+  "side": "left"
+ },
+ "20260917_150545_000004_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000004",
+  "side": "right"
+ },
+ "20260917_150545_000005_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000005",
+  "side": "left"
+ },
+ "20260917_150545_000005_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000005",
+  "side": "right"
+ },
+ "20260917_150545_000006_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000006",
+  "side": "left"
+ },
+ "20260917_150545_000006_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000006",
+  "side": "right"
+ },
+ "20260917_150545_000007_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000007",
+  "side": "left"
+ },
+ "20260917_150545_000007_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000007",
+  "side": "right"
+ },
+ "20260917_150545_000008_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000008",
+  "side": "left"
+ },
+ "20260917_150545_000008_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000008",
+  "side": "right"
+ },
+ "20260917_150545_000009_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000009",
+  "side": "left"
+ },
+ "20260917_150545_000009_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000009",
+  "side": "right"
+ },
+ "20260917_150545_000010_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000010",
+  "side": "left"
+ },
+ "20260917_150545_000010_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000010",
+  "side": "right"
+ },
+ "20260917_150545_000011_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000011",
+  "side": "left"
+ },
+ "20260917_150545_000011_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000011",
+  "side": "right"
+ },
+ "20260917_150545_000012_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000012",
+  "side": "left"
+ },
+ "20260917_150545_000012_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000012",
+  "side": "right"
+ },
+ "20260917_150545_000013_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000013",
+  "side": "left"
+ },
+ "20260917_150545_000013_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000013",
+  "side": "right"
+ },
+ "20260917_150545_000014_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000014",
+  "side": "left"
+ },
+ "20260917_150545_000014_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000014",
+  "side": "right"
+ },
+ "20260917_150545_000015_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000015",
+  "side": "left"
+ },
+ "20260917_150545_000015_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000015",
+  "side": "right"
+ },
+ "20260917_150545_000016_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000016",
+  "side": "left"
+ },
+ "20260917_150545_000016_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000016",
+  "side": "right"
+ },
+ "20260917_150545_000017_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000017",
+  "side": "left"
+ },
+ "20260917_150545_000017_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000017",
+  "side": "right"
+ },
+ "20260917_150545_000018_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000018",
+  "side": "left"
+ },
+ "20260917_150545_000018_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000018",
+  "side": "right"
+ },
+ "20260917_150545_000019_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000019",
+  "side": "left"
+ },
+ "20260917_150545_000019_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000019",
+  "side": "right"
+ },
+ "20260917_150545_000020_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000020",
+  "side": "left"
+ },
+ "20260917_150545_000020_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000020",
+  "side": "right"
+ },
+ "20260917_150545_000021_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000021",
+  "side": "left"
+ },
+ "20260917_150545_000021_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000021",
+  "side": "right"
+ },
+ "20260917_150545_000022_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000022",
+  "side": "left"
+ },
+ "20260917_150545_000022_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000022",
+  "side": "right"
+ },
+ "20260917_150545_000023_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000023",
+  "side": "left"
+ },
+ "20260917_150545_000023_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000023",
+  "side": "right"
+ },
+ "20260917_150545_000024_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000024",
+  "side": "left"
+ },
+ "20260917_150545_000024_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000024",
+  "side": "right"
+ },
+ "20260917_150545_000025_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000025",
+  "side": "left"
+ },
+ "20260917_150545_000025_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000025",
+  "side": "right"
+ },
+ "20260917_150545_000026_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000026",
+  "side": "left"
+ },
+ "20260917_150545_000026_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000026",
+  "side": "right"
+ },
+ "20260917_150545_000027_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000027",
+  "side": "left"
+ },
+ "20260917_150545_000027_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000027",
+  "side": "right"
+ },
+ "20260917_150545_000028_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000028",
+  "side": "left"
+ },
+ "20260917_150545_000028_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000028",
+  "side": "right"
+ },
+ "20260917_150545_000029_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000029",
+  "side": "left"
+ },
+ "20260917_150545_000029_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000029",
+  "side": "right"
+ },
+ "20260917_150545_000030_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000030",
+  "side": "left"
+ },
+ "20260917_150545_000030_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000030",
+  "side": "right"
+ },
+ "20260917_150545_000031_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000031",
+  "side": "left"
+ },
+ "20260917_150545_000031_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000031",
+  "side": "right"
+ },
+ "20260917_150545_000032_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000032",
+  "side": "left"
+ },
+ "20260917_150545_000032_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000032",
+  "side": "right"
+ },
+ "20260917_150545_000033_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000033",
+  "side": "left"
+ },
+ "20260917_150545_000033_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000033",
+  "side": "right"
+ },
+ "20260917_150545_000034_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000034",
+  "side": "left"
+ },
+ "20260917_150545_000034_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000034",
+  "side": "right"
+ },
+ "20260917_150545_000035_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000035",
+  "side": "left"
+ },
+ "20260917_150545_000035_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000035",
+  "side": "right"
+ },
+ "20260917_150545_000036_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000036",
+  "side": "left"
+ },
+ "20260917_150545_000036_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000036",
+  "side": "right"
+ },
+ "20260917_150545_000037_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000037",
+  "side": "left"
+ },
+ "20260917_150545_000037_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000037",
+  "side": "right"
+ },
+ "20260917_150545_000038_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000038",
+  "side": "left"
+ },
+ "20260917_150545_000038_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000038",
+  "side": "right"
+ },
+ "20260917_150545_000039_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000039",
+  "side": "left"
+ },
+ "20260917_150545_000039_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000039",
+  "side": "right"
+ },
+ "20260917_150545_000040_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000040",
+  "side": "left"
+ },
+ "20260917_150545_000040_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000040",
+  "side": "right"
+ },
+ "20260917_150545_000041_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000041",
+  "side": "left"
+ },
+ "20260917_150545_000041_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000041",
+  "side": "right"
+ },
+ "20260917_150545_000042_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000042",
+  "side": "left"
+ },
+ "20260917_150545_000042_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000042",
+  "side": "right"
+ },
+ "20260917_150545_000043_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000043",
+  "side": "left"
+ },
+ "20260917_150545_000043_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000043",
+  "side": "right"
+ },
+ "20260917_150545_000044_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000044",
+  "side": "left"
+ },
+ "20260917_150545_000044_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000044",
+  "side": "right"
+ },
+ "20260917_150545_000045_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000045",
+  "side": "left"
+ },
+ "20260917_150545_000045_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000045",
+  "side": "right"
+ },
+ "20260917_150545_000046_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000046",
+  "side": "left"
+ },
+ "20260917_150545_000046_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000046",
+  "side": "right"
+ },
+ "20260917_150545_000047_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000047",
+  "side": "left"
+ },
+ "20260917_150545_000047_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000047",
+  "side": "right"
+ },
+ "20260917_150545_000048_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000048",
+  "side": "left"
+ },
+ "20260917_150545_000048_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000048",
+  "side": "right"
+ },
+ "20260917_150545_000049_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000049",
+  "side": "left"
+ },
+ "20260917_150545_000049_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000049",
+  "side": "right"
+ },
+ "20260917_150545_000050_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000050",
+  "side": "left"
+ },
+ "20260917_150545_000050_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000050",
+  "side": "right"
+ },
+ "20260917_150545_000052_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000052",
+  "side": "left"
+ },
+ "20260917_150545_000052_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000052",
+  "side": "right"
+ },
+ "20260917_150545_000054_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000054",
+  "side": "left"
+ },
+ "20260917_150545_000054_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000054",
+  "side": "right"
+ },
+ "20260917_150545_000055_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000055",
+  "side": "left"
+ },
+ "20260917_150545_000055_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000055",
+  "side": "right"
+ },
+ "20260917_150545_000056_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000056",
+  "side": "left"
+ },
+ "20260917_150545_000056_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000056",
+  "side": "right"
+ },
+ "20260917_150545_000057_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000057",
+  "side": "left"
+ },
+ "20260917_150545_000057_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000057",
+  "side": "right"
+ },
+ "20260917_150545_000058_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000058",
+  "side": "left"
+ },
+ "20260917_150545_000058_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000058",
+  "side": "right"
+ },
+ "20260917_150545_000059_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000059",
+  "side": "left"
+ },
+ "20260917_150545_000059_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000059",
+  "side": "right"
+ },
+ "20260917_150545_000060_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000060",
+  "side": "left"
+ },
+ "20260917_150545_000060_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000060",
+  "side": "right"
+ },
+ "20260917_150545_000061_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000061",
+  "side": "left"
+ },
+ "20260917_150545_000061_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000061",
+  "side": "right"
+ },
+ "20260917_150545_000062_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000062",
+  "side": "left"
+ },
+ "20260917_150545_000062_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000062",
+  "side": "right"
+ },
+ "20260917_150545_000063_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000063",
+  "side": "left"
+ },
+ "20260917_150545_000063_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000063",
+  "side": "right"
+ },
+ "20260917_150545_000064_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000064",
+  "side": "left"
+ },
+ "20260917_150545_000064_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000064",
+  "side": "right"
+ },
+ "20260917_150545_000065_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000065",
+  "side": "left"
+ },
+ "20260917_150545_000065_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000065",
+  "side": "right"
+ },
+ "20260917_150545_000066_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000066",
+  "side": "left"
+ },
+ "20260917_150545_000066_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000066",
+  "side": "right"
+ },
+ "20260917_150545_000067_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000067",
+  "side": "left"
+ },
+ "20260917_150545_000067_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000067",
+  "side": "right"
+ },
+ "20260917_150545_000068_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000068",
+  "side": "left"
+ },
+ "20260917_150545_000068_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000068",
+  "side": "right"
+ },
+ "20260917_150545_000069_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000069",
+  "side": "left"
+ },
+ "20260917_150545_000069_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000069",
+  "side": "right"
+ },
+ "20260917_150545_000070_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000070",
+  "side": "left"
+ },
+ "20260917_150545_000070_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000070",
+  "side": "right"
+ },
+ "20260917_150545_000071_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000071",
+  "side": "left"
+ },
+ "20260917_150545_000071_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000071",
+  "side": "right"
+ },
+ "20260917_150545_000072_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000072",
+  "side": "left"
+ },
+ "20260917_150545_000072_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000072",
+  "side": "right"
+ },
+ "20260917_150545_000073_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000073",
+  "side": "left"
+ },
+ "20260917_150545_000073_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000073",
+  "side": "right"
+ },
+ "20260917_150545_000074_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000074",
+  "side": "left"
+ },
+ "20260917_150545_000074_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000074",
+  "side": "right"
+ },
+ "20260917_150545_000075_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000075",
+  "side": "left"
+ },
+ "20260917_150545_000075_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000075",
+  "side": "right"
+ },
+ "20260917_150545_000076_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000076",
+  "side": "left"
+ },
+ "20260917_150545_000076_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000076",
+  "side": "right"
+ },
+ "20260917_150545_000077_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000077",
+  "side": "left"
+ },
+ "20260917_150545_000077_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000077",
+  "side": "right"
+ },
+ "20260917_150545_000078_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000078",
+  "side": "left"
+ },
+ "20260917_150545_000078_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000078",
+  "side": "right"
+ },
+ "20260917_150545_000079_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000079",
+  "side": "left"
+ },
+ "20260917_150545_000079_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000079",
+  "side": "right"
+ },
+ "20260917_150545_000080_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000080",
+  "side": "left"
+ },
+ "20260917_150545_000080_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000080",
+  "side": "right"
+ },
+ "20260917_150545_000081_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000081",
+  "side": "left"
+ },
+ "20260917_150545_000081_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000081",
+  "side": "right"
+ },
+ "20260917_150545_000082_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000082",
+  "side": "left"
+ },
+ "20260917_150545_000082_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000082",
+  "side": "right"
+ },
+ "20260917_150545_000083_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000083",
+  "side": "left"
+ },
+ "20260917_150545_000083_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000083",
+  "side": "right"
+ },
+ "20260917_150545_000084_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000084",
+  "side": "left"
+ },
+ "20260917_150545_000084_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000084",
+  "side": "right"
+ },
+ "20260917_150545_000085_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000085",
+  "side": "left"
+ },
+ "20260917_150545_000085_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000085",
+  "side": "right"
+ },
+ "20260917_150545_000086_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000086",
+  "side": "left"
+ },
+ "20260917_150545_000086_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000086",
+  "side": "right"
+ },
+ "20260917_150545_000087_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000087",
+  "side": "left"
+ },
+ "20260917_150545_000087_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000087",
+  "side": "right"
+ },
+ "20260917_150545_000088_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000088",
+  "side": "left"
+ },
+ "20260917_150545_000088_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000088",
+  "side": "right"
+ },
+ "20260917_150545_000089_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000089",
+  "side": "left"
+ },
+ "20260917_150545_000089_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000089",
+  "side": "right"
+ },
+ "20260917_150545_000090_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000090",
+  "side": "left"
+ },
+ "20260917_150545_000090_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000090",
+  "side": "right"
+ },
+ "20260917_150545_000091_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000091",
+  "side": "left"
+ },
+ "20260917_150545_000091_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000091",
+  "side": "right"
+ },
+ "20260917_150545_000092_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000092",
+  "side": "left"
+ },
+ "20260917_150545_000092_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000092",
+  "side": "right"
+ },
+ "20260917_150545_000093_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000093",
+  "side": "left"
+ },
+ "20260917_150545_000093_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000093",
+  "side": "right"
+ },
+ "20260917_150545_000094_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000094",
+  "side": "left"
+ },
+ "20260917_150545_000094_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000094",
+  "side": "right"
+ },
+ "20260917_150545_000095_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000095",
+  "side": "left"
+ },
+ "20260917_150545_000095_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000095",
+  "side": "right"
+ },
+ "20260917_150545_000096_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000096",
+  "side": "left"
+ },
+ "20260917_150545_000096_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000096",
+  "side": "right"
+ },
+ "20260917_150545_000097_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000097",
+  "side": "left"
+ },
+ "20260917_150545_000097_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000097",
+  "side": "right"
+ },
+ "20260917_150545_000098_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000098",
+  "side": "left"
+ },
+ "20260917_150545_000098_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000098",
+  "side": "right"
+ },
+ "20260917_150545_000099_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000099",
+  "side": "left"
+ },
+ "20260917_150545_000099_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000099",
+  "side": "right"
+ },
+ "20260917_150545_000100_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000100",
+  "side": "left"
+ },
+ "20260917_150545_000100_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000100",
+  "side": "right"
+ },
+ "20260917_150545_000101_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000101",
+  "side": "left"
+ },
+ "20260917_150545_000101_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000101",
+  "side": "right"
+ },
+ "20260917_150545_000102_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000102",
+  "side": "left"
+ },
+ "20260917_150545_000102_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000102",
+  "side": "right"
+ },
+ "20260917_150545_000103_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000103",
+  "side": "left"
+ },
+ "20260917_150545_000103_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000103",
+  "side": "right"
+ },
+ "20260917_150545_000104_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000104",
+  "side": "left"
+ },
+ "20260917_150545_000104_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000104",
+  "side": "right"
+ },
+ "20260917_150545_000105_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000105",
+  "side": "left"
+ },
+ "20260917_150545_000105_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000105",
+  "side": "right"
+ },
+ "20260917_150545_000106_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000106",
+  "side": "left"
+ },
+ "20260917_150545_000106_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000106",
+  "side": "right"
+ },
+ "20260917_150545_000107_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000107",
+  "side": "left"
+ },
+ "20260917_150545_000107_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000107",
+  "side": "right"
+ },
+ "20260917_150545_000108_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000108",
+  "side": "left"
+ },
+ "20260917_150545_000108_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000108",
+  "side": "right"
+ },
+ "20260917_150545_000109_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000109",
+  "side": "left"
+ },
+ "20260917_150545_000109_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000109",
+  "side": "right"
+ },
+ "20260917_150545_000110_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000110",
+  "side": "left"
+ },
+ "20260917_150545_000110_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000110",
+  "side": "right"
+ },
+ "20260917_150545_000111_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000111",
+  "side": "left"
+ },
+ "20260917_150545_000111_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000111",
+  "side": "right"
+ },
+ "20260917_150545_000112_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000112",
+  "side": "left"
+ },
+ "20260917_150545_000112_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000112",
+  "side": "right"
+ },
+ "20260917_150545_000113_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000113",
+  "side": "left"
+ },
+ "20260917_150545_000113_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000113",
+  "side": "right"
+ },
+ "20260917_150545_000114_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000114",
+  "side": "left"
+ },
+ "20260917_150545_000114_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000114",
+  "side": "right"
+ },
+ "20260917_150545_000115_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000115",
+  "side": "left"
+ },
+ "20260917_150545_000115_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000115",
+  "side": "right"
+ },
+ "20260917_150545_000116_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000116",
+  "side": "left"
+ },
+ "20260917_150545_000116_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000116",
+  "side": "right"
+ },
+ "20260917_150545_000117_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000117",
+  "side": "left"
+ },
+ "20260917_150545_000117_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000117",
+  "side": "right"
+ },
+ "20260917_150545_000118_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000118",
+  "side": "left"
+ },
+ "20260917_150545_000118_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000118",
+  "side": "right"
+ },
+ "20260917_150545_000120_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000120",
+  "side": "left"
+ },
+ "20260917_150545_000120_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000120",
+  "side": "right"
+ },
+ "20260917_150545_000121_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000121",
+  "side": "left"
+ },
+ "20260917_150545_000121_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000121",
+  "side": "right"
+ },
+ "20260917_150545_000122_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000122",
+  "side": "left"
+ },
+ "20260917_150545_000122_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000122",
+  "side": "right"
+ },
+ "20260917_150545_000123_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000123",
+  "side": "left"
+ },
+ "20260917_150545_000123_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000123",
+  "side": "right"
+ },
+ "20260917_150545_000124_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000124",
+  "side": "left"
+ },
+ "20260917_150545_000124_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000124",
+  "side": "right"
+ },
+ "20260917_150545_000125_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000125",
+  "side": "left"
+ },
+ "20260917_150545_000125_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000125",
+  "side": "right"
+ },
+ "20260917_150545_000126_left": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000126",
+  "side": "left"
+ },
+ "20260917_150545_000126_right": {
+  "domain": "main_calibrated",
+  "early_calibration_domain": false,
+  "episode": "20260917_150545_000126",
+  "side": "right"
+ },
+ "20260915_161954_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_161954_000001",
+  "side": "left"
+ },
+ "20260915_161954_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_161954_000001",
+  "side": "right"
+ },
+ "20260915_171744_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000001",
+  "side": "left"
+ },
+ "20260915_171744_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000001",
+  "side": "right"
+ },
+ "20260915_171744_000002_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000002",
+  "side": "left"
+ },
+ "20260915_171744_000002_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000002",
+  "side": "right"
+ },
+ "20260915_171744_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000004",
+  "side": "left"
+ },
+ "20260915_171744_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000004",
+  "side": "right"
+ },
+ "20260915_171744_000005_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000005",
+  "side": "left"
+ },
+ "20260915_171744_000005_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000005",
+  "side": "right"
+ },
+ "20260915_171744_000006_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000006",
+  "side": "left"
+ },
+ "20260915_171744_000006_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260915_171744_000006",
+  "side": "right"
+ },
+ "20260916_090424_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000001",
+  "side": "left"
+ },
+ "20260916_090424_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000001",
+  "side": "right"
+ },
+ "20260916_090424_000003_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000003",
+  "side": "left"
+ },
+ "20260916_090424_000003_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000003",
+  "side": "right"
+ },
+ "20260916_090424_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000004",
+  "side": "left"
+ },
+ "20260916_090424_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000004",
+  "side": "right"
+ },
+ "20260916_090424_000005_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000005",
+  "side": "left"
+ },
+ "20260916_090424_000005_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000005",
+  "side": "right"
+ },
+ "20260916_090424_000006_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000006",
+  "side": "left"
+ },
+ "20260916_090424_000006_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000006",
+  "side": "right"
+ },
+ "20260916_090424_000007_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000007",
+  "side": "left"
+ },
+ "20260916_090424_000007_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000007",
+  "side": "right"
+ },
+ "20260916_090424_000008_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000008",
+  "side": "left"
+ },
+ "20260916_090424_000008_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000008",
+  "side": "right"
+ },
+ "20260916_090424_000009_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000009",
+  "side": "left"
+ },
+ "20260916_090424_000009_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000009",
+  "side": "right"
+ },
+ "20260916_090424_000010_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000010",
+  "side": "left"
+ },
+ "20260916_090424_000010_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_090424_000010",
+  "side": "right"
+ },
+ "20260916_105608_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_105608_000001",
+  "side": "left"
+ },
+ "20260916_105608_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_105608_000001",
+  "side": "right"
+ },
+ "20260916_105608_000003_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_105608_000003",
+  "side": "left"
+ },
+ "20260916_105608_000003_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_105608_000003",
+  "side": "right"
+ },
+ "20260916_105608_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_105608_000004",
+  "side": "left"
+ },
+ "20260916_105608_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_105608_000004",
+  "side": "right"
+ },
+ "20260916_112115_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000001",
+  "side": "left"
+ },
+ "20260916_112115_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000001",
+  "side": "right"
+ },
+ "20260916_112115_000002_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000002",
+  "side": "left"
+ },
+ "20260916_112115_000002_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000002",
+  "side": "right"
+ },
+ "20260916_112115_000003_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000003",
+  "side": "left"
+ },
+ "20260916_112115_000003_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000003",
+  "side": "right"
+ },
+ "20260916_112115_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000004",
+  "side": "left"
+ },
+ "20260916_112115_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000004",
+  "side": "right"
+ },
+ "20260916_112115_000005_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000005",
+  "side": "left"
+ },
+ "20260916_112115_000005_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_112115_000005",
+  "side": "right"
+ },
+ "20260916_121003_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121003_000001",
+  "side": "left"
+ },
+ "20260916_121003_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121003_000001",
+  "side": "right"
+ },
+ "20260916_121003_000003_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121003_000003",
+  "side": "left"
+ },
+ "20260916_121003_000003_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121003_000003",
+  "side": "right"
+ },
+ "20260916_121003_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121003_000004",
+  "side": "left"
+ },
+ "20260916_121003_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121003_000004",
+  "side": "right"
+ },
+ "20260916_121832_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121832_000001",
+  "side": "left"
+ },
+ "20260916_121832_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121832_000001",
+  "side": "right"
+ },
+ "20260916_121832_000002_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121832_000002",
+  "side": "left"
+ },
+ "20260916_121832_000002_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_121832_000002",
+  "side": "right"
+ },
+ "20260916_122225_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000001",
+  "side": "left"
+ },
+ "20260916_122225_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000001",
+  "side": "right"
+ },
+ "20260916_122225_000002_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000002",
+  "side": "left"
+ },
+ "20260916_122225_000002_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000002",
+  "side": "right"
+ },
+ "20260916_122225_000003_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000003",
+  "side": "left"
+ },
+ "20260916_122225_000003_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000003",
+  "side": "right"
+ },
+ "20260916_122225_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000004",
+  "side": "left"
+ },
+ "20260916_122225_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000004",
+  "side": "right"
+ },
+ "20260916_122225_000005_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000005",
+  "side": "left"
+ },
+ "20260916_122225_000005_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_122225_000005",
+  "side": "right"
+ },
+ "20260916_125236_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000001",
+  "side": "left"
+ },
+ "20260916_125236_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000001",
+  "side": "right"
+ },
+ "20260916_125236_000002_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000002",
+  "side": "left"
+ },
+ "20260916_125236_000002_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000002",
+  "side": "right"
+ },
+ "20260916_125236_000003_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000003",
+  "side": "left"
+ },
+ "20260916_125236_000003_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000003",
+  "side": "right"
+ },
+ "20260916_125236_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000004",
+  "side": "left"
+ },
+ "20260916_125236_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000004",
+  "side": "right"
+ },
+ "20260916_125236_000005_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000005",
+  "side": "left"
+ },
+ "20260916_125236_000005_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000005",
+  "side": "right"
+ },
+ "20260916_125236_000006_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000006",
+  "side": "left"
+ },
+ "20260916_125236_000006_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000006",
+  "side": "right"
+ },
+ "20260916_125236_000007_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000007",
+  "side": "left"
+ },
+ "20260916_125236_000007_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000007",
+  "side": "right"
+ },
+ "20260916_125236_000008_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000008",
+  "side": "left"
+ },
+ "20260916_125236_000008_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000008",
+  "side": "right"
+ },
+ "20260916_125236_000009_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000009",
+  "side": "left"
+ },
+ "20260916_125236_000009_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000009",
+  "side": "right"
+ },
+ "20260916_125236_000010_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000010",
+  "side": "left"
+ },
+ "20260916_125236_000010_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000010",
+  "side": "right"
+ },
+ "20260916_125236_000011_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000011",
+  "side": "left"
+ },
+ "20260916_125236_000011_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000011",
+  "side": "right"
+ },
+ "20260916_125236_000012_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000012",
+  "side": "left"
+ },
+ "20260916_125236_000012_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000012",
+  "side": "right"
+ },
+ "20260916_125236_000013_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000013",
+  "side": "left"
+ },
+ "20260916_125236_000013_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000013",
+  "side": "right"
+ },
+ "20260916_125236_000014_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000014",
+  "side": "left"
+ },
+ "20260916_125236_000014_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000014",
+  "side": "right"
+ },
+ "20260916_125236_000015_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000015",
+  "side": "left"
+ },
+ "20260916_125236_000015_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000015",
+  "side": "right"
+ },
+ "20260916_125236_000016_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000016",
+  "side": "left"
+ },
+ "20260916_125236_000016_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000016",
+  "side": "right"
+ },
+ "20260916_125236_000017_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000017",
+  "side": "left"
+ },
+ "20260916_125236_000017_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000017",
+  "side": "right"
+ },
+ "20260916_125236_000018_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000018",
+  "side": "left"
+ },
+ "20260916_125236_000018_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_125236_000018",
+  "side": "right"
+ },
+ "20260916_142318_000001_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000001",
+  "side": "left"
+ },
+ "20260916_142318_000001_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000001",
+  "side": "right"
+ },
+ "20260916_142318_000002_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000002",
+  "side": "left"
+ },
+ "20260916_142318_000002_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000002",
+  "side": "right"
+ },
+ "20260916_142318_000003_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000003",
+  "side": "left"
+ },
+ "20260916_142318_000003_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000003",
+  "side": "right"
+ },
+ "20260916_142318_000004_left": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000004",
+  "side": "left"
+ },
+ "20260916_142318_000004_right": {
+  "domain": "early_precalibration",
+  "early_calibration_domain": true,
+  "episode": "20260916_142318_000004",
+  "side": "right"
+ }
+}

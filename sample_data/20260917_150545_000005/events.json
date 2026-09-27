@@ -1,0 +1,168 @@
+[
+ {
+  "t_ns": 185286977487583,
+  "t_rel_s": 0.000476167,
+  "kind": "hold_still_start",
+  "device": "session",
+  "detail": {
+   "hold_s": 3.0
+  }
+ },
+ {
+  "t_ns": 185271134485791,
+  "t_rel_s": -15.842525625,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "validation",
+   "phase": "EPISODE",
+   "verdict": "PASS",
+   "notes": [],
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185271136381291,
+  "t_rel_s": -15.840630125,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "keep",
+   "verdict": "PASS",
+   "episode": "episode_000004",
+   "phase": "EPISODE",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185271150852875,
+  "t_rel_s": -15.826158541,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "reset_start",
+   "phase": "RESET",
+   "order": "PRB",
+   "reset_s": 10.0,
+   "episode_n": 5,
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185279187433583,
+  "t_rel_s": -7.789577833,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "ready_cue",
+   "phase": "RESET",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185281153060791,
+  "t_rel_s": -5.823950625,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "arming",
+   "phase": "ARMING",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185286985707291,
+  "t_rel_s": 0.008695875,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "rec_start",
+   "phase": "ARMING"
+  }
+ },
+ {
+  "t_ns": 185287058567708,
+  "t_rel_s": 0.081556292,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_3",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185287953343541,
+  "t_rel_s": 0.976332125,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_2",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185288832574708,
+  "t_rel_s": 1.855563292,
+  "kind": "moved_before_go",
+  "device": "session",
+  "detail": {
+   "sides": [
+    "left"
+   ],
+   "hold_left_s": 1.08,
+   "windows": {
+    "left": {
+     "n": 48,
+     "gyro_mean_deg_s": 10.26,
+     "accel_std": 0.357,
+     "max_gap_ms": 5.9,
+     "reason": "accel std 0.36"
+    }
+   }
+  }
+ },
+ {
+  "t_ns": 185288975307000,
+  "t_rel_s": 1.998295584,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_1",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185289920679958,
+  "t_rel_s": 2.943668542,
+  "kind": "go_cue",
+  "device": "session",
+  "detail": {
+   "held_still": {
+    "left": 0.83,
+    "right": 4.09
+   },
+   "clean": false
+  }
+ },
+ {
+  "t_ns": 185289998386458,
+  "t_rel_s": 3.021375042,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "go",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185310037403875,
+  "t_rel_s": 23.060392459,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "auto_stop",
+   "phase": "EPISODE",
+   "episode_s": 20.0
+  }
+ }
+]

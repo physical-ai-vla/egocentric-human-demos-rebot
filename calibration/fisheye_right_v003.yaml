@@ -1,0 +1,24 @@
+created: 2026-09-16T11:26:14+0900
+schema: handumi_fisheye_intrinsics/v1
+model: kannala_brandt
+side: right
+K:
+- - 791.2815196166999
+  - 0.0
+  - 956.9037509633266
+- - 0.0
+  - 793.1533782322238
+  - 523.4778704088599
+- - 0.0
+  - 0.0
+  - 1.0
+D:
+- -0.0521682968099971
+- 0.02869505460550566
+- -0.015969967053319805
+- 0.0033807032560574635
+image_size:
+- 1920
+- 1080
+source: wrist_bundle:wrist_bundle_right_v005
+notes: 'from wrist_bundle_right_v005: imu_noise side correction; extrinsic unchanged'

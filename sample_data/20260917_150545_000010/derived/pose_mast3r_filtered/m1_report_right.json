@@ -1,0 +1,164 @@
+{
+ "schema": "ego_teleop_m1_report/v1",
+ "episode": "episode_000010",
+ "side": "right",
+ "backend": "mast3r_filtered",
+ "downscale": 2,
+ "mode": null,
+ "pose_qa_verdict": "REJECT",
+ "pose_qa": {
+  "side": "right",
+  "backend": "mast3r_filtered",
+  "metric_scale": true,
+  "n_frames": 692,
+  "n_valid": 692,
+  "valid_ratio": 1.0,
+  "tracking_states": {
+   "tracking": 692
+  },
+  "lost_events": 0,
+  "longest_lost_s": 0.0,
+  "home_start": {
+   "t0_ns": 185459500258000,
+   "t1_ns": 185462500258000,
+   "duration_s": 3.0,
+   "gyro_bias_dps": [
+    0.3515,
+    0.7488,
+    -0.1477
+   ],
+   "gyro_std_dps": 1.2348,
+   "accel_mean": [
+    -1.5837,
+    -1.4531,
+    9.6745
+   ],
+   "accel_norm_std": 0.0629,
+   "n_samples": 605
+  },
+  "home_end": null,
+  "return_translation_mm": null,
+  "return_rotation_deg": null,
+  "home_start_pos_std_mm": 0.8103523940543673,
+  "home_start_rot_std_deg": 0.13728857161669708,
+  "home_end_pos_std_mm": null,
+  "home_end_rot_std_deg": null,
+  "jumps_translation": 6,
+  "jumps_rotation": 4,
+  "max_step_translation_m": 1.2573559836510713,
+  "max_step_rotation_deg": 32.44314283687353,
+  "imu_residual_deg_median": 0.16238069498457128,
+  "imu_residual_deg_p95": 4.609043449532552,
+  "imu_residual_frac_over_warn": 0.06569343065693431,
+  "flags": [
+   "no still HOME window at episode end",
+   "tcp_uncalibrated: T_camera_tcp = identity (camera pose reported as TCP)"
+  ],
+  "verdict": "REJECT",
+  "reasons": [
+   "REVIEW: no still HOME window at episode end",
+   "REJECT: catastrophic pose jumps: 6 translation, 4 rotation"
+  ],
+  "canonical_anchor": "home_start_mean",
+  "runtime_s": 5.55,
+  "clock_fit": {
+   "slope_ns_per_us": 999.9899671692766,
+   "offset_ns": 176062462250793.34,
+   "residual_std_ms": 1.8498,
+   "n": 4644,
+   "drift_ppm": -10.03,
+   "method": "robust_lower_envelope"
+  },
+  "gyro_bias_dps": [
+   0.3515,
+   0.7488,
+   -0.1477
+  ],
+  "calibration": {
+   "side": "right",
+   "versions": {
+    "fisheye": "fisheye_right_v003",
+    "camera_imu": "camera_imu_right_v002",
+    "camera_tcp": null
+   },
+   "tcp_calibrated": false,
+   "imu_extrinsics_calibrated": true,
+   "intrinsics_present": true,
+   "physical_side_verified": false
+  },
+  "error": null
+ },
+ "m1": {
+  "n_frames": 692,
+  "n_valid": 692,
+  "init_frames": 0,
+  "valid_ratio": 1.0,
+  "largest_gap_ms": 65.704541,
+  "lost_runs": 0,
+  "longest_lost_s": 0.0,
+  "time_to_first_valid_s": 0.0,
+  "recovery_times_s": [],
+  "static": {
+   "n": 89,
+   "duration_s": 2.936794417,
+   "pos_std_mm": 0.8103523940543673,
+   "drift_mm": 2.059781004645516,
+   "rot_std_deg": 0.0974885275111068,
+   "rot_drift_deg": 0.34087723608257914
+  },
+  "return_to_start_mm": 142.94378396135338,
+  "return_to_start_deg": 27.17948255314848,
+  "path_length_m": 6.200285073064271,
+  "gt_available": false,
+  "ate_rmse_mm": null,
+  "rpe_trans_rmse_mm": null,
+  "rpe_rot_rmse_deg": null,
+  "scale_ratio": null,
+  "max_abs_error_mm": null,
+  "verdict": "WARN",
+  "reasons": [
+   "return-to-start 142.9mm (only meaningful if the protocol returned to start)"
+  ]
+ },
+ "relative": {
+  "stationary": {
+   "n_windows": 5,
+   "total_windows": 5,
+   "p2p_mm_median": 11.203679270339128,
+   "p2p_mm_p95": 427.6174660495519,
+   "p2p_mm_max": 472.64187407105544,
+   "drift_mm_s_median": 12.854444122576231,
+   "rot_deg_median": 0.7593793535575124
+  },
+  "horizons": {
+   "k5": {
+    "n": 687,
+    "dp_mm_median": 10.700617784998316,
+    "dp_mm_p95": 120.19920601943696,
+    "chain_ratio_median": 0.9496857713485216,
+    "rot_vs_gyro_deg_median": 0.20568451611083227,
+    "rot_vs_gyro_deg_p95": 2.7636144818440687,
+    "scale_drift_last_over_first": 31.87575513589244
+   },
+   "k10": {
+    "n": 682,
+    "dp_mm_median": 22.755635994938984,
+    "dp_mm_p95": 209.75353835563791,
+    "chain_ratio_median": 0.7826900140096023,
+    "rot_vs_gyro_deg_median": 0.3366683345242787,
+    "rot_vs_gyro_deg_p95": 4.04693389551536,
+    "scale_drift_last_over_first": 49.9568103676258
+   },
+   "k15": {
+    "n": 677,
+    "dp_mm_median": 35.41857728083803,
+    "dp_mm_p95": 280.8425755620677,
+    "chain_ratio_median": 0.6942983204506425,
+    "rot_vs_gyro_deg_median": 0.5024656821660661,
+    "rot_vs_gyro_deg_p95": 8.285225823376567,
+    "scale_drift_last_over_first": 50.663383829626056
+   },
+   "growth_15_over_5": 3.309956302755991
+  }
+ }
+}

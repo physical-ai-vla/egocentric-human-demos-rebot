@@ -1,0 +1,19 @@
+cube_set: RBP
+colors: {R: red, B: blue, P: purple}
+orders: [RBP, RPB, BRP, BPR, PRB, PBR]
+target_per_order: 20            # H120 = 6 x 20
+instruction_template: "Stack the {bottom} cube on the bottom, {middle} cube in the middle, and {top} cube on the top, on the plate."
+# dataset modes: session prefix + per-order target (UI selector). Default = collector.yaml session_prefix / target_per_order above.
+datasets:
+  Vpilot_vision_only: {target_per_order: 1, note: "IMU-less V0 observability pilot; NEVER counted as H120"}
+  Hpilot: {target_per_order: 50, note: "300-episode collection (6 orders x 50), AUTO loop; 2026-09-16 -- was 3 for the pre-pilot"}
+  H120:   {target_per_order: 20, note: "final; only after IMU + VIO/TCP validation"}
+  # 2026-09-18 RGB-D teacher-sensor pilot: depth is recorded to LABEL human metric xyz/EEF, never as policy
+  # input. Ten episodes, then QA -- no 100-episode collection until the QA report is read.
+  HRGBD_qa10: {target_per_order: 2, orders: [RBP, RPB, BRP, BPR, PRB],
+               note: "10 = 5 orders x 2; QA gate before any larger RGB-D take"}
+  # 2026-09-18 body->TCP + orientation calibration. NOT a stacking take: the order label is unused and the operator
+  # follows the motion protocol in docs/handumi_collector/RGBD_TEACHER_QA.md (static, xyz, roll/pitch/yaw,
+  # rotation+translation, near/far workspace, grip open/close). Two episodes = one per hand, 20-30 s each.
+  CALIB_bodytcp: {target_per_order: 2, orders: [RBP],
+                  note: "body->TCP full SE(3) + IMU orientation calibration; 2 episodes, motion protocol not stacking"}

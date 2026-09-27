@@ -1,0 +1,142 @@
+[
+ {
+  "t_ns": 185141044996375,
+  "t_rel_s": 0.000272292,
+  "kind": "hold_still_start",
+  "device": "session",
+  "detail": {
+   "hold_s": 3.0
+  }
+ },
+ {
+  "t_ns": 185123786911916,
+  "t_rel_s": -17.257812167,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "reset_start",
+   "phase": "RESET",
+   "order": "RBP",
+   "reset_s": 10.0,
+   "episode_n": 1,
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185131793540125,
+  "t_rel_s": -9.251183958,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "ready_cue",
+   "phase": "RESET",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185133825842833,
+  "t_rel_s": -7.21888125,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "arming",
+   "phase": "ARMING",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185141053785708,
+  "t_rel_s": 0.009061625,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "rec_start",
+   "phase": "ARMING"
+  }
+ },
+ {
+  "t_ns": 185141087914750,
+  "t_rel_s": 0.043190667,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_3",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185141970164333,
+  "t_rel_s": 0.92544025,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_2",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185142992496708,
+  "t_rel_s": 1.947772625,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_1",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185143361437916,
+  "t_rel_s": 2.316713833,
+  "kind": "moved_before_go",
+  "device": "session",
+  "detail": {
+   "sides": [
+    "left"
+   ],
+   "hold_left_s": 0.57,
+   "windows": {
+    "left": {
+     "n": 47,
+     "gyro_mean_deg_s": 4.4,
+     "accel_std": 0.419,
+     "max_gap_ms": 5.9,
+     "reason": "accel std 0.42"
+    }
+   }
+  }
+ },
+ {
+  "t_ns": 185143937884875,
+  "t_rel_s": 2.893160792,
+  "kind": "go_cue",
+  "device": "session",
+  "detail": {
+   "held_still": {
+    "left": 0.63,
+    "right": 4.09
+   },
+   "clean": false
+  }
+ },
+ {
+  "t_ns": 185144016314208,
+  "t_rel_s": 2.971590125,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "go",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185164048192416,
+  "t_rel_s": 23.003468333,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "auto_stop",
+   "phase": "EPISODE",
+   "episode_s": 20.0
+  }
+ }
+]

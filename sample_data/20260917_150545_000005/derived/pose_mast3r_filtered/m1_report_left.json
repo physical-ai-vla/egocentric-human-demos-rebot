@@ -1,0 +1,165 @@
+{
+ "schema": "ego_teleop_m1_report/v1",
+ "episode": "episode_000005",
+ "side": "left",
+ "backend": "mast3r_filtered",
+ "downscale": 2,
+ "mode": null,
+ "pose_qa_verdict": "REJECT",
+ "pose_qa": {
+  "side": "left",
+  "backend": "mast3r_filtered",
+  "metric_scale": true,
+  "n_frames": 692,
+  "n_valid": 692,
+  "valid_ratio": 1.0,
+  "tracking_states": {
+   "tracking": 692
+  },
+  "lost_events": 0,
+  "longest_lost_s": 0.0,
+  "home_start": {
+   "t0_ns": 185287127011416,
+   "t1_ns": 185288516271541,
+   "duration_s": 1.389,
+   "gyro_bias_dps": [
+    0.0857,
+    0.4108,
+    -0.3032
+   ],
+   "gyro_std_dps": 1.9844,
+   "accel_mean": [
+    -0.0355,
+    2.9079,
+    9.4629
+   ],
+   "accel_norm_std": 0.0747,
+   "n_samples": 275
+  },
+  "home_end": null,
+  "return_translation_mm": null,
+  "return_rotation_deg": null,
+  "home_start_pos_std_mm": 1.0817659082452813,
+  "home_start_rot_std_deg": 0.28967852869208355,
+  "home_end_pos_std_mm": null,
+  "home_end_rot_std_deg": null,
+  "jumps_translation": 7,
+  "jumps_rotation": 0,
+  "max_step_translation_m": 1.817576381595458,
+  "max_step_rotation_deg": 13.943067596461642,
+  "imu_residual_deg_median": 0.828860666806601,
+  "imu_residual_deg_p95": 4.756599172858192,
+  "imu_residual_frac_over_warn": 0.1386861313868613,
+  "flags": [
+   "no still HOME window at episode end",
+   "tcp_uncalibrated: T_camera_tcp = identity (camera pose reported as TCP)"
+  ],
+  "verdict": "REJECT",
+  "reasons": [
+   "REVIEW: no still HOME window at episode end",
+   "REJECT: catastrophic pose jumps: 7 translation, 0 rotation",
+   "WARN: 14% of windows have IMU/VIO residual > 3.0deg"
+  ],
+  "canonical_anchor": "home_start_mean",
+  "runtime_s": 6.15,
+  "clock_fit": {
+   "slope_ns_per_us": 999.9984133020303,
+   "offset_ns": 91418226251528.69,
+   "residual_std_ms": 1.491,
+   "n": 4566,
+   "drift_ppm": -1.59,
+   "method": "robust_lower_envelope"
+  },
+  "gyro_bias_dps": [
+   0.0857,
+   0.4108,
+   -0.3032
+  ],
+  "calibration": {
+   "side": "left",
+   "versions": {
+    "fisheye": "fisheye_left_v002",
+    "camera_imu": "camera_imu_left_v001",
+    "camera_tcp": null
+   },
+   "tcp_calibrated": false,
+   "imu_extrinsics_calibrated": true,
+   "intrinsics_present": true,
+   "physical_side_verified": false
+  },
+  "error": null
+ },
+ "m1": {
+  "n_frames": 692,
+  "n_valid": 692,
+  "init_frames": 0,
+  "valid_ratio": 1.0,
+  "largest_gap_ms": 66.232084,
+  "lost_runs": 0,
+  "longest_lost_s": 0.0,
+  "time_to_first_valid_s": 0.0,
+  "recovery_times_s": [],
+  "static": {
+   "n": 42,
+   "duration_s": 1.353893834,
+   "pos_std_mm": 1.0817659082452815,
+   "drift_mm": 4.099619513229788,
+   "rot_std_deg": 0.2711992085302485,
+   "rot_drift_deg": 1.198515617991167
+  },
+  "return_to_start_mm": 89.31300216272105,
+  "return_to_start_deg": 19.9535378164121,
+  "path_length_m": 9.501630665481976,
+  "gt_available": false,
+  "ate_rmse_mm": null,
+  "rpe_trans_rmse_mm": null,
+  "rpe_rot_rmse_deg": null,
+  "scale_ratio": null,
+  "max_abs_error_mm": null,
+  "verdict": "WARN",
+  "reasons": [
+   "return-to-start 89.3mm (only meaningful if the protocol returned to start)"
+  ]
+ },
+ "relative": {
+  "stationary": {
+   "n_windows": 3,
+   "total_windows": 3,
+   "p2p_mm_median": 4.327205427766591,
+   "p2p_mm_p95": 381.14071736662135,
+   "p2p_mm_max": 423.00888535982745,
+   "drift_mm_s_median": 5.622290181332095,
+   "rot_deg_median": 0.6293189698148662
+  },
+  "horizons": {
+   "k5": {
+    "n": 687,
+    "dp_mm_median": 24.548841393175568,
+    "dp_mm_p95": 148.2996069526749,
+    "chain_ratio_median": 0.9460220947961979,
+    "rot_vs_gyro_deg_median": 0.7607716634608079,
+    "rot_vs_gyro_deg_p95": 3.963830589314016,
+    "scale_drift_last_over_first": 2.6715742782079266
+   },
+   "k10": {
+    "n": 682,
+    "dp_mm_median": 47.76888021671299,
+    "dp_mm_p95": 247.622895841603,
+    "chain_ratio_median": 0.8106631584654582,
+    "rot_vs_gyro_deg_median": 0.8933762125716599,
+    "rot_vs_gyro_deg_p95": 4.834653153661644,
+    "scale_drift_last_over_first": 3.225718026815619
+   },
+   "k15": {
+    "n": 677,
+    "dp_mm_median": 75.9578369521856,
+    "dp_mm_p95": 362.70991332163953,
+    "chain_ratio_median": 0.7155289188193287,
+    "rot_vs_gyro_deg_median": 1.3422505608447122,
+    "rot_vs_gyro_deg_p95": 5.393320213340644,
+    "scale_drift_last_over_first": 3.5163641479986105
+   },
+   "growth_15_over_5": 3.0941516031506655
+  }
+ }
+}

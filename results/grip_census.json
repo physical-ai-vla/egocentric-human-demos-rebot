@@ -1,0 +1,5981 @@
+{
+ "anchors": {
+  "20260915_161954_left": {
+   "closed": 3894.0,
+   "open": 5030.6,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260915_161954_right": {
+   "closed": 2124.0,
+   "open": 3372.2,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260915_171744_left": {
+   "closed": 5431.0,
+   "open": 6567.6,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260915_171744_right": {
+   "closed": 2062.2,
+   "open": 3310.3999999999996,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_090424_left": {
+   "closed": 3979.4,
+   "open": 5116.0,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_090424_right": {
+   "closed": 2032.0,
+   "open": 3280.2,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_105608_left": {
+   "closed": 4120.0,
+   "open": 5256.6,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_105608_right": {
+   "closed": 2054.8,
+   "open": 3303.0,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_112115_left": {
+   "closed": 3919.4,
+   "open": 5056.0,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_112115_right": {
+   "closed": 2063.2,
+   "open": 3311.3999999999996,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_121003_left": {
+   "closed": 32938.2,
+   "open": 31801.6,
+   "direction": -1,
+   "source": "derived_early"
+  },
+  "20260916_121003_right": {
+   "closed": 2070.6,
+   "open": 3318.8,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_121832_left": {
+   "closed": 30103.4,
+   "open": 28966.800000000003,
+   "direction": -1,
+   "source": "derived_early"
+  },
+  "20260916_121832_right": {
+   "closed": 2094.2,
+   "open": 3342.3999999999996,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_122225_left": {
+   "closed": 32845.8,
+   "open": 31709.200000000004,
+   "direction": -1,
+   "source": "derived_early"
+  },
+  "20260916_122225_right": {
+   "closed": 2041.8,
+   "open": 3290.0,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_125236_left": {
+   "closed": 32845.6,
+   "open": 31709.0,
+   "direction": -1,
+   "source": "derived_early"
+  },
+  "20260916_125236_right": {
+   "closed": 2041.7,
+   "open": 3289.9,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_140419_left": {
+   "closed": 2858.8,
+   "open": 1722.2,
+   "direction": -1,
+   "source": "stored_contract"
+  },
+  "20260916_140419_right": {
+   "closed": 2049.0,
+   "open": 3297.2,
+   "direction": 1,
+   "source": "stored_contract"
+  },
+  "20260916_142318_left": {
+   "closed": 2754.8,
+   "open": 1618.2000000000003,
+   "direction": -1,
+   "source": "derived_early"
+  },
+  "20260916_142318_right": {
+   "closed": 2081.0,
+   "open": 3329.2,
+   "direction": 1,
+   "source": "derived_early"
+  },
+  "20260916_170333_left": {
+   "closed": 2825.0,
+   "open": 1688.4,
+   "direction": -1,
+   "source": "stored_contract"
+  },
+  "20260916_170333_right": {
+   "closed": 2105.0,
+   "open": 3353.2,
+   "direction": 1,
+   "source": "stored_contract"
+  },
+  "20260917_100511_left": {
+   "closed": 2833.3,
+   "open": 1696.7,
+   "direction": -1,
+   "source": "stored_contract"
+  },
+  "20260917_100511_right": {
+   "closed": 2085.7,
+   "open": 3333.9,
+   "direction": 1,
+   "source": "stored_contract"
+  },
+  "20260917_135136_left": {
+   "closed": 3085.8,
+   "open": 1949.2,
+   "direction": -1,
+   "source": "stored_contract"
+  },
+  "20260917_135136_right": {
+   "closed": 2110.4,
+   "open": 3358.6,
+   "direction": 1,
+   "source": "stored_contract"
+  },
+  "20260917_150545_left": {
+   "closed": 2006.0,
+   "open": 3142.6,
+   "direction": 1,
+   "source": "stored_contract"
+  },
+  "20260917_150545_right": {
+   "closed": 2088.4,
+   "open": 3336.6,
+   "direction": 1,
+   "source": "stored_contract"
+  }
+ },
+ "sides": {
+  "20260915_161954_000001_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 7.119638212316204e-12,
+   "align_dt_ms_p95": 4.965014399999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.05938764661550522
+  },
+  "20260915_161954_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 6.828315690654563e-12,
+   "align_dt_ms_p95": 5.046823049999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 2.649815797805786
+  },
+  "20260915_171744_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 6.203038083185675e-12,
+   "align_dt_ms_p95": 4.8635759,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260915_171744_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 6.927791673660977e-12,
+   "align_dt_ms_p95": 4.8932109,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 64.07146453857422
+  },
+  "20260915_171744_000002_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.014035749999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260915_171744_000002_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.975994,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 65.36933135986328
+  },
+  "20260915_171744_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 4.882568849999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260915_171744_000004_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.958034899999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 62.989906311035156
+  },
+  "20260915_171744_000005_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.90091125,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260915_171744_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.2294167340296553e-12,
+   "align_dt_ms_p95": 4.8524005,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 66.08586120605469
+  },
+  "20260915_171744_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.893755949999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260915_171744_000006_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 4.971194199999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.80107116699219
+  },
+  "20260916_090424_000001_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.954288299999998,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 61.26429748535156
+  },
+  "20260916_090424_000001_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 4.9820219,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 62.89256286621094
+  },
+  "20260916_090424_000003_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.353761712787673e-12,
+   "align_dt_ms_p95": 4.870764,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 57.04777145385742
+  },
+  "20260916_090424_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.4638958368304884e-12,
+   "align_dt_ms_p95": 4.968084,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.37926483154297
+  },
+  "20260916_090424_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.8466582,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.28348159790039
+  },
+  "20260916_090424_000004_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9884832999999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.1629524230957
+  },
+  "20260916_090424_000005_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 5.016676949999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 60.07654571533203
+  },
+  "20260916_090424_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 5.025104000000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.541500091552734
+  },
+  "20260916_090424_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.00872765,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 58.29787826538086
+  },
+  "20260916_090424_000006_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.0628,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 61.648773193359375
+  },
+  "20260916_090424_000007_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.126388037344441e-12,
+   "align_dt_ms_p95": 4.8359389,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 65.12449645996094
+  },
+  "20260916_090424_000007_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 5.01566885,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 58.13371276855469
+  },
+  "20260916_090424_000008_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.055333763768431e-12,
+   "align_dt_ms_p95": 4.90412095,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_090424_000008_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.021847650000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.579349517822266
+  },
+  "20260916_090424_000009_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.9381455,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_090424_000009_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 5.0189889999999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 62.62217330932617
+  },
+  "20260916_090424_000010_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.948783,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_090424_000010_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.254285729781259e-12,
+   "align_dt_ms_p95": 4.929650199999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 59.107112884521484
+  },
+  "20260916_105608_000001_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 4.9626769,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260916_105608_000001_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.112177182629239e-12,
+   "align_dt_ms_p95": 4.8445148,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 58.3067626953125
+  },
+  "20260916_105608_000003_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.169020601490047e-12,
+   "align_dt_ms_p95": 4.941214749999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260916_105608_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5456082514429e-12,
+   "align_dt_ms_p95": 4.951535449999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 62.79520797729492
+  },
+  "20260916_105608_000004_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.064682999999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260916_105608_000004_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 4.9142377999999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 61.118812561035156
+  },
+  "20260916_112115_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.8516385999999985,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 11.913161277770996
+  },
+  "20260916_112115_000001_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.8877292,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 60.8808708190918
+  },
+  "20260916_112115_000002_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.055333763768431e-12,
+   "align_dt_ms_p95": 4.7473272,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 11.913161277770996
+  },
+  "20260916_112115_000002_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.8481004,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 59.47484588623047
+  },
+  "20260916_112115_000003_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.870411750000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 65.06510925292969
+  },
+  "20260916_112115_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 4.9428126,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 2.5308444499969482
+  },
+  "20260916_112115_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.8972007999999985,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.93674087524414
+  },
+  "20260916_112115_000004_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.8740945,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 2.5308444499969482
+  },
+  "20260916_112115_000005_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5349501104064984e-12,
+   "align_dt_ms_p95": 4.7700837499999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_112115_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.78750275,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 2.5308444499969482
+  },
+  "20260916_121003_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 1.7621459846850485e-12,
+   "align_dt_ms_p95": 4.8927498,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_121003_000001_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 1.7053025658242404e-12,
+   "align_dt_ms_p95": 4.936445849999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 57.236019134521484
+  },
+  "20260916_121003_000003_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 1.7479351299698465e-12,
+   "align_dt_ms_p95": 5.003906000000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_121003_000003_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 1.6555645743210334e-12,
+   "align_dt_ms_p95": 4.902993749999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 58.04718780517578
+  },
+  "20260916_121003_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 1.6555645743210334e-12,
+   "align_dt_ms_p95": 4.9748671,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 2.5655465126037598
+  },
+  "20260916_121003_000004_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 1.616484723854228e-12,
+   "align_dt_ms_p95": 4.9313239,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 2.6173689365386963
+  },
+  "20260916_121832_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 1.6626700016786344e-12,
+   "align_dt_ms_p95": 4.911818149999998,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_121832_000001_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 1.7053025658242404e-12,
+   "align_dt_ms_p95": 4.883429399999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 52.020206451416016
+  },
+  "20260916_121832_000002_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 1.7195134205394424e-12,
+   "align_dt_ms_p95": 4.8670627999999985,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_121832_000002_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 1.7479351299698465e-12,
+   "align_dt_ms_p95": 4.938500299999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 52.55287551879883
+  },
+  "20260916_122225_000001_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.204547738278052e-12,
+   "align_dt_ms_p95": 4.9380733,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_122225_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.069544618483633e-12,
+   "align_dt_ms_p95": 4.8457870000000005,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 57.60375213623047
+  },
+  "20260916_122225_000002_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.919027399999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_122225_000002_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 2.8279600883251987e-12,
+   "align_dt_ms_p95": 4.9490851000000005,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 56.35995864868164
+  },
+  "20260916_122225_000003_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 2.8563817977556027e-12,
+   "align_dt_ms_p95": 4.903375199999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_122225_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 4.88732145,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 53.55872344970703
+  },
+  "20260916_122225_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 2.9132252166164108e-12,
+   "align_dt_ms_p95": 4.896165399999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_122225_000004_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.176126028847648e-12,
+   "align_dt_ms_p95": 4.9850204499999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 56.684425354003906
+  },
+  "20260916_122225_000005_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.268496584496461e-13,
+   "align_dt_ms_p95": 5.1165519,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.28506070375442505
+  },
+  "20260916_122225_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-13,
+   "align_dt_ms_p95": 4.830563799999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 3.4177215099334717
+  },
+  "20260916_125236_000001_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 5.0015686,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 5.02066595,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 59.04491424560547
+  },
+  "20260916_125236_000002_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.941122549999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000002_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 4.91191605,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 54.91067123413086
+  },
+  "20260916_125236_000003_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.8676917,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.574029960873304e-12,
+   "align_dt_ms_p95": 4.9403500000000005,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 53.607391357421875
+  },
+  "20260916_125236_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5349501104064984e-12,
+   "align_dt_ms_p95": 4.924247799999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000004_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.946160699999998,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 54.7971076965332
+  },
+  "20260916_125236_000005_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 4.926623349999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 4.778366800000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 53.261295318603516
+  },
+  "20260916_125236_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.9806498,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000006_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.183231456205249e-12,
+   "align_dt_ms_p95": 4.7779498,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 53.337005615234375
+  },
+  "20260916_125236_000007_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 5.064405549999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000007_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.133493464702042e-12,
+   "align_dt_ms_p95": 4.8901714,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 58.582557678222656
+  },
+  "20260916_125236_000008_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.9823962,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000008_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 4.9590043999999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 61.07014083862305
+  },
+  "20260916_125236_000009_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.27164435,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000009_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.609383800000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 55.824588775634766
+  },
+  "20260916_125236_000010_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.218758592993254e-12,
+   "align_dt_ms_p95": 5.234758,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000010_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.7376830000000005,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 54.41856384277344
+  },
+  "20260916_125236_000011_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 9.947598300641403e-14,
+   "align_dt_ms_p95": 4.590239449999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 0.0
+  },
+  "20260916_125236_000011_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 8.881784197001252e-14,
+   "align_dt_ms_p95": 4.8596791999999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 3.6394407749176025
+  },
+  "20260916_125236_000012_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 4.98862595,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000012_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 4.852427249999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 51.87690353393555
+  },
+  "20260916_125236_000013_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 4.926467000000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000013_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.88064125,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 62.00027847290039
+  },
+  "20260916_125236_000014_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.873037200000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000014_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.225864020350855e-12,
+   "align_dt_ms_p95": 4.868763599999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 56.09497833251953
+  },
+  "20260916_125236_000015_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 4.9695922,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000015_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.3928415632544784e-12,
+   "align_dt_ms_p95": 4.862454199999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 59.06925964355469
+  },
+  "20260916_125236_000016_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.9709368,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000016_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.8971608,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 57.338768005371094
+  },
+  "20260916_125236_000017_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.9083464,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000017_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 4.900625649999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 57.55508041381836
+  },
+  "20260916_125236_000018_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5207392556912964e-12,
+   "align_dt_ms_p95": 4.854966200000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 67.5
+  },
+  "20260916_125236_000018_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.8743989999999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 57.01430130004883
+  },
+  "20260916_140419_000001_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.97106365,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.04970932006836
+  },
+  "20260916_140419_000001_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 4.92228935,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.61594009399414
+  },
+  "20260916_140419_000002_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.9779719,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.72215461730957
+  },
+  "20260916_140419_000002_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.055333763768431e-12,
+   "align_dt_ms_p95": 4.9348420000000015,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 53.42893600463867
+  },
+  "20260916_140419_000003_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 4.882259749999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.187664031982422
+  },
+  "20260916_140419_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.9323462,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.593814849853516
+  },
+  "20260916_140419_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.899918099999997,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.296850204467773
+  },
+  "20260916_140419_000004_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 4.8656872,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.998958587646484
+  },
+  "20260916_140419_000005_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.887808000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.197254180908203,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.4496849821152864e-12,
+   "align_dt_ms_p95": 4.94548595,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.2220573425293,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.928295800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.306438446044922
+  },
+  "20260916_140419_000006_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5349501104064984e-12,
+   "align_dt_ms_p95": 4.9574124,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.436546325683594
+  },
+  "20260916_140419_000007_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.015729400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 24.752771377563477
+  },
+  "20260916_140419_000007_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.9747214,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.43069839477539
+  },
+  "20260916_140419_000008_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.9028792,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.08806800842285
+  },
+  "20260916_140419_000008_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.0977262,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.24098587036133
+  },
+  "20260916_140419_000009_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.310746000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 23.683794021606445
+  },
+  "20260916_140419_000009_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 5.080418299999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.647891998291016
+  },
+  "20260916_140419_000010_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 5.6291338,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.821748733520508
+  },
+  "20260916_140419_000010_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.90202855,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.726806640625
+  },
+  "20260916_140419_000011_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.382866600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.05929946899414,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000011_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.9929338,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 53.9156379699707,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000012_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 5.550155349999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.425214767456055,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000012_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.197192200000002,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.91651916503906,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000013_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.4690227,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.068889617919922,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000013_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 5.0124862499999985,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.7542839050293,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000014_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.612262800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.01909065246582,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000014_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.0676024,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.186912536621094,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000015_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.274758200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.296850204467773
+  },
+  "20260916_140419_000015_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 5.26014055,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.2337532043457
+  },
+  "20260916_140419_000016_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 5.299117000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.821748733520508,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000016_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 4.982692449999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.45906066894531,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000017_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.6708996,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.7911319732666
+  },
+  "20260916_140419_000017_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 5.1274812,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.13195037841797
+  },
+  "20260916_140419_000018_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.092034599999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.187664031982422,
+   "legacy_width_identical": true
+  },
+  "20260916_140419_000018_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.623767952376511e-12,
+   "align_dt_ms_p95": 4.881337200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 53.894004821777344,
+   "legacy_width_identical": true
+  },
+  "20260916_142318_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.849916899999999,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 22.792978286743164
+  },
+  "20260916_142318_000001_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 5.013162400000001,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 63.97412109375
+  },
+  "20260916_142318_000002_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 4.95646425,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 22.264427185058594
+  },
+  "20260916_142318_000002_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 5.0223546500000005,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 60.78352737426758
+  },
+  "20260916_142318_000003_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.984666,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 22.3178768157959
+  },
+  "20260916_142318_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 5.0223956,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 64.19041442871094
+  },
+  "20260916_142318_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 4.8615710000000005,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 17.626253128051758
+  },
+  "20260916_142318_000004_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 5.0702207999999995,
+   "anchor_source": "derived_early",
+   "width_p95_mm": 56.94399642944336
+  },
+  "20260916_170333_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.439026841078885e-12,
+   "align_dt_ms_p95": 4.903605149999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.546279907226562
+  },
+  "20260916_170333_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 5.0504771999999996,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.160308837890625
+  },
+  "20260916_170333_000002_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.82817905,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.33749771118164
+  },
+  "20260916_170333_000002_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.02578415,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.91828155517578
+  },
+  "20260916_170333_000003_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 4.821146000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.684234619140625
+  },
+  "20260916_170333_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.934737800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.26934814453125
+  },
+  "20260916_170333_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.083755473198835e-12,
+   "align_dt_ms_p95": 5.0727002,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 32.00994110107422,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000004_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.9401896999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.33876419067383,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000005_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.8917814,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.27811050415039,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.197442310920451e-12,
+   "align_dt_ms_p95": 5.072534,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.21438980102539,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 4.828987,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.29728889465332,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000006_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.2294167340296553e-12,
+   "align_dt_ms_p95": 4.9995199,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.37574005126953,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000007_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 4.876916949999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.218721389770508,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000007_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.973191600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.97147750854492,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000008_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.211653165635653e-12,
+   "align_dt_ms_p95": 4.8529004,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.258930206298828
+  },
+  "20260916_170333_000008_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.0430221999999985,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.83672332763672
+  },
+  "20260916_170333_000009_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.259982999999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.37770652770996
+  },
+  "20260916_170333_000009_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.2284626,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.97236251831055
+  },
+  "20260916_170333_000010_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.450432800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.475454330444336,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000010_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.5207392556912964e-12,
+   "align_dt_ms_p95": 5.241841600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.11704635620117,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000011_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.2050916,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.684234619140625
+  },
+  "20260916_170333_000011_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 5.19299845,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.889923095703125
+  },
+  "20260916_170333_000012_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.427783600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.475454330444336
+  },
+  "20260916_170333_000012_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 5.341967400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 53.9156379699707
+  },
+  "20260916_170333_000013_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 5.47295,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.05974006652832,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000013_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.190746,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.15943145751953,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000014_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.36904545,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 32.366268157958984
+  },
+  "20260916_170333_000014_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5633718198369024e-12,
+   "align_dt_ms_p95": 5.1756424,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.6461296081543
+  },
+  "20260916_170333_000015_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 5.3873252,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.743621826171875
+  },
+  "20260916_170333_000015_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.086429349999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.91651916503906
+  },
+  "20260916_170333_000016_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.9294436,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 24.051998138427734
+  },
+  "20260916_170333_000016_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.9594971999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.70021057128906
+  },
+  "20260916_170333_000017_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.9398855,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.45627212524414
+  },
+  "20260916_170333_000017_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.85214815,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.889041900634766
+  },
+  "20260916_170333_000018_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 4.895662849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.634435653686523,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000018_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.439026841078885e-12,
+   "align_dt_ms_p95": 4.8397882,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.40906524658203,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000019_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 4.8718454,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.525249481201172,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000019_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.899571,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.67537307739258,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000020_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.895293549999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.15933609008789
+  },
+  "20260916_170333_000020_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 4.97398735,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.87275314331055
+  },
+  "20260916_170333_000022_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.03281985,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.624845504760742
+  },
+  "20260916_170333_000022_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.8901212,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.105350494384766
+  },
+  "20260916_170333_000023_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 4.8556044,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.021379470825195
+  },
+  "20260916_170333_000023_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.874249399999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.94399642944336
+  },
+  "20260916_170333_000024_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.161915174132446e-12,
+   "align_dt_ms_p95": 4.902170600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.38729476928711,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000024_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.873704,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.67449188232422,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000025_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.865487399999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.634435653686523,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000025_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 4.7877045,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.72856903076172,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000026_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.91644315,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.871986389160156
+  },
+  "20260916_170333_000026_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.140598892059643e-12,
+   "align_dt_ms_p95": 4.8356328,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.67537307739258
+  },
+  "20260916_170333_000027_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 4.9992038,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.000350952148438
+  },
+  "20260916_170333_000027_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.8144294,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.45817947387695
+  },
+  "20260916_170333_000028_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.929163999999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 32.9007568359375
+  },
+  "20260916_170333_000028_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.9422208,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.70021057128906
+  },
+  "20260916_170333_000029_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.924025,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.684234619140625
+  },
+  "20260916_170333_000029_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.439026841078885e-12,
+   "align_dt_ms_p95": 4.972417000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.382469177246094
+  },
+  "20260916_170333_000030_left": {
+   "ok": true,
+   "offset": 1,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.92938435,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.594228744506836
+  },
+  "20260916_170333_000030_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.311129148642067e-12,
+   "align_dt_ms_p95": 4.9289119999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.26934814453125
+  },
+  "20260916_170333_000031_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.96572295,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.653615951538086
+  },
+  "20260916_170333_000031_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.827727199999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.91651916503906
+  },
+  "20260916_170333_000032_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 1.9895196601282805e-13,
+   "align_dt_ms_p95": 4.935462099999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 1.3659158945083618
+  },
+  "20260916_170333_000032_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 1.9184653865522705e-13,
+   "align_dt_ms_p95": 4.6165939,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 7.246434688568115
+  },
+  "20260916_170333_000033_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 4.973799150320701e-14,
+   "align_dt_ms_p95": 4.665156,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 1.3659158945083618
+  },
+  "20260916_170333_000033_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 4.973799150320701e-14,
+   "align_dt_ms_p95": 4.285278099999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 7.246434688568115
+  },
+  "20260916_170333_000034_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.997020200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 23.9332218170166
+  },
+  "20260916_170333_000034_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.9100874,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.43069839477539
+  },
+  "20260916_170333_000035_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.8815454,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.4773006439209
+  },
+  "20260916_170333_000035_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.837038000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.327510833740234
+  },
+  "20260916_170333_000036_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.928323849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.77423858642578
+  },
+  "20260916_170333_000036_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.8452425,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.7303352355957
+  },
+  "20260916_170333_000037_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 4.893962,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.743621826171875
+  },
+  "20260916_170333_000037_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.88434165,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.91651916503906
+  },
+  "20260916_170333_000038_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.853293,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.575048446655273
+  },
+  "20260916_170333_000038_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.99943015,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.539737701416016
+  },
+  "20260916_170333_000039_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.8546462,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.27811050415039
+  },
+  "20260916_170333_000039_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 4.8673542,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.26934814453125
+  },
+  "20260916_170333_000040_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 2.9984903449076228e-12,
+   "align_dt_ms_p95": 4.9192046000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.743621826171875
+  },
+  "20260916_170333_000040_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.930170949999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.273372650146484
+  },
+  "20260916_170333_000041_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 4.8473506,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.871986389160156
+  },
+  "20260916_170333_000041_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 4.919904400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.593814849853516
+  },
+  "20260916_170333_000042_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 5.6611208,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.05014991760254
+  },
+  "20260916_170333_000042_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 2.9061197892588098e-12,
+   "align_dt_ms_p95": 5.3258122,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.306758880615234
+  },
+  "20260916_170333_000043_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.62194245,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.981170654296875,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000043_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.254146199999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.70197296142578,
+   "legacy_width_identical": true
+  },
+  "20260916_170333_000044_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 5.260029400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.33749771118164
+  },
+  "20260916_170333_000044_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.3604942499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.45906066894531
+  },
+  "20260917_100511_000001_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 4.9135481,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.514297485351562
+  },
+  "20260917_100511_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.86372505,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.28910064697266
+  },
+  "20260917_100511_000002_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 5.0385584,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.048786163330078
+  },
+  "20260917_100511_000002_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.154809746774845e-12,
+   "align_dt_ms_p95": 4.912763899999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.476165771484375
+  },
+  "20260917_100511_000003_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.623767952376511e-12,
+   "align_dt_ms_p95": 4.7656412,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.27674674987793
+  },
+  "20260917_100511_000003_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 4.88506895,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.23501586914062
+  },
+  "20260917_100511_000004_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 4.8933128,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.761436462402344
+  },
+  "20260917_100511_000004_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 4.9834955999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.7474365234375
+  },
+  "20260917_100511_000005_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 4.895503400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.17715072631836
+  },
+  "20260917_100511_000005_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.797075,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.04442596435547
+  },
+  "20260917_100511_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.7942621999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.136943817138672
+  },
+  "20260917_100511_000006_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.038980499999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.422088623046875
+  },
+  "20260917_100511_000007_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9187794,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.3265438079834,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000007_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.140598892059643e-12,
+   "align_dt_ms_p95": 4.93367225,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.69247817993164,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000008_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 4.9546418,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.00857925415039,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000008_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.8209595499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.526153564453125,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000009_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.083755473198835e-12,
+   "align_dt_ms_p95": 4.9650002,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.00857925415039
+  },
+  "20260917_100511_000009_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.7131011,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.20489501953125
+  },
+  "20260917_100511_000010_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.826571400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.880212783813477,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000010_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 4.766400399999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.6749267578125,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000011_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.82055005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.642662048339844
+  },
+  "20260917_100511_000011_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.919423199999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.59199142456055
+  },
+  "20260917_100511_000012_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.86677445,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.771028518676758
+  },
+  "20260917_100511_000012_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 4.8188078,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.99936294555664
+  },
+  "20260917_100511_000013_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.824275,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.077556610107422
+  },
+  "20260917_100511_000013_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.7803336000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.33964920043945
+  },
+  "20260917_100511_000014_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.8360744,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.28633689880371
+  },
+  "20260917_100511_000014_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 4.9084073,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.97141647338867
+  },
+  "20260917_100511_000015_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 4.811957399999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.18674087524414,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000015_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 4.9248078,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.34317779541016,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000016_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 5.0902212,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.10359764099121,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000016_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.885800000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.5320053100586,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000017_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.679049800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.721229553222656
+  },
+  "20260917_100511_000017_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.21211315,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.47161102294922
+  },
+  "20260917_100511_000018_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 5.599917099999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.077556610107422
+  },
+  "20260917_100511_000018_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.086983600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.66323471069336
+  },
+  "20260917_100511_000019_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.097966327914037e-12,
+   "align_dt_ms_p95": 5.62081015,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.711639404296875,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000019_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.262074999999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.7199592590332,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000020_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.454939899999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.40511131286621,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000020_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.9620704,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.04442596435547,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000021_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.410012200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.048786163330078,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000021_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.126388037344441e-12,
+   "align_dt_ms_p95": 5.053149599999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.016944885253906,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000022_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.55898455,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.395523071289062
+  },
+  "20260917_100511_000022_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.1977807999999985,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.99436950683594
+  },
+  "20260917_100511_000023_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.514783400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.93960189819336
+  },
+  "20260917_100511_000023_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5349501104064984e-12,
+   "align_dt_ms_p95": 5.1586866,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.059303283691406
+  },
+  "20260917_100511_000024_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.5065284009760944e-12,
+   "align_dt_ms_p95": 5.28408645,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.84000587463379,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000024_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 5.3573702,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.11244201660156,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000025_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 5.3044329999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.295927047729492,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000025_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.372209549999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.04845428466797,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000026_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.8753206,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.048786163330078,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000026_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.860221,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.878665924072266,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000027_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.785767549999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.702051162719727,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000027_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.8244712000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.69247817993164,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000028_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9276294,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 29.771028518676758,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000028_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.112177182629239e-12,
+   "align_dt_ms_p95": 4.8670603,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.90614318847656,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000029_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.8136716,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.00857925415039
+  },
+  "20260917_100511_000029_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5633718198369024e-12,
+   "align_dt_ms_p95": 4.87097895,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.96110534667969
+  },
+  "20260917_100511_000030_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 4.8377002000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.89939308166504
+  },
+  "20260917_100511_000030_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.0127011996228248e-12,
+   "align_dt_ms_p95": 4.900025,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.729888916015625
+  },
+  "20260917_100511_000031_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.85404355,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.020015716552734,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000031_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.86397795,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.90614318847656,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000032_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.841938,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.910829544067383
+  },
+  "20260917_100511_000032_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.812017549999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.528480529785156
+  },
+  "20260917_100511_000033_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 4.895895400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.970218658447266
+  },
+  "20260917_100511_000033_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.282707439211663e-12,
+   "align_dt_ms_p95": 4.822389299999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.475284576416016
+  },
+  "20260917_100511_000034_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 4.8430194,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.029605865478516,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000034_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 4.8679443,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.6898307800293,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000035_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.517186542012496e-12,
+   "align_dt_ms_p95": 4.9030208,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.801645278930664,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000035_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.9818902,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.206275939941406,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000036_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.8477668,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.098583221435547,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000036_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.827966400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.96110534667969,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000037_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.204547738278052e-12,
+   "align_dt_ms_p95": 4.8978756,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.33613395690918,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000037_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.9361538000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.989463806152344,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000038_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 4.8162294,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.989398956298828
+  },
+  "20260917_100511_000038_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.857331499999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.25809097290039
+  },
+  "20260917_100511_000039_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 5.2488924,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.861032485961914,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000039_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.906156599999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.23325729370117,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000040_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 5.46576765,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.930009841918945
+  },
+  "20260917_100511_000040_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 5.0378203,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.446044921875
+  },
+  "20260917_100511_000041_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.327452049999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.27674674987793,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000041_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 5.0111029,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.752464294433594,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000042_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.6843960000000004,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.167560577392578,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000042_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.3644198538240744e-12,
+   "align_dt_ms_p95": 5.0946084,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.39372634887695,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000043_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.5582628,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.27674674987793
+  },
+  "20260917_100511_000043_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.012396000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.04178237915039
+  },
+  "20260917_100511_000044_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 5.6507407,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.217357635498047
+  },
+  "20260917_100511_000044_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.110483,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.4194450378418
+  },
+  "20260917_100511_000045_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.5241212000000015,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.22694969177246
+  },
+  "20260917_100511_000045_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 5.291049899999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.5
+  },
+  "20260917_100511_000047_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.623767952376511e-12,
+   "align_dt_ms_p95": 4.9467292,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 25.3763427734375
+  },
+  "20260917_100511_000047_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.8288168,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.84797668457031
+  },
+  "20260917_100511_000048_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.2436275887448573e-12,
+   "align_dt_ms_p95": 4.851489549999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.3265438079834,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000048_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.6060043839825084e-12,
+   "align_dt_ms_p95": 4.86113125,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.837162017822266,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000050_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5456082514429e-12,
+   "align_dt_ms_p95": 4.9135048,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.801645278930664,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000050_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.9385704,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.01518249511719,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000051_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.870970799999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.920421600341797,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000051_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.055333763768431e-12,
+   "align_dt_ms_p95": 4.768690899999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.04354476928711,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000052_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.842558199999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.93960189819336
+  },
+  "20260917_100511_000052_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 4.916761999999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.44780731201172
+  },
+  "20260917_100511_000053_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 4.8380752,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.93960189819336
+  },
+  "20260917_100511_000053_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.7410964,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.56092834472656
+  },
+  "20260917_100511_000054_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.90894535,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.730819702148438,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000054_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.19033688356285e-12,
+   "align_dt_ms_p95": 4.84264825,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.74655532836914,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000055_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.8363149,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.514297485351562
+  },
+  "20260917_100511_000055_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.4070524179696804e-12,
+   "align_dt_ms_p95": 4.95152215,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.44956970214844
+  },
+  "20260917_100511_000056_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 4.93540105,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 31.671430587768555
+  },
+  "20260917_100511_000056_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.19033688356285e-12,
+   "align_dt_ms_p95": 4.8918803,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.26481246948242
+  },
+  "20260917_100511_000057_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 4.891232899999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.00857925415039
+  },
+  "20260917_100511_000057_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.7985876,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.28645324707031
+  },
+  "20260917_100511_000058_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.9457706,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.048786163330078
+  },
+  "20260917_100511_000058_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.992271400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.50364685058594
+  },
+  "20260917_100511_000059_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.240074875066057e-12,
+   "align_dt_ms_p95": 4.8319586,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.00857925415039
+  },
+  "20260917_100511_000059_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.7414878,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.773155212402344
+  },
+  "20260917_100511_000060_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 5.3721376,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.573684692382812
+  },
+  "20260917_100511_000060_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.0542091,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.28733444213867
+  },
+  "20260917_100511_000061_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.4380538,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.93960189819336,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000061_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.987979200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.500118255615234,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000062_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.479746550000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.583274841308594
+  },
+  "20260917_100511_000062_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.149944349999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.18370056152344
+  },
+  "20260917_100511_000063_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 5.433414049999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.048786163330078
+  },
+  "20260917_100511_000063_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.133493464702042e-12,
+   "align_dt_ms_p95": 5.103432399999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.5311279296875
+  },
+  "20260917_100511_000064_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 5.469625049999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 30.30551528930664
+  },
+  "20260917_100511_000064_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.1351042,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.34954833984375
+  },
+  "20260917_100511_000065_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.254285729781259e-12,
+   "align_dt_ms_p95": 5.329307800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 24.7824649810791
+  },
+  "20260917_100511_000065_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.1196512499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.28733444213867
+  },
+  "20260917_100511_000066_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.439026841078885e-12,
+   "align_dt_ms_p95": 5.498398849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 32.26530838012695
+  },
+  "20260917_100511_000066_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 5.183333800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.708255767822266
+  },
+  "20260917_100511_000067_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.350352849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.761436462402344,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000067_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 5.070375,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.90790939331055,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000068_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 5.410300049999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.93960189819336,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000068_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.154809746774845e-12,
+   "align_dt_ms_p95": 5.035246000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.88449478149414,
+   "legacy_width_identical": true
+  },
+  "20260917_100511_000069_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 5.414237,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.633071899414062
+  },
+  "20260917_100511_000069_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.056294749999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.04442596435547
+  },
+  "20260917_100511_000070_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 5.3750558999999996,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 32.235591888427734
+  },
+  "20260917_100511_000070_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.0991595499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.14905548095703
+  },
+  "20260917_100511_000071_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.3236868,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.633071899414062
+  },
+  "20260917_100511_000071_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.97041375,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.0718994140625
+  },
+  "20260917_100511_000072_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.574029960873304e-12,
+   "align_dt_ms_p95": 5.463876,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.642662048339844
+  },
+  "20260917_100511_000072_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 5.08200105,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.5798454284668
+  },
+  "20260917_100511_000073_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 5.334703800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 27.692459106445312
+  },
+  "20260917_100511_000073_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.19816995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.82093048095703
+  },
+  "20260917_100511_000074_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.564525400000002,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 24.901241302490234
+  },
+  "20260917_100511_000074_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.1542956,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.50188446044922
+  },
+  "20260917_100511_000075_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.3004710076056654e-12,
+   "align_dt_ms_p95": 5.361139249999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 26.38593101501465
+  },
+  "20260917_100511_000075_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.2028414000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.17741775512695
+  },
+  "20260917_100511_000076_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.069544618483633e-12,
+   "align_dt_ms_p95": 5.372479400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 35.88795471191406
+  },
+  "20260917_100511_000076_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 5.100125000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.662353515625
+  },
+  "20260917_100511_000077_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.256104200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 28.595149993896484
+  },
+  "20260917_100511_000077_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.4638958368304884e-12,
+   "align_dt_ms_p95": 4.9942626,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.421207427978516
+  },
+  "20260917_135136_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 4.74956075,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 41.67824935913086
+  },
+  "20260917_135136_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.0040376,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.92413330078125
+  },
+  "20260917_135136_000002_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.82472495,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 40.25294494628906
+  },
+  "20260917_135136_000002_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.9444668,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.60054397583008
+  },
+  "20260917_135136_000003_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.147704319417244e-12,
+   "align_dt_ms_p95": 4.9371834,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 44.52885818481445
+  },
+  "20260917_135136_000003_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.00960325,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.57752227783203
+  },
+  "20260917_135136_000004_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.894706249999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 45.597835540771484,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000004_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 5.041466600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.24360275268555,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000005_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.773873699999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 44.8257942199707
+  },
+  "20260917_135136_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.93118545,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.84973907470703
+  },
+  "20260917_135136_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.832870600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 44.64763259887695
+  },
+  "20260917_135136_000006_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 4.94713315,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.6829833984375
+  },
+  "20260917_135136_000007_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.204547738278052e-12,
+   "align_dt_ms_p95": 4.98004055,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 44.94457244873047
+  },
+  "20260917_135136_000007_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.574029960873304e-12,
+   "align_dt_ms_p95": 4.9036397,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.4666748046875
+  },
+  "20260917_135136_000008_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.870447849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 44.3506965637207
+  },
+  "20260917_135136_000008_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 5.0998584,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.87678527832031
+  },
+  "20260917_135136_000009_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.806662600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 43.28171920776367
+  },
+  "20260917_135136_000009_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.9702166000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.465789794921875
+  },
+  "20260917_135136_000010_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 5.577287200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 45.360286712646484,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000010_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.439026841078885e-12,
+   "align_dt_ms_p95": 4.9565244,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.78350067138672,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000011_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 5.76264255,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 43.69743347167969,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000011_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.2528126,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.14220428466797,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000012_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 5.6276244,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 42.212738037109375
+  },
+  "20260917_135136_000012_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 5.1354004,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.22872924804688
+  },
+  "20260917_135136_000013_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 5.670079,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 44.2319221496582
+  },
+  "20260917_135136_000013_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.2811876,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.3585205078125
+  },
+  "20260917_135136_000014_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.587771000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 45.30089569091797
+  },
+  "20260917_135136_000014_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.2173206,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.14220428466797
+  },
+  "20260917_135136_000016_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9263788,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 41.856414794921875,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000016_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.068709,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.65550231933594,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000017_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.8429011,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 42.747230529785156,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000017_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.010662600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.87678527832031,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000018_left": {
+   "ok": true,
+   "offset": 1,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.7739585,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 43.69743347167969
+  },
+  "20260917_135136_000018_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.574029960873304e-12,
+   "align_dt_ms_p95": 4.994941000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.16615676879883
+  },
+  "20260917_135136_000019_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.7426319999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 45.6572265625,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000019_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.04884825,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.25035858154297,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000021_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5065284009760944e-12,
+   "align_dt_ms_p95": 4.8819376000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 43.103553771972656
+  },
+  "20260917_135136_000021_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9708342,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.6785774230957
+  },
+  "20260917_135136_000022_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 4.8724254,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 39.95601272583008
+  },
+  "20260917_135136_000022_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9142292,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.19451904296875
+  },
+  "20260917_135136_000023_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 4.847442,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 43.69743347167969,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000023_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 4.9796254,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.92413330078125,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000024_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.90842295,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 41.856414794921875
+  },
+  "20260917_135136_000024_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.9286292000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.227848052978516
+  },
+  "20260917_135136_000025_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.850317200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 45.12273406982422,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000025_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.9601828,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.03140640258789,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000026_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.804669549999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 41.38131332397461,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000026_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9698335,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.95161056518555,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000027_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.941954600000002,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 39.99163818359375,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000027_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.0212289,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.97997283935547,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000029_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.8118788,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.20719528198242
+  },
+  "20260917_135136_000029_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.942554600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.36172103881836
+  },
+  "20260917_135136_000030_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.4781066915456904e-12,
+   "align_dt_ms_p95": 4.779465749999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.96964645385742,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000030_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.169020601490047e-12,
+   "align_dt_ms_p95": 4.9833214,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.16968536376953,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000031_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.84212615,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.96964645385742
+  },
+  "20260917_135136_000031_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.9340336,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.416629791259766
+  },
+  "20260917_135136_000032_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.83985225,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.02903366088867
+  },
+  "20260917_135136_000032_right": {
+   "ok": true,
+   "offset": 1,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.9958755,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.27651596069336
+  },
+  "20260917_135136_000033_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 4.8682382,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.96964645385742,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000033_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 4.96278335,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.62802505493164,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000034_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 4.9573075499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.72250747680664
+  },
+  "20260917_135136_000034_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.957637849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.08812713623047
+  },
+  "20260917_135136_000035_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.8329604,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.84128189086914,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000035_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.970562200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.826786041259766,
+   "legacy_width_identical": true
+  },
+  "20260917_135136_000036_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.9222538,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.732093811035156
+  },
+  "20260917_135136_000036_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 4.9294578,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.70957946777344
+  },
+  "20260917_135136_000037_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.552121400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.732093811035156
+  },
+  "20260917_135136_000037_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 5.3034276999999985,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.92413330078125
+  },
+  "20260917_135136_000038_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 5.606854649999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.26658248901367
+  },
+  "20260917_135136_000038_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.366125,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.96065902709961
+  },
+  "20260917_150545_000001_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.9455729999999996,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.26702880859375,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000001_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.069544618483633e-12,
+   "align_dt_ms_p95": 4.9801643,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.84666442871094,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000002_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5207392556912964e-12,
+   "align_dt_ms_p95": 4.9621756,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.82755279541016,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000002_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 5.049614599999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.57041931152344,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000003_left": {
+   "ok": true,
+   "offset": 1,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.95458015,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.42601013183594
+  },
+  "20260917_150545_000003_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 5.0849712,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.3593978881836
+  },
+  "20260917_150545_000004_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.94591885,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.72294616699219,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000004_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.9869772999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.60456848144531,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000005_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.92512275,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.91069793701172
+  },
+  "20260917_150545_000005_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.9829326,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.80018997192383
+  },
+  "20260917_150545_000006_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.439026841078885e-12,
+   "align_dt_ms_p95": 4.957949800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.56396484375,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000006_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 4.9960746,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.76365661621094,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000007_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5633718198369024e-12,
+   "align_dt_ms_p95": 4.972162,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.35702896118164,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000007_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.0697546,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.90426635742188,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000008_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.932416849999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.21723175048828
+  },
+  "20260917_150545_000008_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.9493714,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.6037483215332
+  },
+  "20260917_150545_000009_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.204547738278052e-12,
+   "align_dt_ms_p95": 5.3763803999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.49497985839844
+  },
+  "20260917_150545_000009_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 5.1976458,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.1156005859375
+  },
+  "20260917_150545_000010_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.234807800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.92987823486328
+  },
+  "20260917_150545_000010_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.06483625,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.744232177734375
+  },
+  "20260917_150545_000011_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 5.4325151,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.25743865966797
+  },
+  "20260917_150545_000011_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.623767952376511e-12,
+   "align_dt_ms_p95": 5.258854249999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.17106628417969
+  },
+  "20260917_150545_000012_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.444958200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.42601013183594
+  },
+  "20260917_150545_000012_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.226419249999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.3585205078125
+  },
+  "20260917_150545_000013_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5065284009760944e-12,
+   "align_dt_ms_p95": 5.2582754000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.50457000732422,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000013_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.1062395,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.5,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000014_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 5.513804200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.3953857421875
+  },
+  "20260917_150545_000014_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 5.1719853,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.808292388916016
+  },
+  "20260917_150545_000015_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 5.2453373999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.49497985839844
+  },
+  "20260917_150545_000015_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.217804200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.14308166503906
+  },
+  "20260917_150545_000016_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 5.3459704,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.99612045288086,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000016_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 5.1570084000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.38335418701172,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000017_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.196017200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.46436309814453,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000017_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.069442,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.7735710144043,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000018_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.574029960873304e-12,
+   "align_dt_ms_p95": 5.004179,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.66355895996094
+  },
+  "20260917_150545_000018_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.1525626,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.92589569091797
+  },
+  "20260917_150545_000019_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.033782399999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.02947235107422,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000019_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.116230000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.5,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000020_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.112177182629239e-12,
+   "align_dt_ms_p95": 5.01929315,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.02947235107422,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000020_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.073208800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.03052520751953,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000021_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.9878454,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.47122192382812
+  },
+  "20260917_150545_000021_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.9639795,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.5
+  },
+  "20260917_150545_000022_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 4.91512085,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.27525329589844
+  },
+  "20260917_150545_000022_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 5.0226,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.57979583740234
+  },
+  "20260917_150545_000023_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.9168536000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.96049118041992,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000023_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.123133600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.30940246582031,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000024_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.9653898,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.02947235107422,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000024_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 5.0056296,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.81861877441406,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000025_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.19033688356285e-12,
+   "align_dt_ms_p95": 4.9027958,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.85131072998047,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000025_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 5.00113,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.979087829589844,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000026_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.574029960873304e-12,
+   "align_dt_ms_p95": 4.9196046,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.326416015625
+  },
+  "20260917_150545_000026_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 5.0774156999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.11473083496094
+  },
+  "20260917_150545_000027_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.140598892059643e-12,
+   "align_dt_ms_p95": 5.2521893,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.02947235107422,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000027_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 5.1999204,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.45408630371094,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000028_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 5.177141600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.5
+  },
+  "20260917_150545_000028_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 5.100150000000002,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.57306671142578
+  },
+  "20260917_150545_000029_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 5.856612600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.38579559326172
+  },
+  "20260917_150545_000029_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.980182800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.84169387817383
+  },
+  "20260917_150545_000030_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 5.452891649999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.09844970703125
+  },
+  "20260917_150545_000030_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 5.05187855,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.57130432128906
+  },
+  "20260917_150545_000031_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.2917708,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.86090087890625,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000031_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 5.018050200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.5,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000032_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 5.447920800000002,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.56396484375,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000032_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 5.2275588,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.3549919128418,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000033_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 5.4059118,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.65396499633789
+  },
+  "20260917_150545_000033_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 5.064979849999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.95927810668945
+  },
+  "20260917_150545_000034_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 5.631903499999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.53519058227539
+  },
+  "20260917_150545_000034_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.9570296,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.30002975463867
+  },
+  "20260917_150545_000035_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 5.326846000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.55437469482422
+  },
+  "20260917_150545_000035_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.866600600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.651981353759766
+  },
+  "20260917_150545_000036_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.881113,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.02947235107422
+  },
+  "20260917_150545_000036_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.7652254,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.33335876464844
+  },
+  "20260917_150545_000037_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.488764832582092e-12,
+   "align_dt_ms_p95": 4.81035755,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.1617317199707,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000037_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.055333763768431e-12,
+   "align_dt_ms_p95": 4.64962375,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.99079132080078,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000038_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 4.87738,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.96049118041992,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000038_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.609557097661309e-12,
+   "align_dt_ms_p95": 4.8633378,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.814212799072266,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000039_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 4.8391126,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.19804382324219,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000039_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 4.879162049999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.76365661621094,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000040_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.91908615,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.19804382324219,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000040_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.211653165635653e-12,
+   "align_dt_ms_p95": 4.74800325,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.759254455566406,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000041_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.9017248,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.59457778930664,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000041_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.8846224,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.84835815429688,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000042_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.8129653,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.86090087890625
+  },
+  "20260917_150545_000042_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.8605328000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.08548355102539
+  },
+  "20260917_150545_000043_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.8207626,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.801513671875
+  },
+  "20260917_150545_000043_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.8525578,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.60726928710938
+  },
+  "20260917_150545_000044_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 5.2848595499999975,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.43559265136719
+  },
+  "20260917_150545_000044_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 5.2615042,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.029640197753906
+  },
+  "20260917_150545_000045_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.225864020350855e-12,
+   "align_dt_ms_p95": 5.2838004000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.79192352294922
+  },
+  "20260917_150545_000045_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 5.2867622,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.7867317199707
+  },
+  "20260917_150545_000046_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.6438219499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.93172836303711,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000046_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.344233249999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.06065368652344,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000047_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 5.4351748,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.27661895751953,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000047_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.2315704,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.4622688293457,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000048_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.595346242946107e-12,
+   "align_dt_ms_p95": 5.3676162,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.43559265136719,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000048_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.32658075,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.30179214477539,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000049_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.4211034499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.59457778930664
+  },
+  "20260917_150545_000049_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.46439085,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.2665786743164
+  },
+  "20260917_150545_000050_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 5.378883400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.42601013183594,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000050_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.2372296,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.63475036621094,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000052_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 4.934225400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.872337341308594
+  },
+  "20260917_150545_000052_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.8326336,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.51634216308594
+  },
+  "20260917_150545_000054_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.8664695,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.70376205444336
+  },
+  "20260917_150545_000054_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.806015550000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.03492736816406
+  },
+  "20260917_150545_000055_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.7817834,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.49497985839844
+  },
+  "20260917_150545_000055_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 4.868850299999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.05976867675781
+  },
+  "20260917_150545_000056_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.849366600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.129066467285156,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000056_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.8154237,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.8448371887207,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000057_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 4.94424745,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.941314697265625
+  },
+  "20260917_150545_000057_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.7256626,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.898399353027344
+  },
+  "20260917_150545_000058_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 4.784012199999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.16927719116211,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000058_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 4.709262400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.1156005859375,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000059_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 4.783653800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.72294616699219
+  },
+  "20260917_150545_000059_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.7656798,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.03140640258789
+  },
+  "20260917_150545_000060_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.9535168,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.93674087524414
+  },
+  "20260917_150545_000060_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.097966327914037e-12,
+   "align_dt_ms_p95": 4.850523549999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.35411071777344
+  },
+  "20260917_150545_000061_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.8151363499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.822540283203125,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000061_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.8235206,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.57890319824219,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000062_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 5.577829499999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.78233337402344
+  },
+  "20260917_150545_000062_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 5.5564458000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.78761672973633
+  },
+  "20260917_150545_000063_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.1867841698840493e-12,
+   "align_dt_ms_p95": 5.5582832,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.93172836303711
+  },
+  "20260917_150545_000063_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.2293607,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.61223602294922
+  },
+  "20260917_150545_000064_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.3527105499999985,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.70376205444336
+  },
+  "20260917_150545_000064_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 5.2196248,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.08724594116211
+  },
+  "20260917_150545_000065_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 5.224833200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.60416793823242
+  },
+  "20260917_150545_000065_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.1299407510232413e-12,
+   "align_dt_ms_p95": 5.057262649999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.033172607421875
+  },
+  "20260917_150545_000066_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 5.2326391,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.36662292480469
+  },
+  "20260917_150545_000066_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 5.3841540000000006,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.816856384277344
+  },
+  "20260917_150545_000067_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.290520600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.36662292480469
+  },
+  "20260917_150545_000067_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 5.5058424,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.328392028808594
+  },
+  "20260917_150545_000068_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.5115998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.07196807861328
+  },
+  "20260917_150545_000068_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 5.21667425,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.411712646484375
+  },
+  "20260917_150545_000069_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.40349970429088e-12,
+   "align_dt_ms_p95": 5.3116168,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.92715072631836
+  },
+  "20260917_150545_000069_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 5.105604200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.760135650634766
+  },
+  "20260917_150545_000070_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.176126028847648e-12,
+   "align_dt_ms_p95": 5.314371949999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.43559265136719
+  },
+  "20260917_150545_000070_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 5.2303828,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.08548355102539
+  },
+  "20260917_150545_000071_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.803266800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.485389709472656,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000071_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.8226662000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.02234649658203,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000072_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.873316849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.68228530883789
+  },
+  "20260917_150545_000072_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 4.83315995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.60142517089844
+  },
+  "20260917_150545_000073_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.431921413721284e-12,
+   "align_dt_ms_p95": 5.037183400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.9011116027832
+  },
+  "20260917_150545_000073_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.8008508,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.3009147644043
+  },
+  "20260917_150545_000074_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.7654252,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.93172836303711
+  },
+  "20260917_150545_000074_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.439026841078885e-12,
+   "align_dt_ms_p95": 5.07425205,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.328392028808594
+  },
+  "20260917_150545_000075_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.90125575,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.65031433105469
+  },
+  "20260917_150545_000075_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 4.897038749999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.81865692138672
+  },
+  "20260917_150545_000076_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 4.771770999999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.04090881347656
+  },
+  "20260917_150545_000076_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.953699599999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.357635498046875
+  },
+  "20260917_150545_000077_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.885592000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.772743225097656
+  },
+  "20260917_150545_000077_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 4.8291454,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.247718811035156
+  },
+  "20260917_150545_000078_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.82601825,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.49683380126953,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000078_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.211653165635653e-12,
+   "align_dt_ms_p95": 4.928712,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.08812713623047,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000079_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.218758592993254e-12,
+   "align_dt_ms_p95": 4.847996,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.943599700927734
+  },
+  "20260917_150545_000079_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.8707254,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.898414611816406
+  },
+  "20260917_150545_000080_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.883425,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.39723587036133
+  },
+  "20260917_150545_000080_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 4.954148249999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.6261978149414
+  },
+  "20260917_150545_000081_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 5.0493926,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.26887130737305,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000081_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 4.8954374000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.08724594116211,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000082_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 5.367747099999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.326416015625,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000082_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.3240546,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.09310150146484,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000083_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 5.184719,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.44518280029297
+  },
+  "20260917_150545_000083_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.285042849999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.830867767333984
+  },
+  "20260917_150545_000084_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.79921575,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.55622100830078
+  },
+  "20260917_150545_000084_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.857855649999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.14044189453125
+  },
+  "20260917_150545_000085_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.204547738278052e-12,
+   "align_dt_ms_p95": 4.8809958,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.66355895996094
+  },
+  "20260917_150545_000085_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.481659405224491e-12,
+   "align_dt_ms_p95": 4.9105794,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.340965270996094
+  },
+  "20260917_150545_000086_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.5207392556912964e-12,
+   "align_dt_ms_p95": 4.9456584,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.09844970703125
+  },
+  "20260917_150545_000086_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.032404299999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.73353576660156
+  },
+  "20260917_150545_000087_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.467448550509289e-12,
+   "align_dt_ms_p95": 4.9124666,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.326416015625
+  },
+  "20260917_150545_000087_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 5.073146,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.792537689208984
+  },
+  "20260917_150545_000088_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.8392402,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.19804382324219
+  },
+  "20260917_150545_000088_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.26139115713886e-12,
+   "align_dt_ms_p95": 4.93386575,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.572181701660156
+  },
+  "20260917_150545_000089_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.169020601490047e-12,
+   "align_dt_ms_p95": 4.801269,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.01988220214844
+  },
+  "20260917_150545_000089_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.852771400000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.921485900878906
+  },
+  "20260917_150545_000090_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 4.8834454,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.60416793823242,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000090_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.881349800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.60374450683594,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000091_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.19033688356285e-12,
+   "align_dt_ms_p95": 4.964183200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.485389709472656
+  },
+  "20260917_150545_000091_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.9109996,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.46721267700195
+  },
+  "20260917_150545_000092_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.364412200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.485389709472656,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000092_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.502975687297294e-12,
+   "align_dt_ms_p95": 5.1526232,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.815975189208984,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000093_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.183231456205249e-12,
+   "align_dt_ms_p95": 5.2927018,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.582679748535156,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000093_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.218758592993254e-12,
+   "align_dt_ms_p95": 5.3089692500000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.46403121948242,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000094_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.2852124,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.01988220214844
+  },
+  "20260917_150545_000094_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.3133502,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.25444412231445
+  },
+  "20260917_150545_000095_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.0269120543380268e-12,
+   "align_dt_ms_p95": 5.267865099999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.43559265136719
+  },
+  "20260917_150545_000095_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 5.347146799999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.32927322387695
+  },
+  "20260917_150545_000096_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.5029712,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.97008514404297
+  },
+  "20260917_150545_000096_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.4651248,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.2743034362793
+  },
+  "20260917_150545_000097_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.538502824085299e-12,
+   "align_dt_ms_p95": 5.22575435,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.65396499633789,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000097_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.3916294,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.815975189208984,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000098_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.1690164,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.13865661621094
+  },
+  "20260917_150545_000098_right": {
+   "ok": true,
+   "offset": 1,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 5.370323,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.94984817504883
+  },
+  "20260917_150545_000099_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.247180302423658e-12,
+   "align_dt_ms_p95": 5.3150436999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.129066467285156
+  },
+  "20260917_150545_000099_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.4212632726848824e-12,
+   "align_dt_ms_p95": 5.4415208,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.28015899658203
+  },
+  "20260917_150545_000100_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.4416292,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.069679260253906,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000100_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.524291969370097e-12,
+   "align_dt_ms_p95": 5.0906668,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.738502502441406,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000101_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.9152461,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.5658073425293,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000101_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.154809746774845e-12,
+   "align_dt_ms_p95": 4.9816834,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.14044189453125,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000102_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.339550858072471e-12,
+   "align_dt_ms_p95": 4.7992417,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.050498962402344,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000102_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 4.8953858,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.62626266479492,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000103_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 4.8767252,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.9029541015625
+  },
+  "20260917_150545_000103_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.531397396727698e-12,
+   "align_dt_ms_p95": 4.855833,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.302677154541016
+  },
+  "20260917_150545_000104_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.4781066915456904e-12,
+   "align_dt_ms_p95": 4.8941542,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.70376205444336,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000104_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 4.9130718,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.60639572143555,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000105_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.460343123151688e-12,
+   "align_dt_ms_p95": 4.8345586,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 66.09844970703125
+  },
+  "20260917_150545_000105_right": {
+   "ok": true,
+   "offset": 1,
+   "interval_match_ms": 3.204547738278052e-12,
+   "align_dt_ms_p95": 4.9937133,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.760135650634766
+  },
+  "20260917_150545_000106_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 4.8482126,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.96049118041992
+  },
+  "20260917_150545_000106_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.9296462000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 55.743465423583984
+  },
+  "20260917_150545_000107_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 4.866082800000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.96049118041992
+  },
+  "20260917_150545_000107_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 4.7708712,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.435665130615234
+  },
+  "20260917_150545_000108_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.8952084000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.48767852783203
+  },
+  "20260917_150545_000108_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 4.8569511499999996,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.518985748291016
+  },
+  "20260917_150545_000109_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.318234575999668e-12,
+   "align_dt_ms_p95": 4.8535520000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.26702880859375
+  },
+  "20260917_150545_000109_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.9790744,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.891231536865234
+  },
+  "20260917_150545_000110_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 4.8602001999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.53519058227539
+  },
+  "20260917_150545_000110_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.47455397786689e-12,
+   "align_dt_ms_p95": 4.9779708000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.62216567993164
+  },
+  "20260917_150545_000111_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.19033688356285e-12,
+   "align_dt_ms_p95": 5.4692456,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.25743865966797
+  },
+  "20260917_150545_000111_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.304023721284466e-12,
+   "align_dt_ms_p95": 5.2530416,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 54.813331604003906
+  },
+  "20260917_150545_000112_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.33244543071487e-12,
+   "align_dt_ms_p95": 5.5262151,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.02947235107422
+  },
+  "20260917_150545_000112_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.100048849999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.180049896240234
+  },
+  "20260917_150545_000113_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.346656285430072e-12,
+   "align_dt_ms_p95": 5.5416546,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.000701904296875,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000113_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.360867140145274e-12,
+   "align_dt_ms_p95": 5.440133200000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.76774597167969,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000114_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.3457662,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.129066467285156,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000114_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 5.472646949999998,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.38423156738281,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000115_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.375077994860476e-12,
+   "align_dt_ms_p95": 5.241120600000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.832130432128906,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000115_right": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.417710559006082e-12,
+   "align_dt_ms_p95": 5.726966799999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.62714385986328,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000116_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.623767952376511e-12,
+   "align_dt_ms_p95": 5.363521,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.10029983520508
+  },
+  "20260917_150545_000116_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.552713678800501e-12,
+   "align_dt_ms_p95": 5.5093624000000005,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.274314880371094
+  },
+  "20260917_150545_000117_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.5456082514429e-12,
+   "align_dt_ms_p95": 5.476667749999997,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.66355895996094
+  },
+  "20260917_150545_000117_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.232969447708456e-12,
+   "align_dt_ms_p95": 5.38380625,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.08724594116211
+  },
+  "20260917_150545_000118_left": {
+   "ok": true,
+   "offset": 4,
+   "interval_match_ms": 3.453237695794087e-12,
+   "align_dt_ms_p95": 5.56194195,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 59.80335998535156
+  },
+  "20260917_150545_000118_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 5.3989163499999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.81773376464844
+  },
+  "20260917_150545_000120_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.566924533515703e-12,
+   "align_dt_ms_p95": 4.894528149999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.10029983520508
+  },
+  "20260917_150545_000120_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.140598892059643e-12,
+   "align_dt_ms_p95": 4.942092000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 58.923248291015625
+  },
+  "20260917_150545_000121_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.275602011854062e-12,
+   "align_dt_ms_p95": 4.8690061,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.39723587036133,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000121_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.083755473198835e-12,
+   "align_dt_ms_p95": 4.967829,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 60.978206634521484,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000122_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.446132268436486e-12,
+   "align_dt_ms_p95": 4.899646000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 62.59457778930664
+  },
+  "20260917_150545_000122_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.510081114654895e-12,
+   "align_dt_ms_p95": 4.789971649999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.03228759765625
+  },
+  "20260917_150545_000123_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.410605131648481e-12,
+   "align_dt_ms_p95": 4.9061686,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 64.5870361328125,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000123_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.581135388230905e-12,
+   "align_dt_ms_p95": 5.010345449999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.381591796875,
+   "legacy_width_identical": true
+  },
+  "20260917_150545_000124_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.789198000000001,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 65.14824676513672
+  },
+  "20260917_150545_000124_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.289812866569264e-12,
+   "align_dt_ms_p95": 5.025249349999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 57.08460235595703
+  },
+  "20260917_150545_000125_left": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.19033688356285e-12,
+   "align_dt_ms_p95": 4.7775191999999995,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 67.16743469238281
+  },
+  "20260917_150545_000125_right": {
+   "ok": true,
+   "offset": 2,
+   "interval_match_ms": 3.424815986363683e-12,
+   "align_dt_ms_p95": 4.805396049999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 56.224761962890625
+  },
+  "20260917_150545_000126_left": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.495870259939693e-12,
+   "align_dt_ms_p95": 4.925006649999999,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 63.99909591674805
+  },
+  "20260917_150545_000126_right": {
+   "ok": true,
+   "offset": 3,
+   "interval_match_ms": 3.389288849575678e-12,
+   "align_dt_ms_p95": 4.93741025,
+   "anchor_source": "stored_contract",
+   "width_p95_mm": 61.68122100830078
+  }
+ },
+ "regression": {
+  "identical": 208
+ }
+}

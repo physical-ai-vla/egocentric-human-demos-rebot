@@ -1,0 +1,152 @@
+{
+ "schema": "handumi_episode_meta/v1",
+ "episode_dir": "episode_000001",
+ "order": "RBP",
+ "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+ "status": "KEEP",
+ "quality": "PASS",
+ "notes": "auto_loop episode 1: 20 s stack, spoken cues, validation PASS",
+ "t_start_monotonic_ns": 185141044724083,
+ "t_stop_monotonic_ns": 185164048533333,
+ "t_start_wall_iso": "2026-09-17T15:06:14+0900",
+ "duration_s": 23.004,
+ "hw_event_in_episode": true,
+ "device_status_at_start": {
+  "left_wrist": {
+   "connected": true,
+   "error": null,
+   "rate_hz": 29.3
+  },
+  "right_wrist": {
+   "connected": true,
+   "error": null,
+   "rate_hz": 29.5
+  },
+  "head": {
+   "connected": true,
+   "error": null,
+   "rate_hz": 29.3
+  },
+  "imu_left": {
+   "connected": true,
+   "error": null,
+   "rate_hz": 197.2
+  },
+  "imu_right": {
+   "connected": true,
+   "error": null,
+   "rate_hz": 200.1
+  },
+  "gripper_left": {
+   "connected": true,
+   "error": null,
+   "rate_hz": 87.4
+  },
+  "gripper_right": {
+   "connected": true,
+   "error": null,
+   "rate_hz": 87.5
+  }
+ },
+ "aux_available": {},
+ "imu_present": true,
+ "imu_sides": [
+  "left",
+  "right"
+ ],
+ "imu_serials": {
+  "left": "20540160",
+  "right": "20778070"
+ },
+ "synthetic": false,
+ "streams": {
+  "left_wrist": {
+   "frames": 690,
+   "skipped_capture_indices": 0,
+   "duration_s": 22.969,
+   "fps_measured": 30.0,
+   "encoder": "h264_videotoolbox",
+   "encoder_error": null,
+   "encoder_backlog_max": 1
+  },
+  "right_wrist": {
+   "frames": 690,
+   "skipped_capture_indices": 0,
+   "duration_s": 22.969,
+   "fps_measured": 30.0,
+   "encoder": "h264_videotoolbox",
+   "encoder_error": null,
+   "encoder_backlog_max": 1
+  },
+  "head": {
+   "frames": 691,
+   "skipped_capture_indices": 0,
+   "duration_s": 23.002,
+   "fps_measured": 30.0,
+   "encoder": "h264_videotoolbox",
+   "encoder_error": null,
+   "encoder_backlog_max": 2
+  }
+ },
+ "sensor_messages": {
+  "/system/sync": 2,
+  "/system/events": 12,
+  "/left_wrist/frame_meta": 690,
+  "/right_wrist/frame_meta": 690,
+  "/head/frame_meta": 691,
+  "/left/imu": 4553,
+  "/right/imu": 4638,
+  "/left/gripper": 2299,
+  "/right/gripper": 2300
+ },
+ "n_events": 12,
+ "event_kinds": [
+  "auto_loop",
+  "go_cue",
+  "hold_still_start",
+  "moved_before_go"
+ ],
+ "operator": "op01",
+ "session": "Hpilot_20260917_150545",
+ "hardware_version": "handumi_v1",
+ "calibration_version": "uncalibrated",
+ "gripper_calibration_version": "gripper_v010",
+ "hardware_profile": "handumi_v1",
+ "cube_set": "RBP",
+ "imu_rate_hz": 200,
+ "stillness_gate": {
+  "enabled": true,
+  "min_still_s": 1.0,
+  "window_s": 0.25,
+  "gyro_max_deg_s": 6.0,
+  "accel_std_max": 0.35,
+  "max_gap_ms": 25.0,
+  "countdown_s": 0.0,
+  "hold_after_rec_s": 3.0,
+  "satisfied": true,
+  "sides": {
+   "left": {
+    "still_s": 1.08,
+    "ready": true,
+    "last_window": {
+     "n": 50,
+     "gyro_mean_deg_s": 1.48,
+     "accel_std": 0.098,
+     "max_gap_ms": 5.7
+    },
+    "ready_to_start_s": 0.06
+   },
+   "right": {
+    "still_s": 1.08,
+    "ready": true,
+    "last_window": {
+     "n": 50,
+     "gyro_mean_deg_s": 0.99,
+     "accel_std": 0.035,
+     "max_gap_ms": 6.0
+    },
+    "ready_to_start_s": 0.06
+   }
+  }
+ }
+}

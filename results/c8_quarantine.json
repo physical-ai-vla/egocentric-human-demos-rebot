@@ -1,0 +1,12 @@
+{
+ "rule": "imu_camera_rotation_inconsistent_v1",
+ "level": "session",
+ "frozen": "2026-09-25",
+ "definition": "A session is quarantined when its wrist IMU is inconsistent with its camera rotation: gyro-vs-pose angular-velocity agreement (c8_regress_ref208.gyro_check, video_to_cori_index_v1 applied) has per-session median vector cosine ~0 while every other session is 0.92-0.98, together with collapsed (mostly negative) IMU-VI scales. Sensor-integrity violation, NOT a yield-based exclusion (bimanual E of these sessions = 0).",
+ "sessions": {
+  "20260915_161954": {"episodes": 1, "sides": 2, "gyro_cos_p50": -0.017, "negative_scale_sides": 2},
+  "20260915_171744": {"episodes": 5, "sides": 10, "gyro_cos_p50": 0.008, "negative_scale_sides": 8}
+ },
+ "reference_other_sessions_gyro_cos_p50": [0.915, 0.975],
+ "reporting": "report BOTH raw census and integrity-filtered census"
+}

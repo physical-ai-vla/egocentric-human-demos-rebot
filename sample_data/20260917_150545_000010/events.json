@@ -1,0 +1,147 @@
+[
+ {
+  "t_ns": 185459350570000,
+  "t_rel_s": 0.000312,
+  "kind": "hold_still_start",
+  "device": "session",
+  "detail": {
+   "hold_s": 3.0
+  }
+ },
+ {
+  "t_ns": 185448164758166,
+  "t_rel_s": -11.185499834,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "validation",
+   "phase": "EPISODE",
+   "verdict": "PASS",
+   "notes": [],
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185448166414958,
+  "t_rel_s": -11.183843042,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "keep",
+   "verdict": "PASS",
+   "episode": "episode_000009",
+   "phase": "EPISODE",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185448183828083,
+  "t_rel_s": -11.166429917,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "reset_start",
+   "phase": "RESET",
+   "order": "BPR",
+   "reset_s": 10.0,
+   "episode_n": 10,
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185456219143541,
+  "t_rel_s": -3.131114459,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "ready_cue",
+   "phase": "RESET",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185458178077291,
+  "t_rel_s": -1.172180709,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "arming",
+   "phase": "ARMING",
+   "before_rec": true
+  }
+ },
+ {
+  "t_ns": 185459359997708,
+  "t_rel_s": 0.009739708,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "rec_start",
+   "phase": "ARMING"
+  }
+ },
+ {
+  "t_ns": 185459410285083,
+  "t_rel_s": 0.060027083,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_3",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185460308252125,
+  "t_rel_s": 0.957994125,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_2",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185461329892125,
+  "t_rel_s": 1.979634125,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "countdown_1",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185462273440416,
+  "t_rel_s": 2.923182416,
+  "kind": "go_cue",
+  "device": "session",
+  "detail": {
+   "held_still": {
+    "left": 4.1,
+    "right": 4.1
+   },
+   "clean": true
+  }
+ },
+ {
+  "t_ns": 185462353954583,
+  "t_rel_s": 3.003696583,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "go",
+   "phase": "HOLD"
+  }
+ },
+ {
+  "t_ns": 185482390455000,
+  "t_rel_s": 23.040197,
+  "kind": "auto_loop",
+  "device": "session",
+  "detail": {
+   "cue": "auto_stop",
+   "phase": "EPISODE",
+   "episode_s": 20.0
+  }
+ }
+]

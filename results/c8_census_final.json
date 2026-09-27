@@ -1,0 +1,57 @@
+{
+ "rule": "imu_camera_rotation_inconsistent_v1",
+ "census": {
+  "raw": {
+   "main_calibrated": {
+    "episodes": 294,
+    "A": 1087,
+    "bimanual_E": 478,
+    "single_arm_E": 950,
+    "bimanual_E_over_A": 0.4397,
+    "single_E_over_A": 0.874
+   },
+   "early_precalibration": {
+    "episodes": 55,
+    "A": 219,
+    "bimanual_E": 83,
+    "single_arm_E": 183,
+    "bimanual_E_over_A": 0.379,
+    "single_E_over_A": 0.8356
+   },
+   "all": {
+    "episodes": 349,
+    "A": 1306,
+    "bimanual_E": 561,
+    "single_arm_E": 1133,
+    "bimanual_E_over_A": 0.4296,
+    "single_E_over_A": 0.8675
+   }
+  },
+  "integrity_filtered": {
+   "main_calibrated": {
+    "episodes": 294,
+    "A": 1087,
+    "bimanual_E": 478,
+    "single_arm_E": 950,
+    "bimanual_E_over_A": 0.4397,
+    "single_E_over_A": 0.874
+   },
+   "early_precalibration": {
+    "episodes": 49,
+    "A": 192,
+    "bimanual_E": 83,
+    "single_arm_E": 173,
+    "bimanual_E_over_A": 0.4323,
+    "single_E_over_A": 0.901
+   },
+   "all": {
+    "episodes": 343,
+    "A": 1279,
+    "bimanual_E": 561,
+    "single_arm_E": 1123,
+    "bimanual_E_over_A": 0.4386,
+    "single_E_over_A": 0.878
+   }
+  }
+ }
+}

@@ -1,0 +1,83 @@
+schema: handumi_tcp_convention/v1
+version: tcp_convention_v1
+created: '2026-09-21'
+
+# ONE definition of the TCP frame, shared by reBot and HandUMI. The point is not to calibrate a transform
+# between two arbitrary frames -- it is to DEFINE both frames the same way, from physical function, so that
+# R_rebotTCP_from_handumiTCP = I is a consequence of construction rather than an assumption.
+#
+# Everything downstream (UMI relative actions, rot6d, the ego->robot comparison) is only meaningful if the
+# two datasets express rotation in the same basis. Translation is a SEPARATE problem and is not settled here.
+
+convention:
+  origin: the pinch centre -- the point the two jaws close on
+  axes:
+    x: approach. Out of the jaw, from the wrist towards the grasped object.
+    y: jaw closing / opening. The direction the fingers travel.
+    z: x cross y (right-handed)
+
+rebot:
+  status: CLOSED 2026-09-21
+  frame: the orientation of {side}_gripper_link; origin at gripper_link + 0.07 m along its +x
+  source: reBot_B601_DM_dualarm.urdf, ~/robot-cockpit/convert/rebot_ee.py
+  evidence:
+    - |
+      the finger joint is prismatic with axis [1,0,0] in a child frame rotated rpy="0 0 -1.5708",
+      so in gripper_link coordinates the fingers travel along Rz(-90deg) @ [1,0,0] = [0,-1,0]  => y is the
+      jaw axis
+    - |
+      the two finger links' inertial origins are symmetric about y: left_gripper_left at y = -0.018351,
+      left_gripper_right at y = +0.018351  => independent confirmation of the same axis
+    - |
+      T_FLANGE_TCP in rebot_ee.py is a PURE TRANSLATION of +0.07 m along x with identity rotation, so the
+      TCP orientation stored in observation.ee.tcp_state IS the gripper_link orientation and the two axes
+      above apply to the dataset directly, not only to the URDF
+  applies_to: observation.ee.tcp_state, action_ee.tcp_cmd, and every R150 UMI export built from them
+
+handumi:
+  status: OPEN -- to be MEASURED MECHANICALLY, not fitted from video
+  method: |
+    [2026-09-21, corrected] UMI does not estimate camera->TCP from imagery at all. Its
+    06_generate_dataset_plan.py writes the transform as a fixed mechanical constant --
+    pose_cam_tcp = [0, 0.086, 0.01465 + tcp_offset, 0, 0, 0] -- and measures gripper width separately from
+    ArUco tags. Fitting jaw tips in video was solving a problem the reproduction does not have, and it failed
+    its own gate (see below). So: declare the HandUMI TCP frame by the convention above, get the rotation as
+    one of the 24 discrete axis permutations, and get the translation with a caliper on the assembled device.
+  rotation_evidence: |
+    The abandoned fit is still usable HERE, because the answer is discrete and the candidates are 90 deg
+    apart. Its closing axis came out a = [-0.9925, 0.1029, 0.0652], i.e. 8 deg from exactly -cam_x. That is
+    far too noisy to use as a continuous value (bootstrap std 45.6 deg, reprojection p50 20.3 px, so the fit
+    is REJECTED as a measurement) but it is decisive for choosing among candidates separated by 90 deg:
+    the jaw closes along the camera x axis. Confirm the sign and the approach axis on the physical device.
+  translation_crosscheck: |
+    The same fit put the pinch centre at C = [-0.0021, -0.0137, 0.1267] m, 12.7 cm ahead of the lens, and
+    implied a 70.8 mm full aperture from the 50 mm anchor at n = 0.711. Both are physically plausible and
+    are recorded as a cross-check for the caliper measurement -- not as the value to use.
+  superseded_plan: |
+    Build the same three axes from the jaw geometry seen by the wrist fisheye, then express HandUMI poses in
+    that frame. The jaws are rigid relative to the camera, so a single frame gives only image-plane
+    directions; the depth comes from the gripper width, which is recorded at ~87 Hz. As the jaw opens, the
+    two tips separate along the closing axis by a known metric amount, so fitting the tip image trajectories
+    against the recorded width recovers the closing axis in 3D. The approach axis follows from the jaw root
+    to tip direction, and the third from the cross product. Sign and handedness are checked per side.
+  do_not: |
+    do not reuse the 6-DoF cube fit for rotation. handumi_camera_tcp_v1.yaml states plainly that its rotation
+    component was never measured (identity was carried through), and it rests on 14 accepted frames on the
+    right. Adding a third estimator is also out of scope -- reBot axes come from the URDF, HandUMI axes from
+    jaw geometry, and nothing else.
+
+translation:
+  status: OPEN -- tracked separately, on purpose
+  current_value: configs/calibration/camera_tcp/handumi_camera_tcp_v1.yaml
+  why_not_production: |
+    left [-0.000663, 0.040061, 0.104796] vs right [-0.004421, 0.072534, 0.123638] -- 32 mm apart in y and
+    19 mm in z for what is the same printed design mirrored, which reads as estimator noise rather than a
+    real difference. The right side rests on 14 accepted frames out of 20 raw detections.
+  options:
+    - CAD, if an assembly is found that holds the camera seat and the jaw tip in one frame. Not available
+      today -- in ~/handumi-hw the parts are exported in part-local frames (only fisheye_camera_main_support
+      and the gripper tip share one), and there is no reBot tip at all (AgileX-Piper / ARX-X5 / Dream /
+      Trossen / UMI-Gripper only).
+    - a translation-only calibration. Much easier than before: with the rotation fixed by the convention
+      above, the earlier observability, yaw-excitation and cube-visibility problems no longer apply, because
+      3 parameters are being estimated instead of 6.

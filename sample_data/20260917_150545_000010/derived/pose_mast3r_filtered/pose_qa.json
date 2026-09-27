@@ -1,0 +1,121 @@
+{
+ "schema": "handumi_pose_qa/v1",
+ "episode": "episode_000010",
+ "backend": "mast3r_filtered",
+ "tracking_mode": "episode_reset",
+ "verdict": "REJECT",
+ "sides": {
+  "left": {
+   "side": "left",
+   "backend": "mast3r_filtered",
+   "metric_scale": true,
+   "n_frames": 692,
+   "n_valid": 691,
+   "valid_ratio": 0.9985549132947977,
+   "tracking_states": {
+    "lost": 1,
+    "tracking": 691
+   },
+   "lost_events": 1,
+   "longest_lost_s": 0.03333333333333333,
+   "home_start": {
+    "t0_ns": 185459500258000,
+    "t1_ns": 185461338791387,
+    "duration_s": 1.839,
+    "gyro_bias_dps": [
+     0.0791,
+     -0.0354,
+     -0.1766
+    ],
+    "gyro_std_dps": 1.694,
+    "accel_mean": [
+     -0.6823,
+     1.09,
+     9.8231
+    ],
+    "accel_norm_std": 0.0679,
+    "n_samples": 364
+   },
+   "home_end": null,
+   "return_translation_mm": null,
+   "return_rotation_deg": null,
+   "home_start_pos_std_mm": 0.7550515452827115,
+   "home_start_rot_std_deg": 0.16905571896885718,
+   "home_end_pos_std_mm": null,
+   "home_end_rot_std_deg": null,
+   "jumps_translation": 35,
+   "jumps_rotation": 1,
+   "max_step_translation_m": 4.3282572395504,
+   "max_step_rotation_deg": 23.680508716104345,
+   "imu_residual_deg_median": 1.0194118406637456,
+   "imu_residual_deg_p95": 7.19585140925245,
+   "imu_residual_frac_over_warn": 0.16058394160583941,
+   "flags": [
+    "no still HOME window at episode end",
+    "tcp_uncalibrated: T_camera_tcp = identity (camera pose reported as TCP)"
+   ],
+   "verdict": "REJECT",
+   "reasons": [
+    "WARN: 1 lost event(s), longest 0.03s",
+    "REVIEW: no still HOME window at episode end",
+    "REJECT: catastrophic pose jumps: 35 translation, 1 rotation",
+    "WARN: 16% of windows have IMU/VIO residual > 3.0deg"
+   ],
+   "canonical_anchor": "home_start_mean",
+   "runtime_s": 5.82,
+   "clock_fit": {
+    "slope_ns_per_us": 999.9961242820632,
+    "offset_ns": 91418441397427.28,
+    "residual_std_ms": 1.6711,
+    "n": 4558,
+    "drift_ppm": -3.88,
+    "method": "robust_lower_envelope"
+   },
+   "gyro_bias_dps": [
+    0.0791,
+    -0.0354,
+    -0.1766
+   ],
+   "calibration": {
+    "side": "left",
+    "versions": {
+     "fisheye": "fisheye_left_v002",
+     "camera_imu": "camera_imu_left_v001",
+     "camera_tcp": null
+    },
+    "tcp_calibrated": false,
+    "imu_extrinsics_calibrated": true,
+    "intrinsics_present": true,
+    "physical_side_verified": false
+   },
+   "error": null
+  }
+ },
+ "canonical": {
+  "rows": 692,
+  "left_tcp_valid_ratio": 1.0
+ },
+ "config": {
+  "lead": 5,
+  "horizon": 30,
+  "fps": 30,
+  "max_pose_gap_ms": 100,
+  "offsets": {
+   "left_camera_imu_offset_ms": 30.17,
+   "right_camera_imu_offset_ms": 32.77,
+   "measured": true
+  },
+  "home_return": {
+   "pass": {
+    "translation_mm": 10.0,
+    "rotation_deg": 3.0
+   },
+   "warn": {
+    "translation_mm": 25.0,
+    "rotation_deg": 7.0
+   }
+  },
+  "image_downscale": 2
+ },
+ "note": "per-hand relative TCP motion only; no shared L/R world frame is produced (V1 design)"
+}

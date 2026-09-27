@@ -1,0 +1,232 @@
+{
+ "created": "2026-09-26 10:52:17",
+ "contract": "TRACK_C_PSEUDO_JOINT_CONTRACT.md \u00a722b / \u00a724",
+ "humanik_delta_md5": "6b63986b890ea815b3ea977e09205552",
+ "train_bi_md5": "70ea32ae91bc028d25d0a485d7802bb3",
+ "lerobot_workspace_git": "9d43958cb5f20f293827fc4226297d45bad8ac49",
+ "xvla_base_md5": "0bed971480d94ddfe002560bde13a59a",
+ "dataset_hash": "c1abe9e86e34e343a459e4a49741e345",
+ "dataset": {
+  "schema": "track_c_c_old_dataset/v1",
+  "contract": "TRACK_C_PSEUDO_JOINT_CONTRACT.md \u00a722b / \u00a724",
+  "report": {
+   "c8old_train": {
+    "segments": 504,
+    "rows": 32760,
+    "chunk_starts": 15624
+   },
+   "c8old_val": {
+    "segments": 57,
+    "rows": 3705,
+    "chunk_starts": 1767
+   }
+  },
+  "val_episodes": [
+   "20260916_090424_000001",
+   "20260916_105608_000001",
+   "20260916_112115_000004",
+   "20260916_122225_000004",
+   "20260916_140419_000014",
+   "20260916_170333_000015",
+   "20260916_170333_000025",
+   "20260916_170333_000028",
+   "20260917_100511_000025",
+   "20260917_100511_000051",
+   "20260917_100511_000057",
+   "20260917_100511_000077",
+   "20260917_135136_000008",
+   "20260917_135136_000018",
+   "20260917_135136_000033",
+   "20260917_150545_000010",
+   "20260917_150545_000020",
+   "20260917_150545_000036",
+   "20260917_150545_000038",
+   "20260917_150545_000050",
+   "20260917_150545_000071",
+   "20260917_150545_000073",
+   "20260917_150545_000092",
+   "20260917_150545_000098",
+   "20260917_150545_000109",
+   "20260917_150545_000112"
+  ],
+  "main_target": "stored Phase-3 pseudo q",
+  "cd_target": "observation.ee.tcp_tgt = retargeted measured TCP (no IK) @ diag(C^T, 1)",
+  "gripper": "A: state raw = -270 * open_fraction, action = raw / -6 (R150 video-verified 2026-09-26)",
+  "quarantine": "imu_camera_rotation_inconsistent_v1",
+  "writer": "resumable shard writer (per-npz finalized shards + .complete markers, lerobot aggregate_datasets, frame-exact spot check)"
+ },
+ "seed": 1000,
+ "batch": 4,
+ "dtype": "float32",
+ "optimizer": "B1 (lerobot xvla preset, fused AdamW)",
+ "pretrain": {
+  "steps": 300000,
+  "decay": 300000,
+  "save": 10000,
+  "init": "lerobot/xvla-base",
+  "EEF_TARGET_SOURCE": "measured",
+  "HUMANIK_TARGET": "cmd (action = pseudo q)"
+ },
+ "r150_ft": {
+  "steps": 600000,
+  "decay": 400000,
+  "save": 10000,
+  "init": "pretrain300k weights only (fresh optimizer / scheduler)",
+  "dataset": "rebot_3stack_R150_headview (150 ep)",
+  "EEF_TARGET_SOURCE": "legacy",
+  "primary_comparison_step": 250000,
+  "baseline": "ckpt_E0_R150_CstateD_fp32_250000"
+ },
+ "env": "HUMANIK_DELTA=1 HUMANIK_LEAD=5 HUMANIK_ROBOT=1 XVLA_EE_AUX=1 EE_AUX_SOURCE=state EE_AUX_SCALE=10 EE_AUX_LAMBDA=2.0 EE_FK_LAMBDA=20 XVLA_TF32=1 XVLA_FUSED_ADAM=1",
+ "gripper": "A: state raw = -270 * open_fraction, action = raw / -6 (R150 wrist-video verified: raw 0 = closed, -270 = open; gripper gate 2026-09-26)",
+ "gripper_distribution": {
+  "ego_c8old_train_left": {
+   "n": 32760,
+   "open_label_state": 0.1665140415140415,
+   "open_label_action": 0.1603785103785104,
+   "state_p10_p50_p90": [
+    -238.04,
+    -23.99,
+    -6.49
+   ],
+   "action_p10_p50_p90": [
+    1.081,
+    3.999,
+    39.674
+   ]
+  },
+  "ego_c8old_train_right": {
+   "n": 32760,
+   "open_label_state": 0.17661782661782663,
+   "open_label_action": 0.17393162393162392,
+   "state_p10_p50_p90": [
+    -209.09,
+    -27.75,
+    -15.42
+   ],
+   "action_p10_p50_p90": [
+    2.571,
+    4.625,
+    34.848
+   ]
+  },
+  "ego_c8old_train_both": {
+   "n": 65520,
+   "open_label_state": 0.17156593406593407,
+   "open_label_action": 0.16715506715506714,
+   "state_p10_p50_p90": [
+    -220.85,
+    -27.1,
+    -9.26
+   ],
+   "action_p10_p50_p90": [
+    1.544,
+    4.517,
+    36.809
+   ]
+  },
+  "ego_c8old_val_left": {
+   "n": 3705,
+   "open_label_state": 0.1746288798920378,
+   "open_label_action": 0.15600539811066128,
+   "state_p10_p50_p90": [
+    -219.5,
+    -19.72,
+    -0.0
+   ],
+   "action_p10_p50_p90": [
+    0.0,
+    3.286,
+    36.583
+   ]
+  },
+  "ego_c8old_val_right": {
+   "n": 3705,
+   "open_label_state": 0.22483130904183535,
+   "open_label_action": 0.22294197031039137,
+   "state_p10_p50_p90": [
+    -223.88,
+    -28.47,
+    -14.97
+   ],
+   "action_p10_p50_p90": [
+    2.495,
+    4.744,
+    37.314
+   ]
+  },
+  "ego_c8old_val_both": {
+   "n": 7410,
+   "open_label_state": 0.19973009446693657,
+   "open_label_action": 0.18947368421052632,
+   "state_p10_p50_p90": [
+    -223.06,
+    -25.65,
+    -8.39
+   ],
+   "action_p10_p50_p90": [
+    1.398,
+    4.276,
+    37.177
+   ]
+  },
+  "r150_left": {
+   "n": 173818,
+   "open_label_state": 0.16160006443521385,
+   "open_label_action": 0.14686050926831515,
+   "state_p10_p50_p90": [
+    -186.08,
+    0.0,
+    0.0
+   ],
+   "action_p10_p50_p90": [
+    -0.0,
+    -0.0,
+    36.5
+   ]
+  },
+  "r150_right": {
+   "n": 173818,
+   "open_label_state": 0.23441185607934736,
+   "open_label_action": 0.21811895200727197,
+   "state_p10_p50_p90": [
+    -233.27,
+    0.0,
+    0.0
+   ],
+   "action_p10_p50_p90": [
+    -0.0,
+    -0.0,
+    45.0
+   ]
+  },
+  "r150_both": {
+   "n": 347636,
+   "open_label_state": 0.1980059602572806,
+   "open_label_action": 0.18248973063779356,
+   "state_p10_p50_p90": [
+    -212.34,
+    0.0,
+    0.0
+   ],
+   "action_p10_p50_p90": [
+    -0.0,
+    -0.0,
+    41.5
+   ]
+  },
+  "window_label_crossing_frac": {
+   "ego_segments": 0.040998217468805706,
+   "ego_n": 1122,
+   "r150_windows": 0.31725888324873097,
+   "r150_n": 16548
+  }
+ },
+ "gripper_ego_anchors_ok": true,
+ "gates": {
+  "regression": "PASS (T0/T1 legacy invariance, measured equivalence; GPU noise floor)",
+  "dataset_gate": "PASS (561 x 65 x 2: pos max 12.59 mm, rot max 5.0 deg)",
+  "loader_checks": "PASS",
+  "gripper_gate": "PASS (c8old_runs/gripper_gate/gate.json)"
+ }
+}

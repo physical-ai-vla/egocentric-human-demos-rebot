@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+checkpoints/
+**/checkpoints/
+analysis/out/*.npz
+analysis/out/*.log

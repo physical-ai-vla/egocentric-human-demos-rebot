@@ -1,0 +1,166 @@
+{
+ "schema": "ego_teleop_m1_report/v1",
+ "episode": "episode_000001",
+ "side": "right",
+ "backend": "mast3r_filtered",
+ "downscale": 2,
+ "mode": null,
+ "pose_qa_verdict": "REJECT",
+ "pose_qa": {
+  "side": "right",
+  "backend": "mast3r_filtered",
+  "metric_scale": true,
+  "n_frames": 690,
+  "n_valid": 690,
+  "valid_ratio": 1.0,
+  "tracking_states": {
+   "tracking": 690
+  },
+  "lost_events": 0,
+  "longest_lost_s": 0.0,
+  "home_start": {
+   "t0_ns": 185141194724083,
+   "t1_ns": 185144194724083,
+   "duration_s": 3.0,
+   "gyro_bias_dps": [
+    0.6288,
+    0.9323,
+    -0.198
+   ],
+   "gyro_std_dps": 1.2056,
+   "accel_mean": [
+    0.6866,
+    -0.4049,
+    9.8782
+   ],
+   "accel_norm_std": 0.0539,
+   "n_samples": 605
+  },
+  "home_end": null,
+  "return_translation_mm": null,
+  "return_rotation_deg": null,
+  "home_start_pos_std_mm": 4.9388810502744995,
+  "home_start_rot_std_deg": 0.4091920923274245,
+  "home_end_pos_std_mm": null,
+  "home_end_rot_std_deg": null,
+  "jumps_translation": 13,
+  "jumps_rotation": 2,
+  "max_step_translation_m": 1.215440723093936,
+  "max_step_rotation_deg": 29.223680993890518,
+  "imu_residual_deg_median": 0.18645623057834637,
+  "imu_residual_deg_p95": 5.205503755766795,
+  "imu_residual_frac_over_warn": 0.0661764705882353,
+  "flags": [
+   "no still HOME window at episode end",
+   "HOME start position jitter 4.9mm > 3.0",
+   "tcp_uncalibrated: T_camera_tcp = identity (camera pose reported as TCP)"
+  ],
+  "verdict": "REJECT",
+  "reasons": [
+   "REVIEW: no still HOME window at episode end",
+   "REVIEW: HOME start position jitter 4.9mm > 3.0",
+   "REJECT: catastrophic pose jumps: 13 translation, 2 rotation"
+  ],
+  "canonical_anchor": "home_start_mean",
+  "runtime_s": 5.56,
+  "clock_fit": {
+   "slope_ns_per_us": 999.9937379490534,
+   "offset_ns": 176062424486916.75,
+   "residual_std_ms": 1.7023,
+   "n": 4638,
+   "drift_ppm": -6.26,
+   "method": "robust_lower_envelope"
+  },
+  "gyro_bias_dps": [
+   0.6288,
+   0.9323,
+   -0.198
+  ],
+  "calibration": {
+   "side": "right",
+   "versions": {
+    "fisheye": "fisheye_right_v003",
+    "camera_imu": "camera_imu_right_v002",
+    "camera_tcp": null
+   },
+   "tcp_calibrated": false,
+   "imu_extrinsics_calibrated": true,
+   "intrinsics_present": true,
+   "physical_side_verified": false
+  },
+  "error": null
+ },
+ "m1": {
+  "n_frames": 690,
+  "n_valid": 690,
+  "init_frames": 0,
+  "valid_ratio": 1.0,
+  "largest_gap_ms": 66.457125,
+  "lost_runs": 0,
+  "longest_lost_s": 0.0,
+  "time_to_first_valid_s": 0.0,
+  "recovery_times_s": [],
+  "static": {
+   "n": 90,
+   "duration_s": 2.97011925,
+   "pos_std_mm": 4.9388810502744995,
+   "drift_mm": 14.740260337797046,
+   "rot_std_deg": 0.3862638985647784,
+   "rot_drift_deg": 1.3183717816221678
+  },
+  "return_to_start_mm": 152.43877364600516,
+  "return_to_start_deg": 7.754328899644848,
+  "path_length_m": 8.4456988099648,
+  "gt_available": false,
+  "ate_rmse_mm": null,
+  "rpe_trans_rmse_mm": null,
+  "rpe_rot_rmse_deg": null,
+  "scale_ratio": null,
+  "max_abs_error_mm": null,
+  "verdict": "WARN",
+  "reasons": [
+   "return-to-start 152.4mm (only meaningful if the protocol returned to start)"
+  ]
+ },
+ "relative": {
+  "stationary": {
+   "n_windows": 7,
+   "total_windows": 7,
+   "p2p_mm_median": 30.45105289375399,
+   "p2p_mm_p95": 343.549543057813,
+   "p2p_mm_max": 390.41905223120807,
+   "drift_mm_s_median": 24.104664292116343,
+   "rot_deg_median": 0.470789722037077
+  },
+  "horizons": {
+   "k5": {
+    "n": 685,
+    "dp_mm_median": 13.54177394575992,
+    "dp_mm_p95": 149.6791041475759,
+    "chain_ratio_median": 0.9386372830494747,
+    "rot_vs_gyro_deg_median": 0.19566112241698855,
+    "rot_vs_gyro_deg_p95": 2.7436809445688057,
+    "scale_drift_last_over_first": 12.329189865990765
+   },
+   "k10": {
+    "n": 680,
+    "dp_mm_median": 26.677841062467483,
+    "dp_mm_p95": 284.6257795043793,
+    "chain_ratio_median": 0.7845430182049418,
+    "rot_vs_gyro_deg_median": 0.3079784021983897,
+    "rot_vs_gyro_deg_p95": 3.5293175628943763,
+    "scale_drift_last_over_first": 16.65070666605977
+   },
+   "k15": {
+    "n": 675,
+    "dp_mm_median": 40.88298164798797,
+    "dp_mm_p95": 488.214354267036,
+    "chain_ratio_median": 0.6877039552077778,
+    "rot_vs_gyro_deg_median": 0.44264456384422474,
+    "rot_vs_gyro_deg_p95": 6.762314380144071,
+    "scale_drift_last_over_first": 17.839702199332006
+   },
+   "growth_15_over_5": 3.019027035286532
+  }
+ }
+}
