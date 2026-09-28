@@ -97,15 +97,15 @@ def main():
 
     D = np.concatenate(dts) if dts else np.array([0.0])
     J = np.array(jumps) if jumps else np.array([0.0])
-    print(f"=== gripper 추출 — {done}/{len(items)} episodes ===")
+    print(f"=== gripper extraction — {done}/{len(items)} episodes ===")
     if fail:
-        print(f"  실패 {len(fail)}: {fail[:5]}")
-    print(f"\n[QA 1] pose-gripper 시간차 (ms)   p50 {np.percentile(D,50):.2f}  "
+        print(f"  failed {len(fail)}: {fail[:5]}")
+    print(f"\n[QA 1] pose-gripper time offset (ms)   p50 {np.percentile(D,50):.2f}  "
           f"p95 {np.percentile(D,95):.2f}  max {D.max():.2f}   "
           f"{'PASS' if D.max() < 1000/30 else 'WARN >1 frame'}")
-    print(f"[QA 2] grip01 in [0,1] 위반        {viol}   {'PASS' if viol == 0 else 'FAIL'}")
-    print(f"[QA 3] 프레임 간 최대 변화          p50 {np.percentile(J,50):.4f}  "
-          f"p95 {np.percentile(J,95):.4f}  max {J.max():.4f}   (1.0 = 한 프레임에 완전 개폐)")
+    print(f"[QA 2] grip01 outside [0,1]       {viol}   {'PASS' if viol == 0 else 'FAIL'}")
+    print(f"[QA 3] max frame-to-frame change  p50 {np.percentile(J,50):.4f}  "
+          f"p95 {np.percentile(J,95):.4f}  max {J.max():.4f}   (1.0 = full open/close in one frame)")
     print(f"\n-> {out}")
 
 

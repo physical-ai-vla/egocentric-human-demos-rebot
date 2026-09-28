@@ -137,7 +137,7 @@ class CollectorCfg:
                                                      "hold_after_rec_s": 3.0})
     # Hands-free loop with spoken cues (collector/autoloop.py): stack episode_s, reset reset_s, repeat until targets are met.
     auto_loop: dict = field(default_factory=lambda: {"enabled": True, "episode_s": 20.0, "reset_s": 10.0, "min_still_s": 1.0, "hold_after_rec_s": 3.0, "auto_keep_pass": True,
-                                                     "pause_on_fail": True, "on_warn": "keep", "balance_orders": True, "voice": True, "voice_name": "Yuna",
+                                                     "pause_on_fail": True, "on_warn": "keep", "balance_orders": True, "voice": True, "voice_name": "Samantha",
                                                      "rate_wpm": None, "ready_cue_s": 2.0, "stop_when_targets_met": False})
     head_overlay: dict = field(default_factory=lambda: {"x0": 0.15, "y0": 0.2, "x1": 0.85, "y1": 0.95})
     head_motion_warn: float = 12.0

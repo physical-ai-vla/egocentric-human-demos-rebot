@@ -139,12 +139,12 @@ def main():
     (out / "gripper_contract.json").write_text(json.dumps(prov, indent=1))
 
     print(f"=== corrected gripper — {n} episodes ===")
-    print(f"   aperture_m = {APERTURE_M} (±{APERTURE_UNCERTAINTY_M})   clip된 샘플 {clipped}")
+    print(f"   aperture_m = {APERTURE_M} (±{APERTURE_UNCERTAINTY_M})   clipped samples {clipped}")
     print(f"\n   {'session':<18} {'side':<6} {'dir':>4} {'closed':>8} {'open':>8} {'span':>6} {'travel':>6}  source")
     for t in table:
         note = f"   [{t['excluded_from_aperture']}]" if t["excluded_from_aperture"] else ""
         tf = t.get("travel_fraction", 1.0)
-        warn = "  <-- 완전 개방 미도달" if tf < 0.85 else ""
+        warn = "  <-- never fully opened" if tf < 0.85 else ""
         print(f"   {t['session']:<18} {t['side']:<6} {t['direction']:>4} {t['closed_raw']:>8.0f} "
               f"{t['open_raw']:>8.0f} {t['span']:>6.0f} {tf:>6.2f}  {t['ticks_source']}{note}{warn}")
     w = np.concatenate([np.load(p)[f"{s}_width_m"] for p in out.glob("2026*.npz") for s in ("left", "right")])

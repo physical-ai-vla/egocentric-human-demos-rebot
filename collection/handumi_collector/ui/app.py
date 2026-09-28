@@ -278,7 +278,7 @@ class MainWindow(W.QMainWindow):
     def on_home_ready(self) -> None: self.on_start()
 
     def on_auto(self) -> None:
-        """Hands-free loop: RESET -> 정지 -> REC -> 셋 둘 하나 고 -> stack -> 스톱 -> KEEP -> RESET ... (collector/autoloop.py)."""
+        """Hands-free loop: RESET -> still -> REC -> three two one go -> stack -> stop -> KEEP -> RESET ... (collector/autoloop.py)."""
         if self.s.state not in ("IDLE", "WAITING_FOR_STILLNESS", "RECORDING"): self.s.say("AUTO: finish KEEP/DISCARD first, then A resumes"); self.b_auto.setChecked(False); return
         on = self.s.auto_toggle(); self.b_auto.setChecked(on)
         if on: self.replay.stop(); self.review.hide()
