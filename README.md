@@ -8,6 +8,22 @@ The write-up is [`report/report.pdf`](report/report.pdf) (LaTeX source `report/r
 
 **Status: offline evaluation only. This repository reports no closed-loop robot results.**
 
+## Demonstration videos
+
+![Three human demonstrations, head camera, 2x speed](docs/media/demo_three_orders.gif)
+
+Head-camera view of three recorded human demonstrations (2x speed). Left to right: RBP (train), PRB (train),
+BPR (held-out validation episode). Full-length videos (640x480, 30 fps, 23 s, no audio):
+
+| Episode | Order (bottom → top) | Split | Video |
+|---|---|---|---|
+| `20260917_150545_000001` | red, blue, purple | train | [head.mp4](sample_data/20260917_150545_000001/head.mp4) |
+| `20260917_150545_000005` | purple, red, blue | train | [head.mp4](sample_data/20260917_150545_000005/head.mp4) |
+| `20260917_150545_000010` | blue, purple, red | held-out | [head.mp4](sample_data/20260917_150545_000010/head.mp4) |
+
+These are human demonstrations recorded with the hand-worn rig, not robot rollouts. Wrist-camera videos are not
+published (see [Sample data](#sample-data)).
+
 ## Dataset
 
 - **Task:** stacking three cubes (red, blue, purple) on a plate, in 6 stacking orders (RBP, RPB, BRP, BPR, PRB, PBR).
