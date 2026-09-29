@@ -15,10 +15,17 @@ def main(argv=None) -> int:
     ap.add_argument("--session", default=None, help="resume/append to an existing session directory")
     ap.add_argument("--dataset", default=None, help="dataset mode from tasks.yaml `datasets` (Hpilot | H120): session prefix + target per order")
     ap.add_argument("--headless-smoke", type=float, default=None, metavar="SECONDS", help="record one episode without UI, then exit")
+    ap.add_argument("--protocol", default=None, help="collection protocol, e.g. robot_like_v1 (configs/handumi/<name>.yaml): "
+                    "live robot-likeness panel + protocol tag in every episode_meta")
     ap.add_argument("-v", "--verbose", action="store_true")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if a.verbose else logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
     cfg = load_config(a.config_dir, mock=a.mock, hardware=a.hardware)
+    if a.protocol:
+        from ..robotlike.monitor import load_protocol
+        proto = load_protocol(a.protocol)
+        cfg.collector.auto_loop.update(proto.get("auto_loop_overrides") or {})
+        cfg.collector.protocol = proto
     sd = Path(a.session) if a.session else None
     if a.headless_smoke:
         from .session import CollectorSession

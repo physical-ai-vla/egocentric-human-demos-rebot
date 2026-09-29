@@ -1,0 +1,26 @@
+{
+ "schema": "c_old_v2_final_combined_contract/v1",
+ "frozen_at": "2026-09-28 17:55, BEFORE any HRL80 retarget result exists",
+ "master": {
+  "old259": "~/c8/robotlike/master_old259_frozen (byte copy of hybrid_master, 518 files sha-verified, read-only; never re-serialized)",
+  "combined": "~/c8/robotlike/master_combined = byte copy of master_old259_frozen files + HRL80 <episode>.json/.npz appended (produced by hybrid_merge on tr_hrl80 / r30_hrl80 only) + a NEW combined MASTER.json whose files_sha256 keeps every old entry's hash unchanged"
+ },
+ "ordering": "segment sequence S = S_old259^689 (exact MANIFEST_tr.json mapping order) || S_HRL80^N (sorted source episode, then start frame), per split; train/val by source episode: old = C-old v1 26 val, HRL80 = hrl80_split_frozen.json (val ep 000049-000054)",
+ "shared_by": ["C-old v2 TR-only final (B1-old state14 rows)", "REL16 ego (rel16_ego_interface.json, state76 / REL16 / binary gripper)"],
+ "shared_rule": "both use the SAME segment sequence, SAME source split and SAME TR-selected segments; only the representation differs. REL16 ego rows keep the segment order of S (row validity per segment is decided by the REL16 window rule only).",
+ "dataset_build": "C-old combined = copy of the frozen ~/c8/c8oldv2_data snapshot + HRL80 LeRobot episodes appended after the old ones in each split (no re-encode of old episodes)",
+ "identity_scope": {
+  "must_be_bit_identical": "old259 episode payload: parquet rows (state/action/tcp_tgt/timestamp/frame_index), task string, decoded video frames, master JSON/NPZ, segment id / source_start_frame / split / LeRobot episode index",
+  "allowed_to_change": "global metadata: meta/info.json totals, meta/stats.json, tasks table additions, episode-meta rows of new episodes"
+ },
+ "gates": "all c8oldv2_validate.py checks on the combined set + c8oldv2_append_invariant.py I0-I5",
+ "hybrid_all": "stays a separate ablation; its results never change any primary rule",
+ "hrl80_report_preregistered": {
+  "utility": "per-segment rates TR / Kr_fallback / none and fallback reasons (no_workspace_window vs no_feasible_rollout); old259 reference: 1229 segs, TR 689 (56.1%), Kr 138 (11.2%), none 402 (32.7%); none:no_workspace_window 399",
+  "question": "does robot-like collection raise TR coverage and lower Kr fallback / workspace failures vs old259?",
+  "posture": "held-out R120 NN p50/p90 + cluster coverage of HRL80 TR segments vs old259 TR segments",
+  "dynamics": "W1 |dq| / |ddq| vs R30 and held-out R120, HRL80 TR vs old259 TR",
+  "four_group": "robotlike_compare_groups.py (old live / old offline / HRL80 live / HRL80 offline)",
+  "not_allowed": "no threshold / K / window-count changes after seeing HRL80 numbers"
+ }
+}

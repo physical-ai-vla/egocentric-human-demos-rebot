@@ -199,11 +199,68 @@ check("prompt", "rank near chance at every k/subset (|rank-3.5|<0.25)", "True",
       str(all(abs(ps[f"k{k}"][s]["rank_true_mean"] - 3.5) < 0.25 for k in KS for s in ("all", "moving"))), src)
 check("prompt", "reproduces reference eval (< 1e-5 mm)", "True", str(ps["repro_max_abs_diff_mm_vs_reference_eval"] < 1e-5), src)
 
+
+# ---------------------------------------------------------------- follow-up: retargeting v2, HRL80, final dataset, fine-tuning
+rv = J("results/retarget_v2/compare_R30_heldout.json"); src = "results/retarget_v2/compare_R30_heldout.json"
+for name, blk, usable, nn50, nn90, w1 in (("v1", rv["r30"]["v1"], 36.5, 1.49, 1.55, 0.00197), ("v2-K", rv["r30"]["v2"], 66.6, 1.21, 1.60, 0.00275),
+                                          ("v2-Kr", rv["r30"]["v2r"], 67.0, 0.44, 0.74, 0.00310), ("v2-TR", rv["tr"]["v2"], 56.1, 0.27, 0.45, 0.00208)):
+    m = blk["manifold"]
+    check("retarget", f"{name} usable %", usable, 100 * blk["rate"], src, tol=0.05)
+    check("retarget", f"{name} NN p50", nn50, m["nn_dist_rad_p50"], src, tol=0.005)
+    check("retarget", f"{name} NN p90", nn90, m["nn_dist_rad_p90"], src, tol=0.005)
+    check("retarget", f"{name} W1 dq", w1, m["W1_dq_vs_heldout120"], src, tol=0.000005)
+check("retarget", "v1 start clusters", 1, rv["r30"]["v1"]["manifold"]["start_distinct_clusters"], src)
+check("retarget", "TR start clusters", 100, rv["tr"]["v2"]["manifold"]["start_distinct_clusters"], src)
+mm = J("results/retarget_v2/hybrid_master_MASTER.json"); src = "results/retarget_v2/hybrid_master_MASTER.json"
+check("retarget", "candidate segments", 1229, mm["total_segments"], src)
+fr = mm["fallback_reasons"]; none_ws = sum(v for k, v in fr.items() if k.startswith("none:no_workspace"))
+none_all = sum(v for k, v in fr.items() if k.startswith("none:"))
+check("retarget", "unsolved segments", 402, none_all, src)
+check("retarget", "unsolved: no workspace window", 399, none_ws, src)
+check("retarget", "matched-segment finding mentions 686 / 0.00207 / 0.00226", "True",
+      str(all(t in str(mm["matched_segment_finding"]) for t in ("686", "0.00207", "0.00226"))), src)
+hc = J("results/hrl80/hrl80_raw_census.json")["summary"]; src = "results/hrl80/hrl80_raw_census.json"
+check("hrl80", "episodes", 60, hc["main_session_episodes"], src)
+check("hrl80", "per order min", 10, min(hc["main_session_orders"].values()), src)
+check("hrl80", "per order max", 10, max(hc["main_session_orders"].values()), src)
+check("hrl80", "main session id", "HRL80_20260928_101010", str(hc["main_session"]), src)
+hp = J("results/hrl80/hrl80_prereg_report.json")["T1_TR_usable_fraction_U_e"]; src = "results/hrl80/hrl80_prereg_report.json"
+check("hrl80", "live rot median old", 0.144, hp["old259"]["live_rot_speed_median"], src, tol=0.0005)
+check("hrl80", "live rot median HRL80", 0.067, hp["HRL80"]["live_rot_speed_median"], src, tol=0.0005)
+check("hrl80", "U_e mean old", 0.59, hp["old259"]["U_mean"], src, tol=0.005)
+check("hrl80", "U_e mean HRL80", 0.59, hp["HRL80"]["U_mean"], src, tol=0.005)
+pk = [k for k in hp["pooled"] if "primary" in k][0]
+check("hrl80", "pooled rho", -0.11, hp["pooled"][pk]["rho"], src, tol=0.005)
+check("hrl80", "pooled p", 0.05, hp["pooled"][pk]["p"], src, tol=0.005)
+check("hrl80", "pooled n", 316, hp["pooled"]["n"], src)
+check("hrl80", "TR usable %", 58.9, 100 * J("results/hrl80/compare_hrl80_heldout.json")["tr"]["v2"]["rate"], "results/hrl80/compare_hrl80_heldout.json", tol=0.05)
+mf = J("results/dataset_v2/final/MANIFEST_final.json"); src = "results/dataset_v2/final/MANIFEST_final.json"
+check("final", "TR segments", 996, mf["composition"]["total"]["segments"], src)
+check("final", "old segments", 689, mf["composition"]["old259"]["segments"], src)
+check("final", "train segments", 896, mf["counts"]["train_segments"], src)
+check("final", "val segments", 100, mf["counts"]["val_segments"], src)
+check("final", "source episodes", 316, mf["composition"]["total"]["train_source_episodes"] + mf["composition"]["total"]["val_source_episodes"], src)
+check("final", "append invariants pass", "True", str(not J("results/dataset_v2/final/APPEND_INVARIANT.json")["failed"]), "results/dataset_v2/final/APPEND_INVARIANT.json")
+bs = J("analysis/out/paired_bootstrap_r150_250k.json"); src = "analysis/out/paired_bootstrap_r150_250k.json"
+check("finetune", "geo delta %", -10.0, 100 * bs["point"]["geo"], src, tol=0.05)
+check("finetune", "geo CI low %", -14.7, 100 * bs["ci95"]["geo"][0], src, tol=0.05)
+check("finetune", "geo CI high %", -5.6, 100 * bs["ci95"]["geo"][1], src, tol=0.05)
+check("finetune", "motion geo delta %", -7.2, 100 * bs["point"]["motion_geo"], src, tol=0.05)
+check("finetune", "motion geo CI low %", -13.4, 100 * bs["ci95"]["motion_geo"][0], src, tol=0.05)
+check("finetune", "motion geo CI high %", -1.8, 100 * bs["ci95"]["motion_geo"][1], src, tol=0.05)
+check("finetune", "motion MAE delta %", -6.8, 100 * bs["point"]["motion_k30_mae"], src, tol=0.05)
+check("finetune", "motion MAE CI low %", -12.7, 100 * bs["ci95"]["motion_k30_mae"][0], src, tol=0.05)
+check("finetune", "motion MAE CI high %", 0.5, 100 * bs["ci95"]["motion_k30_mae"][1], src, tol=0.05)
+check("finetune", "episodes favouring ego init", 8, bs["episodes_cold_better_geo"], src)
+check("finetune", "eval episodes", 10, bs["n_episodes"], src)
+b1, co = J("results/finetune/baseline/B1old_R150_250000.json"), J("results/finetune/r150ft600k/eval/250000.json")
+check("finetune", "bootstrap point == eval JSONs (geo)", "True", str(abs((co["geo_score"] - b1["geo_score"]) / b1["geo_score"] - bs["point"]["geo"]) < 1e-6), "results/finetune/*.json")
+
 # ---------------------------------------------------------------- retired values must not reappear in the report
 tex = open(R / "report/report.tex").read()
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
     check("text", f"retired value absent: {bad}", "True", str(bad not in tex), "report/report.tex")
-for need in ("4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
+for need in ("36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
     check("text", f"value present: {need}", "True", str(need in tex), "report/report.tex")
 
 # ---------------------------------------------------------------- output

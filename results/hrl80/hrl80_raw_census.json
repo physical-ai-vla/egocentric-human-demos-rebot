@@ -1,0 +1,1414 @@
+{
+ "schema": "hrl80_raw_census/v1",
+ "generated": "2026-09-29 for the public repo from session counters.json / session_meta.json / episode_meta.json of the raw HRL80 dataset directory (counts and per-episode metadata only; no raw data copied)",
+ "dataset": "HRL80",
+ "protocol_expected": "robot_like_v1",
+ "sessions": [
+  {
+   "session": "HRL80_20260928_095947",
+   "started_wall_iso": "2026-09-28T09:59:47+0900",
+   "operator": "op01",
+   "hardware_profile": "handumi_v1",
+   "gripper_calibration_version": "gripper_v014",
+   "target_per_order": 14,
+   "counters_valid": {
+    "RBP": 1,
+    "RPB": 0,
+    "BRP": 0,
+    "BPR": 0,
+    "PRB": 0,
+    "PBR": 0
+   },
+   "counters_raw_total": 1,
+   "counters_rejected": 0,
+   "episode_dirs": 1,
+   "discarded_dirs": 0,
+   "orders": {
+    "RBP": 1
+   },
+   "protocol": {
+    "robot_like_v1": 1
+   },
+   "used_in_pipeline": false
+  },
+  {
+   "session": "HRL80_20260928_100304",
+   "started_wall_iso": "2026-09-28T10:03:04+0900",
+   "operator": "op01",
+   "hardware_profile": "handumi_v1",
+   "gripper_calibration_version": "gripper_v014",
+   "target_per_order": 14,
+   "counters_valid": {
+    "RBP": 1,
+    "RPB": 0,
+    "BRP": 0,
+    "BPR": 0,
+    "PRB": 0,
+    "PBR": 0
+   },
+   "counters_raw_total": 1,
+   "counters_rejected": 0,
+   "episode_dirs": 1,
+   "discarded_dirs": 0,
+   "orders": {
+    "RBP": 1
+   },
+   "protocol": {
+    "robot_like_v1": 1
+   },
+   "used_in_pipeline": false
+  },
+  {
+   "session": "HRL80_20260928_100612",
+   "started_wall_iso": "2026-09-28T10:06:12+0900",
+   "operator": "op01",
+   "hardware_profile": "handumi_v1",
+   "gripper_calibration_version": "gripper_v014",
+   "target_per_order": 14,
+   "counters_valid": {
+    "RBP": 1,
+    "RPB": 0,
+    "BRP": 0,
+    "BPR": 0,
+    "PRB": 0,
+    "PBR": 0
+   },
+   "counters_raw_total": 1,
+   "counters_rejected": 0,
+   "episode_dirs": 1,
+   "discarded_dirs": 0,
+   "orders": {
+    "RBP": 1
+   },
+   "protocol": {
+    "robot_like_v1": 1
+   },
+   "used_in_pipeline": false
+  },
+  {
+   "session": "HRL80_20260928_101010",
+   "started_wall_iso": "2026-09-28T10:10:10+0900",
+   "operator": "op01",
+   "hardware_profile": "handumi_v1",
+   "gripper_calibration_version": "gripper_v014",
+   "target_per_order": 14,
+   "counters_valid": {
+    "RBP": 10,
+    "RPB": 10,
+    "BRP": 10,
+    "BPR": 10,
+    "PRB": 10,
+    "PBR": 10
+   },
+   "counters_raw_total": 60,
+   "counters_rejected": 0,
+   "episode_dirs": 60,
+   "discarded_dirs": 0,
+   "orders": {
+    "RBP": 10,
+    "RPB": 10,
+    "BRP": 10,
+    "BPR": 10,
+    "PRB": 10,
+    "PBR": 10
+   },
+   "protocol": {
+    "robot_like_v1": 60
+   },
+   "used_in_pipeline": true
+  }
+ ],
+ "episodes_main_session": [
+  {
+   "episode": "20260928_101010_000001",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:10:32+0900",
+   "duration_s": 33.066,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0907,
+     "ang_a": 0.379
+    },
+    "right": {
+     "ang_w": 0.0565,
+     "ang_a": 0.125
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000002",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:11:24+0900",
+   "duration_s": 33.103,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0724,
+     "ang_a": 0.1368
+    },
+    "right": {
+     "ang_w": 0.0926,
+     "ang_a": 0.2193
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000003",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:12:08+0900",
+   "duration_s": 33.18,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0442,
+     "ang_a": 0.3173
+    },
+    "right": {
+     "ang_w": 0.0301,
+     "ang_a": 0.1124
+    }
+   },
+   "live_grasps_total": 2
+  },
+  {
+   "episode": "20260928_101010_000004",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:12:53+0900",
+   "duration_s": 33.097,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0402,
+     "ang_a": 0.2052
+    },
+    "right": {
+     "ang_w": 0.0584,
+     "ang_a": 0.2213
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000005",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:13:44+0900",
+   "duration_s": 33.077,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0322,
+     "ang_a": 0.3501
+    },
+    "right": {
+     "ang_w": 0.0362,
+     "ang_a": 0.1288
+    }
+   },
+   "live_grasps_total": 2
+  },
+  {
+   "episode": "20260928_101010_000006",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:14:33+0900",
+   "duration_s": 33.021,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0786,
+     "ang_a": 0.3427
+    },
+    "right": {
+     "ang_w": 0.0302,
+     "ang_a": 0.1048
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000007",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:15:22+0900",
+   "duration_s": 33.031,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0706,
+     "ang_a": 0.3286
+    },
+    "right": {
+     "ang_w": 0.0403,
+     "ang_a": 0.1653
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000008",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:16:06+0900",
+   "duration_s": 33.016,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0646,
+     "ang_a": 0.3455
+    },
+    "right": {
+     "ang_w": 0.0364,
+     "ang_a": 0.1071
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000009",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:16:54+0900",
+   "duration_s": 33.024,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0484,
+     "ang_a": 0.2722
+    },
+    "right": {
+     "ang_w": 0.0585,
+     "ang_a": 0.1996
+    }
+   },
+   "live_grasps_total": 2
+  },
+  {
+   "episode": "20260928_101010_000010",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:17:42+0900",
+   "duration_s": 33.088,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0585,
+     "ang_a": 0.2742
+    },
+    "right": {
+     "ang_w": 0.0282,
+     "ang_a": 0.129
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000011",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:18:29+0900",
+   "duration_s": 33.026,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0302,
+     "ang_a": 0.2137
+    },
+    "right": {
+     "ang_w": 0.0706,
+     "ang_a": 0.2238
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000012",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:19:13+0900",
+   "duration_s": 33.016,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0747,
+     "ang_a": 0.3354
+    },
+    "right": {
+     "ang_w": 0.0424,
+     "ang_a": 0.1657
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000013",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:19:58+0900",
+   "duration_s": 33.025,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0423,
+     "ang_a": 0.3085
+    },
+    "right": {
+     "ang_w": 0.0423,
+     "ang_a": 0.1371
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000014",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:20:44+0900",
+   "duration_s": 33.092,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0543,
+     "ang_a": 0.3622
+    },
+    "right": {
+     "ang_w": 0.0342,
+     "ang_a": 0.1046
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000015",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:21:28+0900",
+   "duration_s": 33.082,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0443,
+     "ang_a": 0.1569
+    },
+    "right": {
+     "ang_w": 0.0704,
+     "ang_a": 0.2213
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000016",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:22:13+0900",
+   "duration_s": 33.027,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0606,
+     "ang_a": 0.1758
+    },
+    "right": {
+     "ang_w": 0.0768,
+     "ang_a": 0.2444
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000017",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:22:57+0900",
+   "duration_s": 33.025,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0283,
+     "ang_a": 0.2182
+    },
+    "right": {
+     "ang_w": 0.0505,
+     "ang_a": 0.1778
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000018",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:23:43+0900",
+   "duration_s": 33.029,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0605,
+     "ang_a": 0.3125
+    },
+    "right": {
+     "ang_w": 0.0282,
+     "ang_a": 0.1069
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000019",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:24:28+0900",
+   "duration_s": 33.103,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0523,
+     "ang_a": 0.326
+    },
+    "right": {
+     "ang_w": 0.0423,
+     "ang_a": 0.1066
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000020",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:25:12+0900",
+   "duration_s": 33.06,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0383,
+     "ang_a": 0.1835
+    },
+    "right": {
+     "ang_w": 0.0625,
+     "ang_a": 0.2379
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000021",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:25:58+0900",
+   "duration_s": 33.085,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0685,
+     "ang_a": 0.3085
+    },
+    "right": {
+     "ang_w": 0.0242,
+     "ang_a": 0.129
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000022",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:26:43+0900",
+   "duration_s": 33.094,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0845,
+     "ang_a": 0.2877
+    },
+    "right": {
+     "ang_w": 0.0282,
+     "ang_a": 0.1368
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000023",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:27:27+0900",
+   "duration_s": 33.088,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0282,
+     "ang_a": 0.2173
+    },
+    "right": {
+     "ang_w": 0.0684,
+     "ang_a": 0.3018
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000024",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:28:13+0900",
+   "duration_s": 33.085,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0805,
+     "ang_a": 0.2656
+    },
+    "right": {
+     "ang_w": 0.0322,
+     "ang_a": 0.1247
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000025",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:28:57+0900",
+   "duration_s": 33.043,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0746,
+     "ang_a": 0.3488
+    },
+    "right": {
+     "ang_w": 0.0343,
+     "ang_a": 0.121
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000026",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:29:43+0900",
+   "duration_s": 33.105,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0402,
+     "ang_a": 0.1469
+    },
+    "right": {
+     "ang_w": 0.0724,
+     "ang_a": 0.2414
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000027",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:30:28+0900",
+   "duration_s": 33.091,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0584,
+     "ang_a": 0.1992
+    },
+    "right": {
+     "ang_w": 0.1006,
+     "ang_a": 0.2958
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000028",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:31:12+0900",
+   "duration_s": 33.027,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0504,
+     "ang_a": 0.131
+    },
+    "right": {
+     "ang_w": 0.0625,
+     "ang_a": 0.1835
+    }
+   },
+   "live_grasps_total": 2
+  },
+  {
+   "episode": "20260928_101010_000029",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:31:57+0900",
+   "duration_s": 33.085,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0342,
+     "ang_a": 0.1408
+    },
+    "right": {
+     "ang_w": 0.0644,
+     "ang_a": 0.2213
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000030",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:32:43+0900",
+   "duration_s": 33.105,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0282,
+     "ang_a": 0.2157
+    },
+    "right": {
+     "ang_w": 0.1069,
+     "ang_a": 0.2157
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000031",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:33:27+0900",
+   "duration_s": 33.097,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0744,
+     "ang_a": 0.3219
+    },
+    "right": {
+     "ang_w": 0.0563,
+     "ang_a": 0.0966
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000032",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:34:11+0900",
+   "duration_s": 33.086,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0363,
+     "ang_a": 0.1694
+    },
+    "right": {
+     "ang_w": 0.0605,
+     "ang_a": 0.2883
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000033",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:34:55+0900",
+   "duration_s": 33.019,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0403,
+     "ang_a": 0.1835
+    },
+    "right": {
+     "ang_w": 0.0605,
+     "ang_a": 0.2359
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000034",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:35:41+0900",
+   "duration_s": 33.024,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0182,
+     "ang_a": 0.1737
+    },
+    "right": {
+     "ang_w": 0.0747,
+     "ang_a": 0.2869
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000035",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:36:26+0900",
+   "duration_s": 33.024,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0283,
+     "ang_a": 0.1838
+    },
+    "right": {
+     "ang_w": 0.0606,
+     "ang_a": 0.2
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000036",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:37:10+0900",
+   "duration_s": 33.02,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0403,
+     "ang_a": 0.3004
+    },
+    "right": {
+     "ang_w": 0.0262,
+     "ang_a": 0.1169
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000037",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:37:54+0900",
+   "duration_s": 33.026,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0364,
+     "ang_a": 0.2828
+    },
+    "right": {
+     "ang_w": 0.0485,
+     "ang_a": 0.1333
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000038",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:38:38+0900",
+   "duration_s": 33.011,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0464,
+     "ang_a": 0.2903
+    },
+    "right": {
+     "ang_w": 0.0423,
+     "ang_a": 0.1371
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000039",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:39:22+0900",
+   "duration_s": 33.027,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0685,
+     "ang_a": 0.2722
+    },
+    "right": {
+     "ang_w": 0.0423,
+     "ang_a": 0.125
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000040",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:40:07+0900",
+   "duration_s": 33.011,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0707,
+     "ang_a": 0.299
+    },
+    "right": {
+     "ang_w": 0.0404,
+     "ang_a": 0.1313
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000041",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:40:51+0900",
+   "duration_s": 33.025,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0828,
+     "ang_a": 0.2626
+    },
+    "right": {
+     "ang_w": 0.0323,
+     "ang_a": 0.1051
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000042",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:41:36+0900",
+   "duration_s": 33.025,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0786,
+     "ang_a": 0.3024
+    },
+    "right": {
+     "ang_w": 0.0484,
+     "ang_a": 0.1129
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000043",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:42:20+0900",
+   "duration_s": 33.015,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0828,
+     "ang_a": 0.3091
+    },
+    "right": {
+     "ang_w": 0.0626,
+     "ang_a": 0.1354
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000044",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:43:08+0900",
+   "duration_s": 33.025,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0565,
+     "ang_a": 0.3266
+    },
+    "right": {
+     "ang_w": 0.0262,
+     "ang_a": 0.0968
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000045",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:43:52+0900",
+   "duration_s": 33.014,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0343,
+     "ang_a": 0.204
+    },
+    "right": {
+     "ang_w": 0.0747,
+     "ang_a": 0.1798
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000046",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:44:37+0900",
+   "duration_s": 33.01,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0747,
+     "ang_a": 0.2606
+    },
+    "right": {
+     "ang_w": 0.0606,
+     "ang_a": 0.1556
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000047",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:45:21+0900",
+   "duration_s": 33.026,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0685,
+     "ang_a": 0.3065
+    },
+    "right": {
+     "ang_w": 0.0423,
+     "ang_a": 0.1069
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000048",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:46:09+0900",
+   "duration_s": 33.018,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0706,
+     "ang_a": 0.2641
+    },
+    "right": {
+     "ang_w": 0.0544,
+     "ang_a": 0.1431
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000049",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:46:56+0900",
+   "duration_s": 33.015,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0464,
+     "ang_a": 0.1714
+    },
+    "right": {
+     "ang_w": 0.0665,
+     "ang_a": 0.2077
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000050",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:47:44+0900",
+   "duration_s": 33.026,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0766,
+     "ang_a": 0.3085
+    },
+    "right": {
+     "ang_w": 0.0423,
+     "ang_a": 0.0685
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000051",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:48:28+0900",
+   "duration_s": 33.019,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0586,
+     "ang_a": 0.3293
+    },
+    "right": {
+     "ang_w": 0.0424,
+     "ang_a": 0.1111
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000052",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:49:12+0900",
+   "duration_s": 33.027,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0343,
+     "ang_a": 0.1576
+    },
+    "right": {
+     "ang_w": 0.0949,
+     "ang_a": 0.204
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000053",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:49:56+0900",
+   "duration_s": 33.029,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0403,
+     "ang_a": 0.123
+    },
+    "right": {
+     "ang_w": 0.0726,
+     "ang_a": 0.2157
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000054",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:50:40+0900",
+   "duration_s": 33.031,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0504,
+     "ang_a": 0.123
+    },
+    "right": {
+     "ang_w": 0.0544,
+     "ang_a": 0.1976
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000055",
+   "order": "RBP",
+   "t_start_wall_iso": "2026-09-28T10:51:25+0900",
+   "duration_s": 33.031,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0282,
+     "ang_a": 0.1411
+    },
+    "right": {
+     "ang_w": 0.0706,
+     "ang_a": 0.2157
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000056",
+   "order": "RPB",
+   "t_start_wall_iso": "2026-09-28T10:52:09+0900",
+   "duration_s": 33.031,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0726,
+     "ang_a": 0.2581
+    },
+    "right": {
+     "ang_w": 0.0302,
+     "ang_a": 0.0887
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000057",
+   "order": "BRP",
+   "t_start_wall_iso": "2026-09-28T10:52:55+0900",
+   "duration_s": 33.059,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0867,
+     "ang_a": 0.2944
+    },
+    "right": {
+     "ang_w": 0.0464,
+     "ang_a": 0.1008
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000058",
+   "order": "BPR",
+   "t_start_wall_iso": "2026-09-28T10:53:41+0900",
+   "duration_s": 33.091,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0625,
+     "ang_a": 0.3044
+    },
+    "right": {
+     "ang_w": 0.0464,
+     "ang_a": 0.0827
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000059",
+   "order": "PRB",
+   "t_start_wall_iso": "2026-09-28T10:54:26+0900",
+   "duration_s": 33.082,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0504,
+     "ang_a": 0.2883
+    },
+    "right": {
+     "ang_w": 0.0262,
+     "ang_a": 0.0927
+    }
+   },
+   "live_grasps_total": 3
+  },
+  {
+   "episode": "20260928_101010_000060",
+   "order": "PBR",
+   "t_start_wall_iso": "2026-09-28T10:55:11+0900",
+   "duration_s": 33.078,
+   "status": "KEEP",
+   "quality": "REVIEW",
+   "auto_episode_s": 30.0,
+   "live_verdict": "FAIL",
+   "live_over_frac": {
+    "left": {
+     "ang_w": 0.0403,
+     "ang_a": 0.1633
+    },
+    "right": {
+     "ang_w": 0.0806,
+     "ang_a": 0.2016
+    }
+   },
+   "live_grasps_total": 3
+  }
+ ],
+ "summary": {
+  "session_dirs": 4,
+  "episode_dirs_total": 63,
+  "main_session": "HRL80_20260928_101010",
+  "main_session_episodes": 60,
+  "main_session_orders": {
+   "RBP": 10,
+   "RPB": 10,
+   "BRP": 10,
+   "BPR": 10,
+   "PRB": 10,
+   "PBR": 10
+  },
+  "dates": [
+   "2026-09-28"
+  ],
+  "main_session_first_start": "2026-09-28T10:10:32+0900",
+  "main_session_last_start": "2026-09-28T10:55:11+0900",
+  "duration_s_min": 33.01,
+  "duration_s_max": 33.18,
+  "status": {
+   "KEEP": 60
+  },
+  "quality": {
+   "REVIEW": 60
+  },
+  "live_verdict": {
+   "FAIL": 60
+  },
+  "note": "the three earlier sessions (09:59, 10:03, 10:06) each hold one RBP episode and are not in hrl80_60_episodes.json; the pipeline uses the 60 episodes of HRL80_20260928_101010 (target 14/order = 84 was not reached: 10/order)"
+ }
+}

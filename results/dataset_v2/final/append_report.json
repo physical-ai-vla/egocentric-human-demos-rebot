@@ -1,0 +1,23 @@
+{
+ "schema": "c_old_v2_final_append/v1",
+ "finished": "2026-09-28 22:29:07",
+ "report": {
+  "train": {
+   "old_episodes": 620,
+   "hrl80_episodes": 276,
+   "total": 896,
+   "rows": 58240,
+   "chunk_starts": 27776
+  },
+  "val": {
+   "old_episodes": 69,
+   "hrl80_episodes": 31,
+   "total": 100,
+   "rows": 6500,
+   "chunk_starts": 3100
+  }
+ },
+ "old": "${HOME}/c8/c8oldv2_data",
+ "hrl80": "${HOME}/c8/c8oldv2_hrl80_data",
+ "method": "aggregate_datasets([old snapshot, HRL80 part]) per split; no re-encode; verify_root + 24 pixel-exact spot checks"
+}

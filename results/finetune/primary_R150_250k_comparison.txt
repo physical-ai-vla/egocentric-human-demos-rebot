@@ -1,0 +1,24 @@
+run                      scratch B1-old R150 250k    C-old R150 250k
+n                                             578                578
+geo                                         3.634              3.271   delta -0.363 (-10.0%)
+motion geo                                  9.325              8.658   delta -0.667 (-7.2%)
+k1 FK p50                                   3.547              3.176   delta -0.371 (-10.5%)
+k30 FK p50                                  4.543              4.358   delta -0.185 (-4.1%)
+k30 FK p90                                 22.701             22.012   delta -0.689 (-3.0%)
+motion k30 FK p50                          11.787             11.010   delta -0.778 (-6.6%)
+motion k30 FK p90                          31.706             29.304   delta -2.402 (-7.6%)
+k30 dir cos                                 0.997              0.997   delta +0.001 (+0.1%)
+motion k30 dir cos                          0.997              0.998   delta +0.001 (+0.1%)
+k30 act cos                                 0.992              0.992   delta +0.001 (+0.1%)
+motion k30 act cos                          0.994              0.994   delta +0.001 (+0.1%)
+k1 MAE                                      0.513              0.494   delta -0.020 (-3.8%)
+k30 MAE                                     0.746              0.697   delta -0.049 (-6.6%)
+motion k30 MAE                              1.690              1.574   delta -0.115 (-6.8%)
+motion zero MAE                            10.939             10.939   delta +0.000 (+0.0%)
+k1 norm ratio                               1.364              1.335   delta -0.029 (-2.2%)
+collapse                                    0.981              0.995   delta +0.013 (+1.4%)
+ep seen8 geo                                3.570              3.231   delta -0.339 (-9.5%)
+ep 66/77 geo                                4.119              3.379   delta -0.740 (-18.0%)
+ep 66/77 motion geo                         9.687             10.092   delta +0.405 (+4.2%)
+
+[exited with code 0]

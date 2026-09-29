@@ -1,0 +1,43 @@
+# Robot-like collection protocol v1 (2026-09-28). Enabled with `python -m handumi_collector.collect --protocol robot_like_v1`.
+# Goal: new ego demonstrations whose motion statistics look like the reBot's (R150), so the ego -> robot gap shrinks.
+# The old 259 C8 episodes are untouched; every episode recorded under this protocol carries `protocol: robot_like_v1`
+# in episode_meta.json so `old ego only` vs `old + robot-like ego` can be split exactly.
+protocol: robot_like_v1
+
+# Applied on top of collector.yaml auto_loop when this protocol is active. Slower, staged motion needs more time.
+auto_loop_overrides:
+  episode_s: 30.0                     # 20 s under the legacy protocol (user, 2026-09-28: "extend it to 30 s")
+
+# Live wrist-motion lamps. Same definitions as ~/umi_bridge/track_c/probe_v2_motion.py `gyro_dyn`: gyro averaged over
+# +-1/30 s on a 15 Hz grid, |w| and |dw|*15. Reference = R150 measured TCP at 15 Hz (reports/probe_v2_motion.json):
+#   ang_w  R150 p50 0.045 / p95 0.996 rad/s      human-gyro (old ego) p50 0.178 / p95 1.272
+#   ang_a  R150 p50 0.429 / p95 4.413 rad/s^2    human-gyro (old ego) p50 2.447 / p95 11.18
+# GREEN <= R150 p95, AMBER <= amber_x * p95, RED above.
+reference: r150_probe_v2_motion
+fps: 15.0
+ang_w_p95: 0.996
+ang_a_p95: 4.413
+# Accelerometer minus a low-passed gravity estimate. A PROXY for TCP linear acceleration (includes rotational terms,
+# not the same quantity as R150 lin_a p95 1.157 m/s^2 from position differences), so it is advisory: shown, logged,
+# never part of the verdict.
+lin_a_proxy_p95: 1.157
+gravity_tau_s: 0.5
+amber_x: 1.5
+
+# Episode verdict (logged in derived/robot_like/live_summary.json and episode_meta.robot_like_live). By construction
+# R150 itself exceeds its own p95 5 % of the time, so `max_over_frac` is the share of 15 Hz ticks allowed above p95.
+max_over_frac: 0.10
+min_grasps_per_episode: 2             # a 3-stack is 3 grasp/release cycles across both arms; fewer means a missed stage
+verdict_on_fail: review               # none | review  (review = preliminary QA becomes REVIEW; AUTO on_warn still decides)
+
+# Gripper stage detection on the normalised jaw (0 closed .. 1 open), with hysteresis.
+grip_closed_below: 0.35
+grip_open_above: 0.65
+
+# Operator guidance shown in the RECORD tab.
+guidance:
+  - "Stay inside the robot workspace box on the HEAD preview"
+  - "Keep the wrists level: rotate only as much as the robot would"
+  - "Approach -> grasp -> transport -> place, one stage at a time; pause ~0.3 s at each grasp and release"
+  - "No sudden direction changes; move at robot speed (about half of natural speed)"
+  - "Keep the two hands apart; never cross over the other arm"

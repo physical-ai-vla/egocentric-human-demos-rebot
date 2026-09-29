@@ -1,0 +1,15 @@
+{
+ "schema": "c_old_v2tr_contract/v1",
+ "frozen_at": "2026-09-28 13:00, BEFORE any v2-TR result",
+ "idea": "R30 trajectory-guided retargeting: keep the ego RELATIVE TCP motion, but realise it with a joint trajectory modelled on a real R30 teleop window (initialisation + reference joint velocity).",
+ "real_data": "ONLY the 30 R30 calibration episodes (r30_episodes.json, nested set_id < 5); workspace gate, manifold penalty and window library all from R30; evaluation vs held-out R120 (R150 - R30).",
+ "window_library": "every 65-frame window (30 fps, stride 5) inside an R30 episode; per window q_ref(t) (12 arm joints) and, per arm, the FK-frame relative TCP motion inv(FK(q_ref(0))) FK(q_ref(t))",
+ "retrieval_feature": "per arm, 8 samples (t = 8, 16, ..., 64) of the relative TCP motion: position (m) and rotation vector (rad) x 0.1 m/rad; both arms concatenated (96-D, the SAME window for both arms keeps real bimanual coordination); L2 nearest neighbours",
+ "not_available_for_ego": "inter-arm relative geometry (no shared L/R human frame) and absolute start orientation (episode-local pose) are NOT used; gripper phase NOT used in v1 of TR (human width needs per-session anchors for HRL80)",
+ "candidates": "top 64 nearest windows -> keep those whose targets FK(q_ref(0)) rel_h(t) are >= 95 % inside the R30 workspace on both arms -> first 8",
+ "ik": "ContinuityIK with the frozen C4 IKCfg and status rules, except the next-row seed = last good q + (q_ref(t+1) - q_ref(t)) (reference joint velocity); the solver's rest cost toward the seed is the soft reference",
+ "hard_gates": "same as v2-K / v2-Kr: every row IK status in SUCCESS, clearance d_min >= 0.075 m every 5th row, workspace >= 95 % both arms (R30 gate)",
+ "score": "S = mean pos_err/15 + mean rot_err/5 + mean|dq|/0.6 + 0.5 mean|ddq|/0.6 + 0.5 * d_R30 (median 12-D NN distance to R30 q, rad) -- identical to v2-Kr-R30",
+ "variants": ">= 0.5 rad mean joint distance, max 3",
+ "extra_metrics": "joint velocity / acceleration distribution vs R30 and held-out R120 (per-joint Wasserstein-1 of |dq|, |ddq| at 30 fps), adherence mean |q - q_ref|"
+}

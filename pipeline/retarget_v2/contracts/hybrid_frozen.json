@@ -1,0 +1,10 @@
+{
+ "schema": "c_old_v2_hybrid_contract/v1",
+ "frozen_at": "2026-09-28 15:20, after v2-Kr-R30 and v2-TR-R30 full results, BEFORE the merged result exists (user decision B)",
+ "rule": "per segment: if v2-TR-R30 has >= 1 fully feasible rollout (all hard gates) use the TR top-1; else if v2-Kr-R30 has >= 1 feasible rollout use the Kr top-1; else the segment is not usable. NO score comparison between TR and Kr (deterministic coverage fallback, not a pick).",
+ "inputs": {"TR": "v2-TR-R30 (v2tr_frozen.json), ~/c8/robotlike/tr_old", "Kr": "v2-Kr-R30 (v2kr_frozen.json, R30 contract), ~/c8/robotlike/r30_old key v2r"},
+ "fallback_reason": {"no_workspace_window": "TR found no R30 window (of the 64 nearest) whose targets pass the R30 workspace gate", "no_feasible_rollout": "TR had candidate windows but every rollout failed a hard gate"},
+ "master_record_per_segment": ["retarget_method (TR | Kr_fallback | none)", "fallback_reason", "tr_window_id", "kr_seed_id", "selected score / gates / fk residual / d_min / d_R30", "pseudo-q trajectory (npz)"],
+ "anchors": "TR anchor = q_ref(0) of window tr_window_id in the deterministic R30 window library (build_windows, stride 5); Kr anchor = seedbank_R30_q12[kr_seed_id]. T_tgt = FK(anchor) rel_h(t), recomputed at dataset build.",
+ "adoption": "re-check the three axes (posture held-out R120 NN / cluster, dynamics W1 vs R30 + held-out, utility usable / v1-only) on the merged master before freezing it"
+}

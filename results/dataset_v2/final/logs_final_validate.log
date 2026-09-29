@@ -1,0 +1,30 @@
+objc[75612]: Class AVFFrameReceiver is implemented in both ${HOME}/xvla-mac/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x109d5c3a8) and ${HOME}/xvla-mac/lib/python3.12/site-packages/cv2/.dylibs/libavdevice.61.3.100.dylib (0x11cd883a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[75612]: Class AVFAudioReceiver is implemented in both ${HOME}/xvla-mac/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x109d5c3f8) and ${HOME}/xvla-mac/lib/python3.12/site-packages/cv2/.dylibs/libavdevice.61.3.100.dylib (0x11cd883f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+PASS  L  no source episode in both splits  train src 284  val src 32
+PASS  L  val source episodes == C-old v1 26 + hrl80_split_frozen 6 (exact)  32 val src
+PASS  L  train source episodes == old259 TR train 233 + HRL80 frozen-train episodes with TR segments  284 = 233 + 51
+PASS  L  written LeRobot episodes == cached segments per split  {'c8oldv2_final_train': 896, 'c8oldv2_final_val': 100}  vs rows 896/100
+PASS  G  build gate PASS (< 15 mm / 5 deg)  pos max 10.963 mm  rot max 4.978 deg
+PASS  G  gated segments == written segments  996 vs 996
+PASS  S  feature names / dtypes / shapes identical to C-old v1
+PASS  S  fps identical to C-old v1  30 vs 30
+PASS  S  state/action width 14  (58240, 14) (58240, 14)
+PASS  S  gripper: state in [-270, 0] and action = state / -6 (B1-old contract)
+PASS  S  arm joints: action == state (absolute pseudo-q, deg)
+PASS  S  tcp_tgt finite, 32 wide (2 x 4x4)  (58240, 32)
+PASS  R  every written episode has exactly 65 frames  train 896 eps, val 100 eps
+PASS  R  totals train 65 x segs / val 65 x segs  58240 / 6500 frames
+      chunk starts (LEAD 5, chunk 30): train 27776  val 3100
+PASS  Q  Delta-q_cmd[k] = q_cmd[t+5+k] - q_state[t] forms a (30, 12) finite target  |dq| max 0.334 rad
+PASS  Q  valid chunk starts per 65-frame segment: t + 5 + 29 <= 64  ->  t in 0..30  = 31
+PASS  Q  written-parquet dq == cached-rows dq on 20 random (segment, t) (train split)  max |diff| 0.00e+00 rad
+PASS  C  FK(q_written) vs recomputed T_store within 15 mm / 5 deg on every row  pos p95 0.803 p99 2.354 max 10.963 mm | rot p95 0.562 p99 1.509 max 4.978 deg
+      rotation tail: segments with max >= 4.9 deg: 2, >= 4.8 deg: 5 (5 rows of 129480), >= 4.5 deg: 7; worst: [(('20260917_150545_000021', 295), 4.978, 'L'), (('20260917_150545_000055', 466), 4.961, 'L'), (('20260917_150545_000055', 565), 4.891, 'L'), (('20260917_100511_000050', 71), 4.879, 'R'), (('20260917_135136_000037', 621), 4.83, 'R'), (('20260916_125236_000008', 560), 4.712, 'L'), (('20260928_101010_000054', 726), 4.562, 'R'), (('20260917_150545_000013', 492), 4.48, 'L')]
+      >= 4.5 deg segments by arm {'L': 4, 'R': 3}; frame-of-max histogram (0-64, bins of 13) [0, 1, 2, 3, 1]
+      >= 4.5 deg segments by source episode: {'20260917_150545_000055': 2, '20260916_125236_000008': 1, '20260917_100511_000050': 1, '20260917_135136_000037': 1, '20260917_150545_000021': 1, '20260928_101010_000054': 1}
+PASS  G2 gripper alignment: nearest-sample |dt| <= 20 ms on every row, no range violation  {'frames': 39910, 'dt_ms_p50': 2.41, 'dt_ms_p95': 5.47, 'dt_ms_max': 11.9, 'frames_dt_gt_20ms': 0, 'gripper_samples_normalized_missing': 0, 'range_violations': 0}
+PASS  V  best-matching source frame is EXACTLY the expected one (argmin offset == 0) on every check (6 val + 4 train segs x first/mid/last x 3 cams)  81 checks, offsets {0: 81}; expected-frame mean|d| p50 0.0095 vs nearest other offset p50 0.0156
+PASS  M0 source_episode -> segment -> LeRobot episode mapping exact (all 65 state rows bit-identical)  996 episodes, 0 mismatches
+      manifest -> ${HOME}/c8/c8oldv2_final_data/MANIFEST_final.json
+
+ALL C-OLD V2 CHECKS PASS

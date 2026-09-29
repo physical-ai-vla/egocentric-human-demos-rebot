@@ -161,12 +161,69 @@
 | prompt | rank-1 frequency % | 16 | 15.508 | `analysis/out/prompt_swap_300k_summary.json` | PASS |
 | prompt | rank near chance at every k/subset (|rank-3.5|<0.25) | True | True | `analysis/out/prompt_swap_300k_summary.json` | PASS |
 | prompt | reproduces reference eval (< 1e-5 mm) | True | True | `analysis/out/prompt_swap_300k_summary.json` | PASS |
+| retarget | v1 usable % | 36.5 | 36.5 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v1 NN p50 | 1.49 | 1.494 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v1 NN p90 | 1.55 | 1.551 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v1 W1 dq | 0.00197 | 0.002 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-K usable % | 66.6 | 66.6 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-K NN p50 | 1.21 | 1.206 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-K NN p90 | 1.6 | 1.599 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-K W1 dq | 0.00275 | 0.0027 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-Kr usable % | 67.0 | 67.0 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-Kr NN p50 | 0.44 | 0.441 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-Kr NN p90 | 0.74 | 0.738 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-Kr W1 dq | 0.0031 | 0.0031 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-TR usable % | 56.1 | 56.1 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-TR NN p50 | 0.27 | 0.272 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-TR NN p90 | 0.45 | 0.454 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v2-TR W1 dq | 0.00208 | 0.0021 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | v1 start clusters | 1 | 1.0 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | TR start clusters | 100 | 100.0 | `results/retarget_v2/compare_R30_heldout.json` | PASS |
+| retarget | candidate segments | 1229 | 1229.0 | `results/retarget_v2/hybrid_master_MASTER.json` | PASS |
+| retarget | unsolved segments | 402 | 402.0 | `results/retarget_v2/hybrid_master_MASTER.json` | PASS |
+| retarget | unsolved: no workspace window | 399 | 399.0 | `results/retarget_v2/hybrid_master_MASTER.json` | PASS |
+| retarget | matched-segment finding mentions 686 / 0.00207 / 0.00226 | True | True | `results/retarget_v2/hybrid_master_MASTER.json` | PASS |
+| hrl80 | episodes | 60 | 60.0 | `results/hrl80/hrl80_raw_census.json` | PASS |
+| hrl80 | per order min | 10 | 10.0 | `results/hrl80/hrl80_raw_census.json` | PASS |
+| hrl80 | per order max | 10 | 10.0 | `results/hrl80/hrl80_raw_census.json` | PASS |
+| hrl80 | main session id | HRL80_20260928_101010 | HRL80_20260928_101010 | `results/hrl80/hrl80_raw_census.json` | PASS |
+| hrl80 | live rot median old | 0.144 | 0.144 | `results/hrl80/hrl80_prereg_report.json` | PASS |
+| hrl80 | live rot median HRL80 | 0.067 | 0.067 | `results/hrl80/hrl80_prereg_report.json` | PASS |
+| hrl80 | U_e mean old | 0.59 | 0.592 | `results/hrl80/hrl80_prereg_report.json` | PASS |
+| hrl80 | U_e mean HRL80 | 0.59 | 0.59 | `results/hrl80/hrl80_prereg_report.json` | PASS |
+| hrl80 | pooled rho | -0.11 | -0.11 | `results/hrl80/hrl80_prereg_report.json` | PASS |
+| hrl80 | pooled p | 0.05 | 0.051 | `results/hrl80/hrl80_prereg_report.json` | PASS |
+| hrl80 | pooled n | 316 | 316.0 | `results/hrl80/hrl80_prereg_report.json` | PASS |
+| hrl80 | TR usable % | 58.9 | 58.9 | `results/hrl80/compare_hrl80_heldout.json` | PASS |
+| final | TR segments | 996 | 996.0 | `results/dataset_v2/final/MANIFEST_final.json` | PASS |
+| final | old segments | 689 | 689.0 | `results/dataset_v2/final/MANIFEST_final.json` | PASS |
+| final | train segments | 896 | 896.0 | `results/dataset_v2/final/MANIFEST_final.json` | PASS |
+| final | val segments | 100 | 100.0 | `results/dataset_v2/final/MANIFEST_final.json` | PASS |
+| final | source episodes | 316 | 316.0 | `results/dataset_v2/final/MANIFEST_final.json` | PASS |
+| final | append invariants pass | True | True | `results/dataset_v2/final/APPEND_INVARIANT.json` | PASS |
+| finetune | geo delta % | -10.0 | -9.9837 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | geo CI low % | -14.7 | -14.7324 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | geo CI high % | -5.6 | -5.5999 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | motion geo delta % | -7.2 | -7.1544 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | motion geo CI low % | -13.4 | -13.4431 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | motion geo CI high % | -1.8 | -1.8283 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | motion MAE delta % | -6.8 | -6.8197 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | motion MAE CI low % | -12.7 | -12.7024 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | motion MAE CI high % | 0.5 | 0.5288 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | episodes favouring ego init | 8 | 8.0 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | eval episodes | 10 | 10.0 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
+| finetune | bootstrap point == eval JSONs (geo) | True | True | `results/finetune/*.json` | PASS |
 | text | retired value absent: 16.5\% | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 20.8/23.8 | True | True | `report/report.tex` | PASS |
 | text | retired value absent: versus 0.09 | True | True | `report/report.tex` | PASS |
 | text | retired value absent: five early | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 6.1 and 5.6 | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 128\textdegree | True | True | `report/report.tex` | PASS |
+| text | value present: 36.5\% | True | True | `report/report.tex` | PASS |
+| text | value present: 56.1\% | True | True | `report/report.tex` | PASS |
+| text | value present: 58.9\% | True | True | `report/report.tex` | PASS |
+| text | value present: 14.7 | True | True | `report/report.tex` | PASS |
+| text | value present: 996 segments | True | True | `report/report.tex` | PASS |
 | text | value present: 4.6/17.0 | True | True | `report/report.tex` | PASS |
 | text | value present: 18.5/23.8 | True | True | `report/report.tex` | PASS |
 | text | value present: versus 0.03 | True | True | `report/report.tex` | PASS |
@@ -178,4 +235,4 @@
 | text | value present: 233 train | True | True | `report/report.tex` | PASS |
 | text | value present: 561 | True | True | `report/report.tex` | PASS |
 
-177 claims checked, 0 failed.
+234 claims checked, 0 failed.

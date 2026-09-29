@@ -144,6 +144,9 @@ class CollectorCfg:
     # Depth-preview colour ramp (metres). The HandUMI working distance: below near_m / above far_m saturates.
     depth_preview: dict = field(default_factory=lambda: {"near_m": 0.30, "far_m": 1.20})
     replay_fps: int = 30
+    # Collection protocol (robotlike/monitor.load_protocol), set by `--protocol`, never from collector.yaml. None = legacy
+    # recording: no protocol tag, no robot-like monitor -- exactly what the 259 C8 episodes were recorded with.
+    protocol: dict | None = None
 
 
 @dataclass

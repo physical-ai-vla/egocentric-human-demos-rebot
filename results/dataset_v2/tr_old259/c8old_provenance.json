@@ -1,0 +1,52 @@
+{
+ "schema": "track_c_c_old_dataset/v2",
+ "contract": "TRACK_C_PSEUDO_JOINT_CONTRACT.md \u00a722b / \u00a724",
+ "report": {
+  "c8oldv2_tr_train": {
+   "segments": 620,
+   "rows": 40300,
+   "chunk_starts": 19220
+  },
+  "c8oldv2_tr_val": {
+   "segments": 69,
+   "rows": 4485,
+   "chunk_starts": 2139
+  }
+ },
+ "val_episodes": [
+  "20260916_090424_000001",
+  "20260916_105608_000001",
+  "20260916_112115_000004",
+  "20260916_122225_000004",
+  "20260916_140419_000014",
+  "20260916_170333_000015",
+  "20260916_170333_000025",
+  "20260916_170333_000028",
+  "20260917_100511_000025",
+  "20260917_100511_000051",
+  "20260917_100511_000057",
+  "20260917_100511_000077",
+  "20260917_135136_000008",
+  "20260917_135136_000018",
+  "20260917_135136_000033",
+  "20260917_150545_000010",
+  "20260917_150545_000020",
+  "20260917_150545_000036",
+  "20260917_150545_000038",
+  "20260917_150545_000050",
+  "20260917_150545_000071",
+  "20260917_150545_000073",
+  "20260917_150545_000092",
+  "20260917_150545_000098",
+  "20260917_150545_000109",
+  "20260917_150545_000112"
+ ],
+ "main_target": "hybrid master TR top-1 pseudo q (v2-TR-R30, R30 trajectory-guided continuity IK), NOT Phase-3",
+ "cd_target": "observation.ee.tcp_tgt = measured human relative TCP attached to THAT segment's anchor (TR: R30 window q_ref(0)) -> FK(anchor) rel(t) @ diag(C^T, 1)",
+ "gripper": "A: state raw = -270 * open_fraction, action = raw / -6 (R150 video-verified 2026-09-26)",
+ "quarantine": "imu_camera_rotation_inconsistent_v1",
+ "writer": "resumable shard writer (per-npz finalized shards + .complete markers, lerobot aggregate_datasets, frame-exact spot check)",
+ "source": "~/c8/robotlike/hybrid_master/MASTER.json, retarget_method == TR only (primary)",
+ "manifest": "c8oldv2_data/MANIFEST_tr.json (all strict checks PASS 2026-09-28)",
+ "corrected": "2026-09-28: the write stage had written the v1 main/cd target text; replaced"
+}

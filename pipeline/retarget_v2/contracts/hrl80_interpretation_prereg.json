@@ -1,0 +1,40 @@
+{
+ "schema": "hrl80_interpretation_prereg/v1",
+ "frozen_at": "2026-09-28, before any HRL80 retarget / 4-group result exists",
+ "pipeline": "HRL80 goes through the IDENTICAL frozen pipeline as old259 (r30 mode v1/v2-K/v2-Kr, tr mode, hybrid_merge); no change to threshold, K, lambda, window count, retrieval rule, gates",
+ "order": [
+  {
+   "1_utility": "per-segment TR usable rate vs old259 689/1229 = 56.1%; Kr_fallback and none rates; failure reasons no_workspace_window vs no_feasible_rollout vs old259 (none:no_workspace_window 399/1229)"
+  },
+  {
+   "2_posture": "TR segments: held-out R120 NN p50/p90 (old259 TR 0.27/0.45 rad), k-means cluster coverage, start-posture diversity"
+  },
+  {
+   "3_dynamics": "TR segments: |dq| p95, W1 |dq| and W1 |ddq| vs R30 and vs held-out R120, HRL80 TR vs old259 TR"
+  },
+  {
+   "4_transfer": "old259 live -> offline vs HRL80 live -> offline (robotlike_compare_groups.py 4-group table)"
+  }
+ ],
+ "definitions": {
+  "start_posture_diversity": "q(0) of every TR segment; (a) distinct R120 k-means clusters (same clustering as v2k_compare cluster coverage) hit by starts, (b) NN of starts to held-out R120 p50/p90, (c) mean pairwise 12-D distance of starts. Because counts depend on N, old259 is also reported on 20 random subsamples of size N_HRL80_TR (numpy seed 0..19), median and range",
+  "size_matching": "cluster coverage and start diversity are reported both raw and N-matched as above; NN / W1 / rates are N-independent and reported raw",
+  "transfer": "see amendment_1 (T0 exact reproduction of the -0.009 reference, T1 primary = TR-usable fraction U_e)",
+  "hrl80_val": "all HRL80 numbers on all 60 episodes; train/val split is not used for these descriptive metrics"
+ },
+ "readings_stated_in_advance": {
+  "strong": "TR usable clearly above 56.1% (e.g. 70-80%) with posture NN p50/p90 near 0.27/0.45 and dynamics equal or closer to real => a robot-compatible collection protocol increases usable robot-space trajectories, not only the retarget algorithm",
+  "utility_up_posture_down": "many more segments usable but NN clearly worse => rescued segments sit farther from the robot manifold",
+  "live_up_offline_flat": "live robot-like metrics improve but TR usable does not => live metrics (e.g. rotation speed) are not the cause of retarget feasibility; reinforces the old259 Spearman -0.009 finding; workspace remains the main failure"
+ },
+ "caveat": "HRL80 is one collector, one session day, 6 tasks x 14; old259 differs in session / scene as well as protocol, so a difference is protocol + session, not protocol alone",
+ "amendment_1": {
+  "at": "2026-09-28 18:01, still BEFORE any HRL80 retarget / offline / 4-group result exists",
+  "why": "the transfer definition cited -0.009 as if it were a TR-usable correlation; it is not. Clarified, no new metric picked from results.",
+  "reference_minus_0.009_exact": "x = max(left,right) live over_frac_ang_w (rotation-speed over-p95 fraction); y_e = fraction of the episode's baseline_offline segments with first_fail is None (v1 single-anchor robotlike_offline_check full pass); episodes with >= 1 segment (n 259); rank corr = Pearson of argsort-argsort ranks (ties NOT averaged). Reproduced for HRL80 with this exact code as T0.",
+  "T1_primary_transfer": "U_e = (# segments of episode e with retarget_method == 'TR' in the master) / (# candidate segments of e = master segments that carry a v1 record, the same denominator as old259's 1229). NOT binary any-usable. x = the same live over_frac_ang_w. Spearman with average-rank ties (scipy.stats.spearmanr), episodes with >= 1 candidate segment; old259, HRL80, pooled.",
+  "T1_secondary_x": "live over_frac_ang_a (rotation acceleration) and grasps_total, same U_e, reported but not used for the headline reading",
+  "size_matched_reading": "for cluster coverage and start-posture diversity, HRL80 is read by its position inside the N-matched old259 subsample distribution (median, min-max over seeds 0..19), never against raw full old259",
+  "claim_wording": "any improvement is reported as 'associated with the new collection protocol/session', not as a causal protocol effect (non-randomized: collector, day, scene differ); causal claim would need interleaved old/new protocol collection in one session"
+ }
+}

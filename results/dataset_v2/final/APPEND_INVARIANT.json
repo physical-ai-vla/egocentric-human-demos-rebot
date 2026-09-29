@@ -1,0 +1,37 @@
+{
+ "schema": "c_old_v2_append_invariant/v1",
+ "frozen_snapshot": "${HOME}/c8/c8oldv2_data/MANIFEST_tr.json",
+ "frozen_snapshot_sha256": "6a461d9cce80b53c52316acea74e1e81ad52dbeab3f9f7e51dced7c6c63371ea",
+ "combined": "${HOME}/c8/c8oldv2_final_data",
+ "checks": {
+  "I0 frozen old259 snapshot untouched": {
+   "ok": true,
+   "info": ""
+  },
+  "I1 all 689 old segment IDs present, same source_start_frame and train/val role": {
+   "ok": true,
+   "info": "old 689  missing 0  changed start/split 0"
+  },
+  "I2 append-only: old segments keep LeRobot episode index (prefix), every new segment after them": {
+   "ok": true,
+   "info": "old train 620 / val 69; reindexed 0; new segments 307"
+  },
+  "I3 old segments: state / action / tcp_tgt / timestamp / frame_index byte-identical": {
+   "ok": true,
+   "info": "689 episodes, 0 mismatched {}"
+  },
+  "I3 old segments: same task string per row": {
+   "ok": true,
+   "info": "0 mismatched"
+  },
+  "I4 old segments: every decoded video frame identical (3 cams, rgb24 native res)": {
+   "ok": true,
+   "info": "134355 frames, 0 (camera, episode) streams differ"
+  },
+  "I5 old259 master entries byte-identical in the combined master (frozen copy re-verified too)": {
+   "ok": true,
+   "info": "517 files, 0 differ"
+  }
+ },
+ "failed": []
+}

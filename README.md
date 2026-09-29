@@ -68,6 +68,97 @@ were not systematically randomised. None of the results here are claims about ge
   and the true instruction is no closer to the recorded motion than a wrong one (mean rank 3.55 of 6, chance 3.5).
   The instruction measurably changes predictions but does not make them more accurate.
 
+## Update v2: multi-seed retargeting, robot-like collection, combined dataset
+
+The first release used a single-anchor retarget ("v1"). Every segment started from one robot posture, so v1 lost
+most segments at the workspace gate and collapsed the pseudo-joint starts onto one posture. v2 changes the retargeting
+and adds a second, robot-like collection. Nothing in the first-release dataset was modified.
+
+**Status: offline only.** The v2 ego pretrain (996 segments) is running; no results yet. The fine-tuning comparison
+below uses the **v1** ego pretrain.
+
+### Retarget v2 under an R30-only contract
+
+Every quantity taken from real robot data (seed-bank bounds, workspace gate, manifold penalty, TR window library) comes
+from 30 robot episodes (R30) only. R30 is part of every later fine-tuning subset. Evaluation uses the remaining 120
+robot episodes (held-out R120). Results on the old 259 source episodes (1,229 candidate segments):
+
+| method | usable | posture NN to held-out R120, p50 / p90 (rad) | W1 \|dq\| vs held-out |
+|---|---|---|---|
+| v1 single anchor | 36.5 % | 1.494 / 1.551 | 0.00197 |
+| v2-K kinematic multi-seed | 66.6 % | 1.206 / 1.599 | 0.00275 |
+| v2-Kr + manifold penalty | 67.0 % | 0.441 / 0.738 | 0.0031 |
+| v2-TR R30 window retrieval | 56.1 % | 0.272 / 0.454 | 0.00208 |
+
+- TR is the primary method. It gives the closest postures but fails more segments; almost all of its failures are
+  `no_workspace_window`.
+- On the 686 segments that both TR and Kr solve, TR's velocity W1 advantage is small (0.00207 vs 0.00226). Most of the
+  dynamics gap in the table comes from which segments each method keeps. The posture gain holds on the matched set.
+- The hybrid master (TR if feasible, else Kr) was frozen before HRL80 was retargeted. The primary pretrain set uses TR
+  segments only; hybrid-all is kept as an ablation.
+
+Code: `pipeline/retarget_v2/`. Frozen contracts: `pipeline/retarget_v2/contracts/`. Results: `results/retarget_v2/`.
+
+### Robot-like collection (protocol `robot_like_v1`, dataset HRL80)
+
+The protocol runs inside the existing collector (`--protocol robot_like_v1`). It uses 30 s AUTO episodes and a live
+panel of wrist rotation speed and acceleration against reBot R150 p95 levels, and tracks grasp stages. After each
+session, an offline MASt3R → IK robot-feasibility check runs. Without the flag, the collector behaves exactly as in the
+first release.
+
+- HRL80 = 60 episodes, 10 per order, in one session on 2026-09-28 with one operator. The target was 14 per order.
+- Retargeted with the same frozen pipeline: TR 58.9 % (old259: 56.1 %), Kr fallback 15.5 % (11.2 %), none 25.5 %
+  (32.7 %); hybrid usable 74.5 % (67.3 %).
+- HRL80 wrist rotation speed was lower than old259's (median over-p95 fraction 0.067 vs 0.144), but per-episode
+  TR feasibility did not change (0.59 vs 0.592). The live metric does not track feasibility: Spearman ρ −0.10 old259,
+  −0.17 HRL80, −0.11 pooled. The pre-registered reading that fits is "live up, offline flat". The workspace remains the
+  main failure. The two groups differ in session and scene as well as protocol, so any difference is only associated
+  with the protocol, not shown to be caused by it.
+
+Code: `collection/handumi_collector/robotlike/`, `collection/scripts/robotlike_*`, `collection/configs/handumi/robot_like_v1.yaml`,
+`collection/docs/ROBOT_LIKE_PROTOCOL.md`. Results: `results/hrl80/`.
+
+### C-old v2 dataset (final, frozen)
+
+- 996 TR segments of 65 frames each: old 689 plus HRL80 307.
+- Split: train 896 / val 100, taken by source episode (284 / 32).
+- Chunk starts: 27,776 train / 3,100 val.
+- Val = the first release's 26 held-out episodes + HRL80 episodes 49–54, one round of all six orders. Report these two
+  val groups separately.
+- The old segments are appended unchanged. Rows, task strings and every decoded video frame are verified identical to
+  the frozen old259 snapshot (invariants I0–I5).
+
+Builders and validators: `pipeline/dataset_v2/`. Metadata and manifests (no video or parquet data): `results/dataset_v2/`.
+
+### Ego pretrain → robot fine-tuning (v1 ego pretrain)
+
+At 250k steps of R150 fine-tuning, the model initialised from the v1 ego pretrain beats scratch (`lerobot/xvla-base`,
+same recipe) by a small margin on most metrics:
+
+| metric | geo | motion geo | k30 FK p50 | motion k30 MAE |
+|---|---|---|---|---|
+| C-old vs scratch | −10.0 % | −7.2 % | −4.1 % | −6.8 % |
+
+- Episode-level paired bootstrap (10k draws, `analysis/paired_bootstrap_r150.py`): geo 95 % CI −14.7 to −5.6 %,
+  motion geo −13.4 to −1.8 %, motion k30 MAE −12.7 to +0.5 %; 8 of 10 episodes favour the ego init.
+- Episodes 66/77, motion geo: C-old is worse (+4.2 %).
+- **All 10 evaluation episodes are in the R150 fine-tuning data of both arms.** This comparison measures fit to seen
+  episodes, not generalisation.
+- R90 was compared at only 2 matched steps (10k, 20k). Signs are mixed: C-old is better on all-sample geo and worse
+  on motion geo. There is no conclusion.
+
+Records: `results/finetune/`. The v2 pretrain launch record is `results/finetune/FINAL_TR300K_LAUNCH.json`.
+
+### Repository map additions
+
+| dir | contents |
+|---|---|
+| `pipeline/retarget_v2/` | seed bank, v2-K / v2-Kr / v2-TR retarget, held-out comparison, hybrid merge, HRL80 prereg report, chain scripts; `contracts/` = frozen rules, R30 list, splits, prereg, gripper contract, seed banks |
+| `pipeline/dataset_v2/` | TR / hybrid / HRL80 LeRobot builders, final append, validators, append-invariant checker, env-driven `write_stage.py` |
+| `collection/…/robotlike/`, `collection/scripts/`, `collection/tests/`, `collection/docs/` | robot-like protocol monitor, offline check and group comparison, tests, protocol doc |
+| `results/retarget_v2/`, `results/hrl80/`, `results/dataset_v2/`, `results/finetune/` | comparison JSONs, frozen master manifests, HRL80 census and prereg report, dataset manifests and gates, fine-tuning evals and summaries |
+| `docs/NUMBERS_v2.md`, `docs/SOURCES_v2.md` | every v2 number with its file and key; source mapping |
+
 ## Repository map
 
 | dir | contents |
@@ -84,7 +175,7 @@ were not systematically randomised. None of the results here are claims about ge
 | `evaluation/` | Offline checkpoint evaluator (`c8old_mac_eval.py`), frame cache and checkpoint selection |
 | `results/` | `episode_manifest.csv` (349 episodes: session, order, time, domain, funnel outcome, split), `model_config/` (X-VLA `config.json`, `train_config.json`), `pose_benchmark/`, census/funnel JSONs, domain manifest, quarantine list, gripper census, split index, run provenance/summary, per-checkpoint eval JSONs (`eval/`, `eval_gated/`) and `selection.json` |
 | `sample_data/` | 3 episodes (see below) |
-| `analysis/` | `verify_claims.py` recomputes every number in the report from the files in this repo (177 checks; table in `analysis/out/claim_audit.md`). Post-hoc analyses of the final checkpoint: `prompt_swap.py` (6 order instructions, same noise seed, + 2 extra seeds), `summarize_prompt_swap.py`, `per_order_breakdown.py`; summaries in `analysis/out/*.json` |
+| `analysis/` | `verify_claims.py` recomputes every number in the report from the files in this repo (234 checks; table in `analysis/out/claim_audit.md`). Post-hoc analyses of the final checkpoint: `prompt_swap.py` (6 order instructions, same noise seed, + 2 extra seeds), `summarize_prompt_swap.py`, `per_order_breakdown.py`; summaries in `analysis/out/*.json` |
 | `report/` | Technical report (PDF + LaTeX) and figure script |
 
 ## Verifying the numbers

@@ -8,6 +8,9 @@ datasets:
   Vpilot_vision_only: {target_per_order: 1, note: "IMU-less V0 observability pilot; NEVER counted as H120"}
   Hpilot: {target_per_order: 50, note: "300-episode collection (6 orders x 50), AUTO loop; 2026-09-16 -- was 3 for the pre-pilot"}
   H120:   {target_per_order: 20, note: "final; only after IMU + VIO/TCP validation"}
+  # 2026-09-28 robot-like ego (protocol robot_like_v1, run with --protocol robot_like_v1): first goal ~80 on top of the
+  # 259 C8 episodes, compared as `old ego only` vs `old + robot-like ego`. Own dataset dir so it can never mix with Hpilot.
+  HRL80:  {target_per_order: 14, note: "robot_like_v1 first batch, 6 orders x 14 = 84; +50-100 later if it helps"}
   # 2026-09-18 RGB-D teacher-sensor pilot: depth is recorded to LABEL human metric xyz/EEF, never as policy
   # input. Ten episodes, then QA -- no 100-episode collection until the QA report is read.
   HRGBD_qa10: {target_per_order: 2, orders: [RBP, RPB, BRP, BPR, PRB],

@@ -1,0 +1,14 @@
+{
+ "schema": "rel16_ego_interface/v1",
+ "frozen_at": "2026-09-28 16:10 (interface only; NO build yet)",
+ "build_when": "ONCE, after the hybrid master is final (part A old C8 259 + part B HRL80 with the same frozen rules)",
+ "owner": "ego side builds the dataset and hands it over; REL16 model / training / evaluation belong to the REL16 owner",
+ "source": "frozen hybrid master, segments with retarget_method == 'TR' only (same selected segments and source-frame provenance as the C-old v2 primary set)",
+ "no_new_ik": "pseudo-q (master top-1) -> FK (both arms) -> TCP trajectories; no retarget, no IK",
+ "state": "state76 (ego-compatible UMI76 packing, sorted(low_dim_keys), [history, current] at t - 3/59.94 s and t, SLERP / linear interpolation from the 30 fps pseudo-q FK); cross-arm wrt terms use the robot-frame geometry of the chosen seed pair",
+ "action": "REL16 current-anchor: A_k = inv(T_t) T_{t + (k+1) * 3/59.94 s}, k = 0..15, per arm pos3 + rot6d + gripper; 20-D",
+ "gripper": "binary semantic contract (gripper_binary_contract.json): 1 = OPEN if open_fraction >= 0.5 else 0 = CLOSE, per future timestep, action[..., 9] left / action[..., 19] right; old C8 source = ~/c8/grip/<tag>.npz open_fraction, HRL80 = mcap gripper 'normalized'",
+ "rows": "per 65-frame segment only the rows with 50.05 ms of history and 16 x 50.05 ms of future inside the segment",
+ "not_state94": "state94 (absolute base-frame TCP18) is NOT built for ego: ego has no robot-base absolute pose; that twin is teleop-only / diagnostic",
+ "split": "same source-episode split as C-old v2 (val = the frozen C-old v1 26 source episodes + the part-B val rule decided with HRL80)"
+}

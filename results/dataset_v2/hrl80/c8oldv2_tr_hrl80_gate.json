@@ -1,0 +1,9 @@
+{
+ "part": "HRL80",
+ "segments": 307,
+ "pos_mm_max": 7.9378166537650845,
+ "rot_deg_max": 4.562198818525234,
+ "grip_dt_ms_max": 11.904917,
+ "grip_dt_ms_p99": 9.20861572,
+ "pass_": true
+}

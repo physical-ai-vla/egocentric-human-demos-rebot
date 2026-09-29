@@ -36,6 +36,7 @@ class CollectorSession:
     auto: AutoLoop | None = None           # hands-free loop with spoken cues (collector/autoloop.py)
     recorder: EpisodeRecorder | None = None
     last_meta: dict | None = None
+    robotlike: object | None = None        # robotlike.monitor.RobotLikeMonitor when a --protocol is active
     log_lines: list[str] = field(default_factory=list)
 
     @classmethod
@@ -46,6 +47,13 @@ class CollectorSession:
                                extra=dict(gripper_calibration_version=dm.gripper_calibration_version, identity=dm.identity(),
                                           hardware_profile=cfg.hardware.profile))
         s = cls(cfg, dm, mgr, order=mgr.next_order())
+        if cfg.collector.protocol:
+            try:
+                from ..robotlike.monitor import RobotLikeMonitor
+                s.robotlike = RobotLikeMonitor(cfg.collector.protocol, dm); s.robotlike.start()
+                s.say(f"protocol {cfg.collector.protocol.get('protocol')}: robot-like monitor on, AUTO stack {cfg.collector.auto_loop.get('episode_s')} s")
+            except Exception as exc:                  # the monitor is advisory; recording must not depend on it
+                s.robotlike = None; s.say(f"robot-like monitor unavailable: {exc}")
         for e in mgr.incomplete_episodes():
             s.say(f"WARNING: incomplete episode from a previous crash left in place: {e.name}")
         for n, err in dm.errors.items():
@@ -206,13 +214,29 @@ class CollectorSession:
                                                         gripper_calibration_version=self.devices.gripper_calibration_version,
                                                         hardware_profile=self.cfg.hardware.profile, cube_set=self.cfg.tasks.cube_set,
                                                         imu_rate_hz=(self.cfg.hardware.imus[0].rate_hz if self.cfg.hardware.imus else None),
-                                                        stillness_gate=gate_meta))
+                                                        stillness_gate=gate_meta,
+                                                        **self._protocol_meta()))
         self.recorder.start(); self.state = "RECORDING"; self.say(f"REC {ep.name} order={self.order}")
+        if self.robotlike is not None:
+            try: self.robotlike.begin_episode(ep)
+            except Exception as exc: self.say(f"robot-like monitor: {exc}")
+
+    def _protocol_meta(self) -> dict:
+        p = self.cfg.collector.protocol
+        return {} if not p else dict(protocol=p.get("protocol"), protocol_config=p.get("_path"),
+                                     auto_episode_s=self.cfg.collector.auto_loop.get("episode_s"))
 
     def stop(self) -> dict:
         assert self.recorder and self.state == "RECORDING"
         if self._hold_until_ns is not None: self.recorder.event("stopped_during_hold", "session", {}); self._hold_until_ns = None; self.gate = None
         self.recorder.stop()
+        if self.robotlike is not None:
+            try:
+                rl = self.robotlike.end_episode()
+                self.recorder.extra_meta["robot_like_live"] = dict(verdict=rl["verdict"], reasons=rl["reasons"], grasps_total=rl["grasps_total"],
+                    over_frac={sd: dict(ang_w=d["over_frac_ang_w"], ang_a=d["over_frac_ang_a"]) for sd, d in rl["sides"].items()},
+                    summary="derived/robot_like/live_summary.json")
+            except Exception as exc: self.say(f"robot-like summary: {exc}")
         dur = (self.recorder.t_stop_ns - self.recorder.t_start_ns) / 1e9
         self.state = "REVIEW"
         summ = self.recorder.summary()
@@ -236,6 +260,11 @@ class CollectorSession:
             elif level == "REVIEW" and verdict == "PASS": verdict = "REVIEW"
         if dur < self.cfg.collector.min_episode_s: verdict = "REVIEW"; notes.append(f"shorter than {self.cfg.collector.min_episode_s}s")
         if self.state == "ERROR_REVIEW": verdict = "REVIEW"; notes.insert(0, "required device failed during recording")
+        rl = r.extra_meta.get("robot_like_live")
+        if rl:
+            notes.append(f"robot-like {rl['verdict']}" + (f": {'; '.join(rl['reasons'])}" if rl["reasons"] else ""))
+            if rl["verdict"] == "FAIL" and (self.cfg.collector.protocol or {}).get("verdict_on_fail", "review") == "review" and verdict == "PASS":
+                verdict = "REVIEW"
         return dict(episode=r.episode_dir.name, order=self.order, duration_s=round(dur, 2), streams=streams, grippers=grips, imus=imus,
                     hw_errors=sum(1 for e in r.events if e["kind"] in ("device_error", "critical_device_error", "recorder_error")),
                     events=summ["event_kinds"], n_events=summ["n_events"], verdict=verdict, notes=notes, head_video=str(r.episode_dir / "head.mp4"))
@@ -370,4 +399,7 @@ class CollectorSession:
             self.stop(); self.keep(notes="auto-kept on close")
         elif self.state in ("REVIEW", "ERROR_REVIEW"):
             self.keep(notes="auto-kept on close (was in review)")
+        if self.robotlike is not None:
+            try: self.robotlike.close()
+            except Exception: pass
         self.devices.close_all()

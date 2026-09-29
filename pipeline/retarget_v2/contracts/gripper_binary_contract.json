@@ -1,0 +1,33 @@
+{
+ "schema": "gripper_binary_semantic_contract/v1",
+ "frozen_at": "2026-09-28 (user)",
+ "applies_to": "REL16 ego pretrain dataset and R380-v2 real data. NOT C-old: C-old keeps the B1-old gripper contract unchanged.",
+ "gripper_semantics": {
+  "0": "CLOSE / squeeze",
+  "1": "OPEN"
+ },
+ "real_source": {
+  "signal": "source LeRobot LEADER gripper action (follower measured width is NOT used for the label; sanity check only, ~91-93 % agreement)",
+  "rule": "OPEN (1) if leader >= 27 else CLOSE (0)",
+  "note": "same sign for HEAD and FRONT in R380"
+ },
+ "ego_source": {
+  "signal": "open_fraction (0 = fully closed, 1 = fully open)",
+  "rule": "OPEN (1) if open_fraction >= 0.5 else CLOSE (0)",
+  "consistency": "matches the old C-old mapping raw = -270 * open_fraction with open when raw <= -135",
+  "per_dataset_signal": {
+   "old_C8_259": "~/c8/grip/<tag>.npz field 'open_fraction' -- the exact field c8old_build_dataset.py used (state = -270 * open_fraction); per-session anchors already applied there",
+   "HRL80": "sensors.mcap /<side>/gripper 'normalized' (collector calibration gripper_v014: 0 closed .. 1 open) -- per-session anchors not needed"
+  },
+  "parity_2026_09_28": "PASS: 353,607 frames, range 0..1, p5 0.025 / p95 0.960, 4.2 % in [0.4, 0.6]; open share (>= 0.5) 17.2 % == C-old raw <= -135 share 17.2 % on the built c8old_train state"
+ },
+ "labeling": "per future timestep independently: action[k, 9] (left) and action[k, 19] (right) are the binary intent of that future frame; never one label per segment",
+ "deploy": {
+  "binary_threshold": 0.5,
+  "OPEN": "/execute_step cmd 42",
+  "CLOSE": "/execute_step cmd 0",
+  "note": "the jaw may stop on the cube (seen left -89 / right -128) while the semantic target stays CLOSE = 0"
+ },
+ "rel16_ego_state76": "cross-arm (wrt) terms use the robot-frame geometry produced by the chosen robot seed pair of the TR master (ego has no shared L/R human frame); 50.05 ms history and 16 x 50.05 ms future cut usable rows out of each 65-frame segment",
+ "c_old_ego": "measured EEF C/D aux targets recomputed from the master's final selected trajectory (T_tgt anchored at the chosen seed)"
+}

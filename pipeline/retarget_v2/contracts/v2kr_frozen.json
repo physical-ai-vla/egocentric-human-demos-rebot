@@ -1,0 +1,19 @@
+{
+ "schema": "c_old_v2kr_contract/v1",
+ "frozen_at": "2026-09-28 12:40, BEFORE any proper v2-Kr result; decided from the provisional re-pick on 17/259 old episodes (lambda 0.5 already closed the tail there). lambda is NOT tuned further (user, 2026-09-28).",
+ "seed_bank": {"file": "seedbank_q12.npy", "sha256_q12": "846f44ed67eff493ce83196ea049013aaafb817ffe15ac86243da21b78577937", "n": 2150},
+ "segments": "identical to v2-K / v1: robotlike_offline_check.py segmentation (frozen c8_phase3 chain)",
+ "candidates": "seeds whose targets are >= 95 % inside the R150 workspace on both arms; rolled out = UNION of (top 8 by mean workspace NN position margin, exactly v2-K's set) and (top 8 by the seed posture's own 12-D NN distance to R150 q), <= 16",
+ "hard_gates": "every row IK status in SUCCESS (15 mm / 5 deg, limits, dq), clearance d_min >= 0.075 m on every 5th row, workspace >= 95 % both arms",
+ "score": "S = mean pos_err/15 + mean rot_err/5 + mean|dq|/0.6 + 0.5 mean|ddq|/0.6  +  LAMBDA * d_R150,  d_R150 = median over the rollout's frames (every 3rd) of the 12-D NN distance (rad) to R150 q (all 173,818 frames, every 3rd)",
+ "lambda": 0.5,
+ "variants": "further survivors >= 0.5 rad mean joint distance from every kept one, max 3; top-1 = min S",
+ "adoption_gate_user": [
+  "usable >= v2-K (equal or nearly equal)",
+  "NN p50 AND p90 both better than v1",
+  "joint range / cluster coverage not collapsing vs v2-K",
+  "v1-only ~ 0",
+  "most rescued segments are workspace / IK rescues"
+ ],
+ "next_if_pass": "C-old v2-Kr dataset build (same format as C-old v1, measured EEF C/D unchanged)"
+}

@@ -203,6 +203,17 @@ class MainWindow(W.QMainWindow):
         self.pol_label = W.QLabel("polarity: not tested"); g3l.addWidget(self.pol_label, 7, 0, 1, 2); v.addWidget(g3)
         if not pol_gate:
             bpol.setVisible(False); self.pol_label.setVisible(False)
+        self.rl_label = None
+        if getattr(self.s, "robotlike", None) is not None:              # only under --protocol; the legacy screen is unchanged
+            p = self.s.cfg.collector.protocol
+            grl = W.QGroupBox(f"ROBOT-LIKE PROTOCOL  {p.get('protocol')}  — live wrist motion vs reBot (R150 p95), grasp stages")
+            grll = W.QVBoxLayout(grl)
+            gd = W.QLabel("  ·  ".join(p.get("guidance", []))); gd.setWordWrap(True); gd.setStyleSheet("color:#555"); grll.addWidget(gd)
+            self.rl_label = W.QLabel(); self.rl_label.setStyleSheet("font-family:monospace"); self.rl_label.setTextFormat(QtCore.Qt.TextFormat.RichText)
+            grll.addWidget(self.rl_label)
+            grll.addWidget(W.QLabel("<i>live = IMU + gripper only. Mapped robot TCP / IK / joint margin / collision: offline check after KEEP "
+                                    "(robotlike.offline_check). Inter-arm distance has no live source (no shared L/R frame).</i>"))
+            v.addWidget(grl)
         mid = W.QHBoxLayout()
         g = W.QGroupBox("TASK"); gl = W.QVBoxLayout(g); br = W.QHBoxLayout(); self.order_btns: dict[str, W.QPushButton] = {}
         for o in self.s.cfg.tasks.orders:
@@ -259,6 +270,8 @@ class MainWindow(W.QMainWindow):
     def _qa_tab(self) -> W.QWidget:
         root = W.QWidget(); v = W.QVBoxLayout(root)
         b = W.QPushButton("Load latest pose_qa.json of this session"); b.clicked.connect(self.on_load_qa); v.addWidget(b)
+        b2 = W.QPushButton("Load robot-like offline check of this session  (run: scripts/robotlike_session_check.sh <session>)")
+        b2.clicked.connect(self.on_load_robotlike); v.addWidget(b2)
         self.qa_text = W.QPlainTextEdit(); self.qa_text.setReadOnly(True); v.addWidget(self.qa_text); return root
 
     # ------------------------------------------------------------- actions
@@ -351,6 +364,22 @@ class MainWindow(W.QMainWindow):
         files = sorted(self.s.manager.session_dir.glob("episode_*/derived/pose_*/pose_qa.json"))
         self.qa_text.setPlainText(files[-1].read_text() if files else "no pose_qa.json in this session yet (run tools.pose_process)")
 
+    def on_load_robotlike(self) -> None:
+        """Per-episode robot feasibility from scripts/robotlike_offline_check.py (MASt3R -> retarget -> IK -> margins)."""
+        sd = self.s.manager.session_dir; rep = sd / "robot_like_offline_report.json"; lines = []
+        if rep.exists():
+            r = json.loads(rep.read_text())
+            lines.append(f"SESSION {r['session']}: {r['episodes']} episodes {r['verdicts']}  robot-feasible segments "
+                         f"{r['robot_feasible_segments']}/{r['segments']} ({r['robot_feasible_frac']:.0%})  first fails {r['segment_first_fail']}")
+        for p in sorted(sd.glob("episode_*/derived/robot_like/")):
+            live = p / "live_summary.json"; off = p / "offline_check.json"
+            lv = json.loads(live.read_text()) if live.exists() else None; of = json.loads(off.read_text()) if off.exists() else None
+            lines.append(f"{p.parent.parent.name}:  live {lv['verdict'] if lv else '—'}"
+                         + (f" ({'; '.join(lv['reasons'])})" if lv and lv['reasons'] else "")
+                         + (f"   offline {of['verdict']} feasible {of.get('robot_feasible_frac', '—')} d_min {of.get('collision_min_m', '—')} m"
+                            f" margin {of.get('joint_margin_min_deg', '—')} deg funnel {of.get('funnel_first_fail', of.get('first_fail'))}" if of else "   offline: not run yet"))
+        self.qa_text.setPlainText("\n".join(lines) if lines else "no robot-like results in this session yet")
+
     # ------------------------------------------------------------- panels
     def _side_html(self, side: str) -> str:
         cc = self.s.cfg.collector; imu = self.s.devices.imus.get(side); gr = self.s.devices.grippers.get(side); rows = []
@@ -372,6 +401,26 @@ class MainWindow(W.QMainWindow):
             if smp: rows.append(f"  a {smp.ax:+6.2f} {smp.ay:+6.2f} {smp.az:+6.2f}  g {smp.gx:+6.2f} {smp.gy:+6.2f} {smp.gz:+6.2f}")
         else: rows.append(f'<span style="color:{GREY}">●</span> IMU: WAITING FOR HW (not installed)')
         return "<br>".join(rows).replace(" ", "&nbsp;")
+
+    def _robotlike_html(self) -> str:
+        try: snap = self.s.robotlike.snapshot()
+        except Exception as exc: return f'<span style="color:{RED}">robot-like monitor: {exc}</span>'
+        p = self.s.cfg.collector.protocol; rows = []
+        f = lambda x, u: "  —  " if x is None else f"{x:5.2f} {u}"
+        for side, d in snap["sides"].items():
+            if not d["imu"]: rows.append(f'<b>{side.upper():5s}</b> <span style="color:{GREY}">● no IMU</span>'); continue
+            rows.append(f'<b>{side.upper():5s}</b> '
+                        f'<span style="color:{COL[d["w_lamp"]]}">●</span> rot {f(d["w"], "rad/s")} (p95 {p["ang_w_p95"]})   '
+                        f'<span style="color:{COL[d["a_lamp"]]}">●</span> rot-acc {f(d["a"], "rad/s²")} (p95 {p["ang_a_p95"]})   '
+                        f'<span style="color:{COL[d["lin_lamp"]]}">○</span> lin-acc proxy {f(d["lin"], "m/s²")}   '
+                        f'stage <b>{d["stage"] or "—"}</b>'
+                        + (f'   ep: grasp {d["grasps"]} / release {d["releases"]} · over-p95 rot {d["over_w"]:.0%} rot-acc {d["over_a"]:.0%}' if snap["recording"] else ""))
+        ls = getattr(self.s.robotlike, "last_summary", None)
+        if ls and not snap["recording"]:
+            col = GREEN if ls["verdict"] == "PASS" else AMBER
+            rows.append(f'last episode: <b style="color:{col}">{ls["verdict"]}</b> grasps {ls["grasps_total"]}  {"; ".join(ls["reasons"])}')
+        if snap.get("error"): rows.append(f'<span style="color:{AMBER}">monitor error: {snap["error"]}</span>')
+        return "<br>".join(rows).replace("  ", "&nbsp;&nbsp;")
 
     def refresh(self) -> None:
         s = self.s; cc = s.cfg.collector
@@ -445,6 +494,7 @@ class MainWindow(W.QMainWindow):
         self.b_start.setEnabled(can); self.b_home.setEnabled(can); self.b_hw.setEnabled(can); self.b_stop.setEnabled(s.state in ("RECORDING", "WAITING_FOR_STILLNESS"))
         self.b_mark.setEnabled(s.state == "RECORDING"); self.b_keep.setEnabled(s.state in ("REVIEW", "ERROR_REVIEW")); self.b_discard.setEnabled(s.state in ("REVIEW", "ERROR_REVIEW"))
         for b in self.order_btns.values(): b.setEnabled(idle)
+        if self.rl_label is not None: self.rl_label.setText(self._robotlike_html())
         if len(s.log_lines) != self._nlog: self.logbox.setPlainText("\n".join(s.log_lines[-6:])); self._nlog = len(s.log_lines)
 
     def closeEvent(self, ev) -> None:

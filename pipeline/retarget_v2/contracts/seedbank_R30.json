@@ -1,0 +1,76 @@
+{
+ "schema": "c_old_v2k_seedbank/v1",
+ "frozen": "2026-09-28 (before any v2 retarget result)",
+ "rule": "[2026-09-28] C-old v2-K seed bank: paired bimanual (qL, qR) configurations generated from the reBot's OWN kinematics.\n\nNo teleop episode, trajectory or episode identity is used as a seed. R150 enters only as an ENVELOPE (calibration of\nbounds), never as a sample: per-joint p1-p99 range, the same R150 workspace NN test that Phase 3 gates targets with,\nthe table floor (TCP z p0.1 minus 10 mm) and a manipulability floor (p1 of R150's position-Jacobian sigma_min).\nFROZEN before any v2 retarget result exists (user, 2026-09-28): rule + params + output hash in seedbank.json.\n\n  1. Sobol 2^SOBOL_M points in 12-D (6 joints per arm) inside the R150 p1-p99 joint box\n  2. per arm: FK TCP inside the R150 workspace (pos NN < 50 mm AND ori NN-50 < 20 deg == c8_phase3.ws_in)\n  3. per arm: every link / finger point above the table floor\n  4. per arm: position-Jacobian sigma_min >= R150 p1 (no near-singular pose)\n  5. bimanual clearance d_min >= 0.075 m (c8_collision_v1, contract D_HARD)\n  6. greedy dedup in 12-D joint space: keep a sample only if >= DEDUP_RAD from every kept one",
+ "reference": "r30",
+ "reference_frames": 37512,
+ "params": {
+  "sobol_m": 17,
+  "sobol_seed": 20260928,
+  "dedup_rad": 0.25,
+  "floor_margin_m": 0.01,
+  "ws_pos_m": 0.05,
+  "ws_ori_deg": 20.0,
+  "d_hard": 0.075,
+  "floor_links": [
+   "link3",
+   "link4",
+   "link5",
+   "link6",
+   "gripper_link",
+   "tcp",
+   "gripper_left",
+   "gripper_right"
+  ]
+ },
+ "envelope": {
+  "joint_lo_deg": [
+   -59.79,
+   -123.68,
+   -106.02,
+   6.37,
+   -32.18,
+   -83.68,
+   -23.27,
+   -126.91,
+   -101.34,
+   -12.14,
+   -20.31,
+   -67.59
+  ],
+  "joint_hi_deg": [
+   14.76,
+   -0.12,
+   -1.21,
+   71.83,
+   10.0,
+   38.96,
+   61.1,
+   -0.71,
+   -0.95,
+   70.15,
+   25.43,
+   77.57
+  ],
+  "table_floor_m": [
+   -0.044,
+   -0.0673
+  ],
+  "sigma_min_floor": [
+   0.04766,
+   0.04448
+  ]
+ },
+ "funnel": {
+  "sobol": 131072,
+  "workspace": 1320,
+  "table_floor": 1231,
+  "manipulability": 1230,
+  "collision": 1195,
+  "dedup": 1195
+ },
+ "n": 1195,
+ "sha256_q12": "fa6f394e6e27d976d3dd2e61a6bfc3a589975bade4e1d157bcbc00af952294be",
+ "seconds": 303.5,
+ "columns": "q12 rad: left j1..j6, right j1..j6 (URDF / solver frame), paired same configuration"
+}

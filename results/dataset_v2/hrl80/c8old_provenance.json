@@ -1,0 +1,30 @@
+{
+ "schema": "track_c_c_old_dataset/v2_hrl80_part",
+ "contract": "TRACK_C_PSEUDO_JOINT_CONTRACT.md \u00a722b / \u00a724",
+ "report": {
+  "c8oldv2_hrl80_train": {
+   "segments": 276,
+   "rows": 17940,
+   "chunk_starts": 8556
+  },
+  "c8oldv2_hrl80_val": {
+   "segments": 31,
+   "rows": 2015,
+   "chunk_starts": 961
+  }
+ },
+ "val_episodes": [
+  "20260928_101010_000049",
+  "20260928_101010_000050",
+  "20260928_101010_000051",
+  "20260928_101010_000052",
+  "20260928_101010_000053",
+  "20260928_101010_000054"
+ ],
+ "main_target": "HRL80 master top-1 pseudo q (v2-TR-R30)",
+ "cd_target": "observation.ee.tcp_tgt = measured human relative TCP attached to the TR window anchor q_ref(0) @ diag(C^T, 1)",
+ "source": "~/c8/robotlike/hybrid_hrl80 (frozen hybrid rules on HRL80_20260928_101010), retarget_method == TR only",
+ "gripper": "A: state raw = -270 * open_fraction, action = raw / -6 (R150 video-verified 2026-09-26)",
+ "quarantine": "imu_camera_rotation_inconsistent_v1",
+ "writer": "resumable shard writer (per-npz finalized shards + .complete markers, lerobot aggregate_datasets, frame-exact spot check)"
+}
