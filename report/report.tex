@@ -13,7 +13,7 @@
 \title{Egocentric Human Demonstrations for Robot Manipulation:\\Dataset Design, Processing, and an Offline Learnability Analysis}
 \author{\IEEEauthorblockN{Jeong Hwan Lee}
 \IEEEauthorblockA{Technical report, September 2026 \quad alnrg2arg@gmail.com\\
-Code, results and sample data: \url{https://github.com/physical-ai-vla/egocentric-human-demos-rebot}}}
+Code, results and sample data available on request}}
 \maketitle
 
 \begin{abstract}
@@ -32,7 +32,7 @@ task-useful use of the order instruction in this evaluation.
 Two follow-ups address the main bottleneck. Replacing the single-anchor retarget with multi-seed trajectory-window
 retrieval raises the usable fraction of candidate segments from 36.5\% to 56.1\% and brings the retargeted postures
 much closer to real robot postures; a 60-episode robot-like re-collection is used to test whether collection style changes
-retarget feasibility, and it does not appreciably. Fine-tuned on 150 robot demonstrations, the ego-pretrained model has a
+retarget feasibility; it does not appreciably, a negative, diagnostic result. Fine-tuned on 150 robot demonstrations, the ego-pretrained model has a
 10\% lower geo score than an otherwise identical model trained from scratch (95\% CI 5.6--14.7\%), but only on episodes
 contained in both training sets. We report no closed-loop robot results, and no experiment tests new spatial layouts or
 unseen stacking orders; we state explicitly which generalization claims this data can and cannot support.
@@ -341,14 +341,22 @@ evaluation; only the initialization differs. At the matched step of 250k, the eg
 score (episode-level paired bootstrap, 10k draws: 95\% CI $-14.7$ to $-5.6\%$), a 7.2\% lower moving-sample geo score (CI
 $-13.4$ to $-1.8\%$) and 6.8\% lower moving joint MAE at $k{=}30$ (CI $-12.7$ to $+0.5\%$); 8 of the 10 evaluation
 episodes favour it. The evaluation episodes are part of both fine-tuning sets, so this measures how well each model fits
-the robot training distribution, not generalization. A smaller-data comparison (90 robot episodes) is under way; at the
-two matched steps evaluated so far (10k, 20k) the signs are mixed.
+the robot training distribution, not generalization. A smaller-data comparison on 90 robot episodes was stopped early with
+only two matched steps (10k, 20k); there the signs are mixed (all-sample geo $-33\%$ and $-11\%$, moving-sample geo $+2\%$ and
+$+13\%$ for the ego initialization), so we draw no conclusion from it.
+
+\textbf{Pretraining on the final dataset.} X-VLA was pretrained from \texttt{xvla-base} on the 996-segment dataset with
+the same recipe (planned 300k steps). The run was stopped at 211.7k steps; the 100k and 200k checkpoints are kept, with 100k
+designated as the initialization for later robot fine-tuning. No robot fine-tuning result from these checkpoints is
+reported here: the only fine-tuning comparison above uses the first-release ego checkpoint.
 
 \section{Limitations and Future Work}\label{sec:lim}
 \textbf{Completed:} dataset collection and calibration; the pose, retargeting and QA pipeline; 300k-step ego fine-tuning and
 offline evaluation on held-out episodes; retargeting v2, the robot-like re-collection and the matched 150-episode robot
-fine-tuning comparison. \textbf{Ongoing:} pretraining on the final 996-segment dataset, and the 90-episode comparison.
-The robot evaluation episodes overlap the fine-tuning data, so a benefit on disjoint robot data remains to be shown.
+fine-tuning comparison; pretraining on the final 996-segment dataset (stopped at 211.7k steps, checkpoints 100k and 200k).
+\textbf{Stopped early, no conclusion:} the 90-, 60- and 30-episode robot fine-tuning comparisons (at most two matched steps,
+or only one arm run). \textbf{Not yet done:} robot fine-tuning from the final-dataset checkpoints. The robot evaluation
+episodes overlap the fine-tuning data, so a benefit on disjoint robot data remains to be shown.
 
 \textbf{Not supported by this study:} (i) closed-loop success on a robot; (ii) generalization to new cube layouts, since layouts
 were not recorded and absolute geometry is discarded by design; (iii) generalization to unseen stacking orders, since all six

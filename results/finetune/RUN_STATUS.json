@@ -1,0 +1,25 @@
+{
+ "schema": "finetune_run_status/v1",
+ "as_of": "2026-09-30",
+ "note": "Copied from each run's state.json. All runs below are STOPPED (by the user); none is running. The per-run SUMMARY.md files are supervisor snapshots taken while the runs were still live, so their 'RUNNING' header is stale.",
+ "ego_pretrain_v2_final_TR": {
+  "dataset": "results/dataset_v2/final (996 TR segments, train 896 / val 100)",
+  "planned_steps": 300000,
+  "stopped_by_user": "2026-09-29 10:49",
+  "stopped_step": "211.7k",
+  "checkpoints_kept": ["100k", "200k"],
+  "primary_init_for_later_fine_tuning": "100k",
+  "secondary": "200k (pretrain-length ablation)",
+  "300k": "never produced",
+  "fine_tuning_results_reported": "none"
+ },
+ "r150": {"scratch_B1old": "comparison checkpoint 250k (results/finetune/baseline/B1old_R150_250000.json)", "c_old_v1_init": "stopped at 300k"},
+ "r120_scratch": {"stopped_step": "200k", "c_old_v1_init": "cancelled at ~4.5k"},
+ "r90_c_old_v1_init": {"stopped_by_user": "2026-09-28 17:43", "stopped_step": "~36k", "evaluated_steps": ["10k", "20k"]},
+ "r90_scratch": {"stopped_by_user": "2026-09-29 01:40", "stopped_step": "~168k", "evaluated_steps": "10k..110k"},
+ "r90_matched_steps": ["10k", "20k"],
+ "r60_scratch": {"stopped_by_user": "2026-09-29 10:27", "stopped_step": "~106.8k", "c_old_arm": "not run"},
+ "r30_TR100k_init": {"stopped_by_user": "2026-09-29 13:34", "stopped_step": "20k", "evaluated_steps": ["10k", "20k"]},
+ "r30_scratch": {"stopped_by_user": "2026-09-29 13:50", "stopped_step": "~27.9k", "evaluated_steps": ["10k"]},
+ "interpretation": "Only the R150 250k comparison is reported as a result. R90/R60/R30 have too few matched steps (or no second arm) to support any conclusion."
+}

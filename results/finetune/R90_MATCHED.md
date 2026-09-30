@@ -1,4 +1,4 @@
-# R90 matched-step comparison — 2026-09-29 09:01:08
+# R90 matched-step comparison — 2026-09-30 08:52:21
 
 scratch = xvla-base init · C-old = legacy-v1 ego pretrain 300k-final init · everything else identical (code hash, R90 list, seed, recipe, first batch).
 Eval = probe val-10 (8 seen in R90 train + 2 held-out, eps 66/77). Lower is better except cosines. `Δ` = (C-old − scratch)/scratch.

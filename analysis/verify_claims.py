@@ -256,12 +256,37 @@ check("finetune", "eval episodes", 10, bs["n_episodes"], src)
 b1, co = J("results/finetune/baseline/B1old_R150_250000.json"), J("results/finetune/r150ft600k/eval/250000.json")
 check("finetune", "bootstrap point == eval JSONs (geo)", "True", str(abs((co["geo_score"] - b1["geo_score"]) / b1["geo_score"] - bs["point"]["geo"]) < 1e-6), "results/finetune/*.json")
 
+r90 = open(R / "results/finetune/R90_MATCHED.md").read(); src = "results/finetune/R90_MATCHED.md"
+curve = {l.split("|")[1].strip(): [c.strip() for c in l.split("|")[2:-1]] for l in r90.splitlines() if re.match(r"\| \d+k \|", l)}
+check("finetune", "R90 matched steps", "10k,20k", ",".join(sorted(curve)), src)
+for step, geo, mgeo in (("10k", "-33%", "+2%"), ("20k", "-11%", "+13%")):
+    check("finetune", f"R90 {step} all-sample geo delta", geo, curve[step][1].split("/")[-1].strip(), src)
+    check("finetune", f"R90 {step} motion geo delta", mgeo, curve[step][0].split("/")[-1].strip(), src)
+ho = J("results/finetune/C_OLD_TR_HANDOFF.json"); src = "results/finetune/C_OLD_TR_HANDOFF.json"
+check("pretrain_v2", "stopped at 211.7k", "True", str("211.7k" in " ".join(ho["not_used"])), src)
+check("pretrain_v2", "primary init 100k", "True", str(ho["primary_init"].startswith("TR100k")), src)
+check("pretrain_v2", "secondary 200k", "True", str(ho["secondary_ablation"].startswith("TR200k")), src)
+rs = J("results/finetune/RUN_STATUS.json"); src = "results/finetune/RUN_STATUS.json"
+check("pretrain_v2", "no fine-tuning result from v2 ckpts", "none", rs["ego_pretrain_v2_final_TR"]["fine_tuning_results_reported"], src)
+check("pretrain_v2", "planned steps", 300000, rs["ego_pretrain_v2_final_TR"]["planned_steps"], src)
+check("pretrain_v2", "launch schedule steps", 300000, J("results/finetune/FINAL_TR300K_LAUNCH.json")["schedule"]["steps"], "results/finetune/FINAL_TR300K_LAUNCH.json")
+
 # ---------------------------------------------------------------- retired values must not reappear in the report
 tex = open(R / "report/report.tex").read()
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
     check("text", f"retired value absent: {bad}", "True", str(bad not in tex), "report/report.tex")
-for need in ("36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
+check("text", "private repo URL absent", "True", str("github.com/physical-ai-vla" not in tex), "report/report.tex")
+for need in ("211.7k", "$-33\\%$", "$+13\\%$", "36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
     check("text", f"value present: {need}", "True", str(need in tex), "report/report.tex")
+
+# ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
+rd = open(R / "README.md").read()
+for need in ("349 recorded", "284 pass sync", "259 source", "561 bimanual", "233 train", "26 held-out", "1.5 / 5.7 mm", "11.2 / 39.9 mm",
+             "4.8 mm", "3.55 of 6", "36.5 %", "56.1 %", "1.494 / 1.551", "0.272 / 0.454", "58.9 %", "0.067 vs 0.144", "996 TR segments",
+             "896 / val 100", "27,776", "−10.0 %", "−14.7 to −5.6 %", "8 of 10", "211.7k", "−33 %", "+13 %", "4.6 / 17.0 %", "11.3 mm"):
+    check("readme", f"value present: {need}", "True", str(need in rd), "README.md")
+for bad in ("is running; no results yet", "234 checks"):
+    check("readme", f"stale text absent: {bad}", "True", str(bad not in rd), "README.md")
 
 # ---------------------------------------------------------------- output
 nf = sum(r[-1] == "FAIL" for r in rows)

@@ -213,12 +213,27 @@
 | finetune | episodes favouring ego init | 8 | 8.0 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
 | finetune | eval episodes | 10 | 10.0 | `analysis/out/paired_bootstrap_r150_250k.json` | PASS |
 | finetune | bootstrap point == eval JSONs (geo) | True | True | `results/finetune/*.json` | PASS |
+| finetune | R90 matched steps | 10k,20k | 10k,20k | `results/finetune/R90_MATCHED.md` | PASS |
+| finetune | R90 10k all-sample geo delta | -33% | -33% | `results/finetune/R90_MATCHED.md` | PASS |
+| finetune | R90 10k motion geo delta | +2% | +2% | `results/finetune/R90_MATCHED.md` | PASS |
+| finetune | R90 20k all-sample geo delta | -11% | -11% | `results/finetune/R90_MATCHED.md` | PASS |
+| finetune | R90 20k motion geo delta | +13% | +13% | `results/finetune/R90_MATCHED.md` | PASS |
+| pretrain_v2 | stopped at 211.7k | True | True | `results/finetune/C_OLD_TR_HANDOFF.json` | PASS |
+| pretrain_v2 | primary init 100k | True | True | `results/finetune/C_OLD_TR_HANDOFF.json` | PASS |
+| pretrain_v2 | secondary 200k | True | True | `results/finetune/C_OLD_TR_HANDOFF.json` | PASS |
+| pretrain_v2 | no fine-tuning result from v2 ckpts | none | none | `results/finetune/RUN_STATUS.json` | PASS |
+| pretrain_v2 | planned steps | 300000 | 300000.0 | `results/finetune/RUN_STATUS.json` | PASS |
+| pretrain_v2 | launch schedule steps | 300000 | 300000.0 | `results/finetune/FINAL_TR300K_LAUNCH.json` | PASS |
 | text | retired value absent: 16.5\% | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 20.8/23.8 | True | True | `report/report.tex` | PASS |
 | text | retired value absent: versus 0.09 | True | True | `report/report.tex` | PASS |
 | text | retired value absent: five early | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 6.1 and 5.6 | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 128\textdegree | True | True | `report/report.tex` | PASS |
+| text | private repo URL absent | True | True | `report/report.tex` | PASS |
+| text | value present: 211.7k | True | True | `report/report.tex` | PASS |
+| text | value present: $-33\%$ | True | True | `report/report.tex` | PASS |
+| text | value present: $+13\%$ | True | True | `report/report.tex` | PASS |
 | text | value present: 36.5\% | True | True | `report/report.tex` | PASS |
 | text | value present: 56.1\% | True | True | `report/report.tex` | PASS |
 | text | value present: 58.9\% | True | True | `report/report.tex` | PASS |
@@ -234,5 +249,34 @@
 | text | value present: 3.55 | True | True | `report/report.tex` | PASS |
 | text | value present: 233 train | True | True | `report/report.tex` | PASS |
 | text | value present: 561 | True | True | `report/report.tex` | PASS |
+| readme | value present: 349 recorded | True | True | `README.md` | PASS |
+| readme | value present: 284 pass sync | True | True | `README.md` | PASS |
+| readme | value present: 259 source | True | True | `README.md` | PASS |
+| readme | value present: 561 bimanual | True | True | `README.md` | PASS |
+| readme | value present: 233 train | True | True | `README.md` | PASS |
+| readme | value present: 26 held-out | True | True | `README.md` | PASS |
+| readme | value present: 1.5 / 5.7 mm | True | True | `README.md` | PASS |
+| readme | value present: 11.2 / 39.9 mm | True | True | `README.md` | PASS |
+| readme | value present: 4.8 mm | True | True | `README.md` | PASS |
+| readme | value present: 3.55 of 6 | True | True | `README.md` | PASS |
+| readme | value present: 36.5 % | True | True | `README.md` | PASS |
+| readme | value present: 56.1 % | True | True | `README.md` | PASS |
+| readme | value present: 1.494 / 1.551 | True | True | `README.md` | PASS |
+| readme | value present: 0.272 / 0.454 | True | True | `README.md` | PASS |
+| readme | value present: 58.9 % | True | True | `README.md` | PASS |
+| readme | value present: 0.067 vs 0.144 | True | True | `README.md` | PASS |
+| readme | value present: 996 TR segments | True | True | `README.md` | PASS |
+| readme | value present: 896 / val 100 | True | True | `README.md` | PASS |
+| readme | value present: 27,776 | True | True | `README.md` | PASS |
+| readme | value present: −10.0 % | True | True | `README.md` | PASS |
+| readme | value present: −14.7 to −5.6 % | True | True | `README.md` | PASS |
+| readme | value present: 8 of 10 | True | True | `README.md` | PASS |
+| readme | value present: 211.7k | True | True | `README.md` | PASS |
+| readme | value present: −33 % | True | True | `README.md` | PASS |
+| readme | value present: +13 % | True | True | `README.md` | PASS |
+| readme | value present: 4.6 / 17.0 % | True | True | `README.md` | PASS |
+| readme | value present: 11.3 mm | True | True | `README.md` | PASS |
+| readme | stale text absent: is running; no results yet | True | True | `README.md` | PASS |
+| readme | stale text absent: 234 checks | True | True | `README.md` | PASS |
 
-234 claims checked, 0 failed.
+278 claims checked, 0 failed.

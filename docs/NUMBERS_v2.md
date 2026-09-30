@@ -140,11 +140,18 @@ The C-old arm in this comparison is initialised from the **first-release (v1) eg
 Signs are mixed: C-old is better on all-sample geo at both steps, worse on motion geo at both steps, and better or worse
 on the rest depending on the step. Two steps are too few to call a winner. `results/finetune/r90ft600k/SUMMARY.md` and
 `r90scratch600k/SUMMARY.md` hold the full per-step tables. `r120scratch600k/SUMMARY.md` shows scratch R120 stopped at
-200k. `r60scratch600k/SUMMARY.md` has no evaluated step yet.
+200k. Both R90 runs were stopped by the user (C-old at ~36k on 2026-09-28, scratch at ~168k on 2026-09-29), so no
+further matched steps exist; `results/finetune/RUN_STATUS.json` → `r90_c_old_v1_init`, `r90_scratch`. R60 (scratch only,
+stopped ~106.8k) and R30 (TR100k init stopped at 20k, scratch at ~27.9k) have no matched comparison and are not results.
+The per-run `SUMMARY.md` headers say RUNNING because they are supervisor snapshots taken while the runs were live.
 
 ### v2 final pretrain (5090)
 
-`results/finetune/FINAL_TR300K_LAUNCH.json`: run `c8oldv2_finalTR_300k`, launched 2026-09-28 22:51 (`launched`), fresh
-`lerobot/xvla-base` init (`init`), 300k steps with decay 300k and a save every 100k (`schedule`), on dataset tree sha
-50c6ed88… (`dataset.tree_sha256`). The record has no status field. That the run is still going was reported by the
-author and cannot be checked from repository files. No v2-pretrain fine-tuning result exists yet.
+| quantity | value | source |
+|---|---|---|
+| run, launch, init | `c8oldv2_finalTR_300k`, 2026-09-28 22:51, fresh `lerobot/xvla-base` | `results/finetune/FINAL_TR300K_LAUNCH.json` → `run`, `launched`, `init` |
+| planned schedule | 300k steps, decay 300k, save every 100k | same file → `schedule` |
+| dataset | tree sha 50c6ed88… (996 segments) | same file → `dataset.tree_sha256` |
+| stopped | at 211.7k by the user, 2026-09-29 10:49; 300k never produced | `results/finetune/C_OLD_TR_HANDOFF.json` → `not_used` |
+| checkpoints kept | 100k = primary init for later fine-tuning, 200k = pretrain-length ablation | same file → `primary_init`, `secondary_ablation` |
+| fine-tuning results from these checkpoints | none reported | `results/finetune/RUN_STATUS.json` → `ego_pretrain_v2_final_TR.fine_tuning_results_reported` |

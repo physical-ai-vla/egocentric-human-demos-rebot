@@ -74,8 +74,9 @@ The first release used a single-anchor retarget ("v1"). Every segment started fr
 most segments at the workspace gate and collapsed the pseudo-joint starts onto one posture. v2 changes the retargeting
 and adds a second, robot-like collection. Nothing in the first-release dataset was modified.
 
-**Status: offline only.** The v2 ego pretrain (996 segments) is running; no results yet. The fine-tuning comparison
-below uses the **v1** ego pretrain.
+**Status: offline only.** The v2 ego pretrain on the 996-segment dataset was stopped by us at 211.7k of 300k planned
+steps; the 100k (primary) and 200k checkpoints are kept (`results/finetune/C_OLD_TR_HANDOFF.json`). No robot
+fine-tuning result from them is reported. The fine-tuning comparison below uses the **v1** ego pretrain.
 
 ### Retarget v2 under an R30-only contract
 
@@ -113,7 +114,8 @@ first release.
   TR feasibility did not change (0.59 vs 0.592). The live metric does not track feasibility: Spearman ρ −0.10 old259,
   −0.17 HRL80, −0.11 pooled. The pre-registered reading that fits is "live up, offline flat". The workspace remains the
   main failure. The two groups differ in session and scene as well as protocol, so any difference is only associated
-  with the protocol, not shown to be caused by it.
+  with the protocol, not shown to be caused by it. We read this as a negative, diagnostic result: collection style is
+  not what limits retarget yield.
 
 Code: `collection/handumi_collector/robotlike/`, `collection/scripts/robotlike_*`, `collection/configs/handumi/robot_like_v1.yaml`,
 `collection/docs/ROBOT_LIKE_PROTOCOL.md`. Results: `results/hrl80/`.
@@ -144,8 +146,9 @@ same recipe) by a small margin on most metrics:
 - Episodes 66/77, motion geo: C-old is worse (+4.2 %).
 - **All 10 evaluation episodes are in the R150 fine-tuning data of both arms.** This comparison measures fit to seen
   episodes, not generalisation.
-- R90 was compared at only 2 matched steps (10k, 20k). Signs are mixed: C-old is better on all-sample geo and worse
-  on motion geo. There is no conclusion.
+- R90 was stopped early and compared at only 2 matched steps (10k, 20k). Signs are mixed: C-old is better on all-sample
+  geo (−33 %, −11 %) and worse on motion geo (+2 %, +13 %). There is no conclusion. R60 (scratch arm only) and R30
+  (≤ 20k steps) were also stopped; `results/finetune/RUN_STATUS.json` lists every run's final state. None is running.
 
 Records: `results/finetune/`. The v2 pretrain launch record is `results/finetune/FINAL_TR300K_LAUNCH.json`.
 
@@ -157,7 +160,7 @@ Records: `results/finetune/`. The v2 pretrain launch record is `results/finetune
 | `pipeline/dataset_v2/` | TR / hybrid / HRL80 LeRobot builders, final append, validators, append-invariant checker, env-driven `write_stage.py` |
 | `collection/…/robotlike/`, `collection/scripts/`, `collection/tests/`, `collection/docs/` | robot-like protocol monitor, offline check and group comparison, tests, protocol doc |
 | `results/retarget_v2/`, `results/hrl80/`, `results/dataset_v2/`, `results/finetune/` | comparison JSONs, frozen master manifests, HRL80 census and prereg report, dataset manifests and gates, fine-tuning evals and summaries |
-| `docs/NUMBERS_v2.md`, `docs/SOURCES_v2.md` | every v2 number with its file and key; source mapping |
+| `docs/NUMBERS_v2.md`, `docs/SOURCES_v2.md`, `docs/FINAL_CLAIMS.md` | every v2 number with its file and key; source mapping; headline claim table with evidence and status |
 
 ## Repository map
 
@@ -175,14 +178,23 @@ Records: `results/finetune/`. The v2 pretrain launch record is `results/finetune
 | `evaluation/` | Offline checkpoint evaluator (`c8old_mac_eval.py`), frame cache and checkpoint selection |
 | `results/` | `episode_manifest.csv` (349 episodes: session, order, time, domain, funnel outcome, split), `model_config/` (X-VLA `config.json`, `train_config.json`), `pose_benchmark/`, census/funnel JSONs, domain manifest, quarantine list, gripper census, split index, run provenance/summary, per-checkpoint eval JSONs (`eval/`, `eval_gated/`) and `selection.json` |
 | `sample_data/` | 3 episodes (see below) |
-| `analysis/` | `verify_claims.py` recomputes every number in the report from the files in this repo (234 checks; table in `analysis/out/claim_audit.md`). Post-hoc analyses of the final checkpoint: `prompt_swap.py` (6 order instructions, same noise seed, + 2 extra seeds), `summarize_prompt_swap.py`, `per_order_breakdown.py`; summaries in `analysis/out/*.json` |
+| `analysis/` | `verify_claims.py` recomputes every number in the report and this README from the files in this repo (see `analysis/out/claim_audit.md` for the count; table in `analysis/out/claim_audit.md`). Post-hoc analyses of the final checkpoint: `prompt_swap.py` (6 order instructions, same noise seed, + 2 extra seeds), `summarize_prompt_swap.py`, `per_order_breakdown.py`; summaries in `analysis/out/*.json` |
 | `report/` | Technical report (PDF + LaTeX) and figure script |
 
 ## Verifying the numbers
 
 ```bash
 python3 analysis/verify_claims.py --md analysis/out/claim_audit.md   # needs pyyaml; exits 1 on any mismatch
+python3 analysis/paired_bootstrap_r150.py                            # R150 250k episode-level bootstrap
+python3 report/figures/make_figures.py && tectonic report/report.tex    # rebuild figures and the PDF
 ```
+
+## What this repository does not show
+
+- No closed-loop robot success for any egocentric-pretrained policy.
+- No generalization to unseen cube layouts (layouts were not recorded) or to unseen stacking orders (all six are in training).
+- No benefit on disjoint robot test data: the 10 % R150 gain is measured on episodes inside both fine-tuning sets.
+- No transfer to other operators or scenes (one operator, one scene).
 
 ## Not included
 
