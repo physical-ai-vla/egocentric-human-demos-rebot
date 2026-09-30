@@ -230,7 +230,7 @@
 | text | retired value absent: five early | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 6.1 and 5.6 | True | True | `report/report.tex` | PASS |
 | text | retired value absent: 128\textdegree | True | True | `report/report.tex` | PASS |
-| text | private repo URL absent | True | True | `report/report.tex` | PASS |
+| text | public repo URL present | True | True | `report/report.tex` | PASS |
 | text | value present: 211.7k | True | True | `report/report.tex` | PASS |
 | text | value present: $-33\%$ | True | True | `report/report.tex` | PASS |
 | text | value present: $+13\%$ | True | True | `report/report.tex` | PASS |

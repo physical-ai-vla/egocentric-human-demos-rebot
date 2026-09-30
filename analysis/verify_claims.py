@@ -275,7 +275,7 @@ check("pretrain_v2", "launch schedule steps", 300000, J("results/finetune/FINAL_
 tex = open(R / "report/report.tex").read()
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
     check("text", f"retired value absent: {bad}", "True", str(bad not in tex), "report/report.tex")
-check("text", "private repo URL absent", "True", str("github.com/physical-ai-vla" not in tex), "report/report.tex")
+check("text", "public repo URL present", "True", str("github.com/physical-ai-vla/egocentric-human-demos-rebot" in tex), "report/report.tex")
 for need in ("211.7k", "$-33\\%$", "$+13\\%$", "36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
     check("text", f"value present: {need}", "True", str(need in tex), "report/report.tex")
 
