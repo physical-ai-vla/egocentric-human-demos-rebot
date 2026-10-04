@@ -1,0 +1,3417 @@
+{
+ "schema": "ego_cart20_v2/v1",
+ "created": "2026-10-01 16:55:37",
+ "raw_root": "${HOME}/c8/ego_cart20_v2_raw",
+ "contract": {
+  "cartesian_action_name": "CART20",
+  "cartesian_action_dim": 20,
+  "model_action_dim": 32,
+  "action_horizon": 16,
+  "state_dim": 20,
+  "auxiliary_action_dim": 12,
+  "auxiliary_action_mode": "zero",
+  "row_fps": 15.0,
+  "target_dt_s": 0.05005005005005005,
+  "horizon_span_s": 0.8008008008008008,
+  "action_contract": "current_anchor_relative: A_k = inv(T(t)) @ T(t + k*UMI_DT), k = 1..16, raw-trajectory interpolation",
+  "action_layout": "[L xyz3 rot6d6 g | R xyz3 rot6d6 g | AUX12 = 0]",
+  "state_contract": "relcart20_task_anchor: per arm inv(T(t_task_start)) @ T(t); layout [L pose9 | R pose9 | gL | gR]",
+  "state_prevrel_contract": "diagnostic only: per arm inv(T(t)) @ T(t - UMI_DT); layout [L pose9 g | R pose9 g]",
+  "arm_order": [
+   "left",
+   "right"
+  ],
+  "rotation_representation": "rot6d, first two ROWS of R (umi pose_util.mat_to_rot6d)",
+  "gripper_representation": "continuous aperture, 0 = closed, 1 = open (caliper mm / 80 mm)",
+  "pseudo_robot_q": false,
+  "sequential_delta": false,
+  "tail_padding": false
+ },
+ "config": {
+  "row_fps": 15.0,
+  "target_dt_s": 0.05005005005005005,
+  "horizon": 16,
+  "max_raw_gap_s": 0.05,
+  "image_tol_s": 0.02,
+  "required_cameras": [
+   "head"
+  ],
+  "gripper_convention": "0_closed_1_open",
+  "rot6d_convention": "first_two_rows",
+  "aux_mode": "zero",
+  "stage_weights": [
+   1.0,
+   1.0,
+   1.0,
+   2.0
+  ]
+ },
+ "split": {
+  "rule": "frozen: val = C-old v1 26 (c8old_rows/index.json) + HRL80 round-block ep49-54; test empty",
+  "hrl80_split_sha256": "addd2893589750bbf6ab2d814052369f6f868ab84975be67638521822a336547"
+ },
+ "counts": {
+  "train": {
+   "episodes": 298,
+   "train_rows": 51612,
+   "orders": {
+    "PRB": 48,
+    "PBR": 42,
+    "RBP": 55,
+    "RPB": 53,
+    "BRP": 53,
+    "BPR": 47
+   }
+  },
+  "val": {
+   "episodes": 32,
+   "train_rows": 5671,
+   "orders": {
+    "RBP": 6,
+    "BPR": 4,
+    "RPB": 7,
+    "BRP": 5,
+    "PBR": 6,
+    "PRB": 4
+   }
+  },
+  "test": {
+   "episodes": 0,
+   "train_rows": 0,
+   "orders": {}
+  }
+ },
+ "conversion": [
+  {
+   "episode_id": "20260916_090424_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 106,
+   "rows_valid": 102,
+   "train_rows": 45,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_090424_000006",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 377,
+   "rows_valid": 365,
+   "train_rows": 171,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_090424_000007",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 75,
+   "rows_valid": 73,
+   "train_rows": 36,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_090424_000008",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 126,
+   "rows_valid": 121,
+   "train_rows": 50,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_090424_000009",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 189,
+   "rows_valid": 181,
+   "train_rows": 77,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_090424_000010",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 203,
+   "rows_valid": 195,
+   "train_rows": 94,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_105608_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 301,
+   "rows_valid": 289,
+   "train_rows": 133,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_105608_000003",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 325,
+   "rows_valid": 278,
+   "train_rows": 122,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_105608_000004",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 328,
+   "rows_valid": 315,
+   "train_rows": 154,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_112115_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 315,
+   "rows_valid": 302,
+   "train_rows": 142,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_112115_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 291,
+   "rows_valid": 225,
+   "train_rows": 106,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_112115_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 343,
+   "rows_valid": 260,
+   "train_rows": 119,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_112115_000004",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 418,
+   "rows_valid": 394,
+   "train_rows": 184,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_112115_000005",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 340,
+   "rows_valid": 239,
+   "train_rows": 91,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_121003_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 194,
+   "rows_valid": 186,
+   "train_rows": 79,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_121003_000003",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 195,
+   "rows_valid": 187,
+   "train_rows": 90,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_121832_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 239,
+   "rows_valid": 229,
+   "train_rows": 108,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_121832_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 240,
+   "rows_valid": 230,
+   "train_rows": 101,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_122225_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 104,
+   "rows_valid": 100,
+   "train_rows": 51,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_122225_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 232,
+   "rows_valid": 223,
+   "train_rows": 124,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_122225_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 234,
+   "rows_valid": 224,
+   "train_rows": 113,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_122225_000004",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 269,
+   "rows_valid": 259,
+   "train_rows": 145,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 269,
+   "train_rows": 125,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 298,
+   "train_rows": 132,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 158,
+   "train_rows": 66,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000004",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 195,
+   "train_rows": 96,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000005",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 106,
+   "rows_valid": 104,
+   "train_rows": 49,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000006",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 295,
+   "rows_valid": 260,
+   "train_rows": 112,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000007",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 217,
+   "train_rows": 88,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000008",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 321,
+   "train_rows": 151,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000009",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 152,
+   "rows_valid": 146,
+   "train_rows": 64,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000010",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 155,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000012",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 260,
+   "rows_valid": 137,
+   "train_rows": 61,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000013",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 335,
+   "rows_valid": 322,
+   "train_rows": 178,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000014",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 232,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000015",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 320,
+   "train_rows": 219,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_125236_000016",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 275,
+   "train_rows": 153,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 99,
+   "rows_valid": 95,
+   "train_rows": 34,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 117,
+   "rows_valid": 112,
+   "train_rows": 49,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000004",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 152,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000006",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 160,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000007",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 299,
+   "train_rows": 127,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000008",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 176,
+   "rows_valid": 169,
+   "train_rows": 73,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000009",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 212,
+   "rows_valid": 203,
+   "train_rows": 95,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000010",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 158,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000011",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 272,
+   "train_rows": 114,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000012",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 307,
+   "train_rows": 152,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000013",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 307,
+   "train_rows": 142,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000014",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 153,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000015",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 160,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000016",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 305,
+   "train_rows": 126,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000017",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 134,
+   "rows_valid": 128,
+   "train_rows": 53,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_140419_000018",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 162,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_142318_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 224,
+   "train_rows": 121,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_142318_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 156,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_142318_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 178,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_142318_000004",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 167,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 199,
+   "rows_valid": 191,
+   "train_rows": 103,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 295,
+   "train_rows": 162,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 175,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000006",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 60,
+   "rows_valid": 58,
+   "train_rows": 25,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000007",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 298,
+   "train_rows": 155,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000008",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 319,
+   "train_rows": 171,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000009",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 330,
+   "train_rows": 169,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000010",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 180,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000011",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 275,
+   "rows_valid": 263,
+   "train_rows": 140,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000012",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 264,
+   "train_rows": 136,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000013",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 296,
+   "train_rows": 158,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000014",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 330,
+   "train_rows": 164,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000015",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 174,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000016",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 343,
+   "rows_valid": 332,
+   "train_rows": 160,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000017",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 332,
+   "train_rows": 164,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000018",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 319,
+   "train_rows": 152,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000019",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 283,
+   "train_rows": 122,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000020",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 289,
+   "train_rows": 141,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000024",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 292,
+   "train_rows": 135,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000025",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 227,
+   "train_rows": 110,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000026",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 284,
+   "train_rows": 121,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000027",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 265,
+   "train_rows": 106,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000028",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 237,
+   "rows_valid": 157,
+   "train_rows": 63,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000029",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 162,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000030",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 148,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000034",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 275,
+   "train_rows": 128,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000035",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 329,
+   "train_rows": 150,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000036",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 286,
+   "train_rows": 127,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000039",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 147,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000040",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 288,
+   "train_rows": 131,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000041",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 275,
+   "train_rows": 119,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000042",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 290,
+   "train_rows": 131,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000043",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 273,
+   "train_rows": 125,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260916_170333_000044",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 249,
+   "rows_valid": 239,
+   "train_rows": 107,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 333,
+   "train_rows": 187,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 222,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000005",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 171,
+   "rows_valid": 165,
+   "train_rows": 106,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000006",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 100,
+   "rows_valid": 96,
+   "train_rows": 65,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000007",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 230,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000008",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 214,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000011",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 225,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000012",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 224,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000013",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 287,
+   "rows_valid": 249,
+   "train_rows": 149,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000014",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 164,
+   "rows_valid": 158,
+   "train_rows": 103,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000015",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 282,
+   "train_rows": 181,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000016",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 223,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000017",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 290,
+   "rows_valid": 279,
+   "train_rows": 196,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000021",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 223,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000022",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 156,
+   "rows_valid": 151,
+   "train_rows": 103,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000023",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 303,
+   "rows_valid": 291,
+   "train_rows": 197,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000024",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 294,
+   "train_rows": 192,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000025",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 206,
+   "rows_valid": 198,
+   "train_rows": 137,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000026",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 287,
+   "train_rows": 191,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000030",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 171,
+   "rows_valid": 165,
+   "train_rows": 112,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000031",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 332,
+   "train_rows": 233,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000032",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 332,
+   "train_rows": 242,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000033",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 266,
+   "train_rows": 172,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000034",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 323,
+   "train_rows": 221,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000035",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 235,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000037",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 106,
+   "train_rows": 69,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000038",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 334,
+   "train_rows": 250,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000039",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 337,
+   "train_rows": 241,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000040",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 119,
+   "train_rows": 71,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000041",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 300,
+   "train_rows": 203,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000042",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 335,
+   "train_rows": 247,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000043",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 307,
+   "train_rows": 223,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000044",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 324,
+   "train_rows": 222,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000045",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 335,
+   "train_rows": 239,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000047",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 337,
+   "train_rows": 252,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000048",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 338,
+   "train_rows": 244,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000050",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 232,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000051",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 315,
+   "rows_valid": 130,
+   "train_rows": 89,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000052",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 244,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000053",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 227,
+   "rows_valid": 215,
+   "train_rows": 130,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000056",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 267,
+   "rows_valid": 242,
+   "train_rows": 142,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000057",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 239,
+   "rows_valid": 179,
+   "train_rows": 117,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000058",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 211,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000059",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 266,
+   "train_rows": 159,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000060",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 209,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000061",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 220,
+   "rows_valid": 185,
+   "train_rows": 106,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000062",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 333,
+   "train_rows": 220,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000066",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 200,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000067",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 254,
+   "rows_valid": 220,
+   "train_rows": 130,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000068",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 297,
+   "train_rows": 173,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000069",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 200,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000070",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 292,
+   "train_rows": 175,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000071",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 343,
+   "rows_valid": 329,
+   "train_rows": 205,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000072",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 208,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000073",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 332,
+   "train_rows": 205,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000076",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 138,
+   "rows_valid": 131,
+   "train_rows": 73,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_100511_000077",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 198,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 84,
+   "rows_valid": 81,
+   "train_rows": 44,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 136,
+   "train_rows": 59,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 169,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000007",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 298,
+   "train_rows": 133,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000008",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 163,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000009",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 161,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000010",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 153,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000011",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 318,
+   "train_rows": 148,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000012",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 203,
+   "rows_valid": 166,
+   "train_rows": 75,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000013",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 299,
+   "train_rows": 140,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000016",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 160,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000017",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 267,
+   "train_rows": 121,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000018",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 332,
+   "train_rows": 168,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000019",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 254,
+   "train_rows": 128,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000021",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 325,
+   "train_rows": 183,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000022",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 332,
+   "train_rows": 198,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000023",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 186,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000024",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 188,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000029",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 329,
+   "train_rows": 173,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000030",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 187,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000031",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 190,
+   "rows_valid": 182,
+   "train_rows": 95,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000032",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 332,
+   "train_rows": 202,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000033",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 200,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000036",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 302,
+   "train_rows": 175,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000037",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 204,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_135136_000038",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 290,
+   "rows_valid": 279,
+   "train_rows": 173,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 343,
+   "rows_valid": 329,
+   "train_rows": 171,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 166,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 304,
+   "train_rows": 154,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000004",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 298,
+   "train_rows": 139,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000005",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 172,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000006",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 293,
+   "train_rows": 138,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000007",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 301,
+   "train_rows": 140,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000008",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 264,
+   "train_rows": 123,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000009",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 161,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000010",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 319,
+   "train_rows": 134,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000011",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 332,
+   "train_rows": 167,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000012",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 306,
+   "train_rows": 152,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000013",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 172,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000014",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 160,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000015",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 329,
+   "train_rows": 178,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000016",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 107,
+   "rows_valid": 104,
+   "train_rows": 46,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000017",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 307,
+   "train_rows": 145,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000018",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 59,
+   "rows_valid": 56,
+   "train_rows": 26,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000019",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 303,
+   "train_rows": 137,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000020",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 160,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000021",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 332,
+   "train_rows": 173,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000022",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 262,
+   "rows_valid": 252,
+   "train_rows": 125,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000023",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 168,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000024",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 281,
+   "rows_valid": 270,
+   "train_rows": 146,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000025",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 165,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000026",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 204,
+   "train_rows": 80,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000027",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 301,
+   "train_rows": 156,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000028",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 168,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000029",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 164,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000030",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 315,
+   "train_rows": 166,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000031",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 343,
+   "rows_valid": 129,
+   "train_rows": 71,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000032",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 189,
+   "rows_valid": 181,
+   "train_rows": 83,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000033",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 166,
+   "rows_valid": 158,
+   "train_rows": 76,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000034",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 173,
+   "rows_valid": 167,
+   "train_rows": 89,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000035",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 307,
+   "train_rows": 151,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000036",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 108,
+   "rows_valid": 104,
+   "train_rows": 49,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000037",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 176,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000038",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 190,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000039",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 291,
+   "train_rows": 151,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000040",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 185,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000043",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 110,
+   "train_rows": 49,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000044",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 173,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000045",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 246,
+   "train_rows": 129,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000046",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 192,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000047",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 152,
+   "rows_valid": 146,
+   "train_rows": 73,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000048",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 278,
+   "train_rows": 134,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000049",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 162,
+   "rows_valid": 132,
+   "train_rows": 69,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000050",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 331,
+   "train_rows": 187,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000055",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 317,
+   "train_rows": 196,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000056",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 299,
+   "train_rows": 192,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000057",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 244,
+   "train_rows": 148,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000058",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 213,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000059",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 220,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000060",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 189,
+   "train_rows": 118,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000061",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 244,
+   "train_rows": 147,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000065",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 234,
+   "rows_valid": 224,
+   "train_rows": 135,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000066",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 145,
+   "rows_valid": 141,
+   "train_rows": 94,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000067",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 220,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000068",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 212,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000069",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 138,
+   "rows_valid": 131,
+   "train_rows": 84,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000070",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 226,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000071",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 223,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000073",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 282,
+   "train_rows": 192,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000074",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 267,
+   "train_rows": 184,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000075",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 338,
+   "train_rows": 246,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000076",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 336,
+   "train_rows": 252,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000077",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 337,
+   "train_rows": 238,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000079",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 86,
+   "rows_valid": 82,
+   "train_rows": 55,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000080",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 221,
+   "train_rows": 141,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000081",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 334,
+   "train_rows": 238,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000083",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 326,
+   "train_rows": 242,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000087",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 226,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000088",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 319,
+   "train_rows": 217,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000089",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 303,
+   "train_rows": 205,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000090",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 226,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000091",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 171,
+   "rows_valid": 162,
+   "train_rows": 95,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000092",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 236,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000093",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 300,
+   "train_rows": 194,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000094",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 226,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000097",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 220,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000098",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 104,
+   "rows_valid": 99,
+   "train_rows": 70,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000100",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 188,
+   "train_rows": 110,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000101",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 226,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000102",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 233,
+   "rows_valid": 227,
+   "train_rows": 159,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000103",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 219,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000104",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 331,
+   "train_rows": 218,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000109",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 227,
+   "train_rows": 153,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000110",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 213,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000111",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 223,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000112",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 291,
+   "train_rows": 189,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000113",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 218,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000114",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 332,
+   "train_rows": 226,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000115",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 308,
+   "train_rows": 166,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000117",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 219,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000118",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 330,
+   "train_rows": 212,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000120",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 140,
+   "rows_valid": 135,
+   "train_rows": 73,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000121",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 344,
+   "rows_valid": 310,
+   "train_rows": 170,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000122",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 275,
+   "rows_valid": 238,
+   "train_rows": 121,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260917_150545_000123",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 313,
+   "train_rows": 170,
+   "era": "old259_contract"
+  },
+  {
+   "episode_id": "20260928_101010_000001",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 240,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000002",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 404,
+   "train_rows": 186,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000003",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 496,
+   "rows_valid": 474,
+   "train_rows": 246,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000004",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 447,
+   "train_rows": 228,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000005",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 473,
+   "train_rows": 244,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000006",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 493,
+   "rows_valid": 381,
+   "train_rows": 210,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000007",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 475,
+   "train_rows": 272,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000008",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 268,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000009",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 266,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000010",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 446,
+   "train_rows": 246,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000011",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 480,
+   "train_rows": 281,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000012",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 476,
+   "train_rows": 271,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000013",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 493,
+   "rows_valid": 164,
+   "train_rows": 90,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000014",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 398,
+   "rows_valid": 382,
+   "train_rows": 207,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000015",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 475,
+   "train_rows": 279,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000016",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 475,
+   "train_rows": 266,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000017",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 267,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000018",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 268,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000019",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 475,
+   "train_rows": 283,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000020",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 474,
+   "train_rows": 262,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000022",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 475,
+   "train_rows": 274,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000023",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 433,
+   "train_rows": 248,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000024",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 475,
+   "train_rows": 278,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000025",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 473,
+   "train_rows": 268,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000026",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 468,
+   "train_rows": 271,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000027",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 476,
+   "train_rows": 295,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000028",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 476,
+   "rows_valid": 416,
+   "train_rows": 238,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000030",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 474,
+   "train_rows": 278,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000031",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 472,
+   "train_rows": 264,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000032",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 345,
+   "rows_valid": 278,
+   "train_rows": 153,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000033",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 473,
+   "train_rows": 279,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000034",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 475,
+   "train_rows": 294,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000035",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 458,
+   "train_rows": 277,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000036",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 392,
+   "train_rows": 235,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000037",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 475,
+   "train_rows": 302,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000038",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 479,
+   "train_rows": 282,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000039",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 292,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000040",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 475,
+   "train_rows": 306,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000041",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 478,
+   "train_rows": 295,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000042",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 473,
+   "train_rows": 282,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000043",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 479,
+   "train_rows": 306,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000044",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 476,
+   "train_rows": 299,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000045",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 294,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000046",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 444,
+   "train_rows": 284,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000047",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 475,
+   "train_rows": 297,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000049",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 301,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000050",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 464,
+   "train_rows": 304,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000051",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 304,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000052",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 435,
+   "train_rows": 272,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000053",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 479,
+   "train_rows": 321,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000054",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 474,
+   "train_rows": 307,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000055",
+   "status": "ok",
+   "stack_order": "RBP",
+   "instruction": "Stack the red cube on the bottom, blue cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 473,
+   "train_rows": 308,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000056",
+   "status": "ok",
+   "stack_order": "RPB",
+   "instruction": "Stack the red cube on the bottom, purple cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 494,
+   "rows_valid": 476,
+   "train_rows": 322,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000057",
+   "status": "ok",
+   "stack_order": "BRP",
+   "instruction": "Stack the blue cube on the bottom, red cube in the middle, and purple cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 475,
+   "train_rows": 310,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000058",
+   "status": "ok",
+   "stack_order": "BPR",
+   "instruction": "Stack the blue cube on the bottom, purple cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 469,
+   "train_rows": 291,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000059",
+   "status": "ok",
+   "stack_order": "PRB",
+   "instruction": "Stack the purple cube on the bottom, red cube in the middle, and blue cube on the top, on the plate.",
+   "frames_rows": 495,
+   "rows_valid": 475,
+   "train_rows": 313,
+   "era": "HRL80_v014"
+  },
+  {
+   "episode_id": "20260928_101010_000060",
+   "status": "ok",
+   "stack_order": "PBR",
+   "instruction": "Stack the purple cube on the bottom, blue cube in the middle, and red cube on the top, on the plate.",
+   "frames_rows": 488,
+   "rows_valid": 470,
+   "train_rows": 299,
+   "era": "HRL80_v014"
+  }
+ ],
+ "code_sha256": {
+  "__init__.py": "e3b0c44298fc1c14",
+  "config.py": "22b48d4597ef9044",
+  "convert.py": "190c198340aebdd8",
+  "dataset/__init__.py": "e3b0c44298fc1c14",
+  "dataset/splits.py": "1d3d7cb19c3b7942",
+  "geometry/__init__.py": "e3b0c44298fc1c14",
+  "geometry/canonical_frame.py": "82ba079818e4dc0b",
+  "geometry/rotation6d.py": "beea99916fd169e5",
+  "geometry/transforms.py": "92af316189bd250a",
+  "io/__init__.py": "e3b0c44298fc1c14",
+  "io/processed_writer.py": "2d9e3261fc5e27e7",
+  "io/raw_episode_loader.py": "890aadc35dfae624",
+  "labels/__init__.py": "e3b0c44298fc1c14",
+  "labels/build_cart20.py": "987ec5ab823ea341",
+  "labels/build_state20.py": "2cb70a39ac40e557",
+  "labels/pack_action32.py": "d6eb4950a0bea3fa",
+  "labels/stage.py": "02265724950c8161",
+  "preprocessing/__init__.py": "e3b0c44298fc1c14",
+  "preprocessing/gripper.py": "121bc35b322728d5",
+  "preprocessing/pose_filter.py": "f224b104d56c6b72",
+  "preprocessing/resample.py": "5a2dbceb3f8a3914",
+  "preprocessing/synchronize.py": "9f5027af01c5407c",
+  "scripts/__init__.py": "e3b0c44298fc1c14",
+  "scripts/convert_dataset.py": "1fe3b62464d7af19",
+  "scripts/export_lerobot.py": "a3919fb977c4125e",
+  "sources/__init__.py": "e3b0c44298fc1c14",
+  "sources/handumi_export.py": "713aa171bc1978c1",
+  "validation/__init__.py": "e3b0c44298fc1c14",
+  "validation/parity_gcal1.py": "ff9d4823f31e6c78"
+ }
+}

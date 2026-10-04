@@ -1,0 +1,9 @@
+batch domain_id from processor: [6, 6, 6, 6]
+slot  0: mean loss 1.1121 median 0.9041
+slot  6: mean loss 1.1186 median 0.8935
+slot 10: mean loss 2.3536 median 2.1537
+slot 11: mean loss 22.8008 median 22.7410
+slot 15: mean loss 1.6113 median 1.3690
+slot 16: mean loss 2.6528 median 2.5224
+slot 17: mean loss 4.0692 median 4.0867
+BEST 0

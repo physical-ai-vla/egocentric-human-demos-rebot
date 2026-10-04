@@ -1,0 +1,8 @@
+# Offline real-time-chunking smoke test on ONE live observation pair (co-train 70k checkpoint), anchor shifted to k4. n = 1: not a statistic. Script not published (depends on the private inference client).
+# Provenance: stdout captured verbatim in the experiment session log at 2026-10-03T09:20:09.425Z (UTC); the run wrote no output file. Not re-run for this release.
+
+RTC {"on": false, "ms": 212, "gap_mm_first4": [2.8, 5.4, 7.9, 11.1], "gap_mm_mean_overlap": 27.5}
+RTC {"on": true, "ms": 439, "gap_mm_first4": [1.2, 1.5, 1.7, 2.0], "gap_mm_mean_overlap": 5.2}
+RTC {"on": true, "ms": 387, "gap_mm_first4": [1.2, 1.5, 1.7, 2.0], "gap_mm_mean_overlap": 5.2}
+RTC {"on": true, "ms": 389, "gap_mm_first4": [1.2, 1.5, 1.7, 2.0], "gap_mm_mean_overlap": 5.2}
+RTC {"on": false, "ms": 212, "gap_mm_first4": [2.8, 5.4, 7.9, 11.1], "gap_mm_mean_overlap": 27.5}

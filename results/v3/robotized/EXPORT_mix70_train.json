@@ -1,0 +1,57 @@
+{
+ "schema": "ego_cart20_v2_lerobot/v1",
+ "processed": "${HOME}/c8/ego_cart20_v2b",
+ "split": "train",
+ "report": {
+  "episodes": 297,
+  "rows": 48411,
+  "action_std_0_20": [
+   0.02723,
+   0.01638,
+   0.02572,
+   0.0551,
+   0.06142,
+   0.16346,
+   0.06771,
+   0.02506,
+   0.09395,
+   0.29611,
+   0.02661,
+   0.02185,
+   0.02639,
+   0.07729,
+   0.0643,
+   0.17995,
+   0.06651,
+   0.02776,
+   0.09165,
+   0.29682
+  ]
+ },
+ "processed_metadata_sha256": "5195cbb8036c58de6e962a071da42c85500e5289bb09f8167530daee91483ba5",
+ "exporter_sha256": "139d6aa1c00918fc60596a40881d52d3d10df51276c7ac200216e7d9387d07ea",
+ "agg_patch_sha256": "5f86f70c4fb5edf691f61ef95a9352aedea5397988127ff0b2bf6c7fd9583384",
+ "recipe": "umi_bridge/RELCART20_RELONLY_D6_RECIPE.md",
+ "state": "RELCART20 task anchor",
+ "aux12": "zero",
+ "aux_q_t": "NaN placeholder",
+ "wrist_robotize": {
+  "p": 0.7,
+  "model": "KB8 fisheye -> pinhole R=I",
+  "hfov_deg": [
+   62,
+   70
+  ],
+  "cy_shift_px": [
+   75,
+   125
+  ],
+  "cx_jitter_px": 15,
+  "render": [
+   640,
+   480
+  ],
+  "degrade": "320x240 INTER_AREA, blur U(0.4,1.0), JPEG U(55,85), contrast U(.85,1.15), bright U(-15,15)",
+  "calib": "ego_collector/configs/calibration/fisheye_{side}_v002.yaml"
+ }
+}

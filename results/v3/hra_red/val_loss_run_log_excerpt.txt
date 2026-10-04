@@ -1,0 +1,9 @@
+# HRA_red held-out val loss (masked REL loss, same as training) on Mac MPS, bf16; analysis/v3/hra_val_loss.py. 030000 evaluation was interrupted after val seed 0.
+[data] val 2011 frames / 15 eps; train subset 2000 of 20319 (rng 12345)
+[015000] loaded in 16.3s, domain [20], dtype bf16
+[015000] val seed 0: {'mean_batch_loss': 0.1494707915569759, 'sample_weighted': 0.1498133790161051, 'n_batches': 252, 'n_samples': 2011, 'supervised_frac': 0.45000001788139343} (338s)
+[015000] val seed 1: {'mean_batch_loss': 0.1509774831014626, 'sample_weighted': 0.15132445796688787, 'n_batches': 252, 'n_samples': 2011, 'supervised_frac': 0.45000001788139343} (432s)
+[015000] train-subset seed 0: {'mean_batch_loss': 0.06623646686971188, 'sample_weighted': 0.06623646686971188, 'n_batches': 250, 'n_samples': 2000, 'supervised_frac': 0.45000001788139343} (459s)
+[015000] DONE val_mean 0.1502 train 0.0662 gap +0.0840 runtime 1246s
+[030000] loaded in 20.4s, domain [20], dtype bf16
+[030000] val seed 0: {'mean_batch_loss': 0.19818260641916405, 'sample_weighted': 0.19865027473742083, 'n_batches': 252, 'n_samples': 2011, 'supervised_frac': 0.45000001788139343} (409s)

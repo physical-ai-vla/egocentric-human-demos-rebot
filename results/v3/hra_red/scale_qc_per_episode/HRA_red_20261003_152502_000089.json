@@ -1,0 +1,14 @@
+{
+ "episode": "HRA_red_20261003_152502_000089",
+ "s_imu": -0.06589176532400896,
+ "imu_scale_valid": false,
+ "n_candidate_frames": 0,
+ "n_valid_pnp": 0,
+ "cube_edge_m": 0.038,
+ "reproj_px_p50": null,
+ "reject_counts": {},
+ "valid": false,
+ "reason": "only 0 valid PnP frames (< 10)",
+ "r_pnp_over_imu": null,
+ "frames": []
+}

@@ -1,0 +1,24 @@
+# Teacher-forced direction test, 120 R312c HEAD180 frames (rng 0), bf16, 5 denoise steps, same flow-noise seed per frame.
+# Median cosine between predicted and ground-truth translation (current-TCP frame) at k4/k8/k16, frames whose GT moves > 10 mm.
+# Checkpoints: scratch R312c 40k (A60 @40k; these frames are in its TRAINING set) and ego-only pretrain 40k (never saw robot data).
+# Script: analysis/v3/dir_cos.py.
+# Provenance: stdout captured verbatim in the experiment session log at 2026-10-02T06:09:41.152Z (UTC); the run wrote no output file. Not re-run for this release.
+
+## R312C-RELCART20-RELONLY-D20-B8-150K_40k_pinklockwy
+   Lk4 cos med +0.80 mean +0.60 neg 15% (n 40)
+   Lk8 cos med +0.81 mean +0.60 neg 17% (n 53)
+   Lk16 cos med +0.83 mean +0.61 neg 14% (n 65)
+   L k8 z-sign agree 57%
+   Rk4 cos med +0.73 mean +0.55 neg 14% (n 28)
+   Rk8 cos med +0.77 mean +0.55 neg 16% (n 37)
+   Rk16 cos med +0.79 mean +0.58 neg 13% (n 52)
+   R k8 z-sign agree 55%
+## EGO-CART20V2-RELONLY-D20-B8-50K-V2B_40k_pinklockwy
+   Lk4 cos med +0.02 mean -0.01 neg 50% (n 40)
+   Lk8 cos med -0.05 mean -0.04 neg 53% (n 53)
+   Lk16 cos med -0.11 mean -0.10 neg 57% (n 65)
+   L k8 z-sign agree 42%
+   Rk4 cos med -0.13 mean -0.12 neg 54% (n 28)
+   Rk8 cos med -0.03 mean -0.05 neg 51% (n 37)
+   Rk16 cos med +0.01 mean -0.01 neg 50% (n 52)
+   R k8 z-sign agree 45%

@@ -271,6 +271,151 @@ check("pretrain_v2", "no fine-tuning result from v2 ckpts", "none", rs["ego_pret
 check("pretrain_v2", "planned steps", 300000, rs["ego_pretrain_v2_final_TR"]["planned_steps"], src)
 check("pretrain_v2", "launch schedule steps", 300000, J("results/finetune/FINAL_TR300K_LAUNCH.json")["schedule"]["steps"], "results/finetune/FINAL_TR300K_LAUNCH.json")
 
+# ---------------------------------------------------------------- v3: Cartesian ego dataset
+V = "results/v3/"
+m2, m2b = J(V + "ego_cart20/metadata_v2.json"), J(V + "ego_cart20/metadata_v2b.json"); src = V + "ego_cart20/metadata_v2.json"
+conv = m2["conversion"]
+check("v3_data", "episodes converted", 330, len(conv), src)
+check("v3_data", "original episodes", 273, sum(c["era"] == "old259_contract" for c in conv), src)
+check("v3_data", "HRL80 episodes", 57, sum(c["era"] == "HRL80_v014" for c in conv), src)
+check("v3_data", "refused at export", 3, Counter(x["status"] for x in J(V + "ego_cart20/export_log_v2.json"))["refused"], V + "ego_cart20/export_log_v2.json")
+check("v3_data", "15 Hz rows", 111533, sum(c["frames_rows"] for c in conv), src)
+check("v3_data", "trainable rows", 57283, sum(c["train_rows"] for c in conv), src)
+check("v3_data", "trainable share %", 51.4, 100 * sum(c["train_rows"] for c in conv) / sum(c["frames_rows"] for c in conv), src, tol=0.05)
+check("v3_data", "UMI_DT ms", 50.05, 1e3 * m2["contract"]["target_dt_s"], src, tol=0.005)
+check("v3_data", "v2 train episodes", 298, m2["counts"]["train"]["episodes"], src)
+check("v3_data", "v2 train rows", 51612, m2["counts"]["train"]["train_rows"], src)
+check("v3_data", "val episodes", 32, m2["counts"]["val"]["episodes"], src)
+check("v3_data", "val rows", 5671, m2["counts"]["val"]["train_rows"], src)
+src = V + "ego_cart20/metadata_v2b.json"
+check("v3_data", "v2b train episodes", 297, m2b["counts"]["train"]["episodes"], src)
+check("v3_data", "v2b train rows", 48411, m2b["counts"]["train"]["train_rows"], src)
+check("v3_data", "v2b val rows unchanged", 5671, m2b["counts"]["val"]["train_rows"], src)
+check("v3_data", "v2b train row drop %", -6.20, 100 * (m2b["counts"]["train"]["train_rows"] / m2["counts"]["train"]["train_rows"] - 1), src, tol=0.005)
+man = [json.loads(l) for l in open(R / V / "ego_cart20/manifest_v2b_train.jsonl")]
+ev = [(m["episode_id"], e) for m in man for side in ("left", "right") for e in m.get("jump_events", {}).get(side, [])]
+check("v3_jump", "jump events (train)", 44, len(ev), V + "ego_cart20/manifest_v2b_train.jsonl")
+check("v3_jump", "episodes with jump events", 42, len({e for e, _ in ev}), V + "ego_cart20/manifest_v2b_train.jsonl")
+ig = J(V + "ego_cart20/integrity_v2.json"); check("v3_data", "gripper max observed", 0.847, max(ig["gripper_min_max"]) if isinstance(ig["gripper_min_max"], list) else ig["gripper_min_max"]["max"], V + "ego_cart20/integrity_v2.json", tol=0.0005)
+co = J(V + "state_jump/v2_vs_v2b_continuity.json"); src = V + "state_jump/v2_vs_v2b_continuity.json"
+check("v3_jump", "max adjacent step v2 mm", 422.5, co["v2"]["training_adjacent_rows"]["max_mm"], src, tol=0.05)
+check("v3_jump", "max adjacent step v2b mm", 90.5, co["v2b_C"]["training_adjacent_rows"]["max_mm"], src, tol=0.05)
+check("v3_jump", "steps >100 mm v2", 18, co["v2"]["training_adjacent_rows"]["gt100mm"], src)
+check("v3_jump", "steps >100 mm v2b", 0, co["v2b_C"]["training_adjacent_rows"]["gt100mm"], src)
+check("v3_jump", "raw >3 m/s steps left in valid rows", 7, co["v2b_C"]["raw_steps_gt_3mps_left_in_valid"], src)
+rj = J(V + "state_jump/raw_jump_events.json"); src = V + "state_jump/raw_jump_events.json"
+check("v3_jump", "raw >3 m/s steps (train)", 55, len(rj), src)
+check("v3_jump", "episodes with raw >3 m/s steps", 24, len({r[0] for r in rj}), src)
+check("v3_jump", "raw jumps that return (spikes)", 5, sum(bool(r[-1]) for r in rj), src)
+sd = J(V + "state_jump/raw_jump_stage_dump.json")
+check("v3_jump", "raw steps with a lost/missing flag in the previous 15 samples", 0, sum(d["lost_or_missing_in_prev_15"] > 0 for d in sd), V + "state_jump/raw_jump_stage_dump.json")
+sj = open(R / V / "state_jump/STATE_JUMP_ROOT_CAUSE.md").read()
+check("v3_jump", "apparent jumps that are time gaps", "1,482 out of 2,598 (57%)", re.search(r"(1,482 out of 2,598 \(57%\))", sj).group(1), V + "state_jump/STATE_JUMP_ROOT_CAUSE.md")
+
+# ---------------------------------------------------------------- v3: ego vs robot
+ik = J(V + "ego_vs_robot/kinematic_summary.json")["ik_state_feasibility"]; src = V + "ego_vs_robot/kinematic_summary.json"
+for key, val in (("ego_pos_L", 99.7), ("ego_pos_R", 99.5), ("ego_full_nolock_L", 72.3), ("ego_full_nolock_R", 74.6), ("robot_full_L", 45.2), ("robot_full_R", 52.2)):
+    check("v3_robot", f"IK success {key} %", val, 100 * ik[key]["success"], src, tol=0.05)
+it = open(R / V / "ego_vs_robot/INTERPRETATION.md").read(); src = V + "ego_vs_robot/INTERPRETATION.md"
+row = lambda lab: [c.strip() for c in re.search(r"\| " + re.escape(lab) + r"[^|]*\|([^|]*)\|([^|]*)\|", it).groups()]
+check("v3_robot", "state workspace p95 L ego/robot", "0.221/0.395", "/".join(row("L state workspace p95")), src)
+check("v3_robot", "state workspace p95 R ego/robot", "0.214/0.369", "/".join(row("R state workspace p95")), src)
+check("v3_robot", "k8 translation p95 ego / robot", "93.1 / 99.2|91.0 / 99.9", "|".join(row("k8 translation p95")), src)
+check("v3_robot", "both arms stationary k8 ego/robot", "19.5%/2.4%", "/".join(row("Both arms stationary at k8")), src)
+sh = J(V + "robotized/wrist_sharpness_val.json")["p5_p50_p95"]; src = V + "robotized/wrist_sharpness_val.json"
+for key, val in (("ego_raw_val/left_wrist", 1854), ("ego_raw_val/right_wrist", 1487), ("robot_R312c_sample/left_wrist", 59), ("robot_R312c_sample/right_wrist", 64),
+                 ("robot100_val/left_wrist", 181), ("robot100_val/right_wrist", 132)):
+    check("v3_robot", f"wrist sharpness p50 {key}", val, sh[key][1], src, tol=0.5)
+for d, p in (("robot100", 1.0), ("mix70", 0.7)):
+    for s_ in ("train", "val"):
+        inf = J(V + f"robotized/info_{d}_{s_}.json"); check("v3_robot", f"{d} {s_} frames", 48411 if s_ == "train" else 5671, inf["total_frames"], V + f"robotized/info_{d}_{s_}.json")
+
+# ---------------------------------------------------------------- v3: soft-prompt slots
+fp = J(V + "domain_slots/lineage_comparison.json")["fingerprint"]["orig"]; src = V + "domain_slots/lineage_comparison.json"
+trained = sorted(d["slot"] for d in fp["enc.bias"] if not d["all_zero"])
+check("v3_slots", "trained slots (non-zero enc.bias)", "10-17", f"{trained[0]}-{trained[-1]}" if trained == list(range(trained[0], trained[-1] + 1)) else str(trained), src)
+check("v3_slots", "number of slots", 30, len(fp["enc.bias"]), src)
+pr = {int(a): float(b) for a, b in re.findall(r"slot\s+(\d+): mean loss ([0-9.]+)", open(R / V / "domain_slots/domain_probe_log_excerpt.txt").read())}
+for sl, val in ((0, 1.11), (6, 1.12), (15, 1.61), (10, 2.35), (16, 2.65), (17, 4.07), (11, 22.80)):
+    check("v3_slots", f"init loss slot {sl}", val, pr[sl], V + "domain_slots/domain_probe_log_excerpt.txt", tol=0.005)
+
+# ---------------------------------------------------------------- v3: transfer diagnostics
+dc = open(R / V / "diagnostics/direction_cosine_ego40k_vs_robot40k.txt").read().split("## ")
+k8 = {blk.split("_")[0][:3]: [float(x) for x in re.findall(r"k8 cos med ([+-][0-9.]+)", blk)] for blk in dc[1:]}
+src = V + "diagnostics/direction_cosine_ego40k_vs_robot40k.txt"
+check("v3_transfer", "robot 40k k8 cos L/R", "+0.81/+0.77", "/".join(f"{x:+.2f}" for x in k8["R31"]), src)
+check("v3_transfer", "ego-only 40k k8 cos L/R", "-0.05/-0.03", "/".join(f"{x:+.2f}" for x in k8["EGO"]), src)
+fl = [float(x) for x in re.findall(r"cos L ([+-][0-9.]+)\s+R ([+-][0-9.]+)", open(R / V / "diagnostics/direction_cosine_flip_swap.txt").read()) for x in x]
+check("v3_transfer", "flip/swap variants", 24, len(fl), V + "diagnostics/direction_cosine_flip_swap.txt")
+check("v3_transfer", "flip/swap best cosine", 0.16, max(fl), V + "diagnostics/direction_cosine_flip_swap.txt")
+ab = {re.match(r"(\S+ \w+ img \+ \w+ state)", l).group(1): [float(x) for x in re.findall(r"k\d+ ([+-][0-9.]+)\(", l)] for l in open(R / V / "diagnostics/image_state_ablation_ego40k.txt") if "img +" in l}
+src = V + "diagnostics/image_state_ablation_ego40k.txt"
+egoimg = [x for k, v in ab.items() if "ego img" in k for x in v]; robimg = [x for k, v in ab.items() if "robot img" in k for x in v]
+egonon = [x for k, v in ab.items() if "ego img" in k and "ego state" not in k for x in v]
+check("v3_transfer", "ego img + ego state range", "0.84-0.94", f"{min(ab['1 ego img + ego state']):.2f}-{max(ab['1 ego img + ego state']):.2f}", src)
+check("v3_transfer", "ego img + other state range", "0.66-0.90", f"{min(egonon):.2f}-{max(egonon):.2f}", src)
+check("v3_transfer", "ego img + robot state range", "0.69-0.90", f"{min(ab['3 ego img + robot state']):.2f}-{max(ab['3 ego img + robot state']):.2f}", src)
+check("v3_transfer", "robot img + any state range", "-0.25-0.49", f"{min(robimg):.2f}-{max(robimg):.2f}", src)
+lc = lambda n: {int(r["step"]): float(r["loss"]) for r in csv.DictReader(open(R / V / f"loss_curves/{n}.csv"))}
+A, B = lc("A60_scratch_R312c_150kdecay"), lc("B60_egoinit_R312c_150kdecay"); src = V + "loss_curves/{A60,B60}*.csv"
+check("v3_transfer", "step-200 loss scratch", 0.945, A[200], src); check("v3_transfer", "step-200 loss ego init", 0.244, B[200], src)
+check("v3_transfer", "step-200 ratio", 3.9, A[200] / B[200], src, tol=0.05)
+win = lambda lo, hi: [k for k in sorted(set(A) & set(B)) if lo < k <= hi]
+for (lo, hi), val in (((0, 5000), 0.49), ((5000, 20000), 0.875), ((20000, 40000), 0.95), ((55000, 60000), 0.984)):
+    s_ = win(lo, hi); check("v3_transfer", f"loss ratio B/A {lo // 1000}k-{hi // 1000}k", val, sum(B[k] for k in s_) / sum(A[k] for k in s_), src, tol=0.0015)
+s_ = win(55000, 60000)
+check("v3_transfer", "55-60k means A/B", "0.0745/0.0733", f"{sum(A[k] for k in s_) / len(s_):.4f}/{sum(B[k] for k in s_) / len(s_):.4f}", src)
+check("v3_transfer", "55-60k points B lower", "13 of 24", f"{sum(B[k] < A[k] for k in s_)} of {len(s_)}", src)
+check("v3_transfer", "B60 stop step", 59800, max(B), src)
+last = lambda n: max(lc(n))
+check("v3_runs", "co-train reached step", 88600, last("COTRAIN_R312c_ROBOT100_4p4"), V + "loss_curves/COTRAIN_R312c_ROBOT100_4p4.csv")
+check("v3_runs", "MIX70 reached step", 5000, last("MIX70_pretrain_stopped"), V + "loss_curves/MIX70_pretrain_stopped.csv")
+check("v3_runs", "ROBOT100 pretrain step (snapshot)", 74000, last("ROBOT100_pretrain_300k_running"), V + "loss_curves/ROBOT100_pretrain_300k_running.csv")
+check("v3_runs", "HRA step (snapshot)", 100000, last("HRA_rightonly_300k_running"), V + "loss_curves/HRA_rightonly_300k_running.csv")
+check("v3_runs", "HRA loss at snapshot", 0.019, lc("HRA_rightonly_300k_running")[100000], V + "loss_curves/HRA_rightonly_300k_running.csv")
+ds = open(R / V / "loss_curves/dataset_sizes_from_logs.txt").read()
+check("v3_runs", "R312c episodes/frames", "312/174012", "/".join(re.search(r"r312c-relonly\S*: dataset.num_episodes=(\d+) dataset.num_frames=(\d+)", ds).groups()), V + "loss_curves/dataset_sizes_from_logs.txt")
+hw = list(csv.DictReader(open(R / V / "hardware_cycles_by_ckpt.csv"))); src = V + "hardware_cycles_by_ckpt.csv"
+check("v3_robot_runs", "checkpoints executed", 71, len(hw), src)
+check("v3_robot_runs", "control cycles", 49431, sum(int(h["cycles"]) for h in hw), src)
+check("v3_robot_runs", "run starts", 1681, sum(int(h["starts"]) for h in hw), src)
+hh = [h for h in hw if h["checkpoint"].startswith("HRA")]
+check("v3_robot_runs", "HRA cycles", 8397, sum(int(h["cycles"]) for h in hh), src)
+check("v3_robot_runs", "HRA starts", 658, sum(int(h["starts"]) for h in hh), src)
+
+# ---------------------------------------------------------------- v3: HRA_red
+qc = [json.load(open(p)) for p in sorted((R / V / "hra_red/scale_qc_per_episode").glob("*.json"))]; src = V + "hra_red/scale_qc_per_episode/"
+check("v3_hra", "recorded takes", 200, len(qc), src)
+check("v3_hra", "IMU scale median", 0.012, st.median(q["s_imu"] for q in qc), src, tol=0.0005)
+check("v3_hra", "IMU scale <= 0", 95, sum(q["s_imu"] <= 0 for q in qc), src)
+check("v3_hra", "cube edge m", 0.038, qc[0]["cube_edge_m"], src)
+check("v3_hra", "scale-valid", 181, sum(bool(q["valid"]) for q in qc), src)
+rej = J(V + "hra_red/scale_qc_summary_v0_181.json")["rejected"]; src = V + "hra_red/scale_qc_summary_v0_181.json"
+check("v3_hra", "too few PnP frames", 14, sum("valid PnP frames" in v for v in rej.values()), src)
+check("v3_hra", "spread too large", 5, sum(v.startswith("bootstrap spread") for v in rej.values()), src)
+sr = [json.loads(l)["reject_reason"] for l in open(R / V / "hra_red/sanity_rejected.jsonl")]; src = V + "hra_red/sanity_rejected.jsonl"
+check("v3_hra", "sanity rejects", 15, len(sr), src)
+check("v3_hra", "travel-ratio-only rejects", 10, sum(r.startswith("travel_ratio") and ";" not in r for r in sr), src)
+check("v3_hra", "s>1 and travel>0.8 rejects", 3, sum("outside" in r and "> 0.8 m" in r for r in sr), src)
+sm = J(V + "hra_red/scale_qc_summary.json"); src = V + "hra_red/scale_qc_summary.json"
+check("v3_hra", "accepted", 166, sm["accepted"], src)
+check("v3_hra", "train episodes/rows", "151/20319", f"{sm['train_episodes']}/{sm['train_rows']}", src)
+check("v3_hra", "val episodes/rows", "15/2011", f"{sm['val_episodes']}/{sm['val_rows']}", src)
+check("v3_hra", "s_pnp p5/p50/p95", "0.188/0.354/0.5", "/".join(str(x) for x in sm["s_pnp_p5_p50_p95"]), src)
+check("v3_hra", "centre residual p50 cm", 0.17, sm["centre_resid_cm_p50"], src)
+hv = J(V + "hra_red/hrl_val_1face.json"); ok = [h for h in hv if h["valid"]]; rr = sorted(h["s_pnp"] / h["s_imu"] for h in ok); src = V + "hra_red/hrl_val_1face.json"
+pct = lambda a, q: float(__import__("numpy").percentile(a, q))
+check("v3_hra", "HRL80 PnP-valid of episodes", "37/57", f"{len(ok)}/{len(hv)}", src)
+check("v3_hra", "HRL80 PnP/IMU median", 1.062, st.median(rr), src, tol=0.0005)
+check("v3_hra", "HRL80 PnP/IMU p16", 0.959, pct(rr, 16), src, tol=0.0005)
+check("v3_hra", "HRL80 PnP/IMU p84", 1.274, pct(rr, 84), src, tol=0.0005)
+vl = J(V + "hra_red/val_loss_results.json")["015000"]; src = V + "hra_red/val_loss_results.json"
+check("v3_hra", "val loss 15k", 0.150, vl["val_mean"], src, tol=0.0005)
+check("v3_hra", "train-subset loss 15k", 0.066, vl["train_seed0"]["mean_batch_loss"], src, tol=0.0005)
+check("v3_hra", "partial val loss 30k seed 0", 0.198, float(re.search(r"\[030000\] val seed 0: \{'mean_batch_loss': ([0-9.]+)", open(R / V / "hra_red/val_loss_run_log_excerpt.txt").read()).group(1)), V + "hra_red/val_loss_run_log_excerpt.txt", tol=0.0005)
+rs3 = J(V + "RUN_STATUS_v3.json")
+check("v3_runs", "run status entries", 11, len(rs3["runs"]), V + "RUN_STATUS_v3.json")
+
 # ---------------------------------------------------------------- retired values must not reappear in the report
 tex = open(R / "report/report.tex").read()
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
@@ -279,13 +424,22 @@ check("text", "public repo URL present", "True", str("github.com/physical-ai-vla
 for need in ("211.7k", "$-33\\%$", "$+13\\%$", "36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
     check("text", f"value present: {need}", "True", str(need in tex), "report/report.tex")
 
+for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,}598", "422.5 to 90.5", "99.7\\% (left) and 99.5\\%", "72.3\\%/74.6\\%",
+             "45.2\\%/52.2\\%", "1{,}854/1{,}487", "59/64", "slots 10--17", "22.80", "$+0.81$/$+0.77$", "$-0.05$/$-0.03$", "$+0.16$",
+             "0.69--0.90", "$-0.25$ and $+0.49$", "0.945 for A and 0.244", "3.9$\\times$", "0.49 over the first 5k", "(0.0733 versus 0.0745",
+             "181/132", "88.6k", "71\ncheckpoints, 49{,}431", "median of 0.012", "95 of them", "37 of 57", "1.062 (p16--p84 0.959--1.274",
+             "151 train episodes (20{,}319 rows)", "0.354 (p5 0.188, p95 0.500)", "0.150", "0.198", "8{,}397", "version 3"):
+    check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/report.tex")
 # ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
 rd = open(R / "README.md").read()
 for need in ("349 recorded", "284 pass sync", "259 source", "561 bimanual", "233 train", "26 held-out", "1.5 / 5.7 mm", "11.2 / 39.9 mm",
              "4.8 mm", "3.55 of 6", "36.5 %", "56.1 %", "1.494 / 1.551", "0.272 / 0.454", "58.9 %", "0.067 vs 0.144", "996 TR segments",
              "896 / val 100", "27,776", "−10.0 %", "−14.7 to −5.6 %", "8 of 10", "211.7k", "−33 %", "+13 %", "4.6 / 17.0 %", "11.3 mm"):
     check("readme", f"value present: {need}", "True", str(need in rd), "README.md")
-for bad in ("is running; no results yet", "234 checks"):
+for need in ("48,411 rows (−6.20 %)", "1,482 / 2,598", "99.7 / 99.5 %", "45.2 / 52.2 %", "1,854 / 1,487", "slots 10–17", "−0.05 / −0.03",
+             "+0.81 / +0.77", "0.244 vs 0.945", "0.984 (55–60k, tie)", "1.062 (p16–p84 0.959–1.274)", "151 episodes / 20,319 rows", "49,431"):
+    check("readme", f"v3 value present: {need}", "True", str(need in rd), "README.md")
+for bad in ("is running; no results yet", "234 checks", "This repository reports no closed-loop robot results"):
     check("readme", f"stale text absent: {bad}", "True", str(bad not in rd), "README.md")
 
 # ---------------------------------------------------------------- output

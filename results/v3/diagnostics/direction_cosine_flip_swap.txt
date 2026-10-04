@@ -1,0 +1,15 @@
+# Ego-only 40k on the same 120 robot frames, with L<->R swap and axis sign flips applied to the prediction. k8 median cosine. Script: analysis/v3/dir_cos_alt.py.
+# Provenance: stdout captured verbatim in the experiment session log at 2026-10-02T06:13:44.992Z (UTC); the run wrote no output file. Not re-run for this release.
+
+swap L<->R False flip [1, 1, 1]: cos L -0.05  R -0.03
+swap L<->R False flip [1, -1, 1]: cos L -0.02  R -0.26
+swap L<->R False flip [-1, 1, 1]: cos L -0.06  R -0.08
+swap L<->R False flip [1, 1, -1]: cos L +0.09  R +0.07
+swap L<->R False flip [-1, -1, 1]: cos L -0.09  R -0.07
+swap L<->R False flip [-1, -1, -1]: cos L +0.05  R +0.03
+swap L<->R True  flip [1, 1, 1]: cos L +0.01  R -0.16
+swap L<->R True  flip [1, -1, 1]: cos L +0.07  R -0.08
+swap L<->R True  flip [-1, 1, 1]: cos L -0.15  R -0.04
+swap L<->R True  flip [1, 1, -1]: cos L +0.02  R +0.08
+swap L<->R True  flip [-1, -1, 1]: cos L -0.02  R -0.08
+swap L<->R True  flip [-1, -1, -1]: cos L -0.01  R +0.16

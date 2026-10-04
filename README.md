@@ -2,11 +2,14 @@
 
 Research code, calibration, processing records and a small data sample from one experiment. We collected bimanual
 human demonstrations with a hand-worn UMI-style gripper (HandUMI), converted them into pseudo-joint trajectories
-for a reBot B601 dual-arm robot, and used them to pretrain X-VLA.
+for a reBot B601 dual-arm robot, and used them to pretrain X-VLA. Version 3 (October 2026) replaces the joint-space
+retargeting with a Cartesian conversion that matches the robot's own action contract, and tests what transfers to the
+robot ([Update v3](#update-v3-cartesian-ego-pretraining-and-transfer)). The earlier state is tagged `report-v2-2026-09-30`.
 
 The write-up is [`report/report.pdf`](report/report.pdf) (LaTeX source `report/report.tex`, figures rebuilt by `report/figures/make_figures.py`).
 
-**Status: offline evaluation only. This repository reports no closed-loop robot results.**
+**Status: offline evaluation and training diagnostics.** Version-3 checkpoints were executed on the robot, but no task
+outcome was logged, so this repository reports **no closed-loop success rate**.
 
 ## Demonstration videos
 
@@ -162,6 +165,89 @@ Records: `results/finetune/`. The v2 pretrain launch record is `results/finetune
 | `results/retarget_v2/`, `results/hrl80/`, `results/dataset_v2/`, `results/finetune/` | comparison JSONs, frozen master manifests, HRL80 census and prereg report, dataset manifests and gates, fine-tuning evals and summaries |
 | `docs/NUMBERS_v2.md`, `docs/SOURCES_v2.md`, `docs/FINAL_CLAIMS.md` | every v2 number with its file and key; source mapping; headline claim table with evidence and status |
 
+## Update v3: Cartesian ego pretraining and transfer
+
+Retargeting to robot joints removed a third to a half of the human motion and produced a joint-space target that our robot
+policies are not trained in. Version 3 converts whole human episodes directly into the robot's own relative-Cartesian
+action contract, then tests what transfers. Report sections X–XIII. Run status for every v3 run:
+`results/v3/RUN_STATUS_v3.json`.
+
+**Status:** training diagnostics only. Checkpoints were executed on the robot (`results/v3/hardware_cycles_by_ckpt.csv`:
+71 checkpoints, 49,431 control cycles), but the log records IK tracking, not task outcome, so there is no success rate.
+
+### Data contract and dataset (`cart20/`)
+
+- Rows at 15 Hz. Action = 16 future poses `inv(T(t)) @ T(t + k·50.05 ms)`, k = 1..16 (0.80 s), interpolated on the raw
+  30 Hz track. Per arm xyz + 6-D rotation + gripper = CART20; the model's 32-D action is padded with 12 exact zeros.
+- State = each arm's pose relative to its task start + both grippers (same layout as the robot data). Gripper =
+  continuous aperture / 80 mm (max observed 0.847).
+- No workspace or IK filtering. 330 episodes (273 original + 57 HRL80; 3 refused for invalid IMU scale).
+  111,533 rows at 15 Hz, of which 57,283 (51.4 %) are trainable.
+- Frozen split: train 298 episodes / 51,612 rows, val 32 / 5,671.
+- **Silent pose jumps.** 57 % of apparent > 30 mm state jumps (1,482 / 2,598) were time gaps between exported rows. The rest
+  are MASt3R-SLAM translation jumps without a tracking-lost flag (55 raw steps > 3 m/s in 24 training episodes). The v2b filter
+  acts on 44 events in 42 episodes → **train 297 / 48,411 rows (−6.20 %)**, val unchanged; max adjacent step 422.5 → 90.5 mm.
+- Contract tests: `cart20/tests/test_contract.py` (11 tests, all pass).
+
+Evidence: `results/v3/ego_cart20/`, `results/v3/state_jump/`.
+
+### Ego vs robot, and the soft-prompt audit
+
+- Robot IK reaches 99.7 / 99.5 % of ego positions (L / R) and 72.3 / 74.6 % of full ego poses. The deployed IK
+  (one wrist joint locked) reproduces only 45.2 / 52.2 % of the robot's **own** poses.
+- Wrist-image sharpness (Laplacian variance, p50): ego 1,854 / 1,487 vs robot 59 / 64
+  (`results/v3/robotized/wrist_sharpness_val.json`).
+- **X-VLA soft-prompt slots:** only slots 10–17 of `lerobot/xvla-base` were ever trained. Ids 0 and 6, both used by our
+  earlier runs, were untrained. Initial loss on R312c: slot 0 1.11, 6 1.12, 15 1.61, 10 2.35, 16 2.65, 17 4.07, 11 22.80.
+  All v3 runs use unused slot 20. Evidence: `results/v3/domain_slots/`.
+
+### Transfer diagnostics
+
+| test | result | evidence |
+|---|---|---|
+| Ego-only 40k on 120 robot frames, k8 direction cosine (L / R) | −0.05 / −0.03 (robot-trained 40k: +0.81 / +0.77, in-training frames) | `results/v3/diagnostics/direction_cosine_ego40k_vs_robot40k.txt` |
+| Same, best of 12 L↔R swap × axis-flip variants | max +0.16 (not a convention error) | `…/direction_cosine_flip_swap.txt` |
+| Image/state swap: ego images + any state | 0.69–0.90 | `…/image_state_ablation_ego40k.txt` |
+| Image/state swap: robot images + any state | −0.25 to +0.49 → the gap is visual | same |
+| Ego init (50k) vs scratch, R312c fine-tuning loss, identical data/schedule/seed | step 200: 0.244 vs 0.945; B/A 0.49 (0–5k), 0.875 (5–20k), 0.95 (20–40k), 0.984 (55–60k, tie) | `analysis/out/v3_ego_init_loss.json`, `results/v3/loss_curves/` |
+
+- The diagnostic outputs were captured from the session log (the runs wrote no file); each text file says so and names the
+  script in `analysis/v3/`.
+- The loss comparison is training loss with one seed per arm. The two finished 300k runs used **different robot datasets**
+  (R312c vs R384), so they are not a transfer comparison.
+- **Robotized wrist** (`cart20/ego_cart20/scripts/export_lerobot_robotized.py`): fisheye → virtual pinhole (hfov 62–70°,
+  jaws low), blur, JPEG. ROBOT100 (all frames) sharpness 181 / 132, still 2–3× the robot. The MIX70 pretrain was stopped at 5k.
+  Co-training (4 ego + 4 robot per batch, `training/relonly/train_cotrain.py`) was stopped at 88.6k without evaluation. The
+  ROBOT100 300k pretrain is running (74k), then R30 fine-tuning. **No result yet.**
+
+### HRA_red: right-hand approach with cube-based scale
+
+- 200 right-hand takes of "approach the red cube". The IMU visual–inertial scale is unobservable on these slow motions: median
+  0.012, ≤ 0 in 95 of 200 episodes.
+- **Cube PnP scale** (`cart20/ego_cart20/cube_pnp.py`, edge 3.8 cm). Validated on HRL80 takes, where the IMU is reliable:
+  37 / 57 valid, PnP/IMU median 1.062 (p16–p84 0.959–1.274).
+- Funnel 200 → 181 (scale gates) → 166 (physical sanity). Train 151 episodes / 20,319 rows; val 15 / 2,011.
+- Loss-masked training (left arm and gripper masked; 9 / 20 dims supervised; `training/relonly/rel16_relonly_lossmask.py`).
+  The run is at 100k / 300k.
+- Held-out loss at 15k: 0.150 vs train-subset 0.066. A partial 30k evaluation (one seed) gives 0.198, a possible overfit.
+- No offline direction probe has been run, and robot runs (8,397 cycles) logged no outcome.
+
+Evidence: `results/v3/hra_red/`.
+
+### Repository map additions (v3)
+
+| dir | contents |
+|---|---|
+| `cart20/` | Cartesian ego package: contract (`config.py`), geometry, interpolation, jump filter, label builders, converter, validators, LeRobot exporters (plain, robotized-wrist, right-only), cube PnP scale, right-only conversion + sanity gate, ego-vs-robot and IK compatibility reports; `tests/` (contract, cube scale, right-only) |
+| `training/relonly/` | REL-only loss plugin (dims 20:32 zeroed), per-dim loss-mask variant + tests, AdamW8bit wrapper with a checkpoint-save shim, exact 4 + 4 ego/robot co-training sampler |
+| `analysis/v3/` | loss-curve extraction and the matched init comparison, direction-cosine and image/state-swap diagnostics, wrist optical-flow axis check, soft-prompt slot audit + init-loss probe, wrist sharpness, HRL80 PnP-vs-IMU validation, HRA held-out loss, hardware cycle counts |
+| `results/v3/` | dataset metadata and integrity reports, jump root cause, ego-vs-robot statistics, slot audit, robotized export records, loss curves, diagnostics, HRA QC (per-episode scale records), run status |
+| `report/figures/make_figures_v3.py` | Figs. 4–5 of the report |
+
+v3 code imports some internal packages that are not included: the HandUMI raw-episode exporter (`sources/handumi_export.py`),
+the deployment/inference client (`infer_core_v4`) used by the diagnostics, and the robot datasets. The v3 HRA videos and
+frames are not published (no privacy review).
+
 ## Repository map
 
 | dir | contents |
@@ -186,12 +272,15 @@ Records: `results/finetune/`. The v2 pretrain launch record is `results/finetune
 ```bash
 python3 analysis/verify_claims.py --md analysis/out/claim_audit.md   # needs pyyaml; exits 1 on any mismatch
 python3 analysis/paired_bootstrap_r150.py                            # R150 250k episode-level bootstrap
-python3 report/figures/make_figures.py && tectonic report/report.tex    # rebuild figures and the PDF
+python3 analysis/v3/ego_init_loss_compare.py                         # v3 matched initialization comparison
+python3 report/figures/make_figures.py && python3 report/figures/make_figures_v3.py && tectonic report/report.tex
 ```
 
 ## What this repository does not show
 
-- No closed-loop robot success for any egocentric-pretrained policy.
+- No closed-loop robot success for any egocentric-pretrained policy (v3 checkpoints ran on the robot; outcomes were not logged).
+- No held-out or closed-loop comparison of ego-initialized vs scratch v3 models; the matched comparison is training loss to 60k.
+- No transfer of the ego-only policy, or of the robotized wrist images, to robot cameras.
 - No generalization to unseen cube layouts (layouts were not recorded) or to unseen stacking orders (all six are in training).
 - No benefit on disjoint robot test data: the 10 % R150 gain is measured on episodes inside both fine-tuning sets.
 - No transfer to other operators or scenes (one operator, one scene).

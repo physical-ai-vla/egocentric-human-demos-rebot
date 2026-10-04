@@ -1,0 +1,9 @@
+# Ego-only 40k checkpoint, 100 ego-val frames and 100 robot HEAD180 frames; images and state swapped between domains. Median cosine (n = moving frames). Script: analysis/v3/ego_val_cos.py.
+# Provenance: stdout captured verbatim in the experiment session log at 2026-10-02T06:27:36.466Z (UTC); the run wrote no output file. Not re-run for this release.
+
+1 ego img + ego state        Lk4 +0.87(n34) Lk8 +0.91(n44) Lk16 +0.92(n49) Rk4 +0.89(n21) Rk8 +0.94(n29) Rk16 +0.84(n34)
+1b ego img + zero state      Lk4 +0.77(n34) Lk8 +0.80(n44) Lk16 +0.89(n49) Rk4 +0.85(n21) Rk8 +0.80(n29) Rk16 +0.66(n34)
+3 ego img + robot state      Lk4 +0.76(n34) Lk8 +0.81(n44) Lk16 +0.90(n49) Rk4 +0.72(n21) Rk8 +0.69(n29) Rk16 +0.72(n34)
+4 robot img + robot state    Lk4 +0.36(n32) Lk8 +0.30(n43) Lk16 -0.01(n55) Rk4 +0.19(n32) Rk8 +0.02(n37) Rk16 -0.15(n42)
+2 robot img + zero state     Lk4 +0.17(n32) Lk8 +0.25(n43) Lk16 -0.25(n55) Rk4 +0.24(n32) Rk8 +0.06(n37) Rk16 -0.02(n42)
+2b robot img + ego state     Lk4 +0.16(n32) Lk8 +0.24(n43) Lk16 -0.16(n55) Rk4 +0.49(n32) Rk8 +0.33(n37) Rk16 -0.03(n42)

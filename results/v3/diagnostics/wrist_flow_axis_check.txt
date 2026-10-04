@@ -1,0 +1,19 @@
+# Correlation of wrist-camera optical flow statistics (mean_u, mean_v, divergence) with relative TCP motion (t, r) between frame pairs. Script: analysis/v3/flow_axis_check.py.
+# Provenance: stdout captured verbatim in the experiment session log at 2026-10-02T06:32:08.827Z (UTC); the run wrote no output file. Not re-run for this release.
+
+== EGO raw UMI left wrist (14 episodes): 1213 pairs | |t| p50 17.5 mm, |r| p50 6.0 deg
+   mean_u  tx +0.04  ty -0.40  tz +0.04  rx -0.14  ry +0.01  rz -0.41
+   mean_v  tx -0.17  ty -0.08  tz -0.11  rx -0.26  ry +0.40  rz -0.05
+   diverg  tx +0.28  ty -0.10  tz +0.12  rx -0.12  ry -0.12  rz +0.01
+== EGO raw UMI right wrist (14 episodes): 859 pairs | |t| p50 20.9 mm, |r| p50 6.3 deg
+   mean_u  tx -0.09  ty -0.32  tz -0.20  rx -0.22  ry -0.00  rz -0.39
+   mean_v  tx -0.14  ty +0.15  tz -0.15  rx +0.20  ry +0.36  rz +0.01
+   diverg  tx +0.35  ty +0.08  tz -0.02  rx -0.00  ry -0.20  rz +0.07
+== ROBOT R312c-HEAD180 left wrist: 326 pairs | |t| p50 22.8 mm, |r| p50 3.6 deg
+   mean_u  tx -0.18  ty -0.25  tz +0.04  rx -0.01  ry +0.08  rz -0.25
+   mean_v  tx -0.10  ty -0.18  tz -0.19  rx -0.06  ry +0.27  rz -0.05
+   diverg  tx +0.17  ty -0.01  tz +0.25  rx -0.03  ry -0.15  rz -0.02
+== ROBOT R312c-HEAD180 right wrist: 329 pairs | |t| p50 23.4 mm, |r| p50 4.9 deg
+   mean_u  tx +0.10  ty -0.11  tz -0.32  rx -0.07  ry +0.16  rz -0.07
+   mean_v  tx +0.10  ty +0.14  tz -0.18  rx -0.03  ry +0.11  rz +0.13
+   diverg  tx +0.18  ty -0.09  tz +0.24  rx -0.05  ry -0.30  rz -0.03

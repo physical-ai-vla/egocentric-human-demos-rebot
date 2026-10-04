@@ -1,0 +1,2972 @@
+[
+ {
+  "episode": "20260916_090424_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 762,
+   "right": 760
+  }
+ },
+ {
+  "episode": "20260916_090424_000006",
+  "status": "exists"
+ },
+ {
+  "episode": "20260916_090424_000007",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 604,
+   "right": 604
+  }
+ },
+ {
+  "episode": "20260916_090424_000008",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 594,
+   "right": 594
+  }
+ },
+ {
+  "episode": "20260916_090424_000009",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 591,
+   "right": 591
+  }
+ },
+ {
+  "episode": "20260916_090424_000010",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 697,
+   "right": 697
+  }
+ },
+ {
+  "episode": "20260916_105608_000001",
+  "status": "exists"
+ },
+ {
+  "episode": "20260916_105608_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 650,
+   "right": 650
+  }
+ },
+ {
+  "episode": "20260916_105608_000004",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 657,
+   "right": 657
+  }
+ },
+ {
+  "episode": "20260916_112115_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 630,
+   "right": 629
+  }
+ },
+ {
+  "episode": "20260916_112115_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 584,
+   "right": 583
+  }
+ },
+ {
+  "episode": "20260916_112115_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 686,
+   "right": 685
+  }
+ },
+ {
+  "episode": "20260916_112115_000004",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 837,
+   "right": 836
+  }
+ },
+ {
+  "episode": "20260916_112115_000005",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 680,
+   "right": 680
+  }
+ },
+ {
+  "episode": "20260916_121003_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 389,
+   "right": 388
+  }
+ },
+ {
+  "episode": "20260916_121003_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 391,
+   "right": 390
+  }
+ },
+ {
+  "episode": "20260916_121832_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 478,
+   "right": 478
+  }
+ },
+ {
+  "episode": "20260916_121832_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 479,
+   "right": 480
+  }
+ },
+ {
+  "episode": "20260916_122225_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 538,
+   "right": 537
+  }
+ },
+ {
+  "episode": "20260916_122225_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 540,
+   "right": 539
+  }
+ },
+ {
+  "episode": "20260916_122225_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 539,
+   "right": 540
+  }
+ },
+ {
+  "episode": "20260916_122225_000004",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 539,
+   "right": 538
+  }
+ },
+ {
+  "episode": "20260916_125236_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 687,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_125236_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_125236_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_125236_000004",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_125236_000005",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_125236_000006",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_125236_000007",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_125236_000008",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_125236_000009",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_125236_000010",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_125236_000012",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_125236_000013",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_125236_000014",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_125236_000015",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_125236_000016",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 687
+  }
+ },
+ {
+  "episode": "20260916_140419_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_140419_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_140419_000004",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_140419_000006",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_140419_000007",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_140419_000008",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_140419_000009",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_140419_000010",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_140419_000011",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_140419_000012",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_140419_000013",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_140419_000014",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_140419_000015",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_140419_000016",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_140419_000017",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_140419_000018",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_142318_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_142318_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_142318_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_142318_000004",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 687
+  }
+ },
+ {
+  "episode": "20260916_170333_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_170333_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000006",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_170333_000007",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000008",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_170333_000009",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000010",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000011",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_170333_000012",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000013",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000014",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000015",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_170333_000016",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_170333_000017",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 691,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_170333_000018",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000019",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000020",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_170333_000024",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000025",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_170333_000026",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000027",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000028",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000029",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000030",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000034",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000035",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000036",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_170333_000039",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000040",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260916_170333_000041",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000042",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260916_170333_000043",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260916_170333_000044",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000005",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000006",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000007",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000008",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000011",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000012",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000013",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000014",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000015",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000016",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000017",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000021",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000022",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000023",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000024",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000025",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000026",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000030",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000031",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000032",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000033",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000034",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000035",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000037",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000038",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000039",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000040",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000041",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000042",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000043",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000044",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000045",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000047",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000048",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000050",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000051",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000052",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000053",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 687,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000056",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000057",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000058",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000059",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000060",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000061",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000062",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_100511_000066",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000067",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000068",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000069",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000070",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000071",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000072",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000073",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_100511_000076",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_100511_000077",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_135136_000007",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_135136_000008",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000009",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000010",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000011",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000012",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000013",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000016",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000017",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000018",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 691,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000019",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_135136_000021",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000022",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_135136_000023",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000024",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000029",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000030",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000031",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_135136_000032",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 691
+  }
+ },
+ {
+  "episode": "20260917_135136_000033",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_135136_000036",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_135136_000037",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_135136_000038",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000001",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 687,
+   "right": 687
+  }
+ },
+ {
+  "episode": "20260917_150545_000002",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000003",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000004",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000005",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000006",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000007",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000008",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000009",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000010",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000011",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000012",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000013",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 691
+  }
+ },
+ {
+  "episode": "20260917_150545_000014",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000015",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000016",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000017",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000018",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000019",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000020",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000021",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 691
+  }
+ },
+ {
+  "episode": "20260917_150545_000022",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000023",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000024",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000025",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000026",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000027",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000028",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000029",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000030",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000031",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000032",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000033",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000034",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000035",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000036",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000037",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000038",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000039",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000040",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000043",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000044",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000045",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000046",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000047",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000048",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000049",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000050",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000055",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000056",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000057",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000058",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000059",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000060",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000061",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000065",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000066",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000067",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000068",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000069",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000070",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000071",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000073",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000074",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000075",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000076",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 691,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000077",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000079",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000080",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000081",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000083",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 691,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000087",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000088",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000089",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000090",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000091",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000092",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000093",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 686
+  }
+ },
+ {
+  "episode": "20260917_150545_000094",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000097",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000098",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 691
+  }
+ },
+ {
+  "episode": "20260917_150545_000100",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000101",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000102",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000103",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000104",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000109",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 691,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000110",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000111",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000112",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000113",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000114",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000115",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 687
+  }
+ },
+ {
+  "episode": "20260917_150545_000117",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000118",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 688
+  }
+ },
+ {
+  "episode": "20260917_150545_000120",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000121",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 688,
+   "right": 689
+  }
+ },
+ {
+  "episode": "20260917_150545_000122",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 689,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260917_150545_000123",
+  "status": "ok",
+  "era": "old259_contract",
+  "n": {
+   "left": 690,
+   "right": 690
+  }
+ },
+ {
+  "episode": "20260928_101010_000001",
+  "status": "exists"
+ },
+ {
+  "episode": "20260928_101010_000002",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 991
+  }
+ },
+ {
+  "episode": "20260928_101010_000003",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 993,
+   "right": 992
+  }
+ },
+ {
+  "episode": "20260928_101010_000004",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 991
+  }
+ },
+ {
+  "episode": "20260928_101010_000005",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000006",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000007",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000008",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000009",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000010",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 992
+  }
+ },
+ {
+  "episode": "20260928_101010_000011",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000012",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000013",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000014",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000015",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000016",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000017",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000018",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000019",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 991
+  }
+ },
+ {
+  "episode": "20260928_101010_000020",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000021",
+  "status": "refused",
+  "reason": "IMU-VI scale invalid: ['left']"
+ },
+ {
+  "episode": "20260928_101010_000022",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000023",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000024",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000025",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000026",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000027",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 992
+  }
+ },
+ {
+  "episode": "20260928_101010_000028",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000029",
+  "status": "refused",
+  "reason": "IMU-VI scale invalid: ['right']"
+ },
+ {
+  "episode": "20260928_101010_000030",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 991
+  }
+ },
+ {
+  "episode": "20260928_101010_000031",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 991
+  }
+ },
+ {
+  "episode": "20260928_101010_000032",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000033",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000034",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000035",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 987
+  }
+ },
+ {
+  "episode": "20260928_101010_000036",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000037",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000038",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000039",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000040",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000041",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000042",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000043",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000044",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000045",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000046",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 987,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000047",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000048",
+  "status": "refused",
+  "reason": "IMU-VI scale invalid: ['left']"
+ },
+ {
+  "episode": "20260928_101010_000049",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000050",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000051",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000052",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 988,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000053",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000054",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000055",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 988
+  }
+ },
+ {
+  "episode": "20260928_101010_000056",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000057",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 989
+  }
+ },
+ {
+  "episode": "20260928_101010_000058",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 991,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000059",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 990,
+   "right": 990
+  }
+ },
+ {
+  "episode": "20260928_101010_000060",
+  "status": "ok",
+  "era": "HRL80_v014",
+  "n": {
+   "left": 989,
+   "right": 976
+  }
+ }
+]

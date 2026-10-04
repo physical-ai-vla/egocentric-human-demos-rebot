@@ -1,7 +1,7 @@
 # Headline claims and their evidence
 
 Every row is also a row of `analysis/out/claim_audit.md`, which `analysis/verify_claims.py` regenerates from the
-files below (it exits 1 on any mismatch). Status as of 2026-09-30: all rows VERIFIED.
+files below (it exits 1 on any mismatch). Status as of 2026-10-04 (version 3): all rows VERIFIED (`analysis/verify_claims.py`: 436 checks, 0 failed).
 
 | Claim | Evidence file | Exact value | Status |
 |---|---|---|---|
@@ -33,6 +33,22 @@ files below (it exits 1 on any mismatch). Status as of 2026-09-30: all rows VERI
 | Episodes favouring ego init | `analysis/out/paired_bootstrap_r150_250k.json` | 8 of 10 | VERIFIED |
 | The 10 evaluation episodes are inside both fine-tuning sets | `evaluation/c8old_mac_eval.py` docstring, `results/finetune/SUMMARY.md` | yes | VERIFIED |
 | R90 comparison | `results/finetune/R90_MATCHED.md` | 2 matched steps only; geo −33 % / −11 %, motion geo +2 % / +13 % → no conclusion | VERIFIED |
+| **v3** Cartesian ego dataset: episodes / trainable rows | `results/v3/ego_cart20/metadata_v2.json` | 330 (273 + 57; 3 refused) / 57,283 of 111,533 rows (51.4 %) | VERIFIED |
+| v3 split after jump filter (v2b) | `results/v3/ego_cart20/metadata_v2b.json` | train 297 eps / 48,411 rows (−6.20 %), val 32 / 5,671 | VERIFIED |
+| Apparent state jumps that are time gaps | `results/v3/state_jump/STATE_JUMP_ROOT_CAUSE.md` | 1,482 of 2,598 (57 %) | VERIFIED |
+| Silent MASt3R-SLAM jumps (> 3 m/s, no lost flag) | `results/v3/state_jump/raw_jump_events.json`, `raw_jump_stage_dump.json` | 55 steps in 24 train episodes, 0 with a lost flag | VERIFIED |
+| Robot IK reach of ego poses (position / full pose, L / R) | `results/v3/ego_vs_robot/kinematic_summary.json` | 99.7 / 99.5 % ; 72.3 / 74.6 % | VERIFIED |
+| Deployed IK (wrist joint locked) on the robot's own poses | same | 45.2 / 52.2 % | VERIFIED |
+| Wrist sharpness p50 ego / robot / ROBOT100 | `results/v3/robotized/wrist_sharpness_val.json` | 1,854–1,487 / 59–64 / 181–132 | VERIFIED |
+| Trained soft-prompt slots of `lerobot/xvla-base` | `results/v3/domain_slots/lineage_comparison.json` | 10–17 only (of 30) | VERIFIED |
+| Ego-only 40k on robot frames, k8 direction cosine | `results/v3/diagnostics/direction_cosine_ego40k_vs_robot40k.txt` (session-log capture) | −0.05 / −0.03 (robot model +0.81 / +0.77, in-training frames) | VERIFIED (log capture, not re-run) |
+| Image/state swap | `results/v3/diagnostics/image_state_ablation_ego40k.txt` (session-log capture) | ego images 0.66–0.94; robot images −0.25 to +0.49 | VERIFIED (log capture, not re-run) |
+| Ego init vs scratch, R312c training loss, matched | `results/v3/loss_curves/`, `analysis/out/v3_ego_init_loss.json` | step 200: 0.244 vs 0.945; ratio 0.49 → 0.984 (tie) by 55–60k | VERIFIED (training loss, 1 seed) |
+| v3 checkpoints executed on the robot | `results/v3/hardware_cycles_by_ckpt.csv` | 71 checkpoints, 49,431 cycles; no outcome field | VERIFIED |
+| HRA_red IMU scale unobservable | `results/v3/hra_red/scale_qc_per_episode/` | median 0.012; ≤ 0 in 95 of 200 | VERIFIED |
+| Cube-PnP scale vs IMU on HRL80 | `results/v3/hra_red/hrl_val_1face.json` | 37 / 57 valid; ratio 1.062 (p16–p84 0.959–1.274) | VERIFIED |
+| HRA_red funnel and split | `results/v3/hra_red/scale_qc_summary*.json`, `sanity_rejected.jsonl` | 200 → 181 → 166; 151 / 20,319 train, 15 / 2,011 val | VERIFIED |
+| HRA_red held-out loss | `results/v3/hra_red/val_loss_results.json`, `val_loss_run_log_excerpt.txt` | 15k 0.150 (train subset 0.066); 30k partial 0.198 | VERIFIED |
 
 ## Not shown anywhere in this repository
 
@@ -40,4 +56,7 @@ files below (it exits 1 on any mismatch). Status as of 2026-09-30: all rows VERI
 - generalization to unseen cube layouts or unseen stacking orders;
 - a benefit on robot test episodes disjoint from fine-tuning data;
 - transfer to other operators or scenes;
-- any robot fine-tuning result from the final 996-segment pretraining checkpoints.
+- any robot fine-tuning result from the final 996-segment pretraining checkpoints;
+- a closed-loop success rate for any v3 checkpoint (executed on the robot, outcomes not logged);
+- a held-out or closed-loop advantage of ego initialization (only matched training loss to 60k);
+- transfer of the ego-only policy or the robotized wrist images to robot cameras.

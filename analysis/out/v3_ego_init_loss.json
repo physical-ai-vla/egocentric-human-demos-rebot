@@ -1,0 +1,52 @@
+{
+ "A": "A60_scratch_R312c_150kdecay",
+ "B": "B60_egoinit_R312c_150kdecay",
+ "matched_points": 299,
+ "last_matched_step": 59800,
+ "step200": {
+  "A": 0.945,
+  "B": 0.244
+ },
+ "windows": [
+  {
+   "window": "0k-5k",
+   "n": 25,
+   "A_mean": 0.2959,
+   "B_mean": 0.145,
+   "B_over_A": 0.49,
+   "B_lower_points": 25
+  },
+  {
+   "window": "5k-20k",
+   "n": 75,
+   "A_mean": 0.1276,
+   "B_mean": 0.1116,
+   "B_over_A": 0.875,
+   "B_lower_points": 73
+  },
+  {
+   "window": "20k-40k",
+   "n": 100,
+   "A_mean": 0.0954,
+   "B_mean": 0.0906,
+   "B_over_A": 0.95,
+   "B_lower_points": 84
+  },
+  {
+   "window": "40k-60k",
+   "n": 99,
+   "A_mean": 0.0786,
+   "B_mean": 0.0766,
+   "B_over_A": 0.974,
+   "B_lower_points": 67
+  },
+  {
+   "window": "55k-60k",
+   "n": 24,
+   "A_mean": 0.0745,
+   "B_mean": 0.0733,
+   "B_over_A": 0.984,
+   "B_lower_points": 13
+  }
+ ]
+}

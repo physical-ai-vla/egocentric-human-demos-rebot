@@ -1,0 +1,46 @@
+{
+ "n_frames_per_stream": 200,
+ "statistic": "var(Laplacian(mean_rgb)), 224x224 stored frames",
+ "p5_p50_p95": {
+  "ego_raw_val/left_wrist": [
+   666.7,
+   1853.5,
+   2345.6
+  ],
+  "ego_raw_val/right_wrist": [
+   620.4,
+   1487.4,
+   1926.0
+  ],
+  "robot100_val/left_wrist": [
+   22.5,
+   181.1,
+   463.7
+  ],
+  "robot100_val/right_wrist": [
+   24.7,
+   132.3,
+   348.9
+  ],
+  "mix70_val/left_wrist": [
+   24.3,
+   263.2,
+   2040.9
+  ],
+  "mix70_val/right_wrist": [
+   36.6,
+   219.5,
+   1740.4
+  ],
+  "robot_R312c_sample/left_wrist": [
+   7.9,
+   59.2,
+   186.5
+  ],
+  "robot_R312c_sample/right_wrist": [
+   11.6,
+   64.0,
+   364.2
+  ]
+ }
+}

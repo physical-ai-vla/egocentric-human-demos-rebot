@@ -1,0 +1,6 @@
+# dataset sizes as printed by lerobot_train / the co-train wrapper in each job log
+r312c-relonly-d20-b8-150k-1105: dataset.num_episodes=312 dataset.num_frames=174012 
+r384-relonly-d20-b8-300k-2239: dataset.num_episodes=384 dataset.num_frames=227230 
+ego-cart20v2b-relonly-d20-b8-50k-1105: dataset.num_episodes=297 dataset.num_frames=48411 
+hra-rightonly-d20-b8-300k-4090-1200: dataset.num_episodes=151 dataset.num_frames=20319 
+cotrain-r312c-egorobot100-300k-5090-1232: [cotrain] robot 174012 fr / 312 ep + ego 48411 fr / 297 ep

@@ -1,0 +1,32 @@
+{
+  "015000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.1494707915569759,
+      "sample_weighted": 0.1498133790161051,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_seed1": {
+      "mean_batch_loss": 0.1509774831014626,
+      "sample_weighted": 0.15132445796688787,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.06623646686971188,
+      "sample_weighted": 0.06623646686971188,
+      "n_batches": 250,
+      "n_samples": 2000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.15022413732921924,
+    "gap_val_minus_train": 0.08398767045950736,
+    "runtime_s": 1245.7246887683868
+  }
+}

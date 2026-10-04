@@ -3,16 +3,16 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx,booktabs,amsmath,amssymb,multirow,xcolor,url,xspace}
 \usepackage[hidelinks]{hyperref}
-\hypersetup{pdftitle={Egocentric Human Demonstrations for Robot Manipulation: Dataset Design, Processing, and an Offline Learnability Analysis}, pdfauthor={Jeong Hwan Lee}}
+\hypersetup{pdftitle={Egocentric Human Demonstrations for a Bimanual Robot: From Joint-Space Retargeting to Cartesian Pretraining}, pdfauthor={Jeong Hwan Lee}}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,fit,backgrounds}
 \newcommand{\mm}{\,mm\xspace}
 \newcommand{\cmt}[1]{}
 
 \begin{document}
-\title{Egocentric Human Demonstrations for Robot Manipulation:\\Dataset Design, Processing, and an Offline Learnability Analysis}
+\title{Egocentric Human Demonstrations for a Bimanual Robot:\\From Joint-Space Retargeting to Cartesian Pretraining}
 \author{\IEEEauthorblockN{Jeong Hwan Lee}
-\IEEEauthorblockA{Technical report, September 2026 \quad alnrg2arg@gmail.com\\
+\IEEEauthorblockA{Technical report, version 3, October 2026 \quad alnrg2arg@gmail.com\\
 Code, results and sample data: \url{https://github.com/physical-ai-vla/egocentric-human-demos-rebot}}}
 \maketitle
 
@@ -34,11 +34,21 @@ retrieval raises the usable fraction of candidate segments from 36.5\% to 56.1\%
 much closer to real robot postures; a 60-episode robot-like re-collection is used to test whether collection style changes
 retarget feasibility; it does not appreciably, a negative, diagnostic result. Fine-tuned on 150 robot demonstrations, the ego-pretrained model has a
 10\% lower geo score than an otherwise identical model trained from scratch (95\% CI 5.6--14.7\%), but only on episodes
-contained in both training sets. We report no closed-loop robot results, and no experiment tests new spatial layouts or
-unseen stacking orders; we state explicitly which generalization claims this data can and cannot support.
+contained in both training sets.
+This version adds a third stage that removes joint-space retargeting altogether. Whole human episodes are converted to
+relative Cartesian end-effector actions in the same 20-dimensional layout as our robot data, with no workspace or IK
+filtering (330 episodes, 48{,}411 training rows after a pose-jump filter). An audit of the public X-VLA base shows that only 8
+of its 30 domain soft-prompt slots were ever trained, which changes how earlier runs should be read. On robot camera frames the
+ego-only model predicts no useful motion direction (median cosine $-0.05$/$-0.03$ versus $+0.81$/$+0.77$ for a robot-trained
+model); swapping images and states between domains locates the gap in the wrist images, whose sharpness differs by about
+30$\times$. Used as an initialization for robot fine-tuning, the ego model starts at a 3.9$\times$ lower training loss, but the advantage
+shrinks to a tie by 60k steps of an otherwise identical run. Finally, a right-hand approach set shows that IMU visual--inertial
+scale becomes unobservable on slow motions and replaces it with a cube of known size. Checkpoints from all stages were run on
+the robot, but no task outcome was logged, so we report no closed-loop success rate. No experiment tests new spatial layouts
+or unseen stacking orders; we state explicitly which claims this data can and cannot support.
 \end{abstract}
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 Collecting robot demonstrations is often expensive, requiring access to a physical robot, an operator and task-specific
 teleoperation infrastructure. Egocentric human
 demonstrations can be collected faster, with less hardware, in natural settings, and hand-worn grippers such as UMI~\cite{chi2024umi}
@@ -57,11 +67,15 @@ calibration and per-episode metadata (Sec.~\ref{sec:data});
 (Sec.~\ref{sec:proc});
 \item an offline evaluation of a 0.9B-parameter VLA fine-tuned on the result, including a motion-gated analysis showing that
 aggregate errors are dominated by static phases, and a prompt-swap test of instruction use (Secs.~\ref{sec:eval}--\ref{sec:fail});
-\item follow-up experiments on the retargeting bottleneck, robot-like re-collection and ego-to-robot fine-tuning (Sec.~\ref{sec:follow}).
+\item follow-up experiments on the retargeting bottleneck, robot-like re-collection and ego-to-robot fine-tuning (Sec.~\ref{sec:follow});
+\item a Cartesian conversion of whole episodes that matches the robot's action contract, with the pose-jump failure it
+exposed (Sec.~\ref{sec:v3}), and transfer diagnostics that separate visual, state and initialization effects (Sec.~\ref{sec:transfer});
+\item a single-arm approach set whose metric scale comes from a known object rather than the IMU (Sec.~\ref{sec:hra}).
 \end{itemize}
 We are explicit about scope. The evaluation is open-loop on held-out \emph{episodes}; it is not a closed-loop robot test,
 and because layouts were not recorded and all six orders appear in training, it measures neither spatial nor task-order
-generalization. Sec.~\ref{sec:lim} lists the experiments needed for those claims.
+generalization. Sections~\ref{sec:intro}--\ref{sec:follow} are unchanged in substance from version 2 (30 September 2026);
+Sections~\ref{sec:v3}--\ref{sec:hra} are new. Sec.~\ref{sec:lim} lists the experiments needed for the claims we do not make.
 
 \section{Related and Motivating Work}
 \textbf{Portable demonstration interfaces.} UMI~\cite{chi2024umi} records hand-held gripper demonstrations with a wrist fisheye
@@ -350,17 +364,187 @@ the same recipe (planned 300k steps). The run was stopped at 211.7k steps; the 1
 designated as the initialization for later robot fine-tuning. No robot fine-tuning result from these checkpoints is
 reported here: the only fine-tuning comparison above uses the first-release ego checkpoint.
 
+\section{Cartesian Ego Data (v3)}\label{sec:v3}
+Retargeting to robot joints (Secs.~\ref{sec:proc} and \ref{sec:follow}) had two costs: the workspace and IK gates removed a third
+to a half of the candidate motion, and the joint-space target differed from the Cartesian action space our robot policies are
+fine-tuned in. Version 3 drops the pseudo-joint step. Each human wrist trajectory is converted directly into the same
+relative end-effector representation as the robot teleoperation data, so that ego and robot samples share one tensor contract
+and differ only in where they came from.
+
+\textbf{Contract.} Rows are stored at 15\,Hz. For row time $t$ the action is a chunk of 16 future poses
+$A_k = T(t)^{-1}\,T(t + k\Delta)$, $k=1..16$, with $\Delta = 50.05$\,ms (the robot data's step, 0.80\,s in total), interpolated on
+the raw 30\,Hz track (linear in position, SLERP in rotation) rather than taken from neighbouring rows. Each arm contributes
+position, a 6-D rotation and a gripper value (20 dimensions for two arms, ``CART20''); the model's 32-D action is padded with 12
+dimensions that are exactly zero and never supervised. The state is each arm's pose relative to its own task-start pose plus
+the two gripper values, the same layout as the robot state. The gripper is the continuous jaw aperture divided by 80\mm; the
+largest observed value is 0.847, so the ``fully open'' end is never reached. A row is kept only if both arms are valid at $t$,
+all 16 targets lie on valid raw samples no more than 50\,ms apart, and a head-camera frame exists within 20\,ms; there is no
+padding. Eleven synthetic tests pin the contract.
+
+\textbf{Data.} The source is the 273 original episodes that have valid per-hand IMU scale and 60 HRL80 episodes; 3 HRL80 episodes
+are refused because one hand's IMU scale is invalid, leaving 330. Nothing is filtered for robot workspace or IK feasibility.
+Of 111{,}533 rows at 15\,Hz, 57{,}283 (51.4\%) are usable for training; the rest fall on tracking losses, synchronisation gaps
+or the last 0.8\,s of an episode. The split is frozen from the earlier releases (validation = the 26 held-out episodes of
+Sec.~\ref{sec:proc} plus HRL80 episodes 49--54): 298 train episodes with 51{,}612 rows and 32 validation episodes with 5{,}671 rows.
+
+\textbf{Silent pose jumps.} Comparing ego and robot state statistics showed per-row state jumps above 100\mm in the ego data
+that the robot data does not have. Two causes were mixed. First, the exported dataset contains only training rows, so
+``adjacent'' frames can be seconds apart: 1{,}482 of the 2{,}598 apparent jumps above 30\mm (57\%) are such time gaps, and
+adjacency has to be decided from row timestamps. Second, the remaining jumps are real: MASt3R-SLAM occasionally moves the
+camera by 10\,cm or more within one 30\,Hz frame without flagging tracking loss (55 raw steps faster than 3\,m/s in 24 training
+episodes, none preceded by a loss flag). Because the state is anchored at task start, a one-way jump corrupts every later
+state of that episode, while the current-anchored action is affected only for 0.8\,s. The v2b filter drops the remainder of an
+episode after a one-way jump (above 100\mm or 45\textdegree{} per row, or an isolated step above 50\mm between two slow steps)
+and drops isolated spikes only. It acts on 44 events in 42 training episodes and removes one episode entirely; training
+shrinks to 297 episodes and 48{,}411 rows ($-6.20$\%), validation is unchanged. The largest step between time-adjacent rows
+falls from 422.5 to 90.5\mm and steps above 100\mm from 18 to 0; 7 raw steps faster than 3\,m/s remain inside valid rows.
+
+\textbf{How ego data differs from robot data.} On 60 ego and 60 robot episodes, with the ego poses attached to a robot start
+pose: the robot's IK reaches 99.7\% (left) and 99.5\% (right) of ego positions, and 72.3\%/74.6\% of full ego poses. The IK
+configuration used on the robot, which locks one wrist joint, reproduces only 45.2\%/52.2\% of the robot's \emph{own} recorded
+poses, a deployment limitation that exists without any human data. Ego hands use a smaller workspace (state p95 0.221/0.214\,m
+versus 0.395/0.369\,m) with similar 0.4\,s translations (p95 93/99 versus 91/100\mm), and both ego hands are still at the same
+time far more often (19.5\% versus 2.4\% of samples at 0.4\,s). The largest difference is visual: the variance of the image
+Laplacian, a sharpness measure, has a median of 1{,}854/1{,}487 for the ego wrist fisheye views and 59/64 for the robot's wrist
+cameras.
+
+\section{Transfer Experiments}\label{sec:transfer}
+All runs in this section share one recipe: X-VLA with the 32-D action head, loss on action dimensions 0--19 only, dimensions
+20--31 zeroed at input and output, batch 8, 8-bit AdamW (policy learning rate $10^{-4}$, warm-up 1k, cosine decay ending at the
+last step), bf16 mixed precision, seed 1000. Robot data is R312c, 312 teleoperated episodes (174{,}012 frames) of the same
+six-order stacking task. Fine-tuning starts a fresh optimizer and uses robot normalization statistics.
+
+\textbf{Which soft prompt?} X-VLA conditions on a dataset/embodiment id that selects a set of soft prompts. Our earlier runs used
+id~0. Reading the public base weights shows that only slots 10--17 were trained: in the other 22 slots the encoder and decoder
+biases are exactly zero and the prompt weights stay near their initialization. Ids 0 and 6, both used by us, were therefore untrained
+slots. The trained slots are not a better start either: the initial loss on R312c is 1.11 for slot 0, 1.12 for 6, 1.61 for 15,
+2.35 for 10, 2.65 for 16, 4.07 for 17 and 22.80 for 11. All runs below use the unused slot 20 as our embodiment's own slot.
+
+\textbf{Ego-only model on robot frames.} After 40k steps on ego data alone, the model was queried, teacher-forced, on 120 robot
+frames and compared with a model trained 40k steps on robot data (these frames are in that model's training set, so its value
+is an upper reference). The median cosine between predicted and recorded translation at 0.4\,s is $+0.81$/$+0.77$ (left/right)
+for the robot model and $-0.05$/$-0.03$ for the ego model. No combination of a left/right swap and axis sign flips raises the ego
+model above $+0.16$, and the wrist-camera optical flow has the same sign relations to TCP motion in both domains, so this is not
+a convention error.
+
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3.2pt}
+\caption{Ego-only checkpoint (40k), median direction cosine at $k{=}4/8/16$ (left $|$ right) when images and state come from
+different domains. 100 ego validation frames and 100 robot frames; 21--55 moving frames per cell.}
+\label{tab:ablation}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Images + state & Left $k$=4/8/16 & Right $k$=4/8/16 \\
+\midrule
+ego + ego & 0.87 / 0.91 / 0.92 & 0.89 / 0.94 / 0.84 \\
+ego + zero & 0.77 / 0.80 / 0.89 & 0.85 / 0.80 / 0.66 \\
+ego + robot & 0.76 / 0.81 / 0.90 & 0.72 / 0.69 / 0.72 \\
+robot + robot & 0.36 / 0.30 / $-$0.01 & 0.19 / 0.02 / $-$0.15 \\
+robot + zero & 0.17 / 0.25 / $-$0.25 & 0.24 / 0.06 / $-$0.02 \\
+robot + ego & 0.16 / 0.24 / $-$0.16 & 0.49 / 0.33 / $-$0.03 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{The gap is in the images.} Table~\ref{tab:ablation} swaps the two inputs. With ego images the model keeps a cosine of
+0.69--0.90 whatever state it is given, robot state included; with robot images it falls to between $-0.25$ and $+0.49$ whatever
+the state. The failure is visual, which fits the 30-fold sharpness difference of the wrist views.
+
+\textbf{Ego pretraining as an initialization.} We fine-tuned on R312c from the base model (A) and from the ego model after 50k
+steps (B), with identical data, schedule (150k-step cosine), seed and recipe; both were stopped by us near 60k. At step 200 the
+training loss is 0.945 for A and 0.244 for B. The ratio B/A is 0.49 over the first 5k steps, 0.875 over 5k--20k and 0.95 over
+20k--40k, and over 55k--60k the two are tied (0.0733 versus 0.0745; B lower at 13 of 24 logged points)
+(Fig.~\ref{fig:egoinit}). Ego pretraining therefore speeds up early fitting of the robot data and gives no measurable advantage
+in training loss by 60k. This is training loss with one seed per arm; we have no held-out or closed-loop comparison of A and B.
+Two 300k runs finished later, but on different robot datasets (R312c for the ego-initialized run, 384 episodes for the
+scratch run), so they are not a transfer comparison and we do not report one.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_ego_init_loss.pdf}
+\caption{R312c fine-tuning from the base model versus from the 50k ego checkpoint, same data, schedule and seed. (a) Training
+loss. (b) Ratio of the two; values below 1 favour the ego initialization. Training loss only.}
+\label{fig:egoinit}
+\end{figure*}
+
+\textbf{Attempts to close the visual gap.} To make the ego wrist views look like the robot's, we re-render each fisheye frame as a
+virtual pinhole camera (62--70\textdegree{} horizontal field of view, principal point shifted so that the jaws sit low in the
+image as on the robot), then downsample, blur and JPEG-compress it. Labels, state and head images are unchanged. Applied to
+every frame (ROBOT100) the wrist sharpness median drops from 1{,}854/1{,}487 to 181/132, still two to three times the robot's
+59/64. A run with 70\% of frames re-rendered was stopped at 5k steps; a co-training run with exactly four ego (ROBOT100) and
+four robot samples per batch was stopped at 88.6k steps without evaluation; a 300k ROBOT100 pretraining run is in progress
+(74k steps), followed by fine-tuning on 30 robot episodes. None of these has a result yet.
+
+\textbf{On the robot.} Checkpoints from every run above were executed on the reBot through our deployment interface: 71
+checkpoints, 49{,}431 control cycles and 1{,}681 run starts between 2 and 4 October. The cycle log records IK tracking of the
+model's own waypoints, not task outcome, and has no episode or instruction field, so it yields no success rate. One operator
+observation was not logged: the ego-initialized model at 10k fine-tuning steps grasped cubes but picked the wrong colour. We
+mention it only as a reason to test colour grounding, not as a result.
+
+\section{Single-Arm Approach Data with Object-Based Scale}\label{sec:hra}
+As a simpler probe of transfer we recorded HRA\_red: 200 right-hand-only takes of ``approach the red cube'' (10\,s each, jaw
+unused) in one session. The left arm and the gripper are kept in the 20-D contract as dummies and masked out of the loss, so 9 of
+the 20 dimensions are supervised, and the wrist images are re-rendered as in ROBOT100.
+
+\textbf{IMU scale fails on slow motion.} The per-episode visual--inertial scale that works on the stacking data
+(Sec.~\ref{sec:proc}) is unobservable here: the approaches are slow and smooth, so the accelerometer barely constrains it.
+Across the 200 takes the IMU scale has a median of 0.012 and is zero or negative, which is physically impossible, in 95 of them
+(Fig.~\ref{fig:cube}b).
+
+\textbf{Scale from a known cube.} The red cube is static and has a 3.8\,cm edge. In frames where the cube is visible we fit its
+silhouette with a two- or three-face model, or with a single-face model when one face is seen within 35\textdegree{} of head-on
+(oblique single-face views are rejected), solve PnP, and recover the trajectory scale in closed form from the requirement that
+the cube stays put. An episode is valid with at least 10 PnP frames, a bootstrap spread of at most 10\% and a cube-centre
+residual of at most 2\,cm. On the bimanual HRL80 takes, where the IMU scale is reliable, 37 of 57 right-hand episodes are
+PnP-valid and the PnP/IMU ratio has a median of 1.062 (p16--p84 0.959--1.274; Fig.~\ref{fig:cube}a).
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig6_cube_scale.pdf}
+\caption{Per-episode metric scale of the MASt3R-SLAM trajectory from the IMU and from cube PnP. (a) HRL80 stacking takes,
+where the IMU scale is reliable. (b) HRA\_red approach takes: the IMU scale scatters around zero.}
+\label{fig:cube}
+\end{figure*}
+
+\textbf{Funnel and data.} Of 200 takes, 19 fail the scale gates (14 with too few PnP frames, 5 with too large a spread) and 15
+fail a physical sanity check on the scaled trajectory (scale between 0.1 and 1.0, SLAM travel at least 0.8 of the PnP-observed
+approach distance, travel at most 0.8\,m): 10 on the travel ratio, 3 with scale above 1 and travel above 0.8\,m, 1 with scale
+below 0.1 and 1 on travel alone. The remaining 166 are split into 151 train episodes (20{,}319 rows) and 15 validation
+episodes (2{,}011 rows). The median scale is 0.354 (p5 0.188, p95 0.500) and the median cube-centre residual 0.17\,cm.
+
+\textbf{Training.} A 300-step smoke test verified the loss mask: masked and padded dimensions receive exactly zero gradient and
+every supervised dimension a non-zero one. The 300k run had reached 100k steps at a training loss of 0.019 when this report was
+written. At 15k steps the held-out loss is 0.150 (mean of two noise seeds), against 0.066 on a 2{,}000-sample training subset;
+a partial evaluation at 30k (one seed) gives 0.198, so the model may already be overfitting 151 episodes. Checkpoints from
+15k to 75k ran 8{,}397 control cycles (658 run starts) on the robot, again without logged outcomes, and the planned offline
+direction probe has not been run.
+
+\section{Lessons}\label{sec:lessons}
+Three findings changed how we work, and each was found by an explicit check rather than by a loss curve. (i) A pretrained
+model's conditioning interface has to be audited, not assumed: two of our embodiment ids pointed at soft prompts that had never
+been trained. (ii) When human and robot data share a tensor contract, the remaining gap can be localized by swapping inputs
+between domains; here it is the wrist images, not kinematics or normalization. (iii) Each scale or pose source has a regime in
+which it fails silently: IMU scale on slow motion, MASt3R-SLAM on rare one-frame jumps. Both were caught only by comparison with an
+independent reference (robot statistics, a known object), which we now build into every new collection.
+
 \section{Limitations and Future Work}\label{sec:lim}
 \textbf{Completed:} dataset collection and calibration; the pose, retargeting and QA pipeline; 300k-step ego fine-tuning and
 offline evaluation on held-out episodes; retargeting v2, the robot-like re-collection and the matched 150-episode robot
 fine-tuning comparison; pretraining on the final 996-segment dataset (stopped at 211.7k steps, checkpoints 100k and 200k).
-\textbf{Stopped early, no conclusion:} the 90-, 60- and 30-episode robot fine-tuning comparisons (at most two matched steps,
-or only one arm run). \textbf{Not yet done:} robot fine-tuning from the final-dataset checkpoints. The robot evaluation
-episodes overlap the fine-tuning data, so a benefit on disjoint robot data remains to be shown.
+Version 3 added the Cartesian ego dataset and its filters, the soft-prompt audit, the domain-swap diagnostics, the matched
+initialization comparison up to 60k steps, the robot-like wrist re-rendering and the HRA\_red set with cube-based scale.
+\textbf{Stopped early, no conclusion:} the 90-, 60- and 30-episode robot fine-tuning comparisons of version 2 (at most two
+matched steps, or only one arm run); the 70\%-re-rendered pretraining (5k steps) and the ego/robot co-training run (88.6k
+steps, never evaluated). \textbf{In progress:} ROBOT100 pretraining followed by fine-tuning on 30 robot episodes; HRA\_red
+training. \textbf{Not yet done:} robot fine-tuning from the 996-segment checkpoints; a held-out or closed-loop comparison of
+the ego-initialized and scratch models; outcome logging on the robot. The version-2 robot evaluation episodes overlap the
+fine-tuning data, so a benefit on disjoint robot data remains to be shown.
 
-\textbf{Not supported by this study:} (i) closed-loop success on a robot; (ii) generalization to new cube layouts, since layouts
+\textbf{Not supported by this study:} (i) closed-loop success on a robot (checkpoints were executed, outcomes were not recorded); (ii) generalization to new cube layouts, since layouts
 were not recorded and absolute geometry is discarded by design; (iii) generalization to unseen stacking orders, since all six
-orders appear in training; (iv) transfer beyond one operator, one scene and three days; (v) any benefit of human data for robot learning beyond fitting the robot training distribution. \textbf{Planned experiments:} record layouts from the head camera and hold out layout regions; hold out two orders
+orders appear in training; (iv) transfer beyond one operator, one scene and three days; (v) any benefit of human data for robot learning beyond fitting the robot training distribution faster; (vi) that the
+ego-only policy, or the re-rendered wrist images, transfer to robot cameras. \textbf{Planned experiments:} log trial outcomes
+(target cube, colour, success) for every robot run; record layouts from the head camera and hold out layout regions; hold out two orders
 entirely and test instruction following; train with a static-phase-aware loss or weighting; evaluate closed-loop on the robot
 with the order instruction as the controlled variable.
 
@@ -374,9 +558,14 @@ We collected 349 bimanual egocentric demonstrations of three-cube stacking, proc
 through a gated pipeline, and fine-tuned a 0.9B VLA on the result. Offline, on moving samples the model predicts the
 direction of held-out human motion reliably (cosine 0.90 at $k{=}30$) and reduces joint-space error relative to a zero-motion
 baseline (by 13--32\% across horizons); on static samples it predicts spurious motion, aggregate metrics hide this, and
-swapping the order instruction does not make predictions more accurate. Multi-seed trajectory retrieval removes much of the retargeting loss, and ego pretraining gives a small, consistent gain
-when fine-tuning on robot data, measured on the robot training episodes. Spatial and task-order generalization, a benefit on
-disjoint robot data, and closed-loop transfer remain open and require the controlled experiments listed above.
+swapping the order instruction does not make predictions more accurate. Multi-seed trajectory retrieval removes much of the
+retargeting loss, and ego pretraining gives a small, consistent gain when fine-tuning on robot data, measured on the robot
+training episodes. Converting whole episodes to the robot's Cartesian action contract keeps 330 episodes without any
+feasibility filter, after a filter for silent SLAM jumps. With that contract the remaining human-to-robot gap is visual: an
+ego-only model gives no useful action direction on robot camera frames, and the gap follows the wrist images, not the state.
+As an initialization, ego pretraining speeds up early robot fine-tuning, and the advantage is gone by 60k steps. For slow
+single-arm motions, a known object replaces IMU scale. Spatial and task-order generalization, a benefit on disjoint robot
+data, and closed-loop success remain open and require the controlled experiments listed above.
 
 \begin{thebibliography}{99}\footnotesize
 \bibitem{chi2024umi} C.~Chi, Z.~Xu, C.~Pan, E.~Cousineau, B.~Burchfiel, S.~Feng, R.~Tedrake, and S.~Song, ``Universal manipulation interface: In-the-wild robot teaching without in-the-wild robots,'' in \emph{RSS}, 2024.

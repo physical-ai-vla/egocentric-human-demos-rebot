@@ -1,0 +1,46 @@
+{
+ "dataset": "ego_hra_red_rightonly_v1 (166 clean)",
+ "recorded": 200,
+ "scale_refused": 19,
+ "sanity_rejected": 15,
+ "accepted": 166,
+ "gates": {
+  "scale": "valid PnP >= 10, bootstrap spread <= 0.10, centre resid <= 2 cm",
+  "sanity": {
+   "s_min": 0.1,
+   "s_max": 1.0,
+   "travel_ratio_min": 0.8,
+   "travel_max_m": 0.8
+  }
+ },
+ "s_pnp_p5_p50_p95": [
+  0.188,
+  0.354,
+  0.5
+ ],
+ "centre_resid_cm_p50": 0.17,
+ "n_valid_pnp_p50": 89.0,
+ "travel_ratio_p5_p50_p95": [
+  0.901,
+  1.339,
+  11.878
+ ],
+ "home_to_cube_tcp_net_m_p5_p50_p95": [
+  0.145,
+  0.348,
+  0.598
+ ],
+ "action_0p8s_right_translation_cm_p50_p95": [
+  1.85,
+  7.87
+ ],
+ "train_rows": 20319,
+ "val_rows": 2011,
+ "train_episodes": 151,
+ "val_episodes": 15,
+ "excluded_kept_at": [
+  "raw/_rejected_sanity (15)",
+  "raw/sanity_rejected.jsonl",
+  "raw_spread15_candidates (005, 150 -- user: not included)"
+ ]
+}

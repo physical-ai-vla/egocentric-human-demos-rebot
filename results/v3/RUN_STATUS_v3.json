@@ -1,0 +1,39 @@
+{
+ "schema": "v3_run_status/v1",
+ "as_of": "2026-10-04 21:00 KST",
+ "source": "Ray job API (status, start/end) and each job's console log (steps reached; curves in results/v3/loss_curves/)",
+ "shared_recipe": {
+  "model": "X-VLA 0.9B (LeRobot), base = lerobot/xvla-base widened to a 32-d action / 20-d state head, processor domain_id 20 (an untrained soft-prompt slot, see results/v3/domain_slots/)",
+  "loss": "REL-only: MSE on action dims 0:20 (CART20, 16 x 50.05 ms); dims 20:32 hard-zeroed at input and output",
+  "optimizer": "bitsandbytes AdamW8bit, policy lr 1e-4 (VLM group x0.1 = 1e-5, the value LeRobot prints), wd 1e-4, warmup 1k, cosine to 2.5e-6 at steps = decay",
+  "batch": 8, "precision": "bf16 autocast, fp32 master weights", "seed": 1000, "save_every": 5000,
+  "fine_tuning_init": "fresh optimizer and scheduler; robot dataset statistics"
+ },
+ "datasets": {
+  "R312c": {"episodes": 312, "frames": 174012, "kind": "reBot teleoperation, 6-order cube stacking"},
+  "R384": {"episodes": 384, "frames": 227230, "kind": "R312c + 72 further reBot teleoperation episodes (21 far-layout, 51 earlier-phase)"},
+  "EGO_v2b": {"episodes_train": 297, "rows_train": 48411, "episodes_val": 32, "rows_val": 5671},
+  "EGO_v2b_ROBOT100": "EGO_v2b with every wrist frame re-rendered as a pinhole robot-like view",
+  "EGO_v2b_MIX70": "EGO_v2b with 70 % of wrist frames re-rendered",
+  "HRA_red": {"episodes_train": 151, "rows_train": 20319, "episodes_val": 15, "rows_val": 2011}
+ },
+ "runs": [
+  {"id": "A60", "run": "R312C-RELCART20-RELONLY-D20-B8-150K", "data": "R312c", "init": "base", "planned": 150000, "reached": 60000, "status": "STOPPED 2026-10-02 16:38 (by us)"},
+  {"id": "EGO50k", "run": "EGO-CART20V2-RELONLY-D20-B8-50K-V2B", "data": "EGO_v2b", "init": "base", "planned": 50000, "reached": 50000, "status": "SUCCEEDED 2026-10-02 15:55"},
+  {"id": "B60", "run": "FT-R312C-FROM-EGOV2BB850K-RELONLY-D20-B8-150K", "data": "R312c", "init": "EGO50k step 50000", "planned": 150000, "reached": 59800, "status": "STOPPED 2026-10-02 22:38 (by us)"},
+  {"id": "R384-150K", "run": "R384-RELCART20-RELONLY-D20-B8-150K", "data": "R384", "init": "base", "planned": 150000, "reached": 64000, "status": "STOPPED 2026-10-02 22:38 (by us)"},
+  {"id": "A300", "run": "R384-RELCART20-RELONLY-D20-B8-300K", "data": "R384", "init": "base", "planned": 300000, "reached": 300000, "status": "SUCCEEDED 2026-10-04 02:40"},
+  {"id": "B300", "run": "FT-R312C-FROM-EGOV2BB850K-RELONLY-D20-B8-300K", "data": "R312c", "init": "EGO50k step 50000", "planned": 300000, "reached": 300000, "status": "SUCCEEDED 2026-10-04 03:36"},
+  {"id": "MIX70", "run": "EGO-CART20V2-RELONLY-D20-B8-100K-V2B-MIX70", "data": "EGO_v2b_MIX70", "init": "base", "planned": 100000, "reached": 5000, "status": "STOPPED 2026-10-02 16:50 (by us)"},
+  {"id": "COTRAIN", "run": "COTRAIN-R312C-EGOROBOT100-RELONLY-D20-B8-300K", "data": "R312c + EGO_v2b_ROBOT100, exactly 4 + 4 per batch", "init": "base", "planned": 300000, "reached": 88600, "status": "STOPPED 2026-10-03 18:15 (by us); last checkpoint 85000"},
+  {"id": "ROBOT100-PT", "run": "EGO-CART20V2-RELONLY-D20-B8-300K-V2B-ROBOT100", "data": "EGO_v2b_ROBOT100", "init": "base", "planned": 300000, "reached": 74000, "status": "RUNNING"},
+  {"id": "FT-R30", "run": "FT-R30-FROM-EGOROBOT100PT300K-RELONLY-D20-B8-600K", "data": "R30 = R312c episodes 150-179", "init": "ROBOT100-PT step 300000", "planned": 600000, "reached": 0, "status": "QUEUED (starts when ROBOT100-PT finishes)"},
+  {"id": "HRA", "run": "HRA-RIGHTONLY-LOSSMASK-D20-B8-300K", "data": "HRA_red", "init": "base", "planned": 300000, "reached": 100000, "status": "RUNNING"}
+ ],
+ "comparability": {
+  "A60_vs_B60": "valid: same data, schedule, seed and recipe; training loss only; one seed per arm",
+  "A300_vs_B300": "NOT a transfer comparison: different robot datasets (R384 vs R312c)",
+  "COTRAIN_loss": "not comparable to A/B: half of every batch is ego data",
+  "offline_or_closed_loop_eval_of_A300_B300": "none run"
+ }
+}
