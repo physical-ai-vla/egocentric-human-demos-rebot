@@ -24,18 +24,14 @@ BPR (held-out validation episode). Full-length videos (640x480, 30 fps, 23 s, no
 | `20260917_150545_000005` | purple, red, blue | train | [head.mp4](sample_data/20260917_150545_000005/head.mp4) |
 | `20260917_150545_000010` | blue, purple, red | held-out | [head.mp4](sample_data/20260917_150545_000010/head.mp4) |
 
-**MASt3R-SLAM wrist trajectories** (v3): head view + gravity-aligned 3D wrist trajectory + gripper or speed trace;
-wrist fisheye panels covered for privacy. Details in [MASt3R-SLAM trajectory videos](#mast3r-slam-trajectory-videos).
+**MASt3R-SLAM wrist trajectories** (v3): head + both wrist cameras, gravity-aligned 3D wrist trajectory and gripper
+trace. Details in [MASt3R-SLAM trajectory videos](#mast3r-slam-trajectory-videos).
 
 | Video | Take | Metric scale |
 |---|---|---|
 | [hrl80_000035.mp4](docs/media/mast3r_trajectories/hrl80_000035.mp4) | HRL80 bimanual stacking, PRB, 33 s | IMU-VI |
 | [hrl80_000055.mp4](docs/media/mast3r_trajectories/hrl80_000055.mp4) | HRL80 bimanual stacking, RBP, 33 s | IMU-VI |
 | [hrl80_000060.mp4](docs/media/mast3r_trajectories/hrl80_000060.mp4) | HRL80 bimanual stacking, PBR, 33 s | IMU-VI |
-| [hra_000001_right.mp4](docs/media/mast3r_trajectories/hra_000001_right.mp4) | HRA_red right-hand approach, 13 s | cube PnP |
-| [hra_000002_right.mp4](docs/media/mast3r_trajectories/hra_000002_right.mp4) | HRA_red right-hand approach, 13 s | cube PnP |
-| [hra_000150_right.mp4](docs/media/mast3r_trajectories/hra_000150_right.mp4) | HRA_red, scale QC fail (excluded) | cube PnP |
-| [hra_000180_right.mp4](docs/media/mast3r_trajectories/hra_000180_right.mp4) | HRA_red right-hand approach, 13 s | cube PnP |
 
 These are human demonstrations recorded with the hand-worn rig, not robot rollouts. Wrist-camera videos are not
 published (see [Sample data](#sample-data)).
@@ -206,19 +202,17 @@ Evidence: `results/v3/ego_cart20/`, `results/v3/state_jump/`.
 
 ### MASt3R-SLAM trajectory videos
 
-Gravity-aligned wrist trajectories from MASt3R-SLAM (z up, each arm's origin at its start, current tool axes drawn), with
-the head-camera view and the gripper (HRL80) or wrist-speed and PnP wrist-to-cube distance (HRA_red) trace. Metric scale:
-IMU visual–inertial for HRL80, cube PnP for HRA_red. The wrist fisheye panels are covered: they show the office background
-and monitor screens (`analysis/v3/mask_wrist_panels.sh`). Click a preview for the full-resolution MP4.
+Bimanual HRL80 takes. Left: head camera and both wrist fisheye cameras. Right: gravity-aligned MASt3R-SLAM wrist
+trajectories (z up, each arm's origin at its start, current tool axes drawn) with IMU visual–inertial metric scale, and
+both grippers below (1 = open). Click a preview for the MP4 (960×540).
 
 <table>
 <tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000035.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000035.gif" width="100%" alt="hrl80_000035"></a><br><sub>HRL80 stacking, order PRB (33 s, shown 3×)</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000055.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000055.gif" width="100%" alt="hrl80_000055"></a><br><sub>HRL80 stacking, order RBP (33 s, shown 3×)</sub></td></tr>
-<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000060.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000060.gif" width="100%" alt="hrl80_000060"></a><br><sub>HRL80 stacking, order PBR (33 s, shown 3×)</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000001_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000001_right.gif" width="100%" alt="hra_000001_right"></a><br><sub>HRA_red right-hand approach (13 s, shown 1.5×)</sub></td></tr>
-<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000002_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000002_right.gif" width="100%" alt="hra_000002_right"></a><br><sub>HRA_red right-hand approach</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000180_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000180_right.gif" width="100%" alt="hra_000180_right"></a><br><sub>HRA_red right-hand approach</sub></td></tr>
-<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000150_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000150_right.gif" width="100%" alt="hra_000150_right"></a><br><sub>HRA_red, scale QC <b>fail</b> (spread 0.11), excluded from the dataset</sub></td><td></td></tr>
+<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000060.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000060.gif" width="100%" alt="hrl80_000060"></a><br><sub>HRL80 stacking, order PBR (33 s, shown 3×)</sub></td><td></td></tr>
 </table>
 
-Renderers: `analysis/v3/viz_mast3r_episode.py` (bimanual) and `analysis/v3/viz_hra_mast3r.py` (HRA_red).
+Renderer: `analysis/v3/viz_mast3r_episode.py`.
+
 
 ### Ego vs robot, and the soft-prompt audit
 
@@ -274,8 +268,7 @@ Evidence: `results/v3/hra_red/`.
 | `report/figures/make_figures_v3.py` | Figs. 4–5 of the report |
 
 v3 code imports some internal packages that are not included: the HandUMI raw-episode exporter (`sources/handumi_export.py`),
-the deployment/inference client (`infer_core_v4`) used by the diagnostics, and the robot datasets. Raw HRA videos and wrist frames are not published. The trajectory videos above keep only the head view (checked on 12
-frames per video: table, cube, operator's gloved hand), the 3D trajectory and the plots.
+the deployment/inference client (`infer_core_v4`) used by the diagnostics, and the robot datasets. HRA_red videos and frames are not published.
 
 ## Repository map
 
