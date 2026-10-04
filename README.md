@@ -29,9 +29,9 @@ trace. Details in [MASt3R-SLAM trajectory videos](#mast3r-slam-trajectory-videos
 
 | Video | Take | Metric scale |
 |---|---|---|
-| [hrl80_000035.mp4](docs/media/mast3r_trajectories/hrl80_000035.mp4) | HRL80 bimanual stacking, PRB, 33 s | IMU-VI |
-| [hrl80_000055.mp4](docs/media/mast3r_trajectories/hrl80_000055.mp4) | HRL80 bimanual stacking, RBP, 33 s | IMU-VI |
-| [hrl80_000060.mp4](docs/media/mast3r_trajectories/hrl80_000060.mp4) | HRL80 bimanual stacking, PBR, 33 s | IMU-VI |
+| [hrl80_000035_wrist.mp4](docs/media/mast3r_trajectories/hrl80_000035_wrist.mp4) | HRL80 bimanual stacking, PRB, 33 s | IMU-VI |
+| [hrl80_000055_wrist.mp4](docs/media/mast3r_trajectories/hrl80_000055_wrist.mp4) | HRL80 bimanual stacking, RBP, 33 s | IMU-VI |
+| [hrl80_000060_wrist.mp4](docs/media/mast3r_trajectories/hrl80_000060_wrist.mp4) | HRL80 bimanual stacking, PBR, 33 s | IMU-VI |
 
 These are human demonstrations recorded with the hand-worn rig, not robot rollouts. Wrist-camera videos are not
 published (see [Sample data](#sample-data)).
@@ -207,8 +207,8 @@ trajectories (z up, each arm's origin at its start, current tool axes drawn) wit
 both grippers below (1 = open). Click a preview for the MP4 (960×540).
 
 <table>
-<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000035.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000035.gif" width="100%" alt="hrl80_000035"></a><br><sub>HRL80 stacking, order PRB (33 s, shown 3×)</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000055.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000055.gif" width="100%" alt="hrl80_000055"></a><br><sub>HRL80 stacking, order RBP (33 s, shown 3×)</sub></td></tr>
-<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000060.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000060.gif" width="100%" alt="hrl80_000060"></a><br><sub>HRL80 stacking, order PBR (33 s, shown 3×)</sub></td><td></td></tr>
+<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000035_wrist.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000035_wrist.gif" width="100%" alt="hrl80_000035"></a><br><sub>HRL80 stacking, order PRB (33 s, shown 3×)</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000055_wrist.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000055_wrist.gif" width="100%" alt="hrl80_000055"></a><br><sub>HRL80 stacking, order RBP (33 s, shown 3×)</sub></td></tr>
+<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000060_wrist.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000060_wrist.gif" width="100%" alt="hrl80_000060"></a><br><sub>HRL80 stacking, order PBR (33 s, shown 3×)</sub></td><td></td></tr>
 </table>
 
 Renderer: `analysis/v3/viz_mast3r_episode.py`.
@@ -361,6 +361,5 @@ Each episode directory contains:
 - `segments_<id>.npz`: the processed 65-frame segments. Keys are `starts, st, ac, tcp_tgt, vfL, vfR, vfH, epd, instr, val`. `epd` is the episode path relative to the raw dataset root (`Hpilot/<session>/<episode>`).
 - `right_wrist_frame.jpg`: one 640 px frame from the right wrist camera. It was checked by eye to show only the tabletop, cubes, plate and HandUMI hardware.
 
-**The wrist fisheye videos (`left_wrist.mp4`, `right_wrist.mp4`) are not included.** Their wide field of view
-captures bystanders and office monitor screens. No left-wrist frame is included because every candidate we looked at
-showed the office background or the operator's arm.
+The sample episodes ship the head video only; wrist fisheye views of three HRL80 takes are shown in the
+[MASt3R-SLAM trajectory videos](#mast3r-slam-trajectory-videos).
