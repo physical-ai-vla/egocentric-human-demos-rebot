@@ -191,6 +191,26 @@ action contract, then tests what transfers. Report sections X–XIII. Run status
 
 Evidence: `results/v3/ego_cart20/`, `results/v3/state_jump/`.
 
+### MASt3R-SLAM trajectory videos
+
+![HRL80 take 000035, MASt3R-SLAM wrist trajectories, 2x speed](docs/media/mast3r_trajectory_hrl80_000035.gif)
+
+Gravity-aligned wrist trajectories from MASt3R-SLAM (z up, each arm's origin at its start, current tool axes drawn), with
+the head-camera view and the gripper or wrist-speed trace. The wrist fisheye panels are covered: they show the office
+background and monitor screens (`analysis/v3/mask_wrist_panels.sh`).
+
+| video | take | metric scale | |
+|---|---|---|---|
+| [hrl80_000035.mp4](docs/media/mast3r_trajectories/hrl80_000035.mp4) | HRL80 bimanual stacking, order PRB, 33 s | IMU-VI | both wrists + grippers |
+| [hrl80_000055.mp4](docs/media/mast3r_trajectories/hrl80_000055.mp4) | HRL80 bimanual stacking, order RBP, 33 s | IMU-VI | |
+| [hrl80_000060.mp4](docs/media/mast3r_trajectories/hrl80_000060.mp4) | HRL80 bimanual stacking, order PBR, 33 s | IMU-VI | |
+| [hra_000001_right.mp4](docs/media/mast3r_trajectories/hra_000001_right.mp4) | HRA_red approach, 13 s | cube PnP | right wrist + PnP distance |
+| [hra_000002_right.mp4](docs/media/mast3r_trajectories/hra_000002_right.mp4) | HRA_red approach, 13 s | cube PnP | |
+| [hra_000150_right.mp4](docs/media/mast3r_trajectories/hra_000150_right.mp4) | HRA_red approach, 13 s | cube PnP | scale QC **fail** (spread 0.11), excluded from the dataset |
+| [hra_000180_right.mp4](docs/media/mast3r_trajectories/hra_000180_right.mp4) | HRA_red approach, 13 s | cube PnP | |
+
+Renderers: `analysis/v3/viz_mast3r_episode.py` (bimanual) and `analysis/v3/viz_hra_mast3r.py` (HRA_red).
+
 ### Ego vs robot, and the soft-prompt audit
 
 - Robot IK reaches 99.7 / 99.5 % of ego positions (L / R) and 72.3 / 74.6 % of full ego poses. The deployed IK
@@ -245,8 +265,8 @@ Evidence: `results/v3/hra_red/`.
 | `report/figures/make_figures_v3.py` | Figs. 4–5 of the report |
 
 v3 code imports some internal packages that are not included: the HandUMI raw-episode exporter (`sources/handumi_export.py`),
-the deployment/inference client (`infer_core_v4`) used by the diagnostics, and the robot datasets. The v3 HRA videos and
-frames are not published (no privacy review).
+the deployment/inference client (`infer_core_v4`) used by the diagnostics, and the robot datasets. Raw HRA videos and wrist frames are not published. The trajectory videos above keep only the head view (checked on 12
+frames per video: table, cube, operator's gloved hand), the 3D trajectory and the plots.
 
 ## Repository map
 

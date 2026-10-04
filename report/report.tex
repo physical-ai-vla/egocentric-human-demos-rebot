@@ -379,7 +379,19 @@ dimensions that are exactly zero and never supervised. The state is each arm's p
 the two gripper values, the same layout as the robot state. The gripper is the continuous jaw aperture divided by 80\mm; the
 largest observed value is 0.847, so the ``fully open'' end is never reached. A row is kept only if both arms are valid at $t$,
 all 16 targets lie on valid raw samples no more than 50\,ms apart, and a head-camera frame exists within 20\,ms; there is no
-padding. Eleven synthetic tests pin the contract.
+padding. Eleven synthetic tests pin the contract. Fig.~\ref{fig:traj} shows the wrist trajectories that the labels are
+cut from; the full videos are in the repository.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig7_mast3r_trajectories.png}
+\caption{MASt3R-SLAM wrist trajectories, gravity-aligned (z up), each arm's origin at its start pose, current tool axes
+drawn (x red, y green, z blue). Left: HRL80 stacking take (order PRB, metric scale from the IMU); below, both grippers
+(1 = open). Right: an HRA\_red approach take (right hand only, metric scale from cube PnP); below, wrist speed and the
+PnP wrist-to-cube distance. Head-camera frame at the same instant on the left of each panel. Wrist-camera views are not
+shown because they include the office background (videos: \texttt{docs/media/mast3r\_trajectories/}).}
+\label{fig:traj}
+\end{figure*}
 
 \textbf{Data.} The source is the 273 original episodes that have valid per-hand IMU scale and 60 HRL80 episodes; 3 HRL80 episodes
 are refused because one hand's IMU scale is invalid, leaving 330. Nothing is filtered for robot workspace or IK feasibility.
