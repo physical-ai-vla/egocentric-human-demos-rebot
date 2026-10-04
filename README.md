@@ -24,6 +24,19 @@ BPR (held-out validation episode). Full-length videos (640x480, 30 fps, 23 s, no
 | `20260917_150545_000005` | purple, red, blue | train | [head.mp4](sample_data/20260917_150545_000005/head.mp4) |
 | `20260917_150545_000010` | blue, purple, red | held-out | [head.mp4](sample_data/20260917_150545_000010/head.mp4) |
 
+**MASt3R-SLAM wrist trajectories** (v3): head view + gravity-aligned 3D wrist trajectory + gripper or speed trace;
+wrist fisheye panels covered for privacy. Details in [MASt3R-SLAM trajectory videos](#mast3r-slam-trajectory-videos).
+
+| Video | Take | Metric scale |
+|---|---|---|
+| [hrl80_000035.mp4](docs/media/mast3r_trajectories/hrl80_000035.mp4) | HRL80 bimanual stacking, PRB, 33 s | IMU-VI |
+| [hrl80_000055.mp4](docs/media/mast3r_trajectories/hrl80_000055.mp4) | HRL80 bimanual stacking, RBP, 33 s | IMU-VI |
+| [hrl80_000060.mp4](docs/media/mast3r_trajectories/hrl80_000060.mp4) | HRL80 bimanual stacking, PBR, 33 s | IMU-VI |
+| [hra_000001_right.mp4](docs/media/mast3r_trajectories/hra_000001_right.mp4) | HRA_red right-hand approach, 13 s | cube PnP |
+| [hra_000002_right.mp4](docs/media/mast3r_trajectories/hra_000002_right.mp4) | HRA_red right-hand approach, 13 s | cube PnP |
+| [hra_000150_right.mp4](docs/media/mast3r_trajectories/hra_000150_right.mp4) | HRA_red, scale QC fail (excluded) | cube PnP |
+| [hra_000180_right.mp4](docs/media/mast3r_trajectories/hra_000180_right.mp4) | HRA_red right-hand approach, 13 s | cube PnP |
+
 These are human demonstrations recorded with the hand-worn rig, not robot rollouts. Wrist-camera videos are not
 published (see [Sample data](#sample-data)).
 
