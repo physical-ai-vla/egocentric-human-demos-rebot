@@ -206,21 +206,17 @@ Evidence: `results/v3/ego_cart20/`, `results/v3/state_jump/`.
 
 ### MASt3R-SLAM trajectory videos
 
-![HRL80 take 000035, MASt3R-SLAM wrist trajectories, 2x speed](docs/media/mast3r_trajectory_hrl80_000035.gif)
-
 Gravity-aligned wrist trajectories from MASt3R-SLAM (z up, each arm's origin at its start, current tool axes drawn), with
-the head-camera view and the gripper or wrist-speed trace. The wrist fisheye panels are covered: they show the office
-background and monitor screens (`analysis/v3/mask_wrist_panels.sh`).
+the head-camera view and the gripper (HRL80) or wrist-speed and PnP wrist-to-cube distance (HRA_red) trace. Metric scale:
+IMU visual–inertial for HRL80, cube PnP for HRA_red. The wrist fisheye panels are covered: they show the office background
+and monitor screens (`analysis/v3/mask_wrist_panels.sh`). Click a preview for the full-resolution MP4.
 
-| video | take | metric scale | |
-|---|---|---|---|
-| [hrl80_000035.mp4](docs/media/mast3r_trajectories/hrl80_000035.mp4) | HRL80 bimanual stacking, order PRB, 33 s | IMU-VI | both wrists + grippers |
-| [hrl80_000055.mp4](docs/media/mast3r_trajectories/hrl80_000055.mp4) | HRL80 bimanual stacking, order RBP, 33 s | IMU-VI | |
-| [hrl80_000060.mp4](docs/media/mast3r_trajectories/hrl80_000060.mp4) | HRL80 bimanual stacking, order PBR, 33 s | IMU-VI | |
-| [hra_000001_right.mp4](docs/media/mast3r_trajectories/hra_000001_right.mp4) | HRA_red approach, 13 s | cube PnP | right wrist + PnP distance |
-| [hra_000002_right.mp4](docs/media/mast3r_trajectories/hra_000002_right.mp4) | HRA_red approach, 13 s | cube PnP | |
-| [hra_000150_right.mp4](docs/media/mast3r_trajectories/hra_000150_right.mp4) | HRA_red approach, 13 s | cube PnP | scale QC **fail** (spread 0.11), excluded from the dataset |
-| [hra_000180_right.mp4](docs/media/mast3r_trajectories/hra_000180_right.mp4) | HRA_red approach, 13 s | cube PnP | |
+<table>
+<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000035.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000035.gif" width="100%" alt="hrl80_000035"></a><br><sub>HRL80 stacking, order PRB (33 s, shown 3×)</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000055.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000055.gif" width="100%" alt="hrl80_000055"></a><br><sub>HRL80 stacking, order RBP (33 s, shown 3×)</sub></td></tr>
+<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hrl80_000060.mp4"><img src="docs/media/mast3r_trajectories/preview/hrl80_000060.gif" width="100%" alt="hrl80_000060"></a><br><sub>HRL80 stacking, order PBR (33 s, shown 3×)</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000001_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000001_right.gif" width="100%" alt="hra_000001_right"></a><br><sub>HRA_red right-hand approach (13 s, shown 1.5×)</sub></td></tr>
+<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000002_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000002_right.gif" width="100%" alt="hra_000002_right"></a><br><sub>HRA_red right-hand approach</sub></td><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000180_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000180_right.gif" width="100%" alt="hra_000180_right"></a><br><sub>HRA_red right-hand approach</sub></td></tr>
+<tr><td align="center" width="50%"><a href="docs/media/mast3r_trajectories/hra_000150_right.mp4"><img src="docs/media/mast3r_trajectories/preview/hra_000150_right.gif" width="100%" alt="hra_000150_right"></a><br><sub>HRA_red, scale QC <b>fail</b> (spread 0.11), excluded from the dataset</sub></td><td></td></tr>
+</table>
 
 Renderers: `analysis/v3/viz_mast3r_episode.py` (bimanual) and `analysis/v3/viz_hra_mast3r.py` (HRA_red).
 
