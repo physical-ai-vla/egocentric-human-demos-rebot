@@ -44,7 +44,8 @@ model); swapping images and states between domains locates the gap in the wrist 
 30$\times$. Used as an initialization for robot fine-tuning, the ego model starts at a 3.9$\times$ lower training loss, but the advantage
 shrinks to a tie by 60k steps of an otherwise identical run. Finally, a right-hand approach set shows that IMU visual--inertial
 scale becomes unobservable on slow motions and replaces it with a cube of known size. Checkpoints from all stages were run on
-the robot, but no task outcome was logged, so we report no closed-loop success rate. No experiment tests new spatial layouts
+the robot; an ego-initialized model fine-tuned on 312 robot episodes completed full three-cube stacks in closed loop, but
+trials were not counted, so we report a demonstration, not a success rate. No experiment tests new spatial layouts
 or unseen stacking orders; we state explicitly which claims this data can and cannot support.
 \end{abstract}
 
@@ -488,9 +489,13 @@ four robot samples per batch was stopped at 88.6k steps without evaluation; a 30
 
 \textbf{On the robot.} Checkpoints from every run above were executed on the reBot through our deployment interface: 71
 checkpoints, 49{,}431 control cycles and 1{,}681 run starts between 2 and 4 October. The cycle log records IK tracking of the
-model's own waypoints, not task outcome, and has no episode or instruction field, so it yields no success rate. One operator
-observation was not logged: the ego-initialized model at 10k fine-tuning steps grasped cubes but picked the wrong colour. We
-mention it only as a reason to test colour grounding, not as a result.
+model's own waypoints, not task outcome, and has no episode or instruction field, so it yields no success rate. Two
+operator observations were not logged. First, the ego-initialized model at 10k fine-tuning steps grasped cubes but picked
+the wrong colour. Second, the ego-initialized model fine-tuned on R312c for 300k (B300, checkpoints between 75k and 205k)
+completed the full three-cube stack on the robot in closed loop. The number of trials was not recorded and no video was
+taken, so we state only that closed-loop three-cube stacking has been demonstrated, with no success rate. It also says
+nothing about the value of ego pretraining: no scratch model trained on the same R312c data was evaluated under the same
+protocol (the finished scratch 300k run used R384).
 
 \section{Single-Arm Approach Data with Object-Based Scale}\label{sec:hra}
 As a simpler probe of transfer we recorded HRA\_red: 200 right-hand-only takes of ``approach the red cube'' (10\,s each, jaw
@@ -551,11 +556,14 @@ training. \textbf{Not yet done:} robot fine-tuning from the 996-segment checkpoi
 the ego-initialized and scratch models; outcome logging on the robot. The version-2 robot evaluation episodes overlap the
 fine-tuning data, so a benefit on disjoint robot data remains to be shown.
 
-\textbf{Not supported by this study:} (i) closed-loop success on a robot (checkpoints were executed, outcomes were not recorded); (ii) generalization to new cube layouts, since layouts
+\textbf{Not supported by this study:} (i) a closed-loop success rate (three-cube stacking was demonstrated once fine-tuned on 312 robot episodes, but trials were
+not counted), or any closed-loop difference between ego-initialized and scratch models; (ii) generalization to new cube layouts, since layouts
 were not recorded and absolute geometry is discarded by design; (iii) generalization to unseen stacking orders, since all six
 orders appear in training; (iv) transfer beyond one operator, one scene and three days; (v) any benefit of human data for robot learning beyond fitting the robot training distribution faster; (vi) that the
-ego-only policy, or the re-rendered wrist images, transfer to robot cameras. \textbf{Planned experiments:} log trial outcomes
-(target cube, colour, success) for every robot run; record layouts from the head camera and hold out layout regions; hold out two orders
+ego-only policy, or the re-rendered wrist images, transfer to robot cameras. \textbf{Planned experiments:} log every robot trial (model, checkpoint, robot data size, layout, instruction, stack
+level 0--3, wrong colour, failure reason) and run 20--30 trials per model; compare scratch and ego-initialized models at
+matched fine-tuning steps and at reduced robot data (30 episodes) for the step and data budget at which stacking first
+succeeds; record layouts from the head camera and hold out layout regions; hold out two orders
 entirely and test instruction following; train with a static-phase-aware loss or weighting; evaluate closed-loop on the robot
 with the order instruction as the controlled variable.
 
@@ -574,9 +582,12 @@ retargeting loss, and ego pretraining gives a small, consistent gain when fine-t
 training episodes. Converting whole episodes to the robot's Cartesian action contract keeps 330 episodes without any
 feasibility filter, after a filter for silent SLAM jumps. With that contract the remaining human-to-robot gap is visual: an
 ego-only model gives no useful action direction on robot camera frames, and the gap follows the wrist images, not the state.
-As an initialization, ego pretraining speeds up early robot fine-tuning, and the advantage is gone by 60k steps. For slow
-single-arm motions, a known object replaces IMU scale. Spatial and task-order generalization, a benefit on disjoint robot
-data, and closed-loop success remain open and require the controlled experiments listed above.
+As an initialization, ego pretraining speeds up early robot fine-tuning, and the advantage in training loss is gone by
+60k steps. An ego-initialized model fine-tuned on 312 robot episodes has completed full three-cube stacks on the robot, so
+the task itself is solved in closed loop; whether ego pretraining reaches that point with fewer robot episodes or fewer
+fine-tuning steps is the open question. For slow single-arm motions, a known object replaces IMU scale. Spatial and
+task-order generalization, a benefit on disjoint robot data, and a measured success rate require the controlled
+experiments listed above.
 
 \begin{thebibliography}{99}\footnotesize
 \bibitem{chi2024umi} C.~Chi, Z.~Xu, C.~Pan, E.~Cousineau, B.~Burchfiel, S.~Feng, R.~Tedrake, and S.~Song, ``Universal manipulation interface: In-the-wild robot teaching without in-the-wild robots,'' in \emph{RSS}, 2024.

@@ -44,6 +44,7 @@ files below (it exits 1 on any mismatch). Status as of 2026-10-04 (version 3): a
 | Ego-only 40k on robot frames, k8 direction cosine | `results/v3/diagnostics/direction_cosine_ego40k_vs_robot40k.txt` (session-log capture) | −0.05 / −0.03 (robot model +0.81 / +0.77, in-training frames) | VERIFIED (log capture, not re-run) |
 | Image/state swap | `results/v3/diagnostics/image_state_ablation_ego40k.txt` (session-log capture) | ego images 0.66–0.94; robot images −0.25 to +0.49 | VERIFIED (log capture, not re-run) |
 | Ego init vs scratch, R312c training loss, matched | `results/v3/loss_curves/`, `analysis/out/v3_ego_init_loss.json` | step 200: 0.244 vs 0.945; ratio 0.49 → 0.984 (tie) by 55–60k | VERIFIED (training loss, 1 seed) |
+| Closed-loop three-cube stack, ego-init R312c FT (B300, 75k–205k) | operator observation only (no log, no video) | demonstrated; trials not counted | OPERATOR-REPORTED, not verifiable from repository files |
 | v3 checkpoints executed on the robot | `results/v3/hardware_cycles_by_ckpt.csv` | 71 checkpoints, 49,431 cycles; no outcome field | VERIFIED |
 | HRA_red IMU scale unobservable | `results/v3/hra_red/scale_qc_per_episode/` | median 0.012; ≤ 0 in 95 of 200 | VERIFIED |
 | Cube-PnP scale vs IMU on HRL80 | `results/v3/hra_red/hrl_val_1face.json` | 37 / 57 valid; ratio 1.062 (p16–p84 0.959–1.274) | VERIFIED |
@@ -57,6 +58,6 @@ files below (it exits 1 on any mismatch). Status as of 2026-10-04 (version 3): a
 - a benefit on robot test episodes disjoint from fine-tuning data;
 - transfer to other operators or scenes;
 - any robot fine-tuning result from the final 996-segment pretraining checkpoints;
-- a closed-loop success rate for any v3 checkpoint (executed on the robot, outcomes not logged);
+- a closed-loop success rate for any v3 checkpoint (B300 stacking was observed, trials not counted);
 - a held-out or closed-loop advantage of ego initialization (only matched training loss to 60k);
 - transfer of the ego-only policy or the robotized wrist images to robot cameras.

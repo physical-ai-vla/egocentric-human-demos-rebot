@@ -8,8 +8,9 @@ robot ([Update v3](#update-v3-cartesian-ego-pretraining-and-transfer)). The earl
 
 The write-up is [`report/report.pdf`](report/report.pdf) (LaTeX source `report/report.tex`, figures rebuilt by `report/figures/make_figures.py`).
 
-**Status: offline evaluation and training diagnostics.** Version-3 checkpoints were executed on the robot, but no task
-outcome was logged, so this repository reports **no closed-loop success rate**.
+**Status: offline evaluation and training diagnostics.** Version-3 checkpoints were executed on the robot, and an
+ego-initialized model fine-tuned on 312 robot episodes completed full three-cube stacks in closed loop (operator
+observation; trials not counted, no video). This repository reports **no closed-loop success rate**.
 
 ## Demonstration videos
 
@@ -181,8 +182,11 @@ policies are not trained in. Version 3 converts whole human episodes directly in
 action contract, then tests what transfers. Report sections X–XIII. Run status for every v3 run:
 `results/v3/RUN_STATUS_v3.json`.
 
-**Status:** training diagnostics only. Checkpoints were executed on the robot (`results/v3/hardware_cycles_by_ckpt.csv`:
-71 checkpoints, 49,431 control cycles), but the log records IK tracking, not task outcome, so there is no success rate.
+**Status:** training diagnostics, plus one unlogged closed-loop observation. Checkpoints were executed on the robot
+(`results/v3/hardware_cycles_by_ckpt.csv`: 71 checkpoints, 49,431 control cycles); the log records IK tracking, not task
+outcome. The operator observed complete three-cube stacks with the ego-initialized R312c model (B300, checkpoints
+75k–205k). Trials were not counted and there is no video, so this is a demonstration, not a success rate, and no scratch
+model on the same data was tested the same way.
 
 ### Data contract and dataset (`cart20/`)
 
@@ -300,7 +304,7 @@ python3 report/figures/make_figures.py && python3 report/figures/make_figures_v3
 
 ## What this repository does not show
 
-- No closed-loop robot success for any egocentric-pretrained policy (v3 checkpoints ran on the robot; outcomes were not logged).
+- No closed-loop success rate (three-cube stacking was observed with B300, but trials were not counted or recorded).
 - No held-out or closed-loop comparison of ego-initialized vs scratch v3 models; the matched comparison is training loss to 60k.
 - No transfer of the ego-only policy, or of the robotized wrist images, to robot cameras.
 - No generalization to unseen cube layouts (layouts were not recorded) or to unseen stacking orders (all six are in training).

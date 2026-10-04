@@ -394,6 +394,8 @@ checkpoints, 49{,}431 | True | True | `report/report.tex` | PASS |
 | text | v3 value present: 0.198 | True | True | `report/report.tex` | PASS |
 | text | v3 value present: 8{,}397 | True | True | `report/report.tex` | PASS |
 | text | v3 value present: version 3 | True | True | `report/report.tex` | PASS |
+| text | v3 value present: completed the full three-cube stack | True | True | `report/report.tex` | PASS |
+| text | v3 value present: with no success rate | True | True | `report/report.tex` | PASS |
 | readme | value present: 349 recorded | True | True | `README.md` | PASS |
 | readme | value present: 284 pass sync | True | True | `README.md` | PASS |
 | readme | value present: 259 source | True | True | `README.md` | PASS |
@@ -437,5 +439,6 @@ checkpoints, 49{,}431 | True | True | `report/report.tex` | PASS |
 | readme | stale text absent: is running; no results yet | True | True | `README.md` | PASS |
 | readme | stale text absent: 234 checks | True | True | `README.md` | PASS |
 | readme | stale text absent: This repository reports no closed-loop robot results | True | True | `README.md` | PASS |
+| readme | stale text absent: outcomes were not logged). | True | True | `README.md` | PASS |
 
-436 claims checked, 0 failed.
+439 claims checked, 0 failed.

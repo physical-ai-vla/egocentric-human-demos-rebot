@@ -428,7 +428,7 @@ for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,
              "45.2\\%/52.2\\%", "1{,}854/1{,}487", "59/64", "slots 10--17", "22.80", "$+0.81$/$+0.77$", "$-0.05$/$-0.03$", "$+0.16$",
              "0.69--0.90", "$-0.25$ and $+0.49$", "0.945 for A and 0.244", "3.9$\\times$", "0.49 over the first 5k", "(0.0733 versus 0.0745",
              "181/132", "88.6k", "71\ncheckpoints, 49{,}431", "median of 0.012", "95 of them", "37 of 57", "1.062 (p16--p84 0.959--1.274",
-             "151 train episodes (20{,}319 rows)", "0.354 (p5 0.188, p95 0.500)", "0.150", "0.198", "8{,}397", "version 3"):
+             "151 train episodes (20{,}319 rows)", "0.354 (p5 0.188, p95 0.500)", "0.150", "0.198", "8{,}397", "version 3", "completed the full three-cube stack", "with no success rate"):
     check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/report.tex")
 # ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
 rd = open(R / "README.md").read()
@@ -439,7 +439,7 @@ for need in ("349 recorded", "284 pass sync", "259 source", "561 bimanual", "233
 for need in ("48,411 rows (−6.20 %)", "1,482 / 2,598", "99.7 / 99.5 %", "45.2 / 52.2 %", "1,854 / 1,487", "slots 10–17", "−0.05 / −0.03",
              "+0.81 / +0.77", "0.244 vs 0.945", "0.984 (55–60k, tie)", "1.062 (p16–p84 0.959–1.274)", "151 episodes / 20,319 rows", "49,431"):
     check("readme", f"v3 value present: {need}", "True", str(need in rd), "README.md")
-for bad in ("is running; no results yet", "234 checks", "This repository reports no closed-loop robot results"):
+for bad in ("is running; no results yet", "234 checks", "This repository reports no closed-loop robot results", "outcomes were not logged)."):
     check("readme", f"stale text absent: {bad}", "True", str(bad not in rd), "README.md")
 
 # ---------------------------------------------------------------- output
