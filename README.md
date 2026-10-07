@@ -13,6 +13,7 @@ and `report-v3-2026-10-04`.
 |---|---|---|---|
 | Part I: three-cube stacking (bimanual), 4 pp | [`report/part1_stacking_en.pdf`](report/part1_stacking_en.pdf) | [`report/part1_stacking_ko.pdf`](report/part1_stacking_ko.pdf) | `report/archive/part1_stacking_{en,ko}_full.pdf` (10 pp) |
 | Part II: single-arm approach to a cube, 2 pp | [`report/part2_approach_en.pdf`](report/part2_approach_en.pdf) | [`report/part2_approach_ko.pdf`](report/part2_approach_ko.pdf) | `report/archive/part2_approach_{en,ko}_full.pdf` (5 pp) |
+| Methods and pipeline (how every stage works), 6 pp | [`report/methods_en.pdf`](report/methods_en.pdf) | [`report/methods_ko.pdf`](report/methods_ko.pdf) | — |
 
 The main reports are short versions; the full-length versions in `report/archive/` carry every detail and table. LaTeX
 sources sit next to the PDFs; figures are rebuilt by `report/figures/make_figures*.py`, `analysis/v4_r30_ablation.py` and
@@ -62,7 +63,8 @@ published (see [Sample data](#sample-data)).
   fit (`cp6_scale.imu_vi`). On a separate 14-episode ArUco benchmark (10 tracks held out) the scale error is
   4.6 / 17.0 % (p50 / p90) and the 16-step relative position error p90 is 11.3 mm (`results/pose_benchmark/`). The camera-to-TCP transform is `handumi_camera_tcp_v2`.
 - **Retargeting:** trajectories are anchored at the robot start pose and retargeted to reBot B601 pseudo-joints with
-  continuity IK. Segments then pass workspace, metric, IK/FK and inter-arm collision gates. Sessions with inconsistent
+  continuity IK. Segments then pass workspace, metric and IK gates (an inter-arm clearance check is used only in
+  retargeting v2). Sessions with inconsistent
   IMU and camera rotation are quarantined (`results/c8_quarantine.json`).
 - **Split:** by source episode, never by segment. `numpy.random.default_rng(0)` gives 233 train episodes (504 segments)
   and 26 held-out episodes (57 segments). See `results/split_index.json`.
@@ -358,7 +360,7 @@ python3 analysis/paired_bootstrap_r150.py                            # R150 250k
 python3 analysis/v3/ego_init_loss_compare.py                         # v3 matched initialization comparison
 python3 analysis/v4_r30_ablation.py && python3 analysis/v4_hra_summary.py   # v4 numbers + Figs. 8-9 (need matplotlib)
 python3 report/figures/make_figures.py && python3 report/figures/make_figures_v3.py
-cd report && for f in part1_stacking_en part1_stacking_ko part2_approach_en part2_approach_ko; do tectonic $f.tex; done   # full versions: cd archive
+cd report && for f in part1_stacking_en part1_stacking_ko part2_approach_en part2_approach_ko methods_en methods_ko; do tectonic $f.tex; done   # full versions: cd archive
 # the Korean reports use xeCJK with the macOS fonts AppleMyungjo / Apple SD Gothic Neo
 ```
 

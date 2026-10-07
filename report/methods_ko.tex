@@ -1,0 +1,373 @@
+\documentclass[conference,10pt]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{graphicx,booktabs,amsmath,amssymb,xcolor,url,xspace}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={로봇 양팔을 위한 에고센트릭 인간 시연: 방법과 파이프라인}, pdfauthor={Jeong Hwan Lee}}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage{fontspec}\setmainfont{Times New Roman}\usepackage{xeCJK}\setCJKmainfont[AutoFakeBold=2.5]{AppleMyungjo}\setCJKsansfont[AutoFakeBold=2.5]{Apple SD Gothic Neo}\setCJKmonofont{Apple SD Gothic Neo}\xeCJKsetup{CJKecglue={},CJKspace=true}
+\newcommand{\mm}{\,mm\xspace}
+\def\UrlBreaks{\do\/\do\_\do\.\do\-}\def\UrlFont{\small\ttfamily}\newcommand{\code}[1]{\path{#1}}
+
+\begin{document}
+\title{로봇 양팔을 위한 에고센트릭 인간 시연\\방법과 파이프라인}
+\author{\IEEEauthorblockN{Jeong Hwan Lee}
+\IEEEauthorblockA{기술 보고서, 버전 4, 2026년 10월 7일 \quad alnrg2arg@gmail.com\\
+제1부(큐브 삼단 쌓기)와 제2부(단일 팔 접근)의 동반 문서. 각 단계의 결과가 아니라 작동 방식을 기술한다.}}
+\maketitle
+
+\begin{abstract}
+본 문서는 에고센트릭 인간 시연을 로봇 정책으로 바꾸는 데 사용한 모든 단계를 알고리즘, 파라미터, 게이트 수준에서 기술한다. 손에
+착용하는 기록 장치와 수집 프로토콜, 센서와 로봇의 캘리브레이션, 동기화와 내보내기, 단안 손목 자세 복원과 세 가지 메트릭 스케일
+소스(IMU, 크기를 아는 큐브, 테이블 평면), 로봇 학습 데이터로의 두 세대 변환(관절 공간 리타게팅과 데카르트 액션 계약), 작업
+프레임을 공유하는 단일 팔 변형, X-VLA 모델과 학습 레시피, 오프라인 평가와 진단 평가, 그리고 로봇 배포를 다룬다. 별도 언급이 없으면
+파일 이름은 저장소 기준이다. 마지막 절에는 이 문서를 쓰는 동안 우리 코드에서 발견한 불일치를 나열한다.
+\end{abstract}
+
+\section{개요}
+그림~\ref{fig:overview}은 각 단계를 보여 준다. 각 단계는 출력을 매니페스트와 함께 기록하며, 그 뒤에 오는 게이트가 단위(에피소드,
+세그먼트, 행 또는 테이크)를 승인하거나 사유와 함께 거부한다. 보고서는 각 게이트가 제거한 양을 센다. 두 변환은 앞단을 공유한다.
+1세대(Gen-1)는 인간 손목 자세를 로봇 관절 궤적으로 리타게팅하고, 2세대(Gen-2)는 이를 우리 로봇 원격조작 데이터와 같은 상대
+데카르트 액션 공간으로 표현한다. 단일 팔 접근 데이터(제2부)는 일부 차원을 마스킹하고 로봇과 물리적 원점을 공유하는 Gen-2 변형이다.
+
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[font=\scriptsize, node distance=3mm and 3mm,
+  box/.style={draw=black!55, rounded corners=1.5pt, align=center, inner sep=2pt, minimum height=9mm, text width=24mm, fill=white},
+  g1/.style={box, fill=orange!8, draw=orange!60!black}, g2/.style={box, fill=blue!7, draw=blue!55!black},
+  dep/.style={box, fill=green!7, draw=green!45!black}, arr/.style={-{Stealth[length=1.5mm]}, draw=black!60}]
+\node[box] (rig) {\textbf{장치 + 프로토콜}\\2$\times$HandUMI, 헤드 C922, AUTO 루프};
+\node[box, right=of rig] (cal) {\textbf{캘리브레이션}\\어안, 카메라--IMU, 카메라$\to$TCP, 조, 로봇 카메라};
+\node[box, right=of cal] (exp) {\textbf{내보내기 + 동기화}\\시계 피팅, $\le$20\,ms\\게이트, 그리퍼 폭};
+\node[box, right=of exp] (pose) {\textbf{손목 자세}\\MASt3R-SLAM (RGB), 점프 필터};
+\node[box, right=of pose] (scale) {\textbf{메트릭 스케일}\\IMU-VI $\mid$ 큐브 PnP $\mid$ 원점 평면};
+\node[g1, below=6mm of rig] (g1) {\textbf{Gen-1}\\IK 리타게팅 $\to$ 의사 관절,\\65프레임 세그먼트};
+\node[g2, right=of g1] (g2) {\textbf{Gen-2 CART20}\\상대 자세 16개, 15\,Hz 행, IK 필터 없음};
+\node[g2, right=of g2] (hra) {\textbf{단일 팔}\\loss mask, G 프레임,\\테이블 인지 QP};
+\node[box, right=of hra] (train) {\textbf{X-VLA 0.9B}\\사전학습 / 파인튜닝 /\\공동 학습 (Ray)};
+\node[dep, right=of train] (dep) {\textbf{로봇}\\MPS 추론, Pink IK, PLAN 실행};
+\draw[arr] (rig)--(cal); \draw[arr] (cal)--(exp); \draw[arr] (exp)--(pose); \draw[arr] (pose)--(scale);
+\draw[arr] (scale.south) |- ++(0,-2.6mm) -| (g1.north); \draw[arr] (scale.south) |- ++(0,-2.6mm) -| (g2.north);
+\draw[arr] (g2)--(hra); \draw[arr] (hra)--(train); \draw[arr] (train)--(dep);
+\draw[arr] (g1.south) |- ++(0,-2.5mm) -| (train.south);
+\end{tikzpicture}
+\caption{파이프라인 개요. 주황: 1세대(관절 공간). 파랑: 2세대(데카르트)와 그 단일 팔 변형. 초록: 배포. 모든 화살표 뒤에는 사유를
+기록하는 게이트가 있다.}
+\label{fig:overview}
+\end{figure*}
+
+\section{기록 장치와 수집 프로토콜}\label{sec:rig}
+\textbf{장치} (\code{collection/configs/handumi/hardware_handumi_v1.yaml}). 각 HandUMI 유닛에는 Arducam 어안 UVC 카메라
+(1920$\times$1080, 30\,fps, MJPG), Teensy~4.1에 연결된 ICM-42688-P IMU(공칭 200\,Hz, 보드마다 자체 오실레이터를 가지므로 실측은
+201.6, 197.9\,Hz), 조(jaw) 인코더로 쓰는 Feetech STS3215 서보(4096 ticks/rev, 100\,Hz 폴링)가 달려 있다. 두 손목 카메라가 같은
+USB 시리얼을 보고하므로 제품 이름으로 구분한다. 고정된 Logitech C922(640$\times$480, 30\,fps, 자동 초점 끔)가 탁자를 기록한다.
+RGB-D 카메라는 손목 스트림을 방해하여 제외하였다.
+
+\textbf{기록} (\code{collector/recorder.py}). 에피소드 디렉터리에는 카메라별 MP4 하나, \code{sensors.mcap}, \code{events.json},
+\code{episode_meta.json}이 들어 있으며, 닫힐 때에만 이름이 \code{.incomplete}에서 \code{.complete}로 바뀐다. MCAP JSON 채널에는
+IMU 샘플(장치·호스트 타임스탬프, 가속도계, 자이로), 그리퍼 샘플(언랩·랩 tick, 정규화 값), 프레임별 메타데이터(프레임 인덱스,
+캡처 시각, 건너뛴 프레임), 이벤트, 시계 앵커가 담긴다. 모든 스트림에는 호스트 단조 시계로 타임스탬프를 찍는다. IMU는 호스트 수신
+시각, 그리퍼는 시리얼 트랜잭션의 중간 시점, 프레임은 캡처 시각을 쓴다.
+
+\textbf{AUTO 루프} (\code{collector/autoloop.py}). RESET $\to$ ARMING $\to$ HOLD $\to$ (PREP) $\to$ EPISODE $\to$ STOP 상태
+기계가 음성 신호와 함께 각 테이크를 진행한다. ARMING은 정지 상태를 기다린다. 0.25\,s 창에서 자이로 크기의 평균이 6\textdegree/s
+미만, 가속도 크기의 표준편차가 0.35\,m/s$^2$ 미만, 최대 샘플 간격이 25\,ms 미만, 창 채움률이 60\% 이상인 상태가 1\,s 동안 연속되어야
+한다. 기록 시작 후의 정지 구간은 시각--관성 초기화 창 역할을 한다. 예비 QA를 통과한 테이크는 자동으로 보존되고, 실패하면 루프가
+일시 정지한다.
+\begin{itemize}
+\item \emph{쌓기}: 20\,s 테이크, 10\,s 리셋, 3\,s 정지. 다음 순서는 보존된 테이크가 가장 적은 순서로 정해지므로
+(\code{episode_manager.next_order}) 순서는 무작위가 아니라 균형을 맞춘 것이다.
+\item \emph{로봇 유사}(\code{robot_like_v1}): 실시간 피드백이 있는 30\,s 테이크. 15\,Hz 격자에서 손목 각속도와 각가속도를 로봇
+원격조작 데이터의 95번째 백분위수(0.996\,rad/s, 4.413\,rad/s$^2$)와 비교하며, 이를 넘는 틱이 10\% 초과이거나 파지가 두 번 미만이면
+테이크를 검토로 보낸다.
+\item \emph{접근}(HRA\_red): 오른손만, 10\,s 테이크, 5\,s 리셋, 그리퍼 검사 끔.
+\item \emph{원점이 있는 접근}(HRA\_A100): 5\,s 휴식, 조 끝을 테이프로 표시한 십자에 대고 2\,s 정지, 2\,s 원점 정지를 추가로 하며
+기록 시작(이벤트 \code{go_cue}), 로봇 유사 시작 자세로 3\,s ``ready'' 이동, ``go''에서 10\,s 접근. 오른 손목은 로봇 카메라와 비슷한
+뷰도 기록한다.
+\end{itemize}
+
+\textbf{수집 QA} (\code{collector/integrity.py}). 장치나 레코더 오류 이벤트, 빈 스트림, 25\,fps 미만의 프레임률이 있으면 테이크를
+검토로 보낸다. 그리퍼가 20\,Hz 미만으로 샘플링되거나, 멈춰 있거나, 캘리브레이션 범위를 300 tick 넘게 벗어나거나, 이동 거리가 범위의
+5\% 미만이면 거부한다. 검증 단계에서는 모든 비디오를 디코딩하여 메타데이터 프레임 수와 맞는지 확인하고, 프레임 인덱스가 연속이며
+캡처 시각이 엄격히 증가하는지 검사한다.
+
+\section{캘리브레이션}\label{sec:cal}
+\textbf{손목 카메라.} 전체 해상도에서 Kannala--Brandt(등거리) 어안 모델을 사용하며, 25\mm{} 정사각형의 8$\times$5 체커보드로
+Kalibr로 피팅한다(왼쪽 $f_x{=}788.9$\,px). \textbf{카메라--IMU.} 손별 Kalibr~\cite{furgale2013kalibr} 외부 파라미터와 시간
+오프셋. \textbf{카메라에서 TCP로} (\code{calibration/camera_tcp/handumi_camera_tcp_v2.yaml}). TCP는 집게 중심이며, $x$는 접근
+방향, $y$는 조가 닫히는 방향, $z = x\times y$이다. 회전은 고정된 축 순열($x_\text{TCP}=z_\text{cam}$, $y_\text{TCP}=-x_\text{cam}$,
+$z_\text{TCP}=-y_\text{cam}$)이고, 병진은 캘리퍼 측정값(앞으로 95\mm, 아래로 95\mm)을 IMU 중력으로 측정한 카메라 피치
+(20.7\textdegree)만큼 회전한 것으로, $t=(0, 55.3, 122.5)$\mm{}를 얻으며 큐브 기반 피팅과 약 1\mm{} 이내로 일치한다. 이 값은
+유닛 하나에서 측정하여 양쪽에 적용하였다. \textbf{헤드 카메라.} 임시 plumb-bob 모델($f=677.7$\,px).
+
+\textbf{로봇 측}(제2부). 로봇의 고정 카메라는 같은 체커보드로 캘리브레이션한다($f=728.7$\,px, RMS 1.05\,px). 오른쪽 조 끝으로
+내부 코너 네 개를 터치하고, 순기구학(FK) TCP 위치와 PnP로 구한 보드 자세를 Kabsch 정렬하여 $T_\text{base,board}$를 얻으며,
+$T_\text{base,cam}=T_\text{base,board}T_\text{cam,board}^{-1}$이다. 로봇 손목 카메라는 보드 뷰 13장으로 캘리브레이션하고(종횡비
+고정, 접선 왜곡 없음, RMS 0.16\,px), 핸드-아이 변환은 Tsai, Park, Horaud, Daniilidis 방법~\cite{tsai1989handeye}으로 풀어 Park의
+해를 사용한다. 물리적 접촉은 URDF 손가락 끝 박스(IK TCP에서 $x$를 따라 뒤로 70--80\mm, $z$로 $\pm$19.6\mm)로 모델링하며, 그
+가장 낮은 모서리를 접촉점으로 간주한다.
+
+\section{내보내기와 동기화}\label{sec:export}
+\textbf{시계 정렬} (\code{pose/timing.py}). USB 지연은 항상 지연을 더하기만 하므로, IMU 장치 시각을 최소제곱 기울기로 호스트 시각에
+대응시키고 절편은 잔차의 5번째 백분위수에 다시 고정한다. 그다음 캘리브레이션에서 얻은 카메라--IMU 시간 오프셋을 적용한다. 카메라는
+조금씩 다른 속도(30.003--30.026\,Hz)로 자유 동작하므로 프레임은 고정 오프셋이 아니라 가장 가까운 캡처 시각으로 짝짓는다.
+
+\textbf{내보내기} (\code{pipeline/export/umi_export_orbslam.py}). 각 손목은 960$\times$540 비디오(내부 파라미터 절반), 첫 프레임
+이전 50\,ms의 IMU를 포함한 GoPro 텔레메트리 형식의 IMU 파일, 카메라 설정 파일로 기록된다. 프레임과 캡처 시각은 단일 디코딩 패스에서
+얻으므로 서로 어긋날 수 없다.
+
+\textbf{동기화 게이트} (\code{pipeline/census/c8_census_pre.py}, \code{c8_phase3.py}). 왼 손목이 마스터 시계이고, 오른 손목과 헤드
+카메라는 가장 가까운 캡처 시각으로 매칭한다. 두 손목 자세가 모두 유효하고 두 매칭이 모두 20\,ms 이내($\Delta t_R<20$\,ms,
+$\Delta t_H<20$\,ms)이면 행이 유효하다. 연속된 유효 행 65개 이상의 구간이 하나라도 있으면 에피소드가 통과한다.
+
+\textbf{그리퍼 폭} (\code{pipeline/grip/}). 각 프레임은 가장 가까운 그리퍼 샘플을 취한다. 기록된 정규화 값은 신뢰할 수 없었으므로
+(열린 끝이 기계적 정지점 너머에 있었고, 왼쪽 방향이 세션마다 뒤집혔다) Gen-1은 raw tick으로부터 폭을 다시 계산한다. 방향은 열림/닫힘
+tick 쌍에서, 닫힘 앵커는 에피소드별 닫힘 극값에서 정하고, 열린 끝은 닫힘 앵커에 장치 범위(1136.6 / 1248.2 ticks)를 더한 값이며,
+폭 $= \mathrm{clip}(f,0,1)\times 67.5$\mm{}이다. Gen-2는 이후의 캘리퍼 캘리브레이션(gcal1)을 사용한다. 0/20/40/60/80\mm{}에 구간별
+선형 보간점을 두고 $g=\mathrm{clip}(w/80\,\text{mm},0,1)$로 정규화하며, 0 = 닫힘이다.
+
+\section{손목 자세와 메트릭 스케일}\label{sec:pose}
+\textbf{단안 자세} (\code{pipeline/mast3r_pose/run_perframe.py}). MASt3R-SLAM~\cite{murai2025mast3rslam}(공식 코드, 커밋 고정,
+유일한 패치는 빌드 수정)을 핀홀 뷰로 왜곡 보정한 RGB 손목 비디오에 대해 단일 스레드, 매 프레임, 고정 시드로 실행한다. 전역 최적화
+후 모든 프레임을 최종 키프레임 기준으로 다시 표현한다.
+\begin{equation}
+T_{WC}(f) = T_{WK}^{\text{final}}(k)\,T_{WK}^{\text{track}}(k)^{-1}\,T_{WC}^{\text{track}}(f),
+\end{equation}
+이는 Sim(3) 사슬이다. 재위치추정(relocalisation) 중에 추적된 프레임은 이후 키프레임이 되지 않는 한 무효이다. 장면당 ORB-SLAM3 맵
+하나를 쓰는 UMI 방식~\cite{chi2024umi}은 장면이 바뀐 뒤 재위치추정에 실패하여 대체하였다.
+
+\textbf{IMU 시각--관성 스케일} (\code{cp6_scale.py:imu_vi}). SLAM 궤적은 에피소드별 스케일 $s$를 제외하면 메트릭이다.
+$R_{wb}=R_{wc}R_{cb}$, 각 프레임 주위에서 박스 평균한 가속도계 샘플 $f_b$, 그리고 SLAM 카메라 위치와 $R_{wc}t_{cb}$의
+Savitzky--Golay 2차 도함수(차수 3, 창 $W$)로 얻은 카메라 가속도 $a_\text{cam}$과 레버암 가속도 $a_\text{lever}$를 사용하면, 각
+프레임은 다음 식의 세 행을 제공한다.
+\begin{equation}
+R_{wb}\,f_b - a_\text{lever} = s\,a_\text{cam} - g\;\;(+\,R_{wb}b_a),
+\end{equation}
+이를 가장 긴 유효 구간에 대해 Huber 가중 반복 재가중 최소제곱(10회 반복, $\sigma=1.4826\,$MAD)으로 $s$와 $g\in\mathbb{R}^3$에 대해
+푼다. 양변이 같은 필터를 거치므로 대역 제한이 같고, 어떤 것도 두 번 적분하지 않는다. 바이어스 없는 $W=15$는 마커 벤치마크의 피팅
+분할에서 선택하였다. $s>0$, $|g|\in[8.81,10.81]$\,m/s$^2$이고 $s$가 벤치마크 최소 스케일의 0.1$\times$와 최대 스케일의 10$\times$
+사이에 있으면 스케일이 유효하다. 메트릭 TCP 자세는 $T_\text{tcp}=(T_{WC}\text{ with translation}\times s)\,X_\text{cam,tcp}$이다.
+
+\textbf{자세 벤치마크.} 80\mm{} ArUco 마커 네 개가 보이는 시연 14개(손 트랙 28개, 피팅 9개, held-out 5개). 마커 자세는 왜곡 보정한
+점에 대해 IPPE로 풀며, 합의 방향에서 20\textdegree{} 넘게 벗어난 마커는 버린다. 정답 스케일은 열 프레임 떨어진 프레임 쌍 중 마커가
+30\mm{} 넘게 움직인 쌍에서 마커 변위와 SLAM 변위의 비의 중앙값이다. 커버리지, 스케일 오차, 회전 오차, UMI 방식의 16스텝 상대 위치
+오차, 방향 반전 비율을 보고한다.
+
+\textbf{카메라--IMU 일관성.} 자이로와 SLAM 각속도가 일치하지 않는 세션(다른 곳의 0.92--0.98 대비 코사인 중앙값이 0 근처)은 격리한다.
+접근 데이터에서는 큐브 및 테이블 기하와 비교한 뒤, 오른 손목의 내보낸 카메라--IMU 회전을 카메라 $x$축에 대해 약
+18\textdegree{} 수정하였다.
+
+\textbf{자세 점프 필터} (\code{cart20/ego_cart20/preprocessing/pose_filter.py}). MASt3R-SLAM은 가끔 손실 플래그 없이 한 프레임 안에
+카메라를 수 센티미터 움직인다. 한 66.7\,ms 행 동안의 변위가 100\mm{} 또는 45\textdegree{}를 넘고 점프가 그 스텝 안에 있을 때, 또는
+50\mm{}를 넘는 스텝이 0.3\,m/s보다 느린 스텝들 사이에 고립되어 있을 때 raw 스텝에 플래그를 단다. 5샘플 이내의 플래그는 하나의
+이벤트로 묶는다. 자세가 되돌아오면($\max(30\,\text{mm}, 0.3\times\text{step})$와 45\textdegree{} 이내) 이벤트는 스파이크이며 해당
+샘플만 무효화한다. 그렇지 않으면 단방향 점프로 보고 그 팔 트랙의 나머지를 무효화한다. 시작점에 고정된 상태가 그 이후로 틀리게 되기
+때문이다.
+
+\textbf{큐브 PnP 스케일} (\code{cart20/ego_cart20/cube_pnp.py}, 제2부). 느린 동작에서는 IMU 피팅이 관측 불가능하다. 빨간 큐브(모서리
+38\mm)를 HSV로 분할하고, 볼록 껍질을 꼭짓점 여섯 개(또는 네 개)로 줄인 뒤 각 변의 가운데 부분에 대한 직선 피팅으로 모서리를
+날카롭게 다듬는다. 이를 2면·3면 실루엣 모델로 PnP 피팅하거나(가시성 검사: 카메라가 앞쪽에 놓이는 면들이 모델의 보이는 면과 같아야
+한다), 정면에서 35\textdegree{} 이내이면 중심을 면 뒤쪽 반 모서리 거리에 둔 단일 면 IPPE 모델로 피팅한다. 큐브가 정지해 있으므로 그
+중심 $c_i=p_i + k\,R_i t_i$는 일정해야 하며, 이로부터 역스케일을 닫힌 형태로 얻는다.
+\begin{equation}
+k = -\frac{\sum_i (p_i-\bar p)\cdot(u_i-\bar u)}{\sum_i\lVert u_i-\bar u\rVert^2},\qquad u_i=R_i t_i,\quad s=1/k,
+\end{equation}
+여기에 MAD 트리밍과 부트스트랩 재표본 200회를 적용한다. 테이크는 PnP 프레임 10개 이상, 부트스트랩 퍼짐 10\% 이하, 중심 잔차
+2\,cm 이하를 만족해야 한다.
+
+\textbf{원점 평면 스케일}(제2부, HRA\_A100). 원점 정지 동안 손가락 끝이 판에 닿아 있으므로 첫 SLAM 키프레임은 알려진 거리에서
+테이블을 본다. 손가락 영역과 신뢰도가 낮은 점을 제외하고 RANSAC(400회 반복, 임계값은 깊이 중앙값의 0.4\%)으로 평면을 최대 세 개
+피팅하며, 첫 평면과 평행한 것 중 가장 큰 평면을 테이블로 택한다. 그러면 $s=|n\cdot t_\text{tip}|/(s_0\,|d|)$이며, $t_\text{tip}$은
+카메라 좌표계의 손가락 끝, $s_0$는 키프레임의 Sim(3) 스케일이다. 큐브 PnP가 유효하면 그것을, 아니면 평면을 사용한다.
+
+\section{1세대: 관절 공간 리타게팅}\label{sec:gen1}
+\textbf{세그먼트와 게이트} (\code{c8_phase3.py}). 유효 행을 겹치지 않는 65프레임 블록(2.17\,s)으로 자른다. 팔별로 세그먼트는 유효한
+메트릭 스케일을 가져야 하고(B), 행의 95\% 이상이 로봇 작업 공간 안에 있어야 하며(C; 목표는 로봇 원격조작 TCP 자세 6{,}000개 중
+최근접 이웃이 50\mm{} 이내이고 가장 가까운 50개의 방향 차이 중 최솟값이 20\textdegree{} 미만이면 내부로 본다), 모든 행에서 IK가
+풀려야 하고(D), 유한한 관절 값을 내야 한다(E). 두 팔이 모두 통과하면 세그먼트는 양팔 세그먼트이다.
+
+\textbf{리타게팅} (\code{pipeline/pseudo_joint/pseudo_joint_pipeline.py}). 인간 동작을 세그먼트 시작 기준 상대 동작으로 취해 로봇
+데이터셋의 TCP 프레임으로 옮기고($\text{rel}=F^{-1}T_{0}^{-1}T_{t}F$, $F=R_x(180^\circ)$), 고정된 로봇 앵커 자세(로봇 원격조작
+데이터의 활동 자세 중앙값)에 배치한다. $T_\text{tgt}=\mathrm{FK}(q_\text{anchor})\,C^{-1}\,\text{rel}\,C$, $C=R_y(90^\circ)$.
+최소제곱 IK(방향 가중치 20의 자세 비용, 이전 해를 향한 rest 항, 관절 한계 제약, 최대 10회 반복, 관절 스텝 최대 0.35\,rad)는 이전
+행에서 시드를 받는다. 행에는 LIMIT, DQ\_FAIL($>$1\,rad), BRANCH\_SWITCH(목표가 거의 움직이지 않는데 $>$0.3\,rad), NOT\_CONVERGED
+($>$15\mm{} 또는 $>$5\textdegree), OK 중 하나의 레이블을 붙인다.
+
+\textbf{데이터셋과 목표} (\code{pipeline/dataset/}, \code{training/humanik_delta.py}). 세그먼트당 LeRobot 에피소드 하나이며,
+640$\times$480 뷰 세 개, 14차원 상태(팔마다 관절 각도 여섯 개와 그리퍼 값 하나), 목표 TCP 자세로 구성된다. 정책은 누적 관절 변위
+30개 $a_i=q_{t+5+i}-q_t$(5프레임 선행)와 절대 이진 그리퍼를 예측한다. 두 보조 손실이 관절 공간을 측정된 동작에 묶는다. (C) 여분
+액션 차원에 상대 TCP 병진 $\mathrm{trans}(T_\text{tgt}(t)^{-1}T_\text{tgt}(t{+}5{+}i))\times10$을 두는 항과, (D) FK 일관성 항이다.
+\begin{equation}
+\mathcal{L}=\mathcal{L}_{\Delta q}+\mathcal{L}_\text{grip}+2.0\,\mathcal{L}_C+20\,\lVert \mathrm{FK}(q_t+\hat a)-p_\text{tgt}\rVert^2 .
+\end{equation}
+분할은 고정 시드로 원본 에피소드의 10\%를 뽑으며, 양쪽에 걸치는 에피소드는 없다.
+
+\textbf{리타게팅 v2} (\code{pipeline/retarget_v2/}). 단일 앵커 때문에 모든 세그먼트가 한 자세에서 시작했다. v2는 캘리브레이션에 로봇
+에피소드 30개만 사용한다(다른 120개로 평가). 두 팔 관절의 $2^{17}$개 Sobol 샘플로 된 시드 뱅크를 작업 공간, 테이블 바닥, 조작성
+(위치 야코비안의 최소 특이값), 팔 간 간격 $\ge$75\mm{}(팔당 링크 세그먼트 9개 사이의 정확한 세그먼트 간 거리)로 거른 뒤 중복을
+제거한다(시드 1{,}195개). 변형 K는 상위 시드 8개를 롤아웃하고
+$S=\overline{e_\text{pos}}/15+\overline{e_\text{rot}}/5+\overline{|\Delta q|}/0.6+0.5\,\overline{|\Delta^2q|}/0.6$로 점수를 매긴다.
+Kr은 로봇 데이터까지의 자세 거리를 추가한다. TR은 96차원 상대 동작 특징으로 가장 가까운 로봇 궤적 창 64개를 검색하고, 실현 가능한
+것을 남겨 $q_\text{last}+\Delta q_\text{ref}$로 IK 시드를 준다. 하이브리드는 TR이 실현 가능하면 TR을, 아니면 Kr을 쓴다.
+
+\section{2세대: 데카르트 계약(CART20)}\label{sec:gen2}
+\textbf{계약} (\code{cart20/ego_cart20/config.py}). 행은 15\,Hz이고, 오프셋 $\Delta=3/59.94$\,s $=50.05$\,ms는 로봇 데이터의 스텝이다.
+행 시각 $t$와 각 팔에 대해
+\begin{equation}
+A_k = T(t)^{-1}\,T(t+k\Delta),\qquad k=1,\dots,16 ,
+\end{equation}
+이며, 순차가 아니라 현재 시점에 고정되고 raw 30\,Hz 트랙에서 보간한다(위치는 선형, 회전은 SLERP, 그리퍼는 선형; 50\,ms 이내로
+떨어진 유효 샘플 사이에서만; 외삽 없음). 각 팔은 [위치 3 $\mid$ 6차원 회전($R$의 처음 두 행, Gram--Schmidt로 디코딩) $\mid$
+그리퍼]를 내므로 두 팔은 20차원이 되며, 모델의 32차원 액션은 정확히 0인 12차원으로 패딩된다. 상태는 각 팔의 자체 작업 시작 자세
+기준 상대 자세 $T(t_0)^{-1}T(t)$와 두 그리퍼 값이다(좌우가 공유하는 SLAM 프레임은 없다).
+
+\textbf{변환} (\code{convert.py}). 자세 점프 필터, 팔별 보간 트랙, 두 팔이 모두 유효한 첫 순간을 작업 시작으로, 20\,ms 이내의 가장
+가까운 헤드 프레임. 시각 $t$에서 두 팔이 모두 유효하고, 목표 16개가 모두 유효하며, 헤드 프레임이 있을 때에만 학습 행이 되고 패딩은
+없다. 작업 공간이나 IK에 의한 선별은 적용하지 않는다.
+
+\textbf{검증} (\code{validation/}, \code{tests/}). 형상, 0 패딩, 유한 값, $g\in[0,1]$, 행렬식 $+1$인 정규직교 회전, 항등 시작 상태,
+서로소 분할, 마지막 유효 행을 넘는 목표 없음, $k$에 따라 증가하는 병진 중앙값을 검사하며, 합성 테스트 11개가 계약을 고정한다.
+
+\textbf{로봇 유사 손목 렌더링} (\code{scripts/export_lerobot_robotized.py}). 시각적 격차를 줄이기 위해 어안 프레임을 같은 방향의
+가상 핀홀 카메라로 재렌더링한다(따라서 레이블은 그대로 유효하다). 수평 화각은 62--70\textdegree{}에서 뽑고, 로봇처럼 조가 아래쪽에
+오도록 주점을 75--125\,px 아래로 옮긴 뒤 축소, 블러($\sigma$ 0.4--1.0), JPEG 압축(품질 55--85), 광도 지터를 프레임별 시드로
+적용한다. ROBOT100은 이를 모든 프레임에 적용한다. 단일 팔 robotcam v2 렌더링(\ref{sec:hra}절)은 대신 측정된 로봇 카메라를 사용한다.
+
+\textbf{내보내기.} 15\,fps의 LeRobot v3, 224$\times$224 뷰 세 개, 통계 재계산(패딩 차원은 평균 0, 표준편차 1). 관절 필드는 일부러
+NaN으로 두어 관절 공간 손실이 쓰이면 바로 눈에 띄게 실패하도록 한다.
+
+\section{단일 팔 변형과 공유 작업 프레임}\label{sec:hra}
+\textbf{오른팔 전용 계약} (\code{right_only.py}). 텐서 레이아웃은 바뀌지 않는다. 왼쪽 상태는 그리퍼 0인 항등 자세, 왼쪽 액션은 0
+동작이며, 에피소드별 20차원 loss mask가 오른팔의 위치와 회전(9차원; 그리퍼는 정지해 있어 마스킹)만 지도한다.
+
+\textbf{로봇 카메라 렌더링}(robotcam v2). 로봇 카메라의 각 픽셀에 대해, 측정된 로봇 내부 파라미터로부터의 광선을 어안 모델에
+투영하여 재표본한다(어안 시야 밖의 광선은 검게 둔다). 작은 초점 거리·주점 지터와 같은 열화 사슬을 적용한다. 레이블은 핸드-아이
+변환을 통해 UMI TCP에서 로봇 TCP로 옮긴다. $T_\text{robot}=T_\text{UMI}M^{-1}$.
+
+\textbf{작업 프레임 G.} 테이프 선 위에서 로봇 조 끝으로 세 번 터치하여 원점(십자 중심), 테이프를 따르는 $x$, 베이스 $z$를 따르는
+$z$를 얻는다. 인간 측에서 원점 자세는 정지 구간의 위치 중앙값과 평균 회전이다. 그 yaw는 테이크마다 십자 주변의 테이블 특징을 기준
+테이크와 매칭하여(ORB, ratio test, PnP-RANSAC) 측정하고, 기울기는 IMU 중력(수정된 외부 파라미터)에서 얻는다. 상태는 G에서의 절대
+자세이며 레이블은 $T_G = T_{\text{base},G}\,R(\text{yaw})\,T_\text{origin}^{-1}T_\text{robot}$이다.
+
+\textbf{테이블 인지 변환.} 인간 궤적을 자신의 시작점에서 선택한 로봇 시작 자세 $T_S$ 쪽으로, 정규화 시간 $s$에 대한 smoothstep
+가중치 $\mathrm{sst}(x)=3x^2-2x^3$으로 변형한다. $w_{xy}=1-\mathrm{sst}((s-0.2)/0.6)$, $w_z=1-\mathrm{sst}(s/0.3)$,
+$w_\text{rot}=1-\mathrm{sst}((s-0.1)/0.5)$이므로 큐브 근처의 끝점은 인간의 것이 유지된다. 그다음 높이 보정 $c$를 테이크마다 이차
+계획 문제로 푼다.
+\begin{equation}
+\begin{aligned}
+\min_c\;& \textstyle\sum c^2+50(\Delta c)^2+2000(\Delta^2 c)^2+60\,m\,(c-g)^2\\
+\text{s.t.}\;& z_\text{tip}+c\ge z_\text{table}+5\,\text{mm},
+\end{aligned}
+\end{equation}
+여기서 $c_0=0$, 끝점 들어올림은 최대 30\mm{}이며, $g$는 낮은 프레임을 12\mm{} 간격 쪽으로 끌어올린다. 결과는 IK로 재생한다(두 번째
+프레임마다; 오차 5\mm{}와 3\textdegree{} 미만, 관절 여유 2\textdegree{} 초과). 테이크는 PASS(들어올림 $\le$20\mm), PASS-CORRECTED
+(20--30\mm), REVIEW, EXCLUDED, REJECT(IK 성공률 98\% 미만, 원점 정지 또는 yaw 누락, 정지 중 10\mm{} 넘게 이동, 바닥 아래에서
+시작)로 분류하며, 앞의 두 부류만 내보낸다.
+
+\section{모델}\label{sec:model}
+LeRobot~\cite{cadene2024lerobot}을 통한 X-VLA~\cite{zheng2025xvla}. Florence-2~\cite{xiao2024florence2} 비전-언어 인코더, 24층
+soft prompt transformer(hidden 1024, 헤드 16개), flow matching~\cite{lipman2023flow} 액션 헤드로 구성되며, 파라미터는 약 0.9B이고
+모두 학습 가능하다. 입력은 패딩과 함께 224$\times$224로 크기를 맞춘 뷰 세 개, 지시문(BART 토크나이저), 고유수용 상태이다.
+\textbf{Soft prompt.} 30개 도메인 $\times$ 32 토큰의 임베딩 테이블을 시퀀스에 덧붙이며, 상태/액션 프로젝션은 도메인별 선형층이다.
+도메인 id는 체크포인트의 전처리기에 설정한다. 공개 가중치를 읽어 보니 도메인 10--17만 학습된 적이 있었으므로, 우리 embodiment에는
+쓰이지 않은 도메인 20을 사용한다. \textbf{Flow matching.} 학습에서는 층화된 $t$를 뽑아 $x_t=\varepsilon t+a(1-t)$를 만들고 깨끗한
+액션 $a$를 직접 회귀한다. 추론은 $x_1\sim\mathcal N(0,I)$에서 시작하여 $i=N\dots1$에 대해 $t=i/N$, $x_t=x_1 t+\hat a(1-t)$,
+$\hat a=f(x_t)$로 두며 $x_1$을 재사용한다(기본 10스텝). \textbf{Gen-2를 위한 확장.} 공개 헤드(20차원 액션과 상태)를 32차원 액션과
+20차원 상태로 넓혔다. 기존 행은 그대로 복사하고, 새 행은 기존 행의 스케일로 뽑으며, 새 바이어스는 0으로 두고, 확장된 모델이 모든
+도메인에서 기존 모델을 재현하는지 확인하였다.
+
+\section{학습}\label{sec:train}
+\textbf{Gen-1} (\code{training/train_bi.py}). \ref{sec:gen1}절의 관절 변위 목표와 손실, AdamW(학습률 $10^{-4}$, 비전-언어 그룹은
+0.1$\times$, weight decay $10^{-4}$, 그래디언트 클립 10), 1k 워밍업 후 $2.5\times10^{-6}$까지 코사인 감쇠, 배치 4, TF32를 쓰는 fp32,
+300k 스텝, 10k마다 체크포인트. 먼저 20스텝 스모크 실행에서 유한한 손실과 활성화된 보조 항이 기록되어야 한다. 체크포인트 선택 규칙
+(검증 geo 점수 최소)은 학습 전에 고정하였다.
+
+\textbf{Gen-2, REL-only} (\code{training/relonly/}). 손실은 액션 차원 0--19에 대한 MSE이며, 학습과 추론 모두에서 모든 디노이징
+스텝마다 차원 20--31이 입력과 출력에서 0이 되도록 transformer를 패치한다. 사전 점검(preflight)은 손실이 무작위화한 패딩 목표를
+무시하는지, 패딩 예측이 정확히 0인지, 그 디코더 그래디언트가 사라지는지를 확인한다. 저장 shim을 둔 8-bit AdamW(bitsandbytes),
+fp32 마스터 가중치를 둔 bf16 autocast, 배치 8, 시드 1000, 워밍업 1k, 정확히 마지막 스텝에서 끝나는 코사인 감쇠(LeRobot이 스케줄을
+조용히 재조정하므로, 런처는 스텝 수와 감쇠가 다른 실행을 거부한다). 액션은 평균/표준편차로 정규화하고 상태는 정규화하지 않는다.
+\textbf{Loss mask}(단일 팔): 마스킹된 목표는 뺄셈 전에 detach한 예측으로 대체하며(NaN 그래디언트 방지), 손실은 지도되는 원소 수로
+정규화한다. \textbf{파인튜닝}은 사전학습 가중치에서 새 옵티마이저로 시작하며 로봇 데이터셋의 정규화 통계를 사용한다. 에피소드
+부분집합(예: R30)은 인덱스 목록으로 선택한다. \textbf{공동 학습}은 배치마다 정확히 에고 샘플 네 개와 로봇 샘플 네 개를 뽑는다.
+
+\textbf{운영.} 작업은 Ray 클러스터에 제출하여 GPU 노드(RTX~4090 또는 RTX~5090)에 고정한다. 두 노드의 PyTorch 버전이 달라 노드 간
+실행은 비트 단위로 같지 않다. 런처는 사용 중인 GPU, 코드 해시나 도메인 id 불일치, 그리퍼 계약 게이트 실패, 디스크 공간 부족 시
+시작을 거부하며, 디스크 가드는 노드가 가득 차기 전에 학습을 멈춘다. 각 본 실행 전에 60스텝 스모크 실행(저장·재개 포함)을 한다.
+아카이버는 모든 체크포인트를 SHA-256 검증과 함께 외부 저장소로 복사한 뒤 노드에서 삭제하며, 옵티마이저 상태는 고정 간격으로만
+보존한다.
+
+\section{평가}\label{sec:eval}
+\textbf{Gen-1 오프라인} (\code{evaluation/c8old_mac_eval.py}). held-out 에피소드에서 세그먼트당 시작 프레임 일곱 개(0--30에서 5프레임
+간격)를 쓰고, 시작마다 고정 시드로 flow 샘플 하나를 뽑는다. 호라이즌 $k\in\{1,4,8,16,30\}$에 대해 TCP 오차
+$\lVert\mathrm{FK}(q_t+\hat a_k)-p_k\rVert$(중앙값, p90), 관절 MAE, 0 동작 예측기의 MAE, 예측과 측정 TCP 변위 사이의 코사인을
+계산한다. geo 점수는 호라이즌별 TCP 오차 중앙값의 평균이며, collapse 비율은 예측과 목표의 퍼짐을 비교한다. 움직이는 부분집합은
+$k{=}30$까지 TCP가 20\mm{} 이상 움직인 샘플이다. \textbf{지시문 교체}: 각 샘플을 한 시드에서 여섯 순서 지시문 모두로, 그리고 참
+지시문으로 시드 두 개를 더 써서 실행한다. 지시문에 따른 퍼짐을 시드에 따른 퍼짐과 비교하고, 여섯 개 중 참 지시문의 오차 순위를
+우연 수준과 비교한다. \textbf{대응 부트스트랩}: 두 초기화 사이의 geo 점수 상대 차이를 에피소드 수준 재표본(10k회, 두 모델에 동일)으로
+추정한다.
+
+\textbf{Gen-2 진단} (\code{analysis/v3/}). 로봇 프레임에서의 teacher-forced 방향 코사인($k$=4/8/16에서 10\mm{} 넘게 움직이는 프레임에
+대한 예측 대 기록 병진)을 모든 좌우 교체와 축 부호 반전에 대해 반복한다. 이미지/상태 도메인 교체(에고 또는 로봇 이미지를 에고,
+로봇 또는 0 상태와 결합), 손목 비디오의 optical flow 대 자세 축 상관(컨벤션 검사), 라플라시안 분산으로 잰 손목 이미지 선명도도
+본다. \textbf{학습 손실 비교}: 손실을 로그에서 파싱하고(스텝 = 줄 인덱스 $\times$ 로그 간격) 창 평균과 비로 비교한다.
+\textbf{Held-out 손실}(단일 팔): 모든 검증 행에 대해 노이즈 시드 두 개로, 그리고 2{,}000행 학습 부분집합에 대해 (마스킹된) 학습
+손실을 계산한다.
+
+\textbf{주장 검증} (\code{analysis/verify_claims.py}). 보고서의 모든 수치를 저장소의 증거 파일로부터 인쇄된 정밀도로 다시 계산하며,
+보고서 소스와 README에서 필수 문자열과 폐기된 문자열을 검사한다.
+
+\section{로봇 배포}\label{sec:deploy}
+\textbf{추론.} 정책은 Mac(Apple 실리콘 GPU, bf16)에서 디노이징 스텝 5회(양팔) 또는 10회(단일 팔)와 REL-only 0 패치로 실행된다. 로봇
+카메라 세 대를 640$\times$480으로 캡처하고, 선택적으로 확대한 뒤(오른 손목, 단일 팔) 224$\times$224로 크기를 맞추어 학습과 같이
+정규화한다. 단일 팔 모드에서는 왼 손목 이미지가 검은색이다. \textbf{상태}는 학습 계약을 따른다. 측정 관절의 FK로 구한 TCP 자세에
+FK와 데이터셋 TCP 컨벤션 사이의 고정 프레임 보정을 적용하고, 실행 시작 시 잡은 앵커 또는 고정 앵커 파일(원점 고정 모델은 G) 기준
+상대 자세로 표현한다. \textbf{디코딩}: $k=1..16$에 대해 절대 목표 $T_k=T_\text{now}A_k$. 그리퍼 값은 0--45 명령으로 대응되며(로봇
+raw 0 = 닫힘, $-270$ = 열림), 단일 팔 모드에서는 조를 고정한다.
+
+\textbf{IK}(Pink~\cite{caron2024pink}). 손가락을 잠근 URDF를 쓰며, TCP는 그리퍼 링크에서 $x$를 따라 70\mm{} 떨어져 있다(데이터셋
+TCP와 동일). 팔별 프레임 태스크(위치 1.0, 방향 0.5)와 가벼운 자세 태스크를 측정 관절에서 이차 계획법으로 풀며, 관절 한계 여유와
+웨이포인트별 관절 스텝 한계를 둔다. 프로파일에 따라 손목 yaw 관절을 잠그거나 풀며, 다른 솔버(수치, 학습 기반, GPU 배치)로 실행 중에
+전환할 수 있다.
+
+\textbf{실행.} \emph{스텝 모드}는 각 청크의 웨이포인트 몇 개를 실행하고 팔이 안정될 때까지 기다린다. \emph{PLAN mode}는 순전파 하나를
+항상 진행 중으로 유지하면서 IK로 푼 행(50.05\,ms 간격)을 로봇 서비스로 스트리밍하고, 로봇 서비스는 이를 속도 피드포워드와 함께
+100\,Hz 보간점(knot)으로 재생한다. 예상 지연 시간 안에 실행될 행은 예약해 두고 그 뒤의 행만 교체한다. 청크 사이 이음매는 관절 공간 지수
+블렌드(\code{plan_ema}), 선택적 크로스페이드, 선택적 다항식 평활화, 다음 순전파 전 최소 실행 행 수로 처리한다. 이 값들은 동작을 눈에
+띄게 바꾸므로 실행마다 기록한다. \emph{Real-time chunking}(선택): 각 flow 스텝에서 예측을 이전 청크의 아직 실행되지 않은 목표 쪽으로
+끌어당긴다. $\hat x\leftarrow\hat x+t\,g_w\,J^\top(W\odot(Y-\hat x))$이며, 가이던스 가중치는 10으로 상한을 두고 $W$는 처음 8스텝에
+걸쳐 감쇠한다~\cite{black2025rtc}.
+
+\textbf{로봇 서비스.} 적분 피드포워드 항이 있는 MIT impedance mode의 팔 컨트롤러 두 개, 100\,Hz 제어 스레드, 가속도 제한 동기화
+프로파일로 구성된다. raw 관절 한계는 클리핑하며, 계획된 보간점이 90\textdegree{} 넘게 튀면 팔을 정지시킨다. \textbf{안전과 정지.} NaN
+예측이면 중단한다. 단일 팔 모드에서는 왼팔과 조가 항상 고정된다. 이동량, 스텝, 출력 가드는 선택 사항이다. \emph{큐브 크기 정지}는
+raw 손목 프레임의 HSV 마스크로 빨간 큐브의 겉보기 크기(픽셀 단위 $\sqrt{\text{area}}$)를 0.1\,s마다 재고, 임계값을 넘는 판독이 두 번
+나오면 멈춘다. 선택적인 추종 모드는 크기가 임계값의 85\% 아래로 줄면 재개한다. \textbf{체크포인트}는 학습 노드나 아카이브에서
+가져와 SHA-256과 신원(실행, 데이터셋, 도메인)으로 검증하고, 인터페이스를 재시작하여 로드한다. \textbf{시행 기록}: 작업자 양식에
+체크포인트, 모델 종류, 로봇 데이터, 지시문, 배치, 쌓기 단계 0--3, 잘못된 색, 실패 사유, 실행의 정지 사유를 기록하며, 성공은 색이
+맞는 단계 3으로 정의한다.
+
+\section{알려진 불일치}\label{sec:issues}
+이 문서를 작성하면서 다음 사항이 드러났으며, 숨기지 않고 나열한다. (1) 팔 간 간격 검사는 존재하지만 Gen-1 게이트가 아니라 리타게팅
+v2에서만 쓰인다(이전 README 문장이 다르게 적고 있었으며 수정하였다). (2) Gen-1 목표 코드에서 이진화된 그리퍼 레이블 1은 주석에는
+닫힘이라고 되어 있지만 실제로는 \emph{열림}을 뜻한다. (3) 그리퍼 캘리브레이션이 세 가지 사용된다(67.5\mm{} 개구의 Gen-1 tick, Gen-2의
+gcal1 캘리퍼 보간점, 수집기의 열림/닫힘 파일). 각 데이터셋은 자신이 쓰는 것을 명시한다. (4) 내보내기 도구가 쓰는 카메라--IMU 시간
+오프셋은 raw 캘리브레이션 출력과 부호와 크기가 다르며, 이를 변환한 단계는 기록되어 있지 않다. (5) 내보내기 도구와 한 뷰어 도구가 서로
+다른 두 버전의 오른쪽 어안 캘리브레이션을 사용한다. (6) IK 스텝 임계값은 15\,Hz 행 기준으로 문서화되어 있으나 30\,fps 행에 적용된다.
+(7) PLAN mode에서 양팔 경로는 그리퍼 폭을 웨이포인트 솔버에 전달하지 않으므로 조가 닫힌 채로 남을 가능성이 높다. 조를 고정하는
+단일 팔 실행은 영향을 받지 않는다. (8) 여러 진단은 저장소 밖의 스크립트로 실행되었으며, 그 출력은 다시 실행한 것이 아니라 캡처한
+로그로 보관되어 있다. (9) G 프레임, 손가락 끝 박스, 18\textdegree{} 카메라--IMU 보정의 피팅 스크립트는 저장소에 없고 그 출력만 있다.
+
+\begin{thebibliography}{99}\footnotesize
+\bibitem{chi2024umi} C.~Chi \emph{et al.}, ``Universal manipulation interface: In-the-wild robot teaching without in-the-wild robots,'' in \emph{RSS}, 2024.
+\bibitem{furgale2013kalibr} P.~Furgale, J.~Rehder, and R.~Siegwart, ``Unified temporal and spatial calibration for multi-sensor systems,'' in \emph{IROS}, 2013.
+\bibitem{tsai1989handeye} R.~Y. Tsai and R.~K. Lenz, ``A new technique for fully autonomous and efficient 3D robotics hand/eye calibration,'' \emph{IEEE Trans. Robotics and Automation}, 1989.
+\bibitem{murai2025mast3rslam} R.~Murai, E.~Dexheimer, and A.~J. Davison, ``MASt3R-SLAM: Real-time dense SLAM with 3D reconstruction priors,'' in \emph{CVPR}, 2025.
+\bibitem{zheng2025xvla} J.~Zheng \emph{et al.}, ``X-VLA: Soft-prompted transformer as scalable cross-embodiment vision-language-action model,'' in \emph{ICLR}, 2026.
+\bibitem{cadene2024lerobot} R.~Cadene \emph{et al.}, ``LeRobot: State-of-the-art machine learning for real-world robotics in PyTorch,'' 2024.
+\bibitem{xiao2024florence2} B.~Xiao \emph{et al.}, ``Florence-2: Advancing a unified representation for a variety of vision tasks,'' in \emph{CVPR}, 2024.
+\bibitem{lipman2023flow} Y.~Lipman \emph{et al.}, ``Flow matching for generative modeling,'' in \emph{ICLR}, 2023.
+\bibitem{caron2024pink} S.~Caron \emph{et al.}, ``Pink: Python inverse kinematics based on Pinocchio,'' \url{https://github.com/stephane-caron/pink}, 2024.
+\bibitem{black2025rtc} K.~Black, M.~Y. Galliker, and S.~Levine, ``Real-time execution of action chunking flow policies,'' \emph{arXiv:2506.07339}, 2025.
+\end{thebibliography}
+\end{document}
