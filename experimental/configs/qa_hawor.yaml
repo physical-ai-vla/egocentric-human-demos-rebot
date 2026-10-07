@@ -1,0 +1,12 @@
+# QA thresholds for HaWoR-tracked task episodes (post-gate valid fractions run 70-90%,
+# unlike the >95% AprilTag tracking-clip regime the defaults were written for).
+qa:
+  min_world_valid_fraction: 0.95    # SLAM world pose exists on every frame
+  min_wrist_valid_fraction: 0.65
+  min_aperture_valid_fraction: 0.65
+  min_hand_valid_fraction: 0.0
+  require_both_hands: false
+  require_world: true
+  sides: both
+  max_catastrophic_jumps: 0
+  min_duration_s: 5.0

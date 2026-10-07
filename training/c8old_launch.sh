@@ -1,6 +1,6 @@
 #!/bin/bash
 # [2026-09-25] Mac-side launcher for the Track C-old overnight chain. Stops at the first failed gate (writes the reason).
-C8=$HOME/c8; R=<user>@<gpu-node>; RB=${REMOTE_HOME}/c8old; LOG=$C8/c8old_runs/launch.log; mkdir -p $C8/c8old_runs
+C8=$HOME/c8; R=bh-aiteam@100.64.0.2; RB=/home/bh-aiteam/c8old; LOG=$C8/c8old_runs/launch.log; mkdir -p $C8/c8old_runs
 say() { echo "$(date '+%F %T') $*" | tee -a $LOG; }
 fail() { say "LAUNCH STOPPED: $*"; printf '# Track C-old overnight chain — NOT STARTED\n\nStopped before training: %s\n\nLast PASS: see launch.log\n' "$*" > $C8/c8old_runs/SUMMARY.md; exit 1; }
 say "waiting for the dataset write stage"
@@ -21,7 +21,7 @@ RM=$(ssh $R "cd $RB/data && find c8old_train c8old_val -type f | LC_ALL=C sort |
 [ "$L" = "$RM" ] || fail "dataset hash mismatch Mac $L vs 4090 $RM"
 say "dataset hash identical on Mac and 4090: $L"
 scp -q $C8/c8old/c8old_chain.sh $R:$RB/ && scp -q $C8/c8old/humanik_delta.py $R:$RB/xvla/humanik_delta.py || fail "code copy failed"
-CM=$(ssh $R "md5sum < $RB/xvla/humanik_delta.py | cut -c1-32; md5sum < $RB/xvla/train_bi.py | cut -c1-32; git -C ${REMOTE_HOME}/workspace/bh_rebot_LeRobot rev-parse HEAD 2>/dev/null || echo no-git; md5sum < ${REMOTE_HOME}/.cache/huggingface/hub/models--lerobot--xvla-base/snapshots/cdb7964e4fe842935d671bfab5a5ebe00a96648c/model.safetensors | cut -c1-32")
+CM=$(ssh $R "md5sum < $RB/xvla/humanik_delta.py | cut -c1-32; md5sum < $RB/xvla/train_bi.py | cut -c1-32; git -C /home/bh-aiteam/workspace/bh_rebot_LeRobot rev-parse HEAD 2>/dev/null || echo no-git; md5sum < /home/bh-aiteam/.cache/huggingface/hub/models--lerobot--xvla-base/snapshots/cdb7964e4fe842935d671bfab5a5ebe00a96648c/model.safetensors | cut -c1-32")
 set -- $CM; HD=$1 TB=$2 GIT=$3 BASE=$4
 [ "$HD" = "$(md5 -q $C8/c8old/humanik_delta.py)" ] || fail "humanik_delta md5 mismatch after copy"
 [ "$BASE" = "0bed971480d94ddfe002560bde13a59a" ] || fail "xvla-base weights hash changed ($BASE)"
@@ -45,8 +45,8 @@ ssh $R "cd $RB && python3 -c \"import json,time; json.dump(dict(regression='PASS
 JOB=$(python3 - <<'P'
 import json, urllib.request, time
 sid = f"c8old-chain-{time.strftime('%m%d%H%M')}"
-body = dict(entrypoint="bash ${REMOTE_HOME}/c8old/c8old_chain.sh", submission_id=sid, entrypoint_num_gpus=1, entrypoint_resources={"node:<gpu-node-ip>": 0.001})
-print(json.loads(urllib.request.urlopen(urllib.request.Request("http://<ray-head>:8265/api/jobs/", data=json.dumps(body).encode(), headers={"Content-Type": "application/json"}), timeout=30).read())["job_id"])
+body = dict(entrypoint="bash /home/bh-aiteam/c8old/c8old_chain.sh", submission_id=sid, entrypoint_num_gpus=1, entrypoint_resources={"node:100.64.0.2": 0.001})
+print(json.loads(urllib.request.urlopen(urllib.request.Request("http://100.64.0.1:8265/api/jobs/", data=json.dumps(body).encode(), headers={"Content-Type": "application/json"}), timeout=30).read())["job_id"])
 P
 ) || fail "ray submit failed"
 say "submitted Ray job $JOB"

@@ -2,7 +2,7 @@
 # [2026-09-24] Phase 2 (rest 490 = 380 main + 110 early) from the START with run_perframe_resident.py (resident_v1) on the
 # 5080. Validated vs run_perframe.py on 5 chosen sides (contract §21). Checkpoints from the local SSD copy (MD5 OK,
 # bitwise-neutral). Per-process rest outputs made before the switch are archived in runs_perproc_rest_archive/.
-S=${SHARED_ROOT}; C8=$S/c8; V=$S/trackA_mast3r_pose_v1
+S=/mnt/shared/johann; C8=$S/c8; V=$S/trackA_mast3r_pose_v1
 export M3_REPO=$S/mast3r_slam_official M3_BASE=$C8 PYTHONPATH=$S/mast3r_slam_official:$S/mast3r_slam_official/thirdparty/mast3r:$S/asmk PYTHONNOUSERSITE=1
 case "$(nvidia-smi --query-gpu=name --format=csv,noheader)" in *5080*) ;; *) echo NOT_5080; exit 2;; esac
 echo "HOST $(hostname) GPU $(nvidia-smi --query-gpu=name --format=csv,noheader)"

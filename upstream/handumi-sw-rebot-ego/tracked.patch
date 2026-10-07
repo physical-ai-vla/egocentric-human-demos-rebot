@@ -1,0 +1,345 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 0f5c811..19c7e9e 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -28,7 +28,7 @@ dependencies = [
+     "matplotlib>=3.11.0",
+     "scipy>=1.17.1",
+     # Offline voice control for hands-free recording (src/handumi/utils/voice.py).
+-    "vosk>=0.3.45",
++    "vosk>=0.3.45; sys_platform != 'darwin'",
+     "sounddevice>=0.4.6",
+     # Terminal dashboard for recording status, controls, and timing.
+     "rich>=13.9",
+diff --git a/src/handumi/calibration/control_tcp.py b/src/handumi/calibration/control_tcp.py
+index 2cba75b..4d5cf43 100644
+--- a/src/handumi/calibration/control_tcp.py
++++ b/src/handumi/calibration/control_tcp.py
+@@ -26,7 +26,7 @@ from handumi.robots.utils import IDENTITY_POSE7, pose_mul, quat_normalize
+ 
+ DEFAULT_PARQUET = Path("pico_recording/data/chunk-000/file-000.parquet")
+ DEFAULT_DEVICE = "pico"
+-SUPPORTED_DEVICES = ("pico", "meta")
++SUPPORTED_DEVICES = ("pico", "meta", "apriltag")
+ DEFAULT_CALIBRATION_DIR = Path("configs/calibration/controller_tcp")
+ DEFAULT_CALIBRATION = DEFAULT_CALIBRATION_DIR / f"{DEFAULT_DEVICE}.yaml"
+ STATE_COLUMN = "observation.state"
+diff --git a/src/handumi/dataset/raw.py b/src/handumi/dataset/raw.py
+index 1f83c0e..47061f6 100644
+--- a/src/handumi/dataset/raw.py
++++ b/src/handumi/dataset/raw.py
+@@ -119,6 +119,9 @@ def feetech_features() -> dict[str, Any]:
+         features[f"observation.feetech.{side}_normalized"] = scalar_feature("float32")
+     for key in ("sample_time_ns", "sequence", "healthy"):
+         features[f"observation.feetech.{key}"] = scalar_feature("int64")
++    from handumi.feetech.telemetry import telemetry_features
++
++    features.update(telemetry_features())
+     return features
+ 
+ 
+diff --git a/src/handumi/feetech/bus.py b/src/handumi/feetech/bus.py
+index 2bd53a2..1f70063 100644
+--- a/src/handumi/feetech/bus.py
++++ b/src/handumi/feetech/bus.py
+@@ -133,6 +133,35 @@ class FeetechBus:
+             f"{retries + 1} attempts ({last_error})."
+         )
+ 
++    def read_status_block(
++        self, servo_id: int, *, retries: int = 1, retry_delay_s: float = 0.02
++    ) -> dict[str, Any]:
++        """Read Present_Position..Present_Current (addr 56, 15 bytes) in one transaction."""
++        from handumi.feetech.telemetry import STATUS_BLOCK_ADDR, STATUS_BLOCK_LEN, parse_status_block
++
++        packet = self._require_packet()
++        port = self._require_port()
++        last_error = "no response"
++        for attempt in range(retries + 1):
++            try:
++                data, comm, error = packet.readTxRx(
++                    port, int(servo_id), STATUS_BLOCK_ADDR, STATUS_BLOCK_LEN
++                )
++            except _RETRYABLE_SDK_EXCEPTIONS as exc:
++                if hasattr(port, "is_using"):
++                    port.is_using = False
++                last_error = _format_sdk_exception(exc)
++            else:
++                if _comm_success(comm, self._sdk) and _no_error(error) and len(data) >= STATUS_BLOCK_LEN:
++                    return parse_status_block(data)
++                last_error = f"comm={comm}, error={error}, bytes={len(data) if data else 0}"
++            if attempt < retries:
++                time.sleep(retry_delay_s)
++        raise RuntimeError(
++            f"Failed to read status block from servo {servo_id} after "
++            f"{retries + 1} attempts ({last_error})."
++        )
++
+     def write_servo_id(self, old_id: int, new_id: int) -> None:
+         self.disable_torque(old_id)
+         self._write_1_byte(old_id, _ID_ADDR, new_id, "ID")
+diff --git a/src/handumi/feetech/gripper.py b/src/handumi/feetech/gripper.py
+index 18672ac..3190c64 100644
+--- a/src/handumi/feetech/gripper.py
++++ b/src/handumi/feetech/gripper.py
+@@ -29,6 +29,8 @@ class GripperWidths:
+     left_ticks: int
+     right_ticks: int
+ 
++    left_telemetry: dict | None = None
++    right_telemetry: dict | None = None
+     @classmethod
+     def zero(cls) -> "GripperWidths":
+         """All-zero widths, used when Feetech is skipped or unavailable."""
+@@ -250,6 +252,8 @@ class _EncoderUnwrapper:
+ 
+ 
+ class FeetechGripperPair:
++    telemetry_enabled: bool = True
++
+     def __init__(self, config: FeetechConfig) -> None:
+         self.config = config
+         left_port = _side_port(config, config.left)
+@@ -320,6 +324,7 @@ class FeetechGripperPair:
+             self._left_unwrap,
+             retries=retries,
+             retry_delay_s=retry_delay_s,
++            telemetry=self.telemetry_enabled,
+         )
+         right = _read_width(
+             self._buses[self._right_port],
+@@ -327,6 +332,7 @@ class FeetechGripperPair:
+             self._right_unwrap,
+             retries=retries,
+             retry_delay_s=retry_delay_s,
++            telemetry=self.telemetry_enabled,
+         )
+         return GripperWidths(
+             left=left["width_m"],
+@@ -337,6 +343,8 @@ class FeetechGripperPair:
+             right_normalized=right["normalized"],
+             left_ticks=int(left["ticks"]),
+             right_ticks=int(right["ticks"]),
++            left_telemetry=left.get("telemetry"),
++            right_telemetry=right.get("telemetry"),
+         )
+ 
+ 
+@@ -347,14 +355,28 @@ def _read_width(
+     *,
+     retries: int = 4,
+     retry_delay_s: float = 0.05,
+-) -> dict[str, float | int]:
+-    ticks = unwrap(
+-        bus.read_position(
++    telemetry: bool = False,
++) -> dict[str, float | int | dict | None]:
++    block: dict | None = None
++    if telemetry:
++        # One 15-byte transaction gives position + speed/load/voltage/temp/current.
++        # Any failure falls back to the plain position read so recording never stalls.
++        try:
++            block = bus.read_status_block(
++                calibration.servo_id, retries=retries, retry_delay_s=retry_delay_s
++            )
++        except Exception:  # noqa: BLE001
++            block = None
++    raw_ticks = (
++        int(block["position"])
++        if block is not None
++        else bus.read_position(
+             calibration.servo_id,
+             retries=retries,
+             retry_delay_s=retry_delay_s,
+         )
+     )
++    ticks = unwrap(raw_ticks)
+     normalized = calibration.normalized_width(ticks)
+     width_mm = calibration.width_mm(ticks)
+     return {
+@@ -362,6 +384,7 @@ def _read_width(
+         "normalized": normalized,
+         "width_mm": width_mm,
+         "width_m": width_mm / 1000.0,
++        "telemetry": block,
+     }
+ 
+ 
+diff --git a/src/handumi/scripts/cli.py b/src/handumi/scripts/cli.py
+index 522c2cd..5a4b0f0 100644
+--- a/src/handumi/scripts/cli.py
++++ b/src/handumi/scripts/cli.py
+@@ -28,6 +28,18 @@ COMMANDS = {
+         "handumi.scripts.analyze_dataset",
+         "Analyze statistics and episode outliers",
+     ),
++    ("dataset", "derive"): Command(
++        "handumi.scripts.derive_dataset",
++        "Write derived signals (deltas, bimanual relation, grasp events, contact proxy)",
++    ),
++    ("dataset", "mask-tags"): Command(
++        "handumi.scripts.mask_tags",
++        "Hide AprilTags in the head video -> observation.images.head_clean",
++    ),
++    ("dataset", "label"): Command(
++        "handumi.scripts.label_episode",
++        "Label episodes (outcome/recovery/operator/cube plan) in a sidecar",
++    ),
+     ("dataset", "curate"): Command(
+         "handumi.scripts.curate_dataset",
+         "Create a validated dataset from an analysis report",
+@@ -36,6 +48,10 @@ COMMANDS = {
+         "handumi.scripts.replay.replay_in_sim", "Replay a dataset in simulation"
+     ),
+     ("convert",): Command("handumi.scripts.conversion", "Convert data to a robot"),
++    ("convert-eef",): Command(
++        "handumi.scripts.convert_eef",
++        "Convert raw data to robot-independent TCP state/action",
++    ),
+     ("completion",): Command(
+         "handumi.scripts.completion", "Enable Bash, Zsh, or Fish completion"
+     ),
+@@ -69,6 +85,10 @@ COMMANDS = {
+     ("calibrate", "tcp"): Command(
+         "handumi.scripts.setup.calibrate_tcp_offset", "Calibrate controller-to-TCP"
+     ),
++    ("calibrate", "head-camera"): Command(
++        "handumi.scripts.setup.calibrate_head_camera",
++        "Calibrate the head camera (fisheye intrinsics) and the world tag map",
++    ),
+     ("calibrate", "verify"): Command(
+         "handumi.scripts.setup.verify_calibrations",
+         "Verify the complete calibration chain",
+@@ -80,6 +100,17 @@ COMMANDS = {
+     ("tracking", "pose"): Command(
+         "handumi.scripts.setup.print_controller_pose", "Print live controller poses"
+     ),
++    ("task", "cube"): Command(
++        "handumi.scripts.cube_task", "Plan 3-cube stacking episodes (order/layout/instruction)"
++    ),
++    ("tracking", "apriltag"): Command(
++        "handumi.scripts.apriltag_tools",
++        "AprilTag tools: print tags, preview, bundle-calib, solve-image",
++    ),
++    ("tracking", "eval"): Command(
++        "handumi.scripts.tracker_eval",
++        "EEF tracker acceptance: capture, jitter, return, agreement, table-z",
++    ),
+ }
+ 
+ 
+diff --git a/src/handumi/scripts/record.py b/src/handumi/scripts/record.py
+index 8c70b61..0a51850 100644
+--- a/src/handumi/scripts/record.py
++++ b/src/handumi/scripts/record.py
+@@ -66,7 +66,7 @@ from handumi.cameras import (
+     read_camera_samples,
+     resolve_camera_ids,
+ )
+-from handumi.config import DEFAULT_RIG_CONFIG, load_optional_rig_section
++from handumi.config import load_rig_config, DEFAULT_RIG_CONFIG, load_optional_rig_section
+ from handumi.dataset.raw import (
+     HANDUMI_CAPTURE_SCHEMA,
+     HANDUMI_STATE_SEMANTICS,
+@@ -89,6 +89,8 @@ from handumi.feetech import (
+ )
+ from handumi.feetech.bus import FeetechUnavailableError
+ from handumi.robots.utils import IDENTITY_POSE7
++from handumi.feetech.telemetry import telemetry_frame
++from handumi.tracking.apriltag import apriltag_features, build_provider_from_rig
+ from handumi.synchronization import (
+     SustainedHealthGate,
+     capture_timing_frame,
+@@ -150,7 +152,7 @@ _VALID_VIDEO_CODECS = {
+     "libsvtav1",
+     *_HARDWARE_VIDEO_CODECS,
+ }
+-_CAMERA_NAMES = ("left_wrist", "right_wrist", "workspace")
++_CAMERA_NAMES = ("left_wrist", "right_wrist", "workspace", "head")
+ _RECORDING_DEFAULTS: dict[str, object] = {
+     "device": "meta",
+     "cameras": ["left_wrist", "right_wrist"],
+@@ -719,6 +721,7 @@ def build_features(
+     use_videos: bool,
+     camera_specs: list[dict[str, object]] | None = None,
+     record_audio: bool = False,
++    extra_features: dict | None = None,
+ ) -> dict:
+     img_dtype = "video" if use_videos else "image"
+     features: dict = {}
+@@ -744,6 +747,8 @@ def build_features(
+     features.update(camera_health_features(cam_names))
+     if record_audio:
+         features.update(audio_features())
++    if extra_features:
++        features.update(extra_features)
+     return features
+ 
+ 
+@@ -771,6 +776,7 @@ def build_observation(sample: ControllerPairSample, widths: GripperWidths) -> di
+         "observation.feetech.right_width_mm": np.array([widths.right_mm], dtype=np.float32),
+         "observation.feetech.left_normalized": np.array([widths.left_normalized], dtype=np.float32),
+         "observation.feetech.right_normalized": np.array([widths.right_normalized], dtype=np.float32),
++        **telemetry_frame(widths),
+         **sample.tracking_frame(),
+     }
+ 
+@@ -1213,7 +1219,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+         ),
+     )
+     p.add_argument("--help-advanced", action="store_true", help="Show every expert option.")
+-    p.add_argument("--device", choices=("pico", "meta"), default=None)
++    p.add_argument("--device", choices=("pico", "meta", "apriltag"), default=None)
+     p.add_argument(
+         "--cameras",
+         type=_camera_list_arg,
+@@ -1731,6 +1737,7 @@ def main() -> None:
+         use_videos,
+         camera_specs=camera_specs,
+         record_audio=bool(args.record_audio),
++        extra_features=(apriltag_features() if args.device == "apriltag" else None),
+     )
+     encoder_selection: _VideoEncoderSelection | None = None
+     dataset_vcodec = _SOFTWARE_VIDEO_CODEC
+@@ -2252,6 +2259,9 @@ def build_tracker(
+             skip_adb_check=args.skip_adb_check,
+         )
+ 
++    if args.device == "apriltag":
++        return build_provider_from_rig(args.rig_config, calibration)
++
+     base = MetaQuestConfig.from_yaml(args.rig_config)
+     config = MetaQuestConfig(
+         quest_ip=args.quest_ip if args.quest_ip is not None else base.quest_ip,
+@@ -2280,6 +2290,11 @@ def connect_feetech(args: argparse.Namespace) -> FeetechGripperPair | None:
+         )
+     assert_calibrated(feetech_config, source=user_calibration_path())
+     grippers = FeetechGripperPair(feetech_config)
++    try:
++        rig_feetech = load_rig_config(args.rig_config).get("feetech") or {}
++        grippers.telemetry_enabled = bool(rig_feetech.get("telemetry", True))
++    except Exception:  # noqa: BLE001 - rig without feetech section keeps the default
++        grippers.telemetry_enabled = True
+     try:
+         grippers.open()
+     except FeetechUnavailableError as exc:
+diff --git a/src/handumi/scripts/teleop_record.py b/src/handumi/scripts/teleop_record.py
+index 4775e66..c03f34c 100644
+--- a/src/handumi/scripts/teleop_record.py
++++ b/src/handumi/scripts/teleop_record.py
+@@ -114,6 +114,7 @@ from handumi.scripts.record import (
+     build_tracker,
+     connect_feetech,
+ )
++from handumi.feetech.telemetry import telemetry_frame
+ from handumi.synchronization import (
+     SustainedHealthGate,
+     capture_timing_frame,
+@@ -892,6 +893,7 @@ def _gripper_width_frame(widths: GripperWidths) -> dict[str, np.ndarray]:
+         "observation.feetech.right_normalized": np.array(
+             [widths.right_normalized], dtype=np.float32
+         ),
++        **telemetry_frame(widths),
+     }
+ 
+ 

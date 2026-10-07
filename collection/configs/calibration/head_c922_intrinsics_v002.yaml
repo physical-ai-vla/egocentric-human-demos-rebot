@@ -1,0 +1,89 @@
+created: 2026-09-15T15:35:25+0900
+schema: handumi_pinhole_intrinsics/v1
+distortion_model: plumb_bob
+side: head
+K:
+- 428.4192090523914
+- 0.0
+- 344.1077560997025
+- 0.0
+- 426.84011558664236
+- 310.26389011482314
+- 0.0
+- 0.0
+- 1.0
+D:
+- 0.08634690846458813
+- -0.01645789820329837
+- -0.010743954516108638
+- 0.025800416893114766
+- -0.06471302279194069
+image_size:
+- 640
+- 480
+rms_px: 0.7177
+views: 9
+model: cv2.calibrateCamera (pinhole, plumb_bob)
+calibrated_by: scripts/charuco_calibrate.py (offline re-solve)
+status: SUPERSEDED
+camera:
+  product_name: C922 Pro Stream Webcam
+  usb_serial: B5FBCE9F
+  usb_location_id: '0x01100000'
+  vid_pid: 0x046d:0x085c
+  resolution:
+  - 640
+  - 480
+  fps: 30
+  fourcc: MJPG
+  uvc_controls:
+    auto-focus: false
+    focus-abs: 20
+capture_fps_head_only: 30.17
+board:
+  squares_x: 6
+  squares_y: 8
+  square_length_m: 0.031
+  marker_length_m: 0.023
+  dictionary: DICT_5X5_100
+  legacy_pattern: false
+charuco_config: configs/charuco_wrist.yaml
+tilt_deg:
+  min: 1.5
+  median: 19.7
+  max: 22.7
+corners_per_view:
+  min: 27
+  median: 34
+  max: 35
+  board_total: 35
+stability:
+  fx_spread_pct_over_70pct_subsets: 28.1
+  cy_std_px: 42.9
+git_commit: eb43b06
+source_images: ~/calib/head_locked/*.png (views with board tilt < 35 deg)
+notes: 'PROVISIONAL. Use it, but know what it is.
+
+  Focus is LOCKED (auto-focus off, focus-abs 20). Autofocus previously made this a
+  different lens every session: three earlier batches each fitted themselves to rms
+  0.19-0.26 while disagreeing on fx by 27 percent (417 / 531 / 501), and pooled they
+  reached rms 1.06. Any intrinsics taken before the lock are void.
+
+  Steep views EXCLUDED. Focal length is separated from board distance by how foreshortening
+  changes between poses, so views at 40-54 degrees were shot deliberately -- but at
+  640x480 a 23 mm ChArUco marker cannot be localised that obliquely: those six views
+  reach rms 3.91 among THEMSELVES, so the correspondences are wrong, not the model.
+  Including them drove cy to -36 px, outside the image.
+
+  What supports this number: fx and cy here agree with the very first 25-view batch
+  (fx 417.2, cy 315.3) taken in a different session under different focus. That is
+  the only estimate reproduced independently.
+
+  What is still weak: tilt spans only 1.5-22.7 degrees after the exclusion, which
+  is why the subset spread below is what it is. Revisit with a LARGER board or a plain
+  checkerboard (no markers to lose at an angle) if the pilot shows geometry error
+  that matters.'
+superseded_reason: 'Free 9-parameter fit on 9 views. Lowest reprojection error of
+  any model tried (0.7177) and a 47 percent metric scale error: its K puts the head
+  camera 32.0 cm above the table where a tape measure says 47. Superseded by head_c922_intrinsics_v003,
+  which constrains the model to what a webcam physically is and lands at 50.6 cm.'

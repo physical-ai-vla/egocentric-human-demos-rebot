@@ -6,7 +6,7 @@ protocol: robot_like_v1
 
 # Applied on top of collector.yaml auto_loop when this protocol is active. Slower, staged motion needs more time.
 auto_loop_overrides:
-  episode_s: 30.0                     # 20 s under the legacy protocol (user, 2026-09-28: "extend it to 30 s")
+  episode_s: 30.0                     # 20 s under the legacy protocol (user, 2026-09-28: "30초로 늘려줘")
 
 # Live wrist-motion lamps. Same definitions as ~/umi_bridge/track_c/probe_v2_motion.py `gyro_dyn`: gyro averaged over
 # +-1/30 s on a 15 Hz grid, |w| and |dw|*15. Reference = R150 measured TCP at 15 Hz (reports/probe_v2_motion.json):

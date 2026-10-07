@@ -1,0 +1,29 @@
+created: 2026-09-16T11:26:14+0900
+schema: handumi_camera_imu_extrinsics/v1
+side: right
+T_camera_imu:
+- - -0.994185642
+  - -0.097619618
+  - 0.045445779
+  - -0.047653075
+- - -0.090658146
+  - 0.531095214
+  - -0.842448203
+  - 0.076982584
+- - 0.058103436
+  - -0.841669938
+  - -0.53685725
+  - -0.006278259
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+source: wrist_bundle:wrist_bundle_right_v005 (kalibr)
+notes: 'from wrist_bundle_right_v005: imu_noise side correction; extrinsic unchanged'
+time_offset_ms: 32.77
+imu_noise:
+  gyroscope_noise_density: 0.00022788240400063565
+  gyroscope_random_walk: 4.537594075233024e-06
+  accelerometer_noise_density: 0.0012517393685132084
+  accelerometer_random_walk: 0.00019649099243886181
+  update_rate: 201.57

@@ -1,0 +1,69 @@
+schema: handumi_tracking_mesh_assembly/v1
+side: left
+units: mm
+source: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi
+created: 2026-09-11T10:01:41+0900
+body_frame:
+  convention: origin at a repeatable CAD datum on the rigid body; +x = gripper forward
+    (approach), +y = gripper left, +z = gripper up — the SAME axes as the TCP frame,
+    so body->TCP is a pure offset
+  datum: 'FILL IN: name the CAD feature the origin sits on (e.g. ''centre of the controller-support
+    ring face'')'
+  note: the tracker reports T_depthcam_body in THIS frame; configs/calibration/handumi_body_tcp_<side>_vNNN.yaml
+    then carries body->TCP (Stage B / M2C)
+how_to_fill:
+- 'Preferred: export ONE assembled rigid body from CAD in the body frame and skip
+  this file entirely -'
+- '  point depth_pose.yaml `mesh.<side>` straight at that .obj/.stl.'
+- 'Otherwise: for each included part set pose.translation_m and pose.quaternion_xyzw
+  = the part''s pose in B.'
+- Never include a moving part; never scale a part to make an assembly 'fit'.
+parts:
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/camera_mount.stl
+  classified: rigid
+  include: true
+  pose: null
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/connecting_link_1.stl
+  classified: moving
+  include: false
+  reason: moves with the jaw — a rigid tracker must not see it
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/connecting_link_2.stl
+  classified: moving
+  include: false
+  reason: moves with the jaw — a rigid tracker must not see it
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/crank_mechanism_plate.stl
+  classified: moving
+  include: false
+  reason: moves with the jaw — a rigid tracker must not see it
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/fisheye_camera_main_support.stl
+  classified: rigid
+  include: true
+  pose: null
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/hand_support_base.stl
+  classified: rigid
+  include: true
+  pose: null
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/left_controller_support.stl
+  classified: rigid
+  include: true
+  pose: null
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/left_index_middle_finger_link.stl
+  classified: moving
+  include: false
+  reason: moves with the jaw — a rigid tracker must not see it
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/left_servo_controller_support.stl
+  classified: rigid
+  include: true
+  pose: null
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/left_thumb_link.stl
+  classified: moving
+  include: false
+  reason: moves with the jaw — a rigid tracker must not see it
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/main_support_cover_plate.stl
+  classified: rigid
+  include: true
+  pose: null
+- file: /Users/jeonghwanlee/handumi-hw/hardware/STL/left_handumi/servo_controller_cover.stl
+  classified: rigid
+  include: true
+  pose: null

@@ -1,0 +1,37 @@
+created: 2026-09-15T11:26:35+0900
+schema: ego_teleop_wrist_calibration_bundle/v1
+side: right
+hardware: {}
+hardware_hash: 44136fa355b3
+camera: null
+imu_noise:
+  gyroscope_noise_density: 0.00133385256704486
+  gyroscope_random_walk: 1.971294390591075e-05
+  accelerometer_noise_density: 0.0009805968834199718
+  accelerometer_random_walk: 0.00010328782337154156
+  update_rate: 197.9
+camera_imu:
+  T_camera_imu: null
+  time_offset_ms: null
+  source: null
+provenance:
+  imu_noise:
+    source: allan_variance
+    tool: ego_teleop.tools.imu_allan
+    date: 2026-09-15T11:26:35+0900
+    runs:
+    - allan_20260915_090818/imu_right_20260915_090818_clean
+    notes: '1.46 h static log, 1039537 samples, 197.90 Hz. PRIMARY source is the longest
+      unbroken segment (87.5 min, 1,039,537 samples) of imu_right_20260915_090818,
+      NOT the whole session. That session FAILS integrity: 1901 samples lost across
+      40 sequence gaps inside one 40 s window at 87.5 min, plus an 833.7 ms stall.
+      Device-side dropped 0, ring high-water 2/256, CRC 0, so the loss was on the
+      host/USB transport path, not firmware; which layer is not established. The full
+      session remains on disk as diagnostic-only.'
+missing:
+- camera
+- T_camera_imu
+- time_offset_ms
+- hardware.unit_id
+production_ready: false
+notes: imu_allan

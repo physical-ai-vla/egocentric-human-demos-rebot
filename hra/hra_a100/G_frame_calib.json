@@ -1,0 +1,63 @@
+{
+ "note": "2026-10-07 G frame = HRA_A100 origin: X tape centre touched with the right jaw tip (FK TCP - 82 mm along TCP x). x = tape line direction toward the side the HandUMI faced (near touch), z = robot base z (touches coplanar within 2 mm), y = z cross x.",
+ "T_base_G": [
+  [
+   0.6809102852757069,
+   -0.7323668366370474,
+   0.0,
+   0.05896093212272367
+  ],
+  [
+   0.7323668366370474,
+   0.6809102852757069,
+   0.0,
+   -0.07485537013319685
+  ],
+  [
+   0.0,
+   0.0,
+   1.0,
+   0.006233487550741115
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "origin_base_mm": [
+  59.0,
+  -74.9,
+  6.2
+ ],
+ "x_heading_base_deg": 47.09,
+ "line_points_mm": {
+  "far": [
+   32.2,
+   -102.6,
+   30.3
+  ],
+  "centre": [
+   60.7,
+   -73.1,
+   29.1
+  ],
+  "near": [
+   73.7,
+   -58.7,
+   31.2
+  ]
+ },
+ "collinearity_resid_mm": [
+  0.0,
+  0.38,
+  0.0
+ ],
+ "baseline_mm": 60.4,
+ "contact_model": "v3 2026-10-07: URDF fingertip box (x -70/-80 mm, thickness +-19.6 mm in TCP z), lowest corner = contact",
+ "plate_top_z_m": 0.007934736927659695,
+ "table_z_m": -0.027065263072340306,
+ "plate_thickness_m": 0.035,
+ "frame_names": "G = X-anchor task frame (origin = X tape centre on the head-cam base plate, x = tape, z = up). H = head-camera base frame (not used; H_T_G is a fixed transform, not measured). Training and robot inference both use G."
+}

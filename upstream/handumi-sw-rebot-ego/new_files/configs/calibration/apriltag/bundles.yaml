@@ -1,0 +1,36 @@
+# AprilTag bundles mounted on the two HandUMIs (fixed global camera tracking).
+#
+# Tag frame: centre origin, +X right, +Y up, +Z out of the tag (OpenCV IPPE_SQUARE).
+# `anchor_from_tag` (translation_m / quaternion_xyzw, same keys as spatial.yaml) = T_anchor_tag: pose of that tag in the bundle's anchor-tag frame.
+# The anchor tag is the "controller" frame handed to the pivot (controller->TCP)
+# calibration, so T_table_TCP = T_table_camera · T_camera_anchor · T_anchor_TCP.
+#
+# Non-anchor geometry is a placeholder (measured: false) until
+#   handumi tracking apriltag bundle-calib --side left
+# has been run with both faces visible; it rewrites this file.
+dictionary: DICT_APRILTAG_36h11
+max_reproj_px: 2.0
+bundles:
+  left:
+    anchor_tag: 10
+    tags:
+      - id: 10
+        size_m: 0.040
+        anchor_from_tag: {translation_m: [0.0, 0.0, 0.0], quaternion_xyzw: [0.0, 0.0, 0.0, 1.0]}
+        measured: true
+      - id: 11
+        size_m: 0.040
+        # second face tilted 45 deg about the anchor X axis, 3.5 cm below (placeholder)
+        anchor_from_tag: {translation_m: [0.0, -0.035, -0.015], quaternion_xyzw: [-0.38268343, 0.0, 0.0, 0.92387953]}
+        measured: false
+  right:
+    anchor_tag: 20
+    tags:
+      - id: 20
+        size_m: 0.040
+        anchor_from_tag: {translation_m: [0.0, 0.0, 0.0], quaternion_xyzw: [0.0, 0.0, 0.0, 1.0]}
+        measured: true
+      - id: 21
+        size_m: 0.040
+        anchor_from_tag: {translation_m: [0.0, -0.035, -0.015], quaternion_xyzw: [-0.38268343, 0.0, 0.0, 0.92387953]}
+        measured: false

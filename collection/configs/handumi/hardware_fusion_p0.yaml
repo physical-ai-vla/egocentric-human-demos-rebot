@@ -1,0 +1,34 @@
+# P0 of the multi-sensor ladder: the three fusion sensors, together, through the COLLECTOR's device path.
+#   tools/f0_sensors.py --hardware fusion_p0 --seconds 30 --imu-hz 416
+#
+# Deliberately not the profile the fusion rig uses (hardware_fusion_live.yaml): P0 exists to prove the sensors
+# BEFORE `FusedLiveRig` is trusted, so it opens them the way the recorder does, including the Orbbec.
+# Nothing here is for recording — no grippers, no left wrist, no aux cameras. See docs/ego_teleop/MULTISENSOR_FUSION.md.
+hardware_version: handumi_v1_fusion
+profile: fusion_p0
+calibration_version: auto_v001
+cameras:
+- name: head_depth          # chest-mounted Orbbec: the metric XYZ anchor (colour + ALIGNED depth)
+  role: aux_depth
+  backend: orbbec
+  width: 848
+  height: 480
+  fps: 30
+  required: true
+- name: right_wrist         # the wrist Arducam: visual motion for the VI branch
+  role: pose_estimation
+  backend: uvc
+  match_name: Arducam 1080P Low Light
+  ordinal: 0
+  width: 1920
+  height: 1080
+  fps: 30
+  fourcc: MJPG
+  required: true
+  strict_identity: false
+  strict_format: true
+# The XIAO nRF52840 Sense speaks firmware/teensy_imu/PROTOCOL.md v1 byte for byte, so the `teensy` backend parses it
+# unchanged and only rate_hz differs (416 vs the Teensy unit's 200). Measured 2026-09-22: 417.5 Hz, 0 CRC errors,
+# 0 sequence gaps, 0 FIFO drops over 20 s. Identity is the full USB serial, never enumeration order.
+imus:
+  - {side: right, backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "D2FB7365FE48ED0F", baud: 2000000, rate_hz: 416, required: true}

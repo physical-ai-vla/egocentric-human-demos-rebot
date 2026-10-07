@@ -1,0 +1,16 @@
+# Aero Hand Open branch (official aero_open_sdk). Canonical channel order everywhere:
+#   0 thumb_cmc_abduction, 1 thumb_cmc_flexion, 2 thumb_tendon, 3 index, 4 middle, 5 ring, 6 pinky
+port: null                       # REQUIRED on macOS, e.g. /dev/cu.usbmodemXXXX (ESP32-S3 USB JTAG/serial); SDK autodetect is Linux-only
+baudrate: 921600
+side: right
+homing_timeout_s: 175
+telemetry_every_n: 10            # currents/temperatures every N ticks (position every tick)
+relaxed_normalized: [0.5, 0.1, 0.05, 0.05, 0.1, 0.1, 0.1]   # HAND_LOST pose (normalized per channel)
+channels:                        # per-channel overrides of ChannelMap; human_min/max come from the 3-pose calibration at runtime
+  - {name: thumb_cmc_abduction, deadband: 0.03, lpf_alpha: 0.5, max_rate_deg_s: 300}
+  - {name: thumb_cmc_flexion,   deadband: 0.03, lpf_alpha: 0.5, max_rate_deg_s: 300}
+  - {name: thumb_tendon,        deadband: 0.02, lpf_alpha: 0.6, max_rate_deg_s: 400}
+  - {name: index,               deadband: 0.02, lpf_alpha: 0.6, max_rate_deg_s: 400}
+  - {name: middle,              deadband: 0.02, lpf_alpha: 0.6, max_rate_deg_s: 400}
+  - {name: ring,                deadband: 0.02, lpf_alpha: 0.6, max_rate_deg_s: 400}
+  - {name: pinky,               deadband: 0.02, lpf_alpha: 0.6, max_rate_deg_s: 400}

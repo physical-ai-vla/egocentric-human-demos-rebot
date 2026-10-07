@@ -1,6 +1,6 @@
 #!/bin/bash
-# [2026-09-23] C8 stage M on the RTX 5080 ONLY (<gpu-node>; the NFS data root ${DATA_ROOT} mounted at ${SHARED_ROOT}).
-# Same canonical config as the 5090 benchmark: same m3slam env (byte copy at ${SHARED_ROOT}/envs/m3slam, pip-freeze md5 checked),
+# [2026-09-23] C8 stage M on the RTX 5080 ONLY (node:100.64.0.3, gpu-5080b; /srv/data of the 5090 NFS-mounted at /mnt/shared).
+# Same canonical config as the 5090 benchmark: same m3slam env (byte copy at johann/envs/m3slam, pip-freeze md5 checked),
 # same repo + build_compat_5090 patch (sm_120, shared .so files), same checkpoints (MD5SUMS), run_perframe.py video-direct, ss1 seed0.
 # No 5090 fallback: exits 2 unless this host's GPU is an RTX 5080.
 # Usage: c8_run_5080.sh <side list> <out dir> [<input root, default c8/val/c8> <output name, default ss1>]. Input dir =
@@ -10,7 +10,7 @@
 # gpu peak MiB = whole GPU, base MiB = whole GPU just before the side (other users / display).
 # Memory rule (user, 2026-09-23): proc peak > 15.5 GB (15872 MiB) or OOM -> STOP the list (never change algorithm settings).
 set -u
-L=$1; OUT=$2; S=${SHARED_ROOT}; C8=$S/c8; IN=${3:-$C8/val/c8}; NAME=${4:-ss1}
+L=$1; OUT=$2; S=/mnt/shared/johann; C8=$S/c8; IN=${3:-$C8/val/c8}; NAME=${4:-ss1}
 GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)
 case "$GPU" in *5080*) ;; *) echo "NOT_5080: '$GPU' -> refuse"; exit 2;; esac
 export M3_REPO=$S/mast3r_slam_official M3_BASE=$C8

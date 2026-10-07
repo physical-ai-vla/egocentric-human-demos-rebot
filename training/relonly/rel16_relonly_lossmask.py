@@ -1,4 +1,4 @@
-"""[2026-10-03] REL-only trainer + a per-sample, per-dim LOSS MASK over action dims 0:20 (right-arm-only ego tasks).
+"""[2026-10-03 user] REL-only trainer + a per-sample, per-dim LOSS MASK over action dims 0:20 (right-arm-only ego tasks).
 
 Copy-and-extend of rel16_aux_relonly.py (that file is sha-pinned by running launchers and is NOT modified).
 Everything of the REL-only recipe stays: action dims 20:32 are hard-zeroed at the transformer input and output

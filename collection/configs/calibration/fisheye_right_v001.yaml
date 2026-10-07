@@ -1,0 +1,249 @@
+created: 2026-09-11T17:00:12+0900
+schema: handumi_fisheye_intrinsics/v1
+model: cv2.fisheye.calibrate (kannala_brandt)
+side: right
+K:
+- - 780.3103758346897
+  - 0.0
+  - 962.6353684302877
+- - 0.0
+  - 780.4385906000334
+  - 546.6380501169009
+- - 0.0
+  - 0.0
+  - 1.0
+D:
+- -0.02065502749879325
+- -0.003652015415887318
+- 0.0028036565031240644
+- -0.0013251477388330035
+image_size:
+- 1920
+- 1080
+source: charuco 6x8 31/23mm, 29 views, rms 0.273px
+notes: ''
+product_name: Arducam 1080P Low Light
+match_name: Arducam 1080P Low Light
+reported_serial: UC684
+resolution:
+- 1920
+- 1080
+fps: 30
+fourcc: MJPG
+imaging_preset:
+  auto-exposure-mode: '1'
+  exposure-time-abs: '20'
+  gain: '0'
+  auto-white-balance-temp: 'false'
+  white-balance-temp: '4600'
+  power-line-frequency: '2'
+coverage:
+  grid:
+  - - 3
+    - 3
+    - 3
+  - - 3
+    - 5
+    - 3
+  - - 3
+    - 3
+    - 3
+  distance:
+    near: 14
+    mid: 13
+    far: 2
+coverage_complete: true
+rms_px: 0.2732
+views: 29
+corners_median: 20.0
+total_corners_used: 702
+corners_per_view:
+- 32
+- 27
+- 17
+- 33
+- 32
+- 14
+- 29
+- 33
+- 19
+- 18
+- 35
+- 33
+- 16
+- 20
+- 18
+- 20
+- 19
+- 20
+- 14
+- 29
+- 14
+- 14
+- 18
+- 22
+- 31
+- 20
+- 35
+- 35
+- 35
+min_corners_per_view: 12
+board:
+  squares_x: 6
+  squares_y: 8
+  square_length_m: 0.031
+  marker_length_m: 0.023
+  dictionary: DICT_5X5_100
+  legacy_pattern: false
+board_corners: 35
+charuco_config: configs/charuco_wrist.yaml
+calibrated_by: scripts/charuco_calibrate.py
+hardware_profile: handumi_rgbd
+calibration_version: exposure_v001
+valid_radius_px: 951.8
+valid_radius:
+  valid_radius_px: 951.8
+  r_observed_px: 951.8
+  r_stable_px: 1125.0
+  r_corner_px: 1107.0
+  masked_frame_fraction: 0.0647
+  spread_deg_by_radius:
+    200: 0.047
+    225: 0.053
+    250: 0.058
+    275: 0.063
+    300: 0.069
+    325: 0.074
+    350: 0.079
+    375: 0.083
+    400: 0.088
+    425: 0.092
+    450: 0.096
+    475: 0.099
+    500: 0.102
+    525: 0.105
+    550: 0.107
+    575: 0.109
+    600: 0.11
+    625: 0.111
+    650: 0.112
+    675: 0.112
+    700: 0.112
+    725: 0.111
+    750: 0.11
+    775: 0.108
+    800: 0.106
+    825: 0.104
+    850: 0.101
+    875: 0.098
+    900: 0.095
+    925: 0.091
+    950: 0.087
+    975: 0.082
+    1000: 0.079
+    1025: 0.078
+    1050: 0.086
+    1075: 0.115
+    1100: 0.183
+    1125: 0.261
+  max_deviation_deg_by_radius:
+    200: 0.073
+    225: 0.082
+    250: 0.091
+    275: 0.099
+    300: 0.108
+    325: 0.116
+    350: 0.124
+    375: 0.131
+    400: 0.138
+    425: 0.145
+    450: 0.151
+    475: 0.157
+    500: 0.162
+    525: 0.167
+    550: 0.171
+    575: 0.175
+    600: 0.178
+    625: 0.18
+    650: 0.182
+    675: 0.183
+    700: 0.183
+    725: 0.182
+    750: 0.182
+    775: 0.18
+    800: 0.178
+    825: 0.176
+    850: 0.173
+    875: 0.17
+    900: 0.166
+    925: 0.163
+    950: 0.158
+    975: 0.153
+    1000: 0.147
+    1025: 0.138
+    1050: 0.135
+    1075: 0.197
+    1100: 0.348
+    1125: 0.497
+  worst_lateral_mm_at_0p5m_by_radius:
+    200: 0.6
+    225: 0.7
+    250: 0.8
+    275: 0.9
+    300: 0.9
+    325: 1.0
+    350: 1.1
+    375: 1.1
+    400: 1.2
+    425: 1.3
+    450: 1.3
+    475: 1.4
+    500: 1.4
+    525: 1.5
+    550: 1.5
+    575: 1.5
+    600: 1.6
+    625: 1.6
+    650: 1.6
+    675: 1.6
+    700: 1.6
+    725: 1.6
+    750: 1.6
+    775: 1.6
+    800: 1.6
+    825: 1.5
+    850: 1.5
+    875: 1.5
+    900: 1.5
+    925: 1.4
+    950: 1.4
+    975: 1.3
+    1000: 1.3
+    1025: 1.2
+    1050: 1.2
+    1075: 1.7
+    1100: 3.0
+    1125: 4.3
+  max_spread_deg: 0.3
+  n_subset_refits: 8
+  subset_fraction: 0.7
+  method: subset-refit bearing spread, capped at outermost observed corner
+  derived_by: scripts/charuco_calibrate.py:estimate_valid_radius, re-run on the saved
+    views in ~/calib/right2 after the fact
+physical_side_verified: true
+physical_side_verified_at: '2026-09-11T17:25:57+09:00'
+physical_side_verified_by: scripts/verify_physical_side.py --cover left
+physical_side_evidence:
+  covered: left
+  baseline_luma:
+    left: 154.48
+    right: 145.35
+  covered_luma:
+    left: 48.4
+    right: 164.79
+  drop_fraction:
+    left: 0.6867
+    right: -0.1337
+  product_names:
+    left: FisheyeCamLeft
+    right: Arducam 1080P Low Light

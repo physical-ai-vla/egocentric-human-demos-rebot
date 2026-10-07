@@ -1,0 +1,18 @@
+# Translation diagnostic, right wrist, 1080p30 (2026-09-16). Purpose: separate two failures that were tangled in the
+# bimanual pilot -- late static initialization (episodes started already moving) versus translation estimation itself.
+# Every motion is SLOW and translation-only; keep the wrist orientation as fixed as you can. 10 cm between two marks
+# on the table (tape). Segment boundaries are recovered from the IMU (still vs moving) after the take, so the timing
+# below is a guide for the operator, not something the evaluation depends on.
+gates:
+  scale_min: 0.8               # looser than m1_protocol: a 10 cm move with a tape mark is only good to ~1 cm
+  scale_max: 1.2
+  stationary_drift_mm: 10      # the question is whether still-window jitter comes down to a few mm -- so ask for it
+  post_init_valid: 0.95
+segments:
+  S0: {kind: stationary,  note: "0-3 s   fully still -- this is the window static init needs BEFORE any motion"}
+  S1: {kind: translation, physical_pp_m: 0.10, note: "3-6 s   slow left/right 10 cm and back"}
+  S2: {kind: stationary,  note: "6-9 s   still"}
+  S3: {kind: translation, physical_pp_m: 0.10, note: "9-12 s  slow forward/back 10 cm and back"}
+  S4: {kind: stationary,  note: "12-15 s still"}
+  S5: {kind: translation, physical_pp_m: 0.10, note: "15-18 s slow up/down 10 cm and back"}
+  S6: {kind: stationary,  note: "18-21 s still"}

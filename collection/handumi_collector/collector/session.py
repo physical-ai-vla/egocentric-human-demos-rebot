@@ -252,9 +252,12 @@ class CollectorSession:
         imus = {side: summ["sensor_messages"].get(f"/{side}/imu", 0) for side in self.devices.imus}
         meta_like = dict(streams=summ["streams"], duration_s=dur)
         verdict, notes = preliminary_qa(meta_like, r.events)
-        for side, dev in self.devices.grippers.items():                        # raw-integrity gate on each jaw (never a VIO metric)
+        qa = dict(getattr(self.cfg.collector, "qa", None) or {})
+        jaw_devs = self.devices.grippers.items() if qa.get("gripper_checks", True) else ()   # off for a jaw-free take mode
+        for side, dev in jaw_devs:                                             # raw-integrity gate on each jaw (never a VIO metric)
             cfgg = getattr(dev, "cfg", None); tc, to = getattr(cfgg, "ticks_closed", None), getattr(cfgg, "ticks_open", None)
-            level, note = gripper_integrity(side, getattr(r, "grip_stats", {}).get(side), tc, to, duration_s=dur)
+            level, note = gripper_integrity(side, getattr(r, "grip_stats", {}).get(side), tc, to, duration_s=dur,
+                                            require_travel=bool(qa.get("require_jaw_travel", True)))
             if note: notes.append(note)
             if level == "REJECT": verdict = "REJECT"
             elif level == "REVIEW" and verdict == "PASS": verdict = "REVIEW"
@@ -262,8 +265,10 @@ class CollectorSession:
         if self.state == "ERROR_REVIEW": verdict = "REVIEW"; notes.insert(0, "required device failed during recording")
         rl = r.extra_meta.get("robot_like_live")
         if rl:
-            notes.append(f"robot-like {rl['verdict']}" + (f": {'; '.join(rl['reasons'])}" if rl["reasons"] else ""))
-            if rl["verdict"] == "FAIL" and (self.cfg.collector.protocol or {}).get("verdict_on_fail", "review") == "review" and verdict == "PASS":
+            advisory = qa.get("robot_like") == "advisory"
+            notes.append(f"robot-like {rl['verdict']}" + (" (advisory)" if advisory else "") + (f": {'; '.join(rl['reasons'])}" if rl["reasons"] else ""))
+            if (not advisory and rl["verdict"] == "FAIL" and (self.cfg.collector.protocol or {}).get("verdict_on_fail", "review") == "review"
+                    and verdict == "PASS"):
                 verdict = "REVIEW"
         return dict(episode=r.episode_dir.name, order=self.order, duration_s=round(dur, 2), streams=streams, grippers=grips, imus=imus,
                     hw_errors=sum(1 for e in r.events if e["kind"] in ("device_error", "critical_device_error", "recorder_error")),

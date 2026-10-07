@@ -1,0 +1,29 @@
+# Pilot: 20 raw egocentric episodes for offline 3D hand-pose (WiLoR/HaMeR) quality validation.
+# AprilTags dropped for capture (detection too unreliable on this rig); real-time = QC only.
+# Per-order split 3/3/3/3/4/4. Layouts L01-L03 = same scene, all 6 orders (prompt-conditioned
+# trajectories); L04 = 2 extra episodes on a fresh layout.
+task: cube_stack
+colors: [red, blue, purple]
+template: 'Stack the cubes in this order: {a} at the bottom, {b} in the middle, {c} on top.'
+note: pilot-20-raw-ego (post-process with WiLoR; AprilTag pipeline shelved)
+entries:
+- {layout: L01, order: RBP, target: 1}
+- {layout: L01, order: RPB, target: 1}
+- {layout: L01, order: BRP, target: 1}
+- {layout: L01, order: BPR, target: 1}
+- {layout: L01, order: PRB, target: 1}
+- {layout: L01, order: PBR, target: 1}
+- {layout: L02, order: RBP, target: 1}
+- {layout: L02, order: RPB, target: 1}
+- {layout: L02, order: BRP, target: 1}
+- {layout: L02, order: BPR, target: 1}
+- {layout: L02, order: PRB, target: 1}
+- {layout: L02, order: PBR, target: 1}
+- {layout: L03, order: RBP, target: 1}
+- {layout: L03, order: RPB, target: 1}
+- {layout: L03, order: BRP, target: 1}
+- {layout: L03, order: BPR, target: 1}
+- {layout: L03, order: PRB, target: 1}
+- {layout: L03, order: PBR, target: 1}
+- {layout: L04, order: PRB, target: 1}
+- {layout: L04, order: PBR, target: 1}

@@ -1,0 +1,43 @@
+# Derived from ~/ego_collector/pyproject.toml (project "ego-collector" 0.1.0). Split for the handumi-rebot repo:
+# this project packages only `handumi_collector`; the legacy camera layer it imports lazily (`ego_collector.camera`,
+# used by the UVC/Orbbec backends and the ChArUco scripts) lives in ../experimental and is pulled in as a path dependency.
+[project]
+name = "handumi-collector"
+version = "0.1.0"
+description = "HandUMI egocentric raw collector: head C922 + HandUMI wrist units (Arducam fisheye, Teensy ICM42688P IMU, Feetech jaw) -> mp4 + sensors.mcap episodes"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "opencv-contrib-python>=4.10,<5",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pandas>=2.1",
+    "pyarrow>=14",
+    "pyyaml>=6.0",
+    "matplotlib>=3.8",
+    "tqdm>=4.66",
+    # was the `handumi` extra in the original project
+    "mcap>=1.2",
+    "pyserial>=3.5",
+    "PySide6>=6.7",
+    "feetech-servo-sdk>=1.0.0",
+    "av>=12",
+    "trimesh>=4.0",
+    "handumi-rebot-experimental",
+]
+
+[tool.uv.sources]
+handumi-rebot-experimental = { path = "../experimental", editable = true }
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["handumi_collector"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

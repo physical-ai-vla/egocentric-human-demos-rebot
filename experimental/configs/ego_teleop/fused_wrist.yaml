@@ -1,0 +1,140 @@
+# Multi-sensor wrist tracking: chest RGB-D + wrist Arducam + wrist IMU -> ONE fused wrist pose.
+# Runbook + rationale: docs/ego_teleop/MULTISENSOR_FUSION.md   Tools: ego_teleop/tools/f0_sensors.py, f4_fusion.py
+#
+# The three sensors are NOT alternatives to each other:
+#     chest RGB-D    metric absolute XYZ  (all three axes, section 16) + long-term drift anchor + recovery reference
+#     wrist Arducam  visual motion tracking, keyframes, map, relocalization
+#     wrist IMU      fast rotation / dynamics, motion between camera frames, short visual-dropout bridging
+# Downstream is untouched: HumanRobotFrameMapper -> RelativeSE3Retargeter -> ArmSafetyPipeline -> reBot client.
+enabled: false                   # flip on for a fusion run; production wrist-VIO and the RGB-D POC are unaffected
+side: right
+mode: fused                      # fused | vi_only (ablation B) | rgbd_only (ablation A) — section 21 runs all three
+rate_hz: 50                      # fusion output and robot command rate. Sensors keep THEIR rates (section 15):
+                                 # IMU 416 Hz, Arducam 30 Hz, chest RGB-D 30 Hz, VI update backend-dependent.
+
+# Wrist visual-inertial backend (handumi_collector.pose registry). Spec section 2: OpenVINS is NOT the production
+# tracking backend any more -- it stays registered as a regression/reference path and is not what --live runs.
+#   mast3r_live       LIVE MASt3R-Fusion over a socket (ego_teleop/tracking/backends/mast3r_live.py). The model runs
+#                     on the GPU box; scripts/mast3r_live_server.py is deployed into ITS checkout and nothing of
+#                     MASt3R is vendored here (section 10). Protocol: docs/ego_teleop/MAST3R_LIVE_PROTOCOL.md.
+#   mast3r            OFFLINE replay of a MASt3R-Fusion result.txt (the bake-off path, `m1_vio --backend mast3r`).
+#   openvins          reference only.
+vi_backend: mast3r_live
+vi_backend_options:
+  host: gpu-5090                 # where MASt3R-Fusion lives (~/vio_bakeoff/MASt3R-Fusion). No server -> the backend
+  port: 5577                     # raises BackendUnavailable; a pose source is never substituted.
+  jpeg_quality: 82
+vi_tracking:                     # TrackingSupervisor for the WRIST branch (fisheye VI failure modes)
+  degraded_after_ms: 80
+  lost_after_ms: 250
+  min_confidence_ok: 0.5
+  min_features_ok: 80
+  recover_after_n_ok: 3
+  max_jump_m: 0.15
+  max_jump_deg: 25
+
+palm:                            # how the chest RGB-D anchor is read out of the metric hand (hand3d/palm_pose.py)
+  origin: palm_centroid          # wrist + 4 MCPs: near-rigid under finger motion
+  orientation: fixed             # the anchor contributes TRANSLATION. Palm orientation is still computed and logged
+                                 # (QA / comparison, section 7) but never drives the control rotation.
+  min_palm_landmarks: 3
+  min_palm_landmarks_ok: 5
+  min_origin_depth_m: 0.20
+  max_origin_depth_m: 1.20       # chest-mounted: the hand reaches further out than in the fixed-camera POC
+  hand_degraded_is_arm_degraded: true
+rgbd_tracking:                   # TrackingSupervisor for the ANCHOR branch (palm-from-depth failure modes)
+  degraded_after_ms: 80
+  lost_after_ms: 200
+  min_confidence_ok: 0.5
+  min_features_ok: 0
+  recover_after_n_ok: 3
+  max_jump_m: 0.10
+  max_jump_deg: 30
+
+provider:                        # the fusion itself (tracking/fused_wrist.py + anchor_fusion.py + local_pose.py)
+  max_pair_dt_ms: 20             # an RGB-D sample and a VI pose further apart than this are not one observation
+  vi_ring_s: 2.0
+  supervisor:                    # AGE policy applied to the FUSED pose (how stale before DEGRADED / LOST)
+    degraded_after_ms: 80
+    lost_after_ms: 250
+  local:                         # section 3: global map corrections must never reach the robot
+    absorb_flagged_only: true    # absorb only corrections the backend ANNOUNCES. An unflagged jump stays a jump and
+                                 # is graded LOST — a tracking failure and a loop closure look identical in the pose
+                                 # alone, and swallowing both would hide the failure.
+    map_update_keys: [map_update, loop_closure, global_correction]
+    jump_m: 0.05                 # used only when absorb_flagged_only is false
+    jump_deg: 10
+    max_absorb_m: 1.0            # bigger than this is not a map correction; refuse and let it be graded
+    max_absorb_deg: 90
+  alignment:                     # T_W_D (chest camera in the VI world) + the palm lever arm r, section 6/8
+    window_s: 20
+    min_pairs: 60
+    min_span_m: 0.12             # the hand must actually have moved before a rigid fit means anything
+    min_rotation_span_deg: 20    # r is UNOBSERVABLE without wrist rotation; below this it keeps its last value
+    refit_every_s: 1.0
+    max_rms_m: 0.03              # a worse fit is not accepted as an alignment (then: VI-only, declared)
+    estimate_lever_arm: true
+    lever_arm_m: null            # set to a measured [x,y,z] (palm centroid in the wrist control frame H) to freeze it.
+                                 # r is identifiable only from rotation that is NOT locked to translation -- the
+                                 # `rotation_only` window of the 60 s protocol is exactly that motion. Estimate it
+                                 # there once, read it off the f4_fusion report, and freeze it here.
+    max_lever_arm_m: 0.15
+    max_lever_arm_sigma_m: 0.01  # posterior sigma of r; above this the window cannot see it and the old value stands
+    als_iters: 5
+    freeze_after_align: true     # stop refitting once aligned: a sliding refit absorbs slow VI drift into T_W_D and
+                                 # the anchor then corrects nothing. Costs the assumption that the chest camera is
+                                 # static in the VI world for the length of a take (section 1.1).
+    realign_residual_m: 0.20     # a residual that stays above this ...
+    realign_after_s: 2.0         # ... for this long re-opens the fit (a real torso shift; logged as a re-alignment)
+  fusion:                        # C(t): the slow bounded correction, section 6
+    alpha: 0.02                  # EMA gain per accepted RGB-D observation (~1.7 s at 30 Hz)
+    max_correction_m: 0.25
+    max_correction_rate_m_s: 0.01  # THIS IS ROBOT VELOCITY under relative teleop. Keep it far below hand speed.
+    min_rgbd_confidence: 0.5
+    max_residual_m: 0.15         # a larger residual is occlusion / a wrong hand, not drift -> rejected
+    deadband_m: 0.005            # do not chase depth noise
+    defer_large_to_clutch: true  # section 13: a large re-anchor is mostly applied while the arm is frozen
+    large_correction_m: 0.05
+    deferred_rate_fraction: 0.25
+  state:                         # the unified state machine of section 14
+    rgbd_grace_s: 2.0            # VI OK + anchor dropped out: run on VI this long before declaring DEGRADED
+    max_unanchored_s: 30.0       # VI OK but never anchored: a drifting VI is honestly DEGRADED after this
+    vi_lost_translation_only: false  # VI LOST + RGB-D OK -> HOLD (default). true = follow RGB-D translation at
+                                     # degraded speed with the last VI orientation frozen. Orientation confidence is
+                                     # what is missing there, so HOLD is the safe default.
+
+stable:                          # VioStableGate: nothing anchors or records until the pose source proved itself
+  min_stable_s: 2.0
+  max_lin_vel_m_s: 0.05
+  max_ang_vel_deg_s: 10
+  max_pos_drift_m: 0.02
+
+frames:                          # human wrist frame H -> robot. H is set by the wrist_camera_<side> calibration:
+  translation_axis_map: [x, y, z]   # x forward along the forearm, y left, z up (same convention as frames.yaml)
+  translation_sign: [1, 1, 1]
+  rotation_axis_map: null
+  rotation_sign: null
+  translation_scale: [0.5, 0.5, 0.5]   # first real runs: half scale. Raise only after the P6 numbers are clean.
+  rotation_scale: 1.0
+
+safety:                          # P7 starts conservative and one axis at a time
+  workspace: {min_xyz: [0.05, -0.45, 0.02], max_xyz: [0.65, 0.45, 0.55]}
+  workspace_mode: clamp
+  max_lin_vel_m_s: 0.06
+  max_ang_vel_deg_s: 20
+  max_lin_acc_m_s2: 0.5
+  robot_obs_max_age_ms: 200
+workspace_from_anchor: true
+workspace_half_extent_m: [0.10, 0.10, 0.10]
+
+gates:                           # section 20 acceptance thresholds — pre-hardware starting points, re-fit on real data
+  min_fusion_rate_hz: 45
+  min_tracking_ok_fraction: 0.95
+  max_stationary_jitter_mm_p95: 8.0
+  max_stationary_rotation_jitter_deg_p95: 2.0
+  max_return_to_start_mm: 30.0
+  max_rotation_translation_leak_mm: 20.0   # translation during the rotation-only window = an uncompensated lever arm
+  max_rgbd_vi_discrepancy_mm_p95: 40.0
+  max_catastrophic_jumps: 0
+  max_command_discontinuity_mm: 10.0
+  max_end_to_end_latency_ms: 80.0

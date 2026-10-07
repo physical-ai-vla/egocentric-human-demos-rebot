@@ -1,0 +1,60 @@
+# HandUMI pose-tracking subsystem (M2). Everything tunable lives here — nothing is hard-coded in handumi_collector/pose.
+# Fiducial-free: Arducam fisheye + ICM42688P -> VIO/VO backend -> camera pose -> TCP; HOME-return drift as the drift QA.
+backend: opencv_vo                 # mock | opencv_vo (visual-only baseline, non-metric scale) | orbslam3 (visual-inertial, external) | dpvo (visual-only, needs dpvo)
+tracking_mode: episode_reset       # episode_reset (offline, per-episode cold start) | continuous_session (online LivePoseRunner, poses canonicalised per episode)
+sides: [left, right]
+image_downscale: 2                 # 1920x1080 -> 960x540 for the estimator (raw video untouched)
+master_timeline: head              # canonical 30 Hz timeline = head C922 capture_ns
+fps: 30
+lead: 5                            # relative TCP: inv(T_t) T_{t+lead}  (robot C_state: lead 5)
+horizon: 30                        # chunk length for exporters
+max_pose_gap_ms: 100               # head frame -> nearest valid wrist pose farther than this => TCP invalid (no long-gap interpolation)
+max_grip_gap_ms: 150
+offsets:                           # camera - IMU clock offset (ms). MUST be measured (tools.camera_imu_offset); `measured: false` => QA warning
+  # Measured 2026-09-15 on TSYNC/TSYNC_20260915_144622/episode_000001, backend opencv_vo, search +/-100 ms step 0.5.
+  # Sense: imu_time + offset ~= camera_time. Full provenance (confidence, VO valid ratio, camera and IMU identity,
+  # profile, git commit) lives in configs/calibration/wrist_bundle_{left,right}_v003.yaml -- this file is only what
+  # the pose pipeline reads, and the bundle alone does NOT reach it: PoseCfg.camera_imu_offset_ns() reads here.
+  left_camera_imu_offset_ms: 30.17     # confidence 0.95, VO valid ratio 0.802
+  right_camera_imu_offset_ms: 32.77    # confidence 0.96, VO valid ratio 0.471 -- below the nominal 0.5 gate,
+                                       # accepted as an exception on the evidence recorded in the bundle
+  measured: true
+static_window:                     # HOME start/end still segments (auto-detected from IMU; explicit home_leave/home_return events win)
+  min_duration_s: 0.8
+  max_duration_s: 3.0
+  gyro_thresh_dps: 3.0             # |gyro| (bias-removed) below this ...
+  accel_std_thresh_m_s2: 0.35      # ... and accel-norm std below this => still
+  edge_trim_s: 0.15
+home_return:                       # translation / rotation of inv(T_start) T_end; PASS < pass, WARN < warn, else REJECT
+  pass: {translation_mm: 10.0, rotation_deg: 3.0}
+  warn: {translation_mm: 25.0, rotation_deg: 7.0}
+static_jitter:                     # pose std inside a still window
+  review: {pos_std_mm: 3.0, rot_std_deg: 1.0}
+jumps:                             # frame-to-frame catastrophic pose jumps (per 1/fps step)
+  translation_m: 0.15
+  rotation_deg: 20.0
+imu_consistency:                   # VIO delta-rotation vs raw gyro integration over a window
+  window_frames: 10
+  warn_deg: 3.0
+  reject_deg: 15.0
+  max_frac_over_warn: 0.10
+valid_ratio: {warn: 0.98, reject: 0.90}
+lost_events: {reject_if_lost_longer_than_s: 1.0}
+imu_bias: {estimate_from_static_start: true}
+
+segmented:                          # segmented relative VIO (pose/backends/segmented.py). 2026-09-16: a waiting hand starves the filter of
+  enabled: false                    #   visual updates (no parallax) and it diverges; so STATIC windows (IMU) -> delta p = 0, delta R = gyro;
+  min_static_s: 0.5                 #   MOVING segments -> a fresh backend that saw the static prefix (re-init on the still->motion edge).
+  gyro_max_deg_s: 4.0               #   static needs gyro AND accel-variance AND gap AND duration -- never gyro alone
+  accel_std_max: 0.25
+  max_gap_ms: 25.0
+  window_s: 0.2
+  prefix_s: 2.0                     # static prefix fed to the next segment's backend before its motion starts
+  tail_s: 0.5                       # keep feeding a segment this long into the following static window
+  flow_width_px: 120                # image-motion guard: mean |frame diff| (DN) on a grey frame resized to ~120 px wide ...
+  flow_max_dn: 6.0                  # ... above this for flow_frames consecutive frames => not static, whatever the IMU says
+  flow_frames: 2
+  starve_frames: 0                  # DISABLED (2026-09-16): OpenVINS' per-update feature count is 1-4 even when tracking well, so it cannot
+                                    #   tell starvation from health; min 5 wrecked both wrists, min 1 did not stop the jumps. Kept as an option.
+                                    #   >0: a moving segment with < starve_min_features for this many frames is dead -> LOST until the next static
+  starve_min_features: 5            #   window (its IMU-only state is not trusted). frames with fewer features are never output. 0 disables.

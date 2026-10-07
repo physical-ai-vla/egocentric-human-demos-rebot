@@ -1,0 +1,13 @@
+# Fixed world tags around the workspace. World/table frame: +X right, +Y away from the
+# operator, +Z up. Poses are T_world_tag (tag frame: centre origin, +X right, +Y up,
+# +Z out of the tag). A tag lying flat on the table with its top edge pointing away
+# from the operator therefore has rpy = [0, 0, 0].
+tag_family: tag36h11
+tag_size_m: 0.045           # detector quad (AprilTag tag_size): tag36h11 = 8 of 10 modules; printed footprint 56 mm
+tags:
+  100: {xyz: [-0.35, 0.10, 0.0], rpy: [0.0, 0.0, 0.0]}
+  101: {xyz: [ 0.35, 0.10, 0.0], rpy: [0.0, 0.0, 0.0]}
+  102: {xyz: [-0.35, 0.70, 0.0], rpy: [0.0, 0.0, 0.0]}
+  103: {xyz: [ 0.35, 0.70, 0.0], rpy: [0.0, 0.0, 0.0]}
+# Set measured: true once the layout has been verified with a ruler / the tracking-test.
+measured: false

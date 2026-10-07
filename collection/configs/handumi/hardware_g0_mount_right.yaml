@@ -1,0 +1,14 @@
+# G0-0 Mount Qualification (2026-10-02): ONE wrist unit only — the right Arducam remounted lateral-oblique toward
+# thumb + index, plus the IMU on the same unit. No head camera, no Orbbec, no Feetech jaw (the jaw is not on this mount).
+#     .venv/bin/python -m ego_teleop.tools.g0_mount_qual record --hardware g0_mount_right
+# Fix exposure on the Arducam BEFORE the take (motion blur changes both the hand detector and the VI features):
+#     ~/robot-cockpit/bin/uvc-util -I <i> -s auto-exposure-mode=1 ; -s exposure-time-abs=<v>
+# If the pilot uses the XIAO nRF52840 unit instead of the Teensy, swap the imus line for the one in
+# hardware_fusion_live.yaml (serial D2FB7365FE48ED0F, rate_hz 416).
+hardware_version: handumi_v1_g0mount
+profile: g0_mount_right
+calibration_version: uncalibrated          # the mount is what is being decided; nothing is calibrated for it yet
+cameras:
+  - {name: right_wrist, role: pose_estimation, backend: uvc, match_name: "Arducam 1080P Low Light", ordinal: 0, width: 1920, height: 1080, fps: 30, fourcc: MJPG, required: true, strict_identity: true}
+imus:
+  - {side: right, backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "20778070", baud: 2000000, rate_hz: 200, required: true}

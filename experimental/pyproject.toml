@@ -1,0 +1,44 @@
+# Derived from ~/ego_collector/pyproject.toml (project "ego-collector" 0.1.0). Packages the two experimental trees:
+# `ego_collector` (V0 AprilTag pipeline; its camera layer is also used by ../collection) and `ego_teleop`
+# (wearable teleop / VIO). ego_teleop imports `handumi_collector` -- install ../collection into the same venv
+# (not declared here to avoid a circular path dependency).
+[project]
+name = "handumi-rebot-experimental"
+version = "0.1.0"
+description = "Experimental: V0 AprilTag ego pipeline (ego_collector) and wearable teleop / VIO (ego_teleop)"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "opencv-contrib-python>=4.10,<5",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pandas>=2.1",
+    "pyarrow>=14",
+    "pyyaml>=6.0",
+    "matplotlib>=3.8",
+    "tqdm>=4.66",
+    "mediapipe>=0.10.14",
+]
+
+[project.optional-dependencies]
+apriltag = ["pupil-apriltags>=1.0.4"]
+viz = ["rerun-sdk>=0.20"]
+# Aero hand branch (ego_teleop/hand3d + retarget/aero_backends): dex_retargeting/DexPilot on the Aero URDF.
+# The head RGB-D camera additionally needs `pyorbbecsdk`, installed by hand.
+aero = ["dex-retargeting>=0.5,<1"]
+
+[project.scripts]
+ego-collector = "ego_collector.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ego_collector", "ego_teleop"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: runs the real OpenVINS through ov_bridge (seconds); skipped when the bridge is not built"]

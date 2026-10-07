@@ -1,0 +1,30 @@
+{
+ "T_base_F": [
+  [
+   0.30157571422566437,
+   0.7323668366370474,
+   -0.6104841563738775,
+   0.05896093212272367
+  ],
+  [
+   0.3243658623023709,
+   -0.6809102852757069,
+   -0.6566185885113176,
+   -0.07485537013319685
+  ],
+  [
+   -0.8965706196179528,
+   0.0,
+   -0.44290080609305765,
+   0.006233487550741115
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "note": "2026-10-07 F = HRA_A100 origin frame in robot base: position = X centre (jaw-tip touch), TCP x = HandUMI camera axis at the origin (heading = tape line 46.59 deg, pitched 63.7 deg down = median IMU pitch over 100 origin holds), dataset-TCP axes (y = x cross up, z = x cross y). Approximation: per-episode yaw at the origin varied ~6 deg; roll assumed 0. | v3: X position/heading from the URDF fingertip box contact",
+ "pitch_deg": 63.71088902994735
+}

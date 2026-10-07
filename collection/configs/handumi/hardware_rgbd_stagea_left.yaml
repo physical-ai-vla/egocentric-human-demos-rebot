@@ -1,0 +1,52 @@
+# STAGE-A RGB-D POSE PILOT — LEFT HAND ONLY (dataset Hpilot_rgbd_stageA, docs/handumi_collector/RGBD_POSE.md)
+#
+# Purpose: answer one question — can the head Orbbec track the HandUMI rigid body's metric 6DoF?
+# This is NOT a data-collection profile. It is a validation take: one hand, 20-30 s, no IMU needed.
+#
+# Three differences from hardware_handumi_preimu.yaml, all deliberate:
+#   1. head_depth is `required: true`. In the preimu profile it is optional, so a failed Orbbec open records a
+#      complete-looking episode with NO depth — useless for this pilot and only discovered afterwards. Here the
+#      collector refuses to record instead. Run `sudo ... tools.check_rgbd_ready --live` first regardless.
+#   2. right_wrist and the right gripper are absent. Stage A is single-hand on purpose: a single-hand tracker must
+#      pass before dual-hand identity is added, so instability and identity confusion are never debugged together.
+#      Switch back to hardware_handumi_preimu.yaml for two-handed collection.
+#   3. The Orbbec is the ONLY camera — single-sensor validation, not a hardware limitation.
+#
+# The whole collector must run under sudo on macOS — pyorbbecsdk cannot claim the UVC interface otherwise
+# (UVCAssistant holds it). Verified 2026-09-11: C922 idx 0, Orbbec Gemini 336 idx 1, Arducam idx 2,
+# Feetech bus 5B3D048082 answers as servo id 1.
+hardware_version: handumi_v1_preimu
+profile: rgbd_stagea_left
+calibration_version: uncalibrated
+cameras:
+  # ONE CAMERA ONLY, ON PURPOSE — no head C922, no left Arducam. Stage A validates whether head RGB-D can track the
+  # HandUMI rigid body, so a second camera adds risk and no information. This is NOT because the Orbbec cannot coexist
+  # with a UVC camera: an earlier report to that effect did not reproduce — see the measured capacity table below.
+  # The point of this profile. 848x480 colour + depth aligned to colour; intrinsics.json is written from the SDK.
+  - {name: head_depth, role: aux_depth, backend: orbbec, width: 848, height: 480, fps: 30, required: true}
+imus: []                                   # Stage A uses no IMU at all — do not wait for the ICM-42688P
+grippers:
+  # Grip is the authoritative jaw signal (never estimated from vision). If the servo is unpowered and blocks the take,
+  # set required: false — Stage A validates pose, not grip.
+  - {side: left, backend: feetech, port_serial: "5B3D048082", port: "/dev/cu.usbmodem5B3D0480821", servo_id: 1, baud: 1000000, sample_hz: 100, norm_one_is: open, required: true}
+gripper_calibration: latest
+
+# CAMERA CAPACITY — what was actually going on (final, 2026-09-11)
+# Earlier notes in this file blamed USB bandwidth, then a bus ceiling, for the failures seen all day: cameras that
+# "opened but returned no frame", zero-frame episodes, and a non-deterministic choice of which camera died. Both
+# diagnoses were WRONG and are retracted.
+#
+# The cause was CAMERA IDENTITY. The AVFoundation enumeration order is not stable (observed changing between calls),
+# so `product name + ordinal -> index` selected the wrong device — sometimes the Orbbec's RGB node, which pyorbbecsdk
+# already holds, which returns no frame. Two cameras of the same model made it unfixable by care: both Arducams shipped
+# with the same product name AND the same serial "UC684".
+#
+# After reflashing one unit's product name so each matches exactly one device, with strict_identity on:
+#   2 Arducam @1280x720            5/5 runs, 30 fps
+#   2 Arducam @1920x1080           5/5 runs, 30 fps
+#   Orbbec + 2 Arducam @1280x720   6/6 runs, all three at 30 fps
+#   Orbbec + 2 Arducam @1920x1080  6/6 runs, all three at 30 fps   <- the combination that "failed on bandwidth"
+# Nothing was bandwidth-limited. See configs/handumi/hardware_handumi_rgbd.yaml for the frozen production profile.
+#
+# This Stage-A profile stays single-camera for its own reason: it validates whether head RGB-D alone can track the
+# HandUMI rigid body, so a second camera adds risk and no information.

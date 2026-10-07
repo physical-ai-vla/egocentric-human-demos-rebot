@@ -1,0 +1,58 @@
+created: 2026-09-16T11:26:14+0900
+schema: ego_teleop_wrist_calibration_bundle/v1
+side: left
+hardware:
+  imu_serial: '20540160'
+  side: left
+hardware_hash: ae8f810cd1e3
+camera: null
+imu_noise:
+  gyroscope_noise_density: 0.00133385256704486
+  gyroscope_random_walk: 1.971294390591075e-05
+  accelerometer_noise_density: 0.0009805968834199718
+  accelerometer_random_walk: 0.00010328782337154156
+  update_rate: 197.9
+camera_imu:
+  T_camera_imu: null
+  time_offset_ms: 30.17
+  source: null
+provenance:
+  imu_noise:
+    source: allan_variance
+    tool: ego_teleop.tools.imu_allan
+    date: 2026-09-15T11:26:35+0900
+    runs:
+    - allan_20260915_090818/imu_right_20260915_090818_clean
+    notes: 'SIDE CORRECTION 2026-09-16: the 2026-09-15 Allan session ran with the
+      IMU sides labelled backwards (fixed in df2ddb7 -- left=20540160, right=20778070).
+      Its ''imu_left'' log is serial 20778070 (201.57 Hz), which is the RIGHT wrist
+      board; its ''imu_right'' log is 20540160 (197.90 Hz), the LEFT board. The noise
+      blocks were therefore swapped between the bundles. The right-wrist Kalibr run
+      already used the 201.57 Hz numbers (board 20778070) and stands. This block:
+      serial 20540160, log imu_right_20260915_090818_clean (label of that day). 1.46
+      h static log, 1039537 samples, 197.90 Hz. PRIMARY source is the longest unbroken
+      segment (87.5 min, 1,039,537 samples) of imu_right_20260915_090818, NOT the
+      whole session. That session FAILS integrity: 1901 samples lost across 40 sequence
+      gaps inside one 40 s window at 87.5 min, plus an 833.7 ms stall. Device-side
+      dropped 0, ring high-water 2/256, CRC 0, so the loss was on the host/USB transport
+      path, not firmware; which layer is not established. The full session remains
+      on disk as diagnostic-only.'
+  time_offset_ms:
+    source: gyro_correlation
+    tool: handumi_collector.tools.temporal_sync (pose.timing.estimate_camera_imu_offset)
+    date: 2026-09-15T14:50:08+0900
+    runs:
+    - TSYNC/TSYNC_20260915_144622/episode_000001
+    notes: 'confidence 0.95; vo_valid_ratio 0.802; backend opencv_vo; search +/-100.0
+      ms step 0.5 ms, peak at 30.17 ms. Sense: imu_time + offset ~ camera_time. camera:
+      ''FisheyeCamLeft'' usb_location_id 0x03110000 serial UC684 0x0c45:0x0261 (measured
+      OpenCV index 2; the device listing order is NOT the index order on this host).
+      imu serial 20540160. hardware profile temporal_sync_calib / hardware_version
+      handumi_v1 / calibration_version uncalibrated. git efd3569. T_camera_imu still
+      unmeasured - needs Kalibr.'
+missing:
+- camera
+- T_camera_imu
+- hardware.unit_id
+production_ready: false
+notes: imu_noise side correction (serial 20540160); awaiting Kalibr T_camera_imu

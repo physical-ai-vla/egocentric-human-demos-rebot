@@ -1,4 +1,4 @@
-"""[2026-09-30] REL-only ablation of the REL16-v3/v4 trainer: ONE variable, Δq + FK supervision ON -> OFF.
+"""[2026-09-30 user] REL-only ablation of the REL16-v3/v4 trainer: ONE variable, Δq + FK supervision ON -> OFF.
 
 Same dataset bytes (r312c_relcart20_rel16_v4, action (16, 32) = REL20 + Δq12, aux.q_t present but unused), same base,
 same architecture/decoder width (32), same optimizer/schedule/seed. Differences vs rel16_aux.py:

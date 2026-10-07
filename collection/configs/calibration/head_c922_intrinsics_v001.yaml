@@ -1,0 +1,94 @@
+created: 2026-09-15T15:03:46+0900
+schema: handumi_pinhole_intrinsics/v1
+distortion_model: plumb_bob
+side: head
+K:
+- 417.202133907561
+- 0.0
+- 325.64147578400576
+- 0.0
+- 416.890511101937
+- 315.2826669102367
+- 0.0
+- 0.0
+- 1.0
+D:
+- 0.04405883896891481
+- -0.07311138781446257
+- -0.0028161819449617617
+- 0.006847843813513749
+- 0.06523335361347048
+image_size:
+- 640
+- 480
+source: charuco 6x8 31/23mm, 25 views, rms 0.258px
+source_images: ~/calib/head/*.png
+n_images: 25
+coverage:
+  grid:
+  - - 2
+    - 3
+    - 3
+  - - 2
+    - 3
+    - 3
+  - - 3
+    - 3
+    - 3
+  distance:
+    near: 8
+    mid: 13
+    far: 4
+coverage_complete: true
+rms_px: 0.2581
+views: 25
+corners_median: 17.0
+total_corners_used: 489
+corners_per_view:
+- 26
+- 19
+- 14
+- 18
+- 13
+- 14
+- 12
+- 31
+- 14
+- 32
+- 32
+- 16
+- 17
+- 14
+- 12
+- 23
+- 15
+- 15
+- 17
+- 26
+- 31
+- 14
+- 23
+- 25
+- 16
+min_corners_per_view: 12
+board:
+  squares_x: 6
+  squares_y: 8
+  square_length_m: 0.031
+  marker_length_m: 0.023
+  dictionary: DICT_5X5_100
+  legacy_pattern: false
+board_corners: 35
+charuco_config: configs/charuco_wrist.yaml
+model: cv2.calibrateCamera (pinhole, plumb_bob)
+calibrated_by: scripts/charuco_calibrate.py
+distance_bins:
+  near_gt: 0.33
+  mid_gt: 0.25
+hardware_profile: handumi_rgbd
+calibration_version: exposure_v001
+status: VOID
+voided_reason: Taken with autofocus ON. Three batches from that period each fitted
+  themselves to rms 0.19-0.26 while disagreeing on fx by 27 percent, because the lens
+  changed between sessions. Superseded by head_c922_intrinsics_v002, taken with auto-focus
+  off and focus-abs 20.

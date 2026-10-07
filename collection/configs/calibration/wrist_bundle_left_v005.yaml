@@ -1,0 +1,160 @@
+created: 2026-09-16T11:51:36+0900
+schema: ego_teleop_wrist_calibration_bundle/v1
+side: left
+hardware:
+  imu_serial: '20540160'
+  side: left
+  unit_id: handumi-wristL-01
+  mount_revision: handumi_v1
+  camera_serial: UC684
+hardware_hash: dc3d3d826fec
+camera:
+  model: kannala_brandt
+  K:
+  - - 788.9385178282296
+    - 0.0
+    - 939.1683702914798
+  - - 0.0
+    - 780.9929235715126
+    - 546.8760402767231
+  - - 0.0
+    - 0.0
+    - 1.0
+  D:
+  - -0.03932998104988185
+  - 0.01762759255879042
+  - -0.015519489763592518
+  - 0.0034164807370739235
+  image_size:
+  - 1920
+  - 1080
+  reprojection_rms_px: null
+  n_views: null
+  target: null
+imu_noise:
+  gyroscope_noise_density: 0.00133385256704486
+  gyroscope_random_walk: 1.971294390591075e-05
+  accelerometer_noise_density: 0.0009805968834199718
+  accelerometer_random_walk: 0.00010328782337154156
+  update_rate: 197.9
+camera_imu:
+  T_camera_imu:
+  - - 0.998116399
+    - 0.061131545
+    - -0.005156307
+    - 0.045847102
+  - - 0.026022798
+    - -0.497995148
+    - -0.866789275
+    - 0.090160883
+  - - -0.055555983
+    - 0.865022408
+    - -0.498647937
+    - -0.018148106
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  time_offset_ms: 30.17
+  source: kalibr
+provenance:
+  imu_noise:
+    source: allan_variance
+    tool: ego_teleop.tools.imu_allan
+    date: 2026-09-15T11:26:35+0900
+    runs:
+    - allan_20260915_090818/imu_right_20260915_090818_clean
+    notes: 'SIDE CORRECTION 2026-09-16: the 2026-09-15 Allan session ran with the
+      IMU sides labelled backwards (fixed in df2ddb7 -- left=20540160, right=20778070).
+      Its ''imu_left'' log is serial 20778070 (201.57 Hz), which is the RIGHT wrist
+      board; its ''imu_right'' log is 20540160 (197.90 Hz), the LEFT board. The noise
+      blocks were therefore swapped between the bundles. The right-wrist Kalibr run
+      already used the 201.57 Hz numbers (board 20778070) and stands. This block:
+      serial 20540160, log imu_right_20260915_090818_clean (label of that day). 1.46
+      h static log, 1039537 samples, 197.90 Hz. PRIMARY source is the longest unbroken
+      segment (87.5 min, 1,039,537 samples) of imu_right_20260915_090818, NOT the
+      whole session. That session FAILS integrity: 1901 samples lost across 40 sequence
+      gaps inside one 40 s window at 87.5 min, plus an 833.7 ms stall. Device-side
+      dropped 0, ring high-water 2/256, CRC 0, so the loss was on the host/USB transport
+      path, not firmware; which layer is not established. The full session remains
+      on disk as diagnostic-only.'
+  time_offset_ms:
+    source: gyro_correlation
+    tool: handumi_collector.tools.temporal_sync (pose.timing.estimate_camera_imu_offset)
+    date: 2026-09-15T14:50:08+0900
+    runs:
+    - TSYNC/TSYNC_20260915_144622/episode_000001
+    notes: 'confidence 0.95; vo_valid_ratio 0.802; backend opencv_vo; search +/-100.0
+      ms step 0.5 ms, peak at 30.17 ms. Sense: imu_time + offset ~ camera_time. camera:
+      ''FisheyeCamLeft'' usb_location_id 0x03110000 serial UC684 0x0c45:0x0261 (measured
+      OpenCV index 2; the device listing order is NOT the index order on this host).
+      imu serial 20540160. hardware profile temporal_sync_calib / hardware_version
+      handumi_v1 / calibration_version uncalibrated. git efd3569. T_camera_imu still
+      unmeasured - needs Kalibr. CROSS-CHECK: Kalibr (calib_left-camchain-imucam.yaml)
+      independently estimated +35.972 ms, 5.802 ms from this frozen value; the frozen
+      value is kept.'
+    status: FROZEN 2026-09-16 at 30.17 ms (user decision after head-to-head); alternative
+      estimates kept below
+    frozen: true
+    session_latency_variation_suspected: true
+    candidates_ms:
+      frozen_vo_corr_20260915: 30.17
+      kalibr_20260916: 35.97
+      board_corr_20260916: 43.8
+      board_corr_bias_seen_on_right: 3.7
+    head_to_head_20260916:
+      episodes: Hpilot_20260916_112115/ep3-5 (left task)
+      '30.17':
+        coverage_median: 0.983
+        lost_runs_median: 1
+      '35.97':
+        coverage_median: 0.961
+        lost_runs_median: 4
+        ep4: cov 0.769, 12 lost runs, 3 jumps, ba 0.21
+      verdict: 36 ms does not win; 30.17 kept, NOT frozen
+    unresolved_note: 'Left offset estimates scatter more than the right''s (frozen
+      30.17 / Kalibr 35.97 / board-corr 43.8). Same-method re-measurement on the 2026-09-16
+      TSYNC takes: VO-corr left 32.6 ms (conf 0.55) vs 30.17 frozen, right 31.2 ms
+      (conf 0.70) vs 32.77 frozen -- ~2 ms session scatter on BOTH sides, so a left-specific
+      session-dependent latency is suspected but NOT established. Investigation closed
+      2026-09-16 (low yield: 36 ms lost the downstream head-to-head).'
+  camera:
+    source: kalibr
+    tool: kalibr_calibrate_cameras
+    date: 2026-09-16T11:51:36+0900
+    runs:
+    - calib_left-camchain-imucam.yaml
+    notes: 'PROVISIONAL (2026-09-16): Kalibr 2-step on gpu-4090, step1 needed --no-shuffle
+      (shuffled init diverged 3x); step2 with Kalibr''s own intrinsics; identical
+      result (0.71 deg / 1.6 mm) with our fisheye_left_v001 intrinsics, which agree
+      with Kalibr''s to 0.8%. Rotation confirmed by an independent board+gyro hand-eye
+      on the same take (rpy 119.9/2.2/2.8 vs Kalibr 120.3/3.8/1.7) -- the left PCB
+      sits ~120 deg about camera x, NOT the mirror of the right (180 deg). Lever arm
+      10.28 cm vs 8.5 measured (right: 9.08). Translation direction: IMU 9.0 cm below,
+      4.6 cm outboard(+x), 1.8 cm behind the lens. OPEN: Kalibr timeshift +35.97 ms
+      vs frozen 30.17 (right agreed to 0.6 ms); gyro residual 0.080 rad/s = 6x the
+      right. Time offset to be decided head-to-head on the left task episodes; import
+      is provisional until then.'
+  T_camera_imu:
+    source: kalibr
+    tool: kalibr_calibrate_imu_camera
+    date: 2026-09-16T11:51:36+0900
+    runs:
+    - calib_left-camchain-imucam.yaml
+    notes: 'PROVISIONAL (2026-09-16): Kalibr 2-step on gpu-4090, step1 needed --no-shuffle
+      (shuffled init diverged 3x); step2 with Kalibr''s own intrinsics; identical
+      result (0.71 deg / 1.6 mm) with our fisheye_left_v001 intrinsics, which agree
+      with Kalibr''s to 0.8%. Rotation confirmed by an independent board+gyro hand-eye
+      on the same take (rpy 119.9/2.2/2.8 vs Kalibr 120.3/3.8/1.7) -- the left PCB
+      sits ~120 deg about camera x, NOT the mirror of the right (180 deg). Lever arm
+      10.28 cm vs 8.5 measured (right: 9.08). Translation direction: IMU 9.0 cm below,
+      4.6 cm outboard(+x), 1.8 cm behind the lens. OPEN: Kalibr timeshift +35.97 ms
+      vs frozen 30.17 (right agreed to 0.6 ms); gyro residual 0.080 rad/s = 6x the
+      right. Time offset to be decided head-to-head on the left task episodes; import
+      is provisional until then.'
+    status: ACCEPTED 2026-09-16 (Kalibr + independent hand-eye agree)
+missing: []
+production_ready: true
+notes: 'Left wrist bundle frozen 2026-09-16: Kalibr extrinsic + Kalibr intrinsics,
+  time offset 30.17 ms kept. See provenance.time_offset_ms for the alternatives and
+  the open note.'

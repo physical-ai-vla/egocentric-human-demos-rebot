@@ -1,0 +1,61 @@
+#!/bin/bash
+# [2026-10-03 user] 5090 copy of load_relonly_run_ckpt_to_ui.sh (cotrain :8054): node bh-ai-5090 direct (no head-lp jump),
+# runs in /srv/data/johann/relonly/runs, SSD prefix 5090_, rsync fetch, exports CKSEL_* for the UI checkpoint selector.
+# (copied from:) [2026-10-02 user] GENERIC REL-only 4090 loader (domain-20 E5 runs): copy of load_relonly_d6_ckpt_to_ui.sh with RUN and the
+# expected dataset taken from the environment (RUN=<run name> DS_EXPECT=<dataset dir name>). Deploy env unchanged.
+# usage: RUN=R312C-RELCART20-RELONLY-D20-E5 DS_EXPECT=r312c_relcart20_rel16_v4 load_relonly_run_ckpt_to_ui.sh <step> <port>
+# (copied from:) REL-only domain-6 run (R312C-RELCART20-RELONLY-D6-S600K, 4090) -- copy of load_relonly_v4_ckpt_to_ui.sh;
+# (originally:) REL-only ablation (R312C-RELCART20-RELONLY-V4, 5090) into the robot UI. Same deploy contract as the v4 pink UI
+# (:8036: relcart20 state, umi action, chunk 16, exec_k 4, continuous gripper, dwell 1.0, joint5 lock) PLUS V4_RELONLY=1
+# (channels 20:32 hard-zeroed at the transformer input/output, as in training). Pure Pink only (pinkdq refused by infer_core_v4).
+# usage: load_relonly_v4_ckpt_to_ui.sh <step> [port=8037]
+set -u
+STEP=$(printf "%06d" "${1:?step}"); PORT=${2:-8037}; EXEC_K=${EXEC_K:-4}; DWELL=${DWELL:-1.0}; RUN=${RUN:?set RUN}; DS_EXPECT=${DS_EXPECT:?set DS_EXPECT}
+K=$((10#$STEP / 1000)); LOCAL=$HOME/holobrain-mac-model/ckpt_UI_${RUN}_${K}k_pinklockwy
+N=bh-ai-5090@100.64.0.5; R=/srv/data/johann/relonly/runs; SRC=$R/$RUN/checkpoints/$STEP/pretrained_model
+SSD=/Volumes/PortableSSD/rebot_ckpts_archive/5090_$RUN/$STEP
+if [ -f "$SSD/.archived" ]; then want=$(grep " pretrained_model/model.safetensors$" "$SSD/SHA256SUMS" | cut -c1-64)
+else
+  # completeness: "Checkpoint policy after step N" followed by a later step line in the run log
+  ssh -o BatchMode=yes $N "awk -v n=$((10#$STEP)) '{gsub(/\r/,\"\")} s==0 && match(\$0,/Checkpoint policy after step [0-9]+/){if(substr(\$0,RSTART+29,RLENGTH-29)+0==n)s=1;next} s==1 && (/ot_train\.py:[0-9]+ step:/ || /End of training/){f=1;exit} END{exit f?0:1}' $R/$RUN.log" < /dev/null \
+    || { echo "5090 checkpoint $STEP not complete yet"; exit 1; }
+  want=$(ssh -o BatchMode=yes $N "sha256sum $SRC/model.safetensors" < /dev/null | cut -c1-64)
+fi
+[ -f "$LOCAL/model.safetensors" ] && [ "$(shasum -a 256 "$LOCAL/model.safetensors" | cut -c1-64)" != "$want" ] && { echo "stale local copy -- re-fetching"; rm -rf "$LOCAL"; }
+if [ ! -f "$LOCAL/model.safetensors" ]; then
+  rm -rf "$LOCAL.part"; mkdir -p "$LOCAL.part"
+  if [ -f "$SSD/.archived" ]; then /opt/homebrew/bin/rsync -a "$SSD/pretrained_model/" "$LOCAL.part/"
+  else /opt/homebrew/bin/rsync -a -e "ssh -o BatchMode=yes" "$N:$SRC/" "$LOCAL.part/" < /dev/null || { echo "fetch failed"; exit 1; }; fi
+  [ "$(shasum -a 256 "$LOCAL.part/model.safetensors" | cut -c1-64)" = "$want" ] || { echo "sha mismatch"; rm -rf "$LOCAL.part"; exit 1; }
+  mv "$LOCAL.part" "$LOCAL"
+fi
+$HOME/xvla-mac/bin/python - "$LOCAL" <<'EOS' || { echo "identity guard FAILED -- UI not started"; exit 1; }
+import json, pathlib, sys
+p = pathlib.Path(sys.argv[1]) / "config.json"; c = json.loads(p.read_text())
+if "type" not in c: p.write_text(json.dumps({"type": "xvla", **c}, indent=2))
+assert c.get("max_action_dim") == 32 and c.get("max_state_dim") == 20
+tc = json.loads((pathlib.Path(sys.argv[1]) / "train_config.json").read_text())
+import os
+assert tc["output_dir"].rstrip("/").endswith("relonly/runs/" + os.environ["RUN"]), tc["output_dir"]
+assert tc["dataset"]["root"].rstrip("/").endswith(os.environ["DS_EXPECT"]), tc["dataset"]["root"]
+pp = json.loads((pathlib.Path(sys.argv[1]) / "policy_preprocessor.json").read_text())
+dom = [st["config"]["domain_id"] for st in pp["steps"] if st.get("registry_name") == "xvla_add_domain_id"]
+assert dom == [int(os.environ.get("DOMAIN_EXPECT", "20"))], dom
+print("domain_id", dom)
+print("run identity OK:", tc["output_dir"], "| steps", tc["steps"])
+EOS
+curl -s -m 10 -X POST http://localhost:$PORT/stop > /dev/null 2>&1
+kill $(lsof -nP -iTCP:$PORT -sTCP:LISTEN -t) 2>/dev/null; sleep 3
+# [2026-10-03 user "추론 5090 통해서"] the 5090 inference server reads the training run's own checkpoint (no copy)
+[ -n "${V4_REMOTE_INFER:-}" ] && [ "${V4_REMOTE_ENABLE:-0}" = 1 ] && export V4_REMOTE_CKPT=$SRC && echo "[loader] remote inference ckpt $SRC"
+cd $HOME/holobrain-mac-model || exit 1
+export CKSEL_LOADER=$HOME/umi_bridge/load_relonly_5090_run_ckpt_to_ui.sh CKSEL_NODE=$N:$R/$RUN/checkpoints CKSEL_SSD_PREFIX=5090_
+V4_RELONLY=1 V4_CKPT=$LOCAL V4_ACTION_MODE=umi V4_STATE_MODE=relcart20 V4_GRIPPER=continuous V4_GRIP_THRESH=0.6 \
+  V4_CLAMP_MM=0 V4_CLAMP_DEG=0 V4_CHUNK=16 V4_EXEC_K=$EXEC_K V4_DWELL_TIMEOUT_S=$DWELL V4_DTYPE=${V4_DTYPE:-fp32} V4_N_ACTION=${V4_N_ACTION:-1} \
+  V4_GLOBAL_ROT180=0 V4_GLOBAL_MIRROR=0 V4_UI_PORT=$PORT V4_IK_MAX_JOINT_DELTA=none IK_BACKEND=${IK_BACKEND:-pink} V4_PINK_LOCK=${V4_PINK_LOCK-joint5} \
+  V4_DQ_MAX=${DQ_MAX:-0.6} V4_FK_MAX_MM=${FK_MAX_MM:-60} UI_TAG=pinklockwy \
+  nohup $HOME/xvla-mac/bin/python mac_v4_smoke_ui.py > $HOME/v4_smoke_ui_$PORT.log 2>&1 < /dev/null &
+for i in $(seq 1 30); do sleep 5; [ "$(curl -s -m 5 -o /dev/null -w '%{http_code}' http://localhost:$PORT/)" = 200 ] && break; done
+curl -s -m 5 http://localhost:$PORT/status | $HOME/xvla-mac/bin/python -c "import json,sys;print(json.load(sys.stdin)['model'])"
+grep -m3 -iE "relonly|zero" $HOME/v4_smoke_ui_$PORT.log
+echo "UI http://localhost:$PORT  REL-only $RUN $STEP  exec_k $EXEC_K dwell ${DWELL}s IK ${IK_BACKEND:-pink} lock joint5 gripper continuous"

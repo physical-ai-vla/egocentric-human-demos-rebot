@@ -1,0 +1,105 @@
+# reBot ego-bimanual capture rig (JeongHwan's MacBook Pro).
+# Quest 3S + Touch Plus L/R in HandUMI mounts, 3x Logitech C922, 2x Feetech STS3215.
+#
+# Phase gates (see docs/rebot/RUNBOOK.md):
+#   V0.1  Quest -> L/R controller pose        (only `meta_quest` below is needed)
+#   V0.2  + table (session) + controller->TCP calibration
+#   V0.3  + Feetech jaw encoders
+#   V0.4  + workspace / wrist cameras  -> cube dataset recording
+
+cameras:
+  # OpenCV indices measured 2026-08 on this Mac: 1 = global/workspace, 0 = left wrist,
+  # 2 = right wrist, 4 = built-in MacBook camera (never use). Spread the three C922s
+  # over three different USB-C ports: one bus streams at most two cameras.
+  # Re-check with `handumi setup ports` after replugging.
+  left_wrist:
+    type: opencv
+    index_or_path: 0
+    width: 640
+    height: 480
+    fps: 30
+  right_wrist:
+    type: opencv
+    index_or_path: 2
+    width: 640
+    height: 480
+    fps: 30
+  workspace:
+    type: opencv
+    index_or_path: 1
+    width: 640
+    height: 480
+    fps: 30
+  # Head-mounted egocentric camera (Arducam B0202, IMX291, 160 deg fisheye, 1080p30 UVC).
+  # Roles: VLA head view (masked copy `head_clean`) + world-tag localisation + L/R UMI tag
+  # tracking for the AprilTag EEF backend. Wrist cameras are observation-only.
+  head:
+    type: opencv
+    index_or_path: 3
+    width: 1920
+    height: 1080
+    fps: 30
+
+recording:
+  device: meta
+  cameras: [head, left_wrist, right_wrist]   # head = egocentric B0202 (raw, tags visible)
+  width: 640
+  height: 480
+  camera_fps: 30
+  fps: 30
+  robot: rebot_b601
+  # Uncomment once `handumi calibrate spatial --device meta session` has been run
+  # for the current Quest tracking session (redo after any Quest relocalisation).
+  # session_calibration: outputs/calibration/session.yaml
+
+feetech:
+  baudrate: 1000000
+  protocol_version: 0
+  # Read the whole present-status block (speed/load/voltage/temp/current) each sample.
+  telemetry: true
+  # macOS: Waveshare/CH340 adapters appear as /dev/cu.usbserial-* or /dev/cu.usbmodem*.
+  # Fill in after `handumi setup ports`; assign IDs with `handumi servo set-id`.
+  left:
+    servo_id: 0
+    port: /dev/cu.usbserial-HANDUMI_L
+  right:
+    servo_id: 1
+    port: /dev/cu.usbserial-HANDUMI_R
+
+meta_quest:
+  connection:
+    # `adb shell ip route` on the Quest 3S -> address after "src".
+    quest_ip: "192.168.50.200"
+    tcp_port: 65432
+    sync_port: 42000
+    connect_retry_s: 1.0
+  health:
+    frame_stale_timeout_s: 0.25
+
+spatial_calibration:
+  board:
+    # Same 5x7 ChArUco board as upstream HandUMI. Table frame: origin = board
+    # centre, +X right, +Y away from operator, +Z up.
+    id: opencv_charuco_5x7_30mm_v1
+    squares_x: 5
+    squares_y: 7
+    dictionary: DICT_5X5_100
+    square_length_m: 0.030
+    marker_length_m: 0.015
+    legacy_pattern: false
+
+apriltag:
+  spatial: outputs/calibration/spatial.yaml            # cameras.head intrinsics (fisheye)
+  bundles: configs/calibration/apriltag/bundles.yaml   # L/R UMI tag bundles (10,11 / 20,21)
+  world_map: outputs/calibration/world_map.yaml        # fixed tags 100..103 in the table frame
+  require_world: true                                  # no world anchor visible -> frame invalid
+  rectify_balance: 0.5                                 # fisheye -> virtual pinhole for detection
+  frame_stale_timeout_s: 0.25
+
+# Phase 2 EEF-tracker acceptance thresholds (handumi tracking eval ...).
+tracker_eval:
+  static_translation_rms_mm: 5.0
+  static_rotation_rms_deg: 1.0
+  return_to_point_max_mm: 10.0
+  left_right_agreement_max_mm: 10.0
+  table_z_max_mm: 15.0

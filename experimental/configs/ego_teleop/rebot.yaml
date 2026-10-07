@@ -1,0 +1,8 @@
+# reBot arm branch. Talks to the EXISTING robot-cockpit robot_service (joint space). Units boundary = ego_teleop/robot/rebot_client.py.
+base_url: http://127.0.0.1:8020   # robot-cockpit robot_service (verify: curl :8020/status)
+side: right                      # arm carrying the Aero Hand
+ik_backend: pyroki               # handumi rebot_b601 embodiment continuity IK (PyrokiIkSolver.for_rebot_b601); run from ~/xvla-mac/bin/python
+max_ik_pos_err_m: 0.01           # IK residual above this => command refused (unreachable / singular)
+max_ik_rot_err_deg: 5.0
+joint_max_step_rad: 0.05         # per 30 Hz command (~2.9 deg) — IK flip guard
+joint_limits_rad: null           # {lower_rad: [..6], upper_rad: [..6]} FOLLOWER frame; null => rebot_client C30 defaults

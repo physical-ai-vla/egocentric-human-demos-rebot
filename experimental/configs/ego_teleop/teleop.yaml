@@ -1,0 +1,41 @@
+# ego_teleop master config (spec: reBot Damiao + Aero Hand wearable teleop v1, tag-free). frames/rebot/aero have their own files.
+# Sensing layout (agreed 2026-09-10): head C922 = RGB observation ONLY (no IMU, no 6-DoF tracking role, never drives the arm);
+# left + right wrist unit = Arducam fisheye + ICM42688P, rigid, each with its own camera-IMU extrinsic, each its own VIO world;
+# no AprilTag / ArUco / ChArUco / Quest / T265 / OptiTrack in the runtime path; Orbbec RGB-D = optional auxiliary raw only.
+wrists: [left, right]            # both tracked and logged as independent streams (raw/wrist_pose_live_{left,right})
+                                 # `_live` = causal/online estimate at recording time; an offline `_refined` stream may be
+                                 # ADDED later (ladder 11) and never overwrites it. Training picks action_pose_source: live|refined.
+side: right                      # v1 teleop: this wrist drives the reBot arm that carries the Aero Hand (mirror mapping lives in frames.yaml)
+finger_source: unverified        # unverified | wrist_fisheye | dedicated_camera | head_c922 — decide after checking the wrist fisheye FOV on the fingers
+head_camera_role: observation_only
+rate_hz: 30                      # master teleop clock; every TeleopCommand is stamped on it
+pose_backend: orbslam3           # handumi_collector.pose backend; live teleop needs online_capable + metric_scale (see PLAN.md risk #1)
+pose_backend_options: {}
+tracking:                        # TrackingSupervisor: backend state + age + confidence -> TRACKING_OK / DEGRADED / LOST
+  degraded_after_ms: 80
+  lost_after_ms: 250
+  min_confidence_ok: 0.5
+  min_features_ok: 80
+  recover_after_n_ok: 3
+  max_jump_m: 0.15
+  max_jump_deg: 25
+hand:                            # HandTrackingSupervisor
+  hold_ms: 300                   # landmarks missing: hold previous Aero target this long, then relaxed pose
+  min_confidence: 0.5
+  fresh_ms: 60
+hand_rectify_fov_deg: 100        # only if finger_source == wrist_fisheye: fisheye -> pinhole view for the landmark model (VIO keeps the raw frame)
+degraded_speed_factor: 0.3       # Cartesian speed multiplier under TRACKING_DEGRADED
+safety:
+  workspace: {min_xyz: [0.05, -0.45, 0.02], max_xyz: [0.65, 0.45, 0.55]}   # robot base frame, metres. VERIFY on the real arm before ARM.
+  workspace_mode: clamp          # clamp | hold
+  max_lin_vel_m_s: 0.10          # first hardware tests: keep low (spec M2 "very low Cartesian velocity limits")
+  max_ang_vel_deg_s: 30
+  max_lin_acc_m_s2: 0.8
+  robot_obs_max_age_ms: 200
+coordinator:
+  rate_hz: 30
+  clutch_freezes_hand: false     # default: clutch freezes the arm only
+  hand_enabled: true
+  arm_enabled: true
+  hand_telemetry_every_n: 10
+episode_root: datasets/ego_teleop_raw

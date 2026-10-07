@@ -1,5 +1,5 @@
 import sys, json, pathlib, glob, numpy as np
-sys.path.insert(0, "${HOME}/ego_cart20")
+sys.path.insert(0, __import__("os").path.expanduser("~/ego_cart20"))
 from ego_cart20 import cube_pnp as CP
 H = pathlib.Path.home(); simu = {}
 for f in glob.glob(str(H / "c8/ego_cart20_v2_raw/20260928_101010_*/raw_episode.json")):

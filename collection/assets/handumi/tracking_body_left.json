@@ -1,0 +1,26 @@
+{
+ "schema": "handumi_tracking_body/v1",
+ "note": "FROZEN Stage-A single-part tracking body. The STL's own local frame IS the temporary body frame B_left.",
+ "side": "left",
+ "part": "fisheye_camera_main_support",
+ "path": "assets/handumi/left_tracking_body_fisheye_support.stl",
+ "copied_from": "~/handumi-hw/hardware/STL/left_handumi/fisheye_camera_main_support.stl (vendored into the repo so the mesh cannot drift or be swapped)",
+ "md5": "6e5f09ce5027e8575716d2599c69621d",
+ "source_repo": "handumi-hw @ e58de33",
+ "units_in_file": "mm",
+ "bbox_mm": [114.5, 140.0, 83.0],
+ "bounds_mm": {"min": [-40.5, 0.0, -49.0], "max": [74.0, 140.0, 34.0]},
+ "vertices_merged": 39000,
+ "faces": 78000,
+ "watertight_after_merge": true,
+ "winding_consistent": true,
+ "side_agnostic": "left and right copies of this part are byte-identical (md5 6e5f09ce...) - it is the only entry in RIGID_PART_STEMS without a <side>_ prefix",
+ "why_this_part": "largest rigid part by surface area (240 cm2, >2x the next); inertia spread 0.626 with the two smaller principal moments separated by 0.307, so orientation is not rotationally ambiguous",
+ "DO_NOT_USE": {
+   "path": "~/Desktop/handumi-print/left/stl/fisheye_camera_main_support.stl",
+   "md5": "94eca74f0d...",
+   "reason": "same geometry translated by (60.49, 20.0, 69.0) mm = 93.9 mm into the positive octant for slicing. Its origin lies OUTSIDE the part (127 mm from the centroid) and tracking_mesh.validate() rejects it. Using it as B would offset every later T_B_TCP by 93.9 mm."
+ },
+ "body_to_tcp": "NOT CALIBRATED. T_D_TCP = T_D_B @ T_B_TCP; T_B_TCP absorbs the arbitrary CAD origin and is a Stage-B task.",
+ "frozen": "2026-09-11"
+}

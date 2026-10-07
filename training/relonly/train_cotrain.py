@@ -1,4 +1,4 @@
-"""[2026-10-03] ego + robot CO-TRAINING on top of the B8 REL-only recipe (code_8bit wrapper -> train_rel16_relonly.py).
+"""[2026-10-03 user] ego + robot CO-TRAINING on top of the B8 REL-only recipe (code_8bit wrapper -> train_rel16_relonly.py).
 --dataset.repo_id/--dataset.root = the ROBOT dataset (R312c): its meta/stats/features drive the policy + normalizer (deploy target).
 COTRAIN_EGO_ROOT = the ego dataset (ego_cart20_v2b_robot100_train), same CART20 contract, same domain 20, same loss (REL 0:20).
 Sampling: every batch is exactly COTRAIN_EGO_PER_BATCH ego + rest robot rows (default 4 + 4 at batch 8), each source drawn
@@ -68,5 +68,5 @@ class DataLoader(_DL):
 
 LT.make_dataset = make_dataset
 LT.torch.utils.data.DataLoader = DataLoader
-sys.argv[0] = "${SHARED_ROOT}/relonly/code_8bit/train_rel16_relonly.py"
+sys.argv[0] = "/srv/data/johann/relonly/code_8bit/train_rel16_relonly.py"
 runpy.run_path(sys.argv[0], run_name="__main__")

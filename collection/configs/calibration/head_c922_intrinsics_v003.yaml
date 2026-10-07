@@ -1,0 +1,92 @@
+created: 2026-09-15T15:46:11+0900
+schema: handumi_pinhole_intrinsics/v1
+distortion_model: plumb_bob
+side: head
+status: PROVISIONAL
+K:
+- 677.7268162505784
+- 0.0
+- 320.0
+- 0.0
+- 677.7268162505784
+- 240.0
+- 0.0
+- 0.0
+- 1.0
+D:
+- 0.1702184635162691
+- -0.40677903521292286
+- 0.0
+- 0.0
+- 0.0
+image_size:
+- 640
+- 480
+rms_px: 0.8237
+views: 9
+model: 'cv2.calibrateCamera, pinhole: fx=fy free, principal point fixed at the image
+  centre, k3=0, tangential=0'
+free_parameters:
+- fx (=fy)
+- k1
+- k2
+calibrated_by: scripts/charuco_calibrate.py frames, constrained re-solve
+camera:
+  product_name: C922 Pro Stream Webcam
+  usb_serial: B5FBCE9F
+  usb_location_id: '0x01100000'
+  vid_pid: 0x046d:0x085c
+  resolution:
+  - 640
+  - 480
+  fps: 30
+  fourcc: MJPG
+  uvc_controls:
+    auto-focus: false
+    focus-abs: 20
+metric_check:
+  tape_measured_camera_height_cm: 47.0
+  solved_camera_height_cm: 50.6
+  error_pct: 7.7
+  note: head_mount_c922 solved 32.0 cm under v002 (fx 428.4); camera distance scales
+    with fx
+board:
+  squares_x: 6
+  squares_y: 8
+  square_length_m: 0.031
+  marker_length_m: 0.023
+  dictionary: DICT_5X5_100
+  legacy_pattern: false
+charuco_config: configs/charuco_wrist.yaml
+tilt_deg:
+  min: 1.5
+  median: 19.7
+  max: 22.7
+corners_per_view:
+  min: 27
+  median: 34
+  max: 35
+  board_total: 35
+stability:
+  fx_spread_pct_over_70pct_subsets: 2.5
+git_commit: 48c467b
+source_images: ~/calib/head_locked/*.png (board tilt < 35 deg)
+supersedes: head_c922_intrinsics_v002 (free 9-parameter fit, fx 428.4)
+notes: 'PROVISIONAL, and chosen on a PHYSICAL check rather than on reprojection error.
+
+  v002 fitted all nine parameters freely and reached rms 0.7177 -- the lowest of any
+  model tried -- and its K put the head camera 32.0 cm above the table when a tape
+  measure says 47. Camera distance scales linearly with focal length, so that is a
+  47 percent scale error, and every metric quantity downstream would have carried
+  it: table coordinates, cube pose from known size, wrist 6 DoF, the retargeted reBot
+  EE, IK reach.
+
+  Nine views cannot support nine parameters. Constraining the model to what a webcam
+  physically is -- square pixels, principal point at the image centre, no tangential
+  term, no k3 -- costs almost nothing in residual (0.7177 -> 0.8237) and moves the
+  solved height from 32.0 cm to 50.6 cm against the measured 47.
+
+  Still +7.7 percent out, so this remains provisional: the tape measure is one reading
+  and carries its own error, and the tilt range here is only 1.5-22.7 degrees because
+  ChArUco corners cannot be localised more obliquely at 640x480. Re-run head_mount_c922
+  with this file and check the height again.'

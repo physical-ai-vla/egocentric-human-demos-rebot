@@ -1,0 +1,35 @@
+created: 2026-09-15T15:42:55+0900
+schema: handumi_head_mount/v1
+camera: head
+mount: fixed_table_holder
+T_table_camera:
+- - -0.029380239141907405
+  - -0.9513718308553966
+  - 0.3066405729886624
+  - -0.07159151565029705
+- - -0.9975802690154204
+  - 0.008569510502898559
+  - -0.06899398786026413
+  - -0.1463755303167082
+- - 0.0630111769377933
+  - -0.3079256451557609
+  - -0.9493215412263237
+  - 0.3198825939202333
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+geometry:
+  height_cm: 50.0
+  edge_cm: 14.0
+  pitch_deg: 60.0
+board:
+  name: charuco 6x8 31/23mm DICT_5X5_50
+  plane_from_depth: false
+rms_reproj_px: 0.2921
+source: live
+notes: ''
+view_spread:
+  translation_mm: 0.074
+  rotation_deg: 0.0393
+intrinsics_source: head_c922_intrinsics_v002 (rms 0.7177, 9 views, status PROVISIONAL)

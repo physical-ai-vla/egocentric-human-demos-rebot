@@ -1,0 +1,52 @@
+{
+ "episodes": 200,
+ "scale_valid": 181,
+ "rejected": {
+  "HRA_red_20261003_152502_000005": "bootstrap spread 0.11 > 0.1",
+  "HRA_red_20261003_152502_000006": "only 1 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000007": "only 0 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000008": "only 6 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000010": "only 9 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000021": "bootstrap spread 0.19 > 0.1",
+  "HRA_red_20261003_152502_000060": "only 0 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000085": "only 3 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000088": "bootstrap spread 0.62 > 0.1; cube-centre residual 9.1 cm > 2 cm",
+  "HRA_red_20261003_152502_000089": "only 0 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000096": "bootstrap spread 0.24 > 0.1",
+  "HRA_red_20261003_152502_000105": "only 0 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000107": "only 0 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000124": "only 4 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000142": "only 0 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000150": "bootstrap spread 0.11 > 0.1",
+  "HRA_red_20261003_152502_000167": "only 4 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000169": "only 0 valid PnP frames (< 10)",
+  "HRA_red_20261003_152502_000179": "only 1 valid PnP frames (< 10)"
+ },
+ "s_pnp_p5_p50_p95": [
+  0.1872,
+  0.3549,
+  0.523
+ ],
+ "r_pnp_over_imu_p5_p50_p95": [
+  -11.01,
+  0.93,
+  24.61
+ ],
+ "centre_resid_cm_p50": 0.18,
+ "n_valid_pnp_p50": 90.0,
+ "exported_ok": 181,
+ "export_status": {
+  "ok": 181,
+  "refused": 19
+ },
+ "home_to_cube_tcp_net_m_p5_p50_p95": [
+  0.132,
+  0.332,
+  0.606
+ ],
+ "action_0p8s_right_translation_cm_p50_p95": [
+  1.75,
+  8.2
+ ],
+ "train_rows_total": 24323
+}

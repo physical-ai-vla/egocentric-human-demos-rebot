@@ -97,6 +97,7 @@ class TasksCfg:
     instruction_template: str = ("Stack the {bottom} cube on the bottom, {middle} cube in the middle, "
                                  "and {top} cube on the top, on the plate.")
     datasets: dict = field(default_factory=lambda: {"Hpilot": {"target_per_order": 50}, "H120": {"target_per_order": 20}})
+    instruction_voice: str | None = None    # set by a fixed-instruction dataset mode: AUTO speaks this instead of the order colours
 
     def instruction(self, order: str) -> str:
         b, m, t = (self.colors[c] for c in order)
@@ -137,9 +138,14 @@ class CollectorCfg:
                                                      "hold_after_rec_s": 3.0})
     # Hands-free loop with spoken cues (collector/autoloop.py): stack episode_s, reset reset_s, repeat until targets are met.
     auto_loop: dict = field(default_factory=lambda: {"enabled": True, "episode_s": 20.0, "reset_s": 10.0, "min_still_s": 1.0, "hold_after_rec_s": 3.0, "auto_keep_pass": True,
-                                                     "pause_on_fail": True, "on_warn": "keep", "balance_orders": True, "voice": True, "voice_name": "Samantha",
+                                                     "pause_on_fail": True, "on_warn": "keep", "balance_orders": True, "voice": True, "voice_name": "Yuna",
                                                      "rate_wpm": None, "ready_cue_s": 2.0, "stop_when_targets_met": False})
     head_overlay: dict = field(default_factory=lambda: {"x0": 0.15, "y0": 0.2, "x1": 0.85, "y1": 0.95})
+    # Per-dataset QA relaxations (tasks.yaml datasets.<name>.qa), for takes that are not stacking:
+    #   require_jaw_travel: false   the jaw may legitimately stay still (approach-only); frozen / out-of-span still REJECT
+    #   robot_like: advisory        robot-like motion/grasp checks are shown and logged but never change the verdict
+    #   gripper_checks: false       no jaw integrity check at all (the take does not use the jaw)
+    qa: dict = field(default_factory=dict)
     head_motion_warn: float = 12.0
     # Depth-preview colour ramp (metres). The HandUMI working distance: below near_m / above far_m saturates.
     depth_preview: dict = field(default_factory=lambda: {"near_m": 0.30, "far_m": 1.20})

@@ -7,16 +7,16 @@ echo "resident job $st $(date +%H:%M)"; ray job logs $JOB > $L/logs/$JOB.log 2>&
 echo "OK $(grep -c '^OK ' $L/logs/$JOB.log)  FAIL $(grep -c '^FAIL ' $L/logs/$JOB.log)  STOP $(grep -c '^STOP ' $L/logs/$JOB.log)"
 bash $HOME/ego_collector/scripts/robotlike_session_check.sh $S > $L/logs/HRL80_20260928_101010.run2.log 2>&1; tail -3 $L/logs/HRL80_20260928_101010.run2.log
 # parity: 2 sides first done per-process, re-run with resident_v1 into a separate dir
-M=${SHARED_ROOT}/c8/robotlike; ssh <gpu-node> "printf '20260928_101010_000003_left\n20260928_101010_000003_right\n' > ${DATA_ROOT}/c8/robotlike/lists/parity_resident.txt"
+M=/mnt/shared/johann/c8/robotlike; ssh gpu-5090 "printf '20260928_101010_000003_left\n20260928_101010_000003_right\n' > /srv/data/johann/c8/robotlike/lists/parity_resident.txt"
 PJ=rl-m3res-parity-$(date +%H%M%S)
-ray job submit --submission-id $PJ --entrypoint-num-gpus 1 --entrypoint-resources '{"node:<gpu-node-ip>": 0.01}' --no-wait -- bash -c "ls $M/in/* > /dev/null; bash $M/robotlike_resident_5080.sh $M/lists/parity_resident.txt $M/runs_resident_parity $M/in" > /dev/null 2>&1
+ray job submit --submission-id $PJ --entrypoint-num-gpus 1 --entrypoint-resources '{"node:100.64.0.3": 0.01}' --no-wait -- bash -c "ls $M/in/* > /dev/null; bash $M/robotlike_resident_5080.sh $M/lists/parity_resident.txt $M/runs_resident_parity $M/in" > /dev/null 2>&1
 while :; do st=$(ray job status $PJ 2>/dev/null | grep -oiE "(succeeded|failed|stopped)" | tail -1); [ -n "$st" ] && break; sleep 60; done
 for t in 20260928_101010_000003_left 20260928_101010_000003_right; do
-  ssh <gpu-node> "cmp -s ${DATA_ROOT}/c8/robotlike/runs/$t/ss1.csv ${DATA_ROOT}/c8/robotlike/runs_resident_parity/$t/ss1.csv && echo 'PARITY $t BITWISE_IDENTICAL' || python3 -c \"
+  ssh gpu-5090 "cmp -s /srv/data/johann/c8/robotlike/runs/$t/ss1.csv /srv/data/johann/c8/robotlike/runs_resident_parity/$t/ss1.csv && echo 'PARITY $t BITWISE_IDENTICAL' || python3 -c \"
 import csv
 def rd(p):
     R=list(csv.DictReader(open(p))); return R
-a=rd('${DATA_ROOT}/c8/robotlike/runs/$t/ss1.csv'); b=rd('${DATA_ROOT}/c8/robotlike/runs_resident_parity/$t/ss1.csv')
+a=rd('/srv/data/johann/c8/robotlike/runs/$t/ss1.csv'); b=rd('/srv/data/johann/c8/robotlike/runs_resident_parity/$t/ss1.csv')
 va=[r['is_lost']=='false' for r in a]; vb=[r['is_lost']=='false' for r in b]
 print('PARITY $t NOT bitwise: rows',len(a),len(b),'valid',sum(va),sum(vb),'mask_identical',va==vb)\""
 done

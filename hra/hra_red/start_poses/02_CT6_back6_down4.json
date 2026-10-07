@@ -1,0 +1,30 @@
+{
+ "t": "2026-10-07 13:30",
+ "note": "[user \"ct6 \uc2dc\uc791 \uc790\uc138\ub85c \uc62c\ub824\uc918\"] CT6 start pose (copy of ~/c8/hra_a100/start_pose_CT6.json); previous (CT5 human-median start) in umi_start_pose.json.bak_preCT6_1007. CT6 start = HRA_A100 human-median start (umi_start_pose.json 11:28) moved 6 cm back (base xy dir (-0.059,-0.998), away from the median endpoint) and 4 cm down, orientation kept; robot C922 camera 8 mm from the human GO camera median (pipe/start_candidates_down.log)",
+ "T_base_tcp": [
+  [
+   0.7055092542502845,
+   0.6813489878131633,
+   -0.19498781749941516,
+   0.30093990332363607
+  ],
+  [
+   0.6339339529194985,
+   -0.7297259949268247,
+   -0.2561790695273818,
+   -0.0758699868923039
+  ],
+  [
+   -0.3168350288447704,
+   0.057127306378244896,
+   -0.9467586996499688,
+   0.1700879324886791
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ]
+}

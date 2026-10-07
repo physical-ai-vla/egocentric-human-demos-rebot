@@ -1,0 +1,17 @@
+# DEVELOPMENT ONLY — the 3 C922 currently on this Mac (they belong to the robot rig) stand in for head + L/R wrist cameras.
+# Not a valid production sensor set. IMU/gripper are mocked unless a Teensy/Feetech is attached (edit backends then).
+hardware_version: dev_3c922
+profile: dev_3c922
+calibration_version: uncalibrated
+cameras:
+  - {name: head, role: policy_obs, backend: uvc, match_name: "C922", ordinal: 0, width: 640, height: 480, fps: 30, fourcc: MJPG, required: true}
+  - {name: left_wrist, role: pose_estimation, backend: uvc, match_name: "C922", ordinal: 1, width: 640, height: 480, fps: 30, fourcc: MJPG, required: true}
+  - {name: right_wrist, role: pose_estimation, backend: uvc, match_name: "C922", ordinal: 2, width: 640, height: 480, fps: 30, fourcc: MJPG, required: true}
+  - {name: head_depth, role: aux_depth, backend: mock, width: 848, height: 480, fps: 30, required: false}
+imus:
+  - {side: left,  backend: mock, rate_hz: 400, required: true}
+  - {side: right, backend: mock, rate_hz: 400, required: true}
+grippers:
+  - {side: left,  backend: mock, servo_id: 0, sample_hz: 100, norm_one_is: open, required: true}
+  - {side: right, backend: mock, servo_id: 1, sample_hz: 100, norm_one_is: open, required: true}
+gripper_calibration: latest

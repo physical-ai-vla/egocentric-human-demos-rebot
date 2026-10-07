@@ -7,6 +7,7 @@ import json
 import threading
 import time
 from pathlib import Path
+import pathlib
 import cv2
 import numpy as np
 from PySide6 import QtCore, QtGui, QtWidgets as W
@@ -73,6 +74,8 @@ class Preview(W.QWidget):
             cv2.putText(img, "WORKSPACE", (int(o["x0"] * w) + 6, int(o["y0"] * h) + 18), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 1)
         pm = QtGui.QPixmap.fromImage(_qimage(img)).scaled(self.lab.size(), QtCore.Qt.AspectRatioMode.KeepAspectRatio); self.lab.setPixmap(pm)
 
+
+from ..robotlike.c922_view import C922View   # [2026-10-06] shared with the recorder (right_wrist_c922.mp4)
 
 class GripGauge(W.QWidget):
     """Live jaw visualisation: bar = normalized opening (0 closed … 1 open) with raw ticks, sparkline = last ~6 s of history.
@@ -182,7 +185,39 @@ class MainWindow(W.QMainWindow):
             p = Preview(name, title, overlay=cc.head_overlay if name == "head" else None, rectifier=rectifiers.get(name),
                         depth=is_depth, near_m=float(dp.get("near_m", 0.30)), far_m=float(dp.get("far_m", 1.20)))
             row.addWidget(p); self.previews[name] = p
+        self.c922 = None
+        if "right_wrist" in self.previews:                         # [2026-10-06] robot C922 view of the right wrist (preview only)
+            try:
+                self.c922 = C922View(); p = Preview("right_wrist_c922", "ROBOT C922 VIEW (pose-A overlay)")
+                p.undist.setText("A overlay"); p.undist.setEnabled(True); p.undist.setChecked(True); p.undist.setToolTip("blend the robot pose-A frame")
+                row.addWidget(p); self.previews["right_wrist_c922"] = p
+            except Exception as exc:
+                print("C922 view unavailable:", exc)
         v.addLayout(row)
+        # [2026-10-06 user "항상 같은 xyz라는 걸 대기에서"] fiducial-free start repeatability: live wrist frame vs a stored START REF on the
+        # table plane (robotlike/start_match.py). Shows the camera displacement vs the reference; GREEN = within tol. Reference persists in
+        # configs/calibration/start_ref_<dataset>.png so every session compares against the same start.
+        self.sm = None; self._sm_t = 0.0; self._sm_last = None
+        if "right_wrist" in self.previews:
+            try:
+                import yaml as _y
+                from ..robotlike.start_match import StartMatcher
+                c = pathlib.Path(__file__).resolve().parents[2] / "configs/calibration"; fy = _y.safe_load(open(c / "fisheye_right_v002.yaml"))
+                self.sm = StartMatcher(fy["K"], fy["D"], fy["image_size"], ref_height_mm=200.0)   # scale: start camera height above the table (assumed 20 cm; relative check)
+                ci = _y.safe_load(open(c / "camera_imu_right_v002.yaml")); self._R_ci = np.array(ci["T_camera_imu"], float)[:3, :3]
+                # Kalibr extrinsic is ~18 deg off about cam x (2026-10-06: cube-axis err 17.8 -> 3.4 deg, SLAM up drift 17.2 -> 4.9 deg)
+                self._R_fix = np.load(c / "camera_imu_right_rotfix_20261006.npy"); self._up_ema = None
+                self.sm.mask[: int(0.18 * self.sm.mask.shape[0])] = 0
+                self._sm_ref = c / f"start_ref_{getattr(self.s.cfg.tasks, 'dataset', None) or self.s.manager.session_dir.parent.name}.png"
+                if self._sm_ref.exists():
+                    upf = self._sm_ref.with_suffix(".up.npy")
+                    self.sm.set_reference(cv2.imread(str(self._sm_ref)), np.load(upf) if upf.exists() else self._up_nominal())
+                hb = W.QHBoxLayout(); b = W.QPushButton("SET START REF (current right wrist frame)"); b.clicked.connect(self.on_set_start_ref); hb.addWidget(b)
+                br = W.QPushButton("REOPEN RIGHT WRIST CAM"); br.clicked.connect(self.on_reopen_right_wrist); hb.addWidget(br)   # [2026-10-06] no full restart
+                self.sm_lab = W.QLabel("START REF: " + ("loaded " + self._sm_ref.name if self._sm_ref.exists() else "none — hold the start pose and press SET START REF"))
+                self.sm_lab.setStyleSheet("font-size:16px;font-weight:bold"); hb.addWidget(self.sm_lab); hb.addStretch(); v.addLayout(hb)
+            except Exception as exc:
+                print("start matcher unavailable:", exc); self.sm = None
         aux = W.QHBoxLayout(); self.aux_dot = Dot(); aux.addWidget(W.QLabel("<b>AUX ORBBEC RGB-D</b>")); aux.addWidget(self.aux_dot); aux.addWidget(W.QLabel("OPTIONAL")); aux.addStretch(); v.addLayout(aux)
         g3 = W.QGroupBox("LEFT HAND / RIGHT HAND"); g3l = W.QGridLayout(g3); self.side_panels: dict[str, W.QLabel] = {}; self.gauges: dict[str, GripGauge] = {}
         for col, side in enumerate(("left", "right")):
@@ -216,11 +251,13 @@ class MainWindow(W.QMainWindow):
             v.addWidget(grl)
         mid = W.QHBoxLayout()
         g = W.QGroupBox("TASK"); gl = W.QVBoxLayout(g); br = W.QHBoxLayout(); self.order_btns: dict[str, W.QPushButton] = {}
-        for o in self.s.cfg.tasks.orders:
+        self.fixed_task = bool(getattr(self.s.cfg.tasks, "instruction_voice", None))   # single-prompt mode: no order choice
+        for o in ([] if self.fixed_task else self.s.cfg.tasks.orders):
             b = W.QPushButton(o); b.setCheckable(True); b.clicked.connect(lambda _=False, oo=o: self.set_order(oo)); br.addWidget(b); self.order_btns[o] = b
-        nb = W.QPushButton("next least-collected"); nb.clicked.connect(lambda: self.set_order(self.s.manager.next_order())); br.addWidget(nb)
+        if not self.fixed_task:
+            nb = W.QPushButton("next least-collected"); nb.clicked.connect(lambda: self.set_order(self.s.manager.next_order())); br.addWidget(nb)
         gl.addLayout(br); self.instr = W.QLabel(); self.instr.setWordWrap(True); gl.addWidget(self.instr); self.suggest = W.QLabel(); gl.addWidget(self.suggest)
-        proto = W.QLabel("Protocol: HEAD C922 fixed mount · plate fixed · cubes red/blue/purple · layout ≈ robot R150 · 6 balanced orders · HOME still 1–2 s at start and end")
+        proto = W.QLabel("Protocol: single task, one cube · HOME still 1–2 s at start and end" if self.fixed_task else "Protocol: HEAD C922 fixed mount · plate fixed · cubes red/blue/purple · layout ≈ robot R150 · 6 balanced orders · HOME still 1–2 s at start and end")
         proto.setStyleSheet("color:#555"); proto.setWordWrap(True); gl.addWidget(proto); mid.addWidget(g, 3)
         gd = W.QGroupBox("DATASET"); gdl = W.QVBoxLayout(gd); self.dataset_lab = W.QLabel(f"<b>{self.s.manager.dataset}</b>  target/order {self.s.cfg.tasks.target_per_order}"); gdl.addWidget(self.dataset_lab)
         self.counter = W.QLabel(); self.counter.setStyleSheet("font-family:monospace"); gdl.addWidget(self.counter)
@@ -253,6 +290,56 @@ class MainWindow(W.QMainWindow):
         self.logbox = W.QPlainTextEdit(); self.logbox.setReadOnly(True); self.logbox.setMaximumHeight(90); v.addWidget(self.logbox); self._nlog = 0
         return root
 
+    @staticmethod
+    def _up_nominal(pitch_deg: float = 59.0):
+        """world-up in the wrist-camera frame for a camera pitched pitch_deg below horizontal, no roll (robot pose-A view)."""
+        p = np.radians(pitch_deg); return np.array([0.0, -np.cos(p), -np.sin(p)])
+
+    def _up_live(self):
+        """world-up in the wrist-camera frame from the right IMU accelerometer (specific force at rest = up), Kalibr extrinsic + 18 deg fix, EMA."""
+        imu = self.s.devices.imus.get("right"); smp = imu.buffer.latest() if imu else None
+        if smp is None: return self._up_ema if self._up_ema is not None else self._up_nominal()
+        a = np.array([smp.ax, smp.ay, smp.az], float); u = self._R_fix @ self._R_ci @ a; u /= np.linalg.norm(u)
+        self._up_ema = u if self._up_ema is None else 0.7 * self._up_ema + 0.3 * u; return self._up_ema / np.linalg.norm(self._up_ema)
+
+    def on_reopen_right_wrist(self) -> None:
+        """[2026-10-06 user "오른쪽 우미캠만 다시 틀어줘"] close + reopen ONLY the right wrist camera (head / IMU / jaw untouched).
+        Refused while recording. Runs in a thread so the UI keeps drawing; the index is re-probed for that one camera."""
+        if self.s.state == "RECORDING": self.s.say("REOPEN refused: recording"); return
+        cam = self.s.devices.cameras.get("right_wrist")
+        if cam is None: self.s.say("REOPEN: no right_wrist camera configured"); return
+        def _job():
+            from ..devices.camera import list_video_devices, probe_index_map
+            try:
+                cam.close(); listing = list_video_devices(); name = next((n for n in listing if cam.cfg.match_name.lower() in n.lower()), None)
+                imap = dict(self.s.devices.index_map)
+                try: cam.open(listing, imap)                    # same index as at start-up (binding proof inside open)
+                except Exception as exc:                          # the device re-enumerated elsewhere: re-probe that one name
+                    self.s.say(f"REOPEN: old index failed ({exc}); probing {name}")
+                    cam.close(); imap.update(probe_index_map([name]) if name else {}); cam.open(listing, imap)
+                cam.start(); self.s.say(f"REOPEN right_wrist OK (index {cam.index})")
+            except Exception as exc:
+                self.s.say(f"REOPEN right_wrist FAILED: {exc}")
+        threading.Thread(target=_job, name="reopen-right-wrist", daemon=True).start()
+
+    def on_set_start_ref(self) -> None:
+        cam = self.s.devices.cameras.get("right_wrist"); f = cam.latest() if cam else None
+        if f is None or self.sm is None: self.sm_lab.setText("START REF: no right wrist frame"); return
+        up = self._up_live(); info = self.sm.set_reference(f.image, up); cv2.imwrite(str(self._sm_ref), f.image); np.save(self._sm_ref.with_suffix(".up.npy"), up)
+        self.sm_lab.setText(f"START REF set ({info['features']} features) -> {self._sm_ref.name}"); self.s.say(f"start reference saved: {self._sm_ref}")
+
+    def _start_match_tick(self) -> None:
+        if self.sm is None or self.sm.ref is None or time.monotonic() - self._sm_t < 0.33: return
+        self._sm_t = time.monotonic(); cam = self.s.devices.cameras.get("right_wrist"); f = cam.latest() if cam else None
+        if f is None: return
+        up = self._up_live(); m = self.sm.measure(f.image, up); self._sm_last = m
+        pitch = float(np.degrees(np.arcsin(np.clip(-up[2], -1, 1))))
+        if not m.get("ok"): self.sm_lab.setText(f'<span style="color:{AMBER}">START Δ: 측정 불가 — {m.get("why")}</span>'); return
+        good = m["dist_mm"] < 15 and m["rot_deg"] < 3
+        col = GREEN if good else (AMBER if m["dist_mm"] < 30 else RED)
+        self.sm_lab.setText(f'<span style="color:{col}">START xyz (REF=0,0,0): 앞 {m["fwd_mm"]:+.0f}  왼 {m["left_mm"]:+.0f}  위 {m["up_mm"]:+.0f} mm'
+                            f'  | {m["dist_mm"]:.0f} mm, 회전 {m["rot_deg"]:.1f}°  ({"SAME ✓" if good else "이동 필요"}) | 카메라 숙임 {pitch:.0f}° (IMU)</span>')
+
     def _pose_tab(self) -> W.QWidget:
         root = W.QWidget(); v = W.QVBoxLayout(root)
         pc = self.s.cfg.pose; imu = bool(self.s.devices.imus); mode = "VISUAL-INERTIAL" if imu else "VISUAL ONLY (pre-IMU experimental)"
@@ -279,7 +366,7 @@ class MainWindow(W.QMainWindow):
         if self.s.state != "IDLE" or not o: return
         self.s.order = o
         for k, b in self.order_btns.items(): b.setChecked(k == o)
-        self.instr.setText(f"<b>Current: {o}</b> — <i>{self.s.cfg.tasks.instruction(o)}</i>")
+        self.instr.setText(f"<b>Task:</b> <i>{self.s.cfg.tasks.instruction(o)}</i>" if self.fixed_task else f"<b>Current: {o}</b> — <i>{self.s.cfg.tasks.instruction(o)}</i>")
 
     def _preflight_changed(self, *_): self.s.preflight_ok = all(cb.isChecked() for cb in self.preflight) if self.preflight else True
 
@@ -291,7 +378,7 @@ class MainWindow(W.QMainWindow):
     def on_home_ready(self) -> None: self.on_start()
 
     def on_auto(self) -> None:
-        """Hands-free loop: RESET -> still -> REC -> three two one go -> stack -> stop -> KEEP -> RESET ... (collector/autoloop.py)."""
+        """Hands-free loop: RESET -> 정지 -> REC -> 셋 둘 하나 고 -> stack -> 스톱 -> KEEP -> RESET ... (collector/autoloop.py)."""
         if self.s.state not in ("IDLE", "WAITING_FOR_STILLNESS", "RECORDING"): self.s.say("AUTO: finish KEEP/DISCARD first, then A resumes"); self.b_auto.setChecked(False); return
         on = self.s.auto_toggle(); self.b_auto.setChecked(on)
         if on: self.replay.stop(); self.review.hide()
@@ -426,9 +513,15 @@ class MainWindow(W.QMainWindow):
         s = self.s; cc = s.cfg.collector
         self.clock.setText(time.strftime("%H:%M:%S"))
         s.poll()                                                  # drives the stillness gate -> REC, and device-error -> ERROR_REVIEW
+        if s.state != "RECORDING": self._start_match_tick()          # [2026-10-06] start repeatability while waiting
         if s.state == "ERROR_REVIEW" and not self.review.isVisible(): self._enter_review()
         replay_frame = self.replay.frame if s.state in ("REVIEW", "ERROR_REVIEW") else None
         for name, pv in self.previews.items():
+            if name == "right_wrist_c922":
+                cam = s.devices.cameras.get("right_wrist"); f = cam.latest() if cam else None
+                if f is not None and self.c922 is not None: pv.show_frame(self.c922.render(f.image, overlay=pv.undist.isChecked()))
+                pv.dot.set(GREEN if f is not None else GREY, "measured robot cam" if f is not None else "no right wrist frame")
+                continue
             src = name[:-4] if name.endswith("_rgb") else name        # the head RGB tile reads the same device as the depth tile
             cam = s.devices.cameras.get(src); st = cam.status() if cam else None
             f = cam.latest() if cam else None
@@ -462,8 +555,8 @@ class MainWindow(W.QMainWindow):
         ident = s.devices.identity(); self.ident.setText("  |  ".join(f"{k} = {v}" for k, v in ident.items()) + f"  |  profile {s.cfg.hardware.profile}")
         pend = getattr(s, "_pending_cal", {}); self.cal_label.setText(f"active gripper calibration: {s.devices.gripper_calibration_version or 'NONE (norm = NaN until saved)'}   pending: {pend or '—'}")
         c = s.manager.counts; tgt = s.cfg.tasks.target_per_order
-        self.counter.setText(" | ".join(f"{o} {c[o]:2d}/{tgt}" for o in s.cfg.tasks.orders) + f"\nValid {sum(c.values())} / Raw {s.manager.raw_total} / Discarded {s.manager.rejected}\n{s.manager.session_dir.name}")
-        self.suggest.setText(f"Suggested next order: <b>{s.manager.next_order()}</b>")
+        self.counter.setText((f"Episodes {sum(c.values())}/{tgt}" if self.fixed_task else " | ".join(f"{o} {c[o]:2d}/{tgt}" for o in s.cfg.tasks.orders)) + f"\nValid {sum(c.values())} / Raw {s.manager.raw_total} / Discarded {s.manager.rejected}\n{s.manager.session_dir.name}")
+        self.suggest.setText("" if self.fixed_task else f"Suggested next order: <b>{s.manager.next_order()}</b>")
         dk = s.disk(); self.disk_lab.set(COL[dk["state"]], f"Free disk {dk['free_gb']:.0f} GB  (~{dk['capacity_min']:.0f} min of recording)")
         if s.state == "RECORDING" and s.recorder:
             r = s.recorder; el = (time.monotonic_ns() - r.t_start_ns) / 1e9

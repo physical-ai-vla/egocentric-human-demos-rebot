@@ -1,0 +1,70 @@
+# HandUMI RGB-D rigid-body 6DoF tracker (Stage A / M2A). Everything tunable lives here — nothing is hard-coded in
+# handumi_collector/pose/depth_*.py. Read with handumi_collector.pose.depth_config.load_depth_pose_cfg().
+#
+#   head Orbbec RGB-D  ->  HandUMI rigid body 6DoF (T_depthcam_body)  ->  [Stage B] body->TCP  ->  [Stage C] head odometry
+#
+# Grip is NOT estimated here (Feetech encoder is authoritative) and moving HandUMI parts are NOT in the tracking mesh.
+backend: icp                  # icp (CPU baseline, runs on the Mac) | foundationpose (CUDA only) | mock (tests)
+sides: [left, right]
+stream:                       # depth stream name; empty = the episode's only *_depth/ stream (head_depth today)
+mesh:                         # tracking-only rigid mesh per side (see tools.make_tracking_mesh); .obj/.stl or an assembly .yaml
+  # STAGE A (frozen 2026-09-11): single-part tracking body, NOT an assembled mesh. The STL's own local frame is the
+  # temporary body frame B; T_B_TCP absorbs the CAD origin later. Provenance + md5: assets/handumi/tracking_body_*.json
+  # Do NOT substitute the ~/Desktop/handumi-print copy: same geometry, translated 93.9 mm for slicing, origin outside the part.
+  left: assets/handumi/left_tracking_body_fisheye_support.stl
+  right: assets/handumi/right_tracking_body_fisheye_support.stl
+fps: 30                       # fallback only; the measured frame timestamps win
+z_range_m: [0.10, 2.5]        # depth outside this is discarded before anything else
+edge_trim_s: 0.15             # trimmed off each end of an operator-marked HOME window (settling)
+
+# ---------------------------------------------------------------------------------------------------------- QA (§15/§16)
+# PROVISIONAL engineering criteria, NOT a scientific bound. Freeze them against the first real pilot distribution
+# (the report prints every raw number, so re-freezing never needs a re-run).
+qa:
+  valid_ratio: {pass: 0.95, warn: 0.90}          # >= pass: PASS; < pass: NEEDS_WORK; < warn: FAIL
+  jumps:                                          # per-frame step between consecutive VALID frames (30 Hz)
+    translation_mm: 50.0
+    rotation_deg: 20.0
+  static_jitter:                                  # pose spread inside a still segment (p95 over segments)
+    pass_translation_mm: 5.0
+    warn_translation_mm: 10.0
+    pass_rotation_deg: 2.0
+    warn_rotation_deg: 5.0
+  static_detect:                                  # auto-detection of still segments when the operator marked none
+    translation_mm_per_frame: 1.5
+    rotation_deg_per_frame: 0.5
+    min_duration_s: 0.5
+  lost: {reject_if_lost_longer_than_s: 1.0}
+  depth_residual: {warn_mm: 6.0, reject_mm: 12.0}
+  home_return:                                    # inv(mean pose of the first still window) @ (mean pose of the last one).
+    # NO MECHANICAL DOCK YET: the operator puts the HandUMI back by hand, so this bounds tracker drift AND placement
+    # repeatability together. It is an UPPER BOUND on drift, never drift itself — tighten once a dock exists.
+    pass: {translation_mm: 15.0, rotation_deg: 5.0}
+    warn: {translation_mm: 35.0, rotation_deg: 10.0}
+
+backend_options:
+  icp:
+    model_points: 8000            # surface samples of the rigid mesh used as the ICP target
+    model_points_coarse: 2000     # subset used during the multi-start initial registration
+    voxel_m: 0.004                # scene downsampling while tracking
+    voxel_coarse_m: 0.010         # scene downsampling during initialisation
+    max_corr_init_m: 0.030
+    max_corr_track_m: 0.015
+    max_corr_recover_m: 0.040     # widened correspondence distance while recovering from a loss
+    icp_iters: 50
+    icp_iters_coarse: 20
+    init_rotations: 240           # random orientations tried on the first frame (no detector: the ROI gives position only)
+    init_seed: 0
+    min_scene_points: 250         # fewer valid depth points in the ROI => LOST (never a guessed pose)
+    fitness_min: 0.35             # inlier fraction below this => LOST
+    fitness_degraded: 0.50        # valid but flagged DEGRADED between fitness_min and this
+    rmse_max_mm: 8.0              # inlier RMSE above this => LOST
+    roi_pad_px: 28                # padding round the projected model bbox (x3 while recovering)
+    depth_band_scale: 1.6         # keep depth within +-scale*model_radius of the ROI median
+    recover_after_lost_frames: 3
+    constant_velocity_seed: false  # OFF: extrapolating the last SE(3) increment amplifies tracking error
+                                  # (measured on the synthetic pilot: 40/240 valid vs 240/240 with the last-pose seed)
+  foundationpose:
+    refine_iter_init: 5
+    refine_iter_track: 2
+    reinit_after_lost_frames: 0   # 0 = never re-register automatically (FoundationPose has no validity signal of its own)

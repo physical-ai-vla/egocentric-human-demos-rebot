@@ -54,6 +54,18 @@ class EpisodeManager:
                 bad = [o for o in spec["orders"] if o not in cfg.tasks.orders]
                 if bad: raise ValueError(f"dataset {dataset!r} lists orders not in tasks.orders: {bad}")
                 cfg.tasks.orders = list(spec["orders"])
+            # a non-stacking mode may fix the language prompt for every episode (no {bottom}/{middle}/{top} needed)
+            if spec.get("instruction"):
+                cfg.tasks.instruction_template = str(spec["instruction"])
+                cfg.tasks.instruction_voice = spec.get("instruction_voice") or str(spec["instruction"])
+            # per-mode AUTO timing (applied after --protocol overrides, so the mode wins)
+            if spec.get("auto_loop"):
+                cfg.collector.auto_loop.update(spec["auto_loop"])
+            # per-mode QA relaxations (a non-stacking take must not fail on stacking-only checks)
+            if spec.get("qa"):
+                cfg.collector.qa = dict(spec["qa"])
+            # [2026-10-06] also record the right wrist rendered as the measured robot C922 (right_wrist_c922.mp4, 1:1 frames)
+            cfg.collector.record_c922_view = bool(spec.get("record_c922_view", False))
         self.session_dir = session_dir or (root / self.dataset / session_name(self.dataset))
         self.session_dir.mkdir(parents=True, exist_ok=True)
         (self.session_dir / "_discarded").mkdir(exist_ok=True)

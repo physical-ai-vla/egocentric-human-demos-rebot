@@ -21,9 +21,9 @@ import lr_groups; lr_groups.install()
 import humanik_delta; humanik_delta.install()
 import eef_delta; eef_delta.install()   # [2026-09-17] EEF_DELTA=1 -> bimanual EEF-delta action space (D0/D250 main line); mutually exclusive with HUMANIK_DELTA   # [2026-09-05] HUMANIK_DELTA=1 -> t+5 cumulative-delta targets + validity-masked joint loss   # [2026-08-27] XVLA_LR_GROUPS → per-group LRs   # [2026-08-27] XVLA_AUG=1 → weak photometric aug (train only)   # [2026-08-27] XVLA_TARGET_HEAD=1 → keep episode/frame index through the preprocessor   # [2026-08-27] CONTRASTIVE=1 → same-scene batch sampler (needs set_map.json in dataset root)
 
-DATASET_ROOT = "${HOME}/holobrain-data/lerobot/rebot_3stack_bimanual_60ep"
+DATASET_ROOT = "/home/bh-aiteam/holobrain-data/lerobot/rebot_3stack_bimanual_60ep"
 REPO_ID = "rebot/3stack_bimanual_60ep"
-OUTPUT_DIR = "${HOME}/xvla_bi_out"
+OUTPUT_DIR = "/home/bh-aiteam/xvla_bi_out"
 
 class TensorBoardLogger:
     def __init__(self, cfg):

@@ -311,6 +311,25 @@ trial logger in the deployment UI exists but has recorded no trial. Evidence: `r
 
 Evidence: `results/v4/hra/` (validation losses, calibration files, table-aware reports, start poses, plan-session summary).
 
+### Code added on 2026-10-07 (repository now private)
+
+The full working code of the project was added, so the repository is no longer only the audited subset:
+
+| path | contents |
+|---|---|
+| `collection/` | latest `handumi_collector` (robot_like_v1, HRA_red, HRA_A100 origin protocol, C922-view tile), firmware, calibration configs; depends on `experimental/` (uv path dependency) |
+| `hra/` | single-arm approach pipeline: base-frame linking, robot camera and hand-eye calibration, robotcam v2 rendering, origin-plane scale, origin yaw, G frame, table-aware QP, held-out evaluation |
+| `deploy/` | inference core, robot UI (PLAN/RTC/cube-size stop/trial logger), Pink IK, checkpoint loaders, MIT robot service |
+| `hardware/` | HandUMI print package (3MF/STL) and build notes |
+| `experimental/` | wearable teleop (VIO), AprilTag V0 collector, RGB-D body tracking |
+| `upstream/` | patch and new files on top of robonet-ai/handumi-sw (Apache-2.0) |
+| `training/launchers/`, `training/archivers/`, `training/umi76/` | node launchers (4090 / 5090), archivers, base widening |
+| `docs/OPERATIONS_NOTES.md` | conventions and pitfalls (gripper signs, TCP frames, PLAN settings, GPU rules) |
+
+Path placeholders that had been substituted for the public release were restored to the real working paths, and the reBot
+URDF and MASt3R build patch are included. Many scripts hard-code the roots they ran from; each folder's `MANIFEST.md` lists
+the source of every file. Datasets and checkpoints are still not included. The same tree is in `physical-ai-vla/umihand`.
+
 ### Repository map additions (v4)
 
 | path | contents |

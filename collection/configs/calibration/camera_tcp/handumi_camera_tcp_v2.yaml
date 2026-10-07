@@ -1,0 +1,67 @@
+schema: handumi_camera_tcp/v2
+version: camera_to_tcp_v2
+created: '2026-09-21'
+supersedes: handumi_camera_tcp_v1.yaml
+
+# UMI does not calibrate camera->TCP from imagery: 06_generate_dataset_plan.py writes a fixed mechanical
+# constant. This file follows that, so the transform is a declaration plus a caliper measurement rather than
+# a fit. v1 remains for reference; its rotation was never measured and its translation disagreed left/right
+# by 32 mm on 14 accepted frames.
+
+frame_convention: >
+  camera = OpenCV optical frame (x right, y down, z forward along the optical axis).
+  TCP = the shared functional convention in tcp_convention_v1.yaml: x = approach, y = jaw closing,
+  z = x cross y. Applied as T_world_tcp = T_world_camera @ T_camera_tcp.
+
+translation:
+  source: caliper on the assembled right-hand device, 2026-09-21
+  measured_in: world frame (horizontal forward, vertical down), NOT along the optical axis
+  measured: {forward_horizontal_m: 0.095, down_vertical_m: 0.095, lateral_m: 0.0}
+  camera_pitch_deg: 20.7
+  camera_pitch_source: >
+    gravity during the mapping sweep's 3 s still hold, rotated into the camera frame with the frozen
+    T_camera_imu. |accel| read 9.901 m/s^2, confirming a real still window. An accelerometer at rest reads
+    specific force, i.e. it points UP, and that sign is accounted for.
+  t_camera_tcp_m: [0.0, 0.0553, 0.1225]
+  crosscheck: >
+    converting the caliper measurement through the 20.7 deg pitch gives forward 12.25 cm in the camera frame
+    against 12.36 cm in the v1 cube fit -- 1 mm apart on the dominant axis, from two independent methods.
+    The down component differs (5.53 vs 7.25 cm), which is the size of disagreement a hand measurement and a
+    14-frame back-projection can produce. Taking the raw 9.5/9.5 as camera-frame coordinates would have put
+    the transform 20 deg out.
+
+rotation:
+  R_camera_tcp: [[0, -1,  0],
+                 [0,  0, -1],
+                 [1,  0,  0]]
+  meaning: TCP x (approach) = camera z;  TCP y (closing) = camera -x;  TCP z = camera -y
+  sign_rule: >
+    CLOSED 2026-09-21. A parallel jaw is symmetric under y -> -y, but flipping y flips z too, which is a real
+    180 deg difference, so the sign needs a physical statement that can be applied identically to both
+    devices: +y is chosen so that z = x cross y points TOWARD THE WRIST CAMERA. The operator confirmed the
+    camera sits on the same side (above the plane the fingers open in) on both the HandUMI unit and the
+    reBot gripper, so both frames are built by the same rule and NO 180 deg roll enters the human->robot
+    mapping. On HandUMI the rule resolves by geometry alone: the pinch centre is at [0, 0.0553, 0.1225] in
+    camera coordinates, so the direction from the TCP back to the camera, taken perpendicular to the approach
+    axis, is camera -y. That fixes TCP z = camera -y and hence TCP y = camera -x.
+  correction: >
+    the first version of this file had TCP z = camera +y, i.e. pointing AWAY from the camera. It was written
+    before the sign rule was applied and is exactly 180 deg out. Do not use it.
+  basis: >
+    the axis choice itself is one of 24 discrete permutations, so a noisy estimate still decides it when the
+    candidates are 90 deg apart. Closing axis: the abandoned jaw fit gave [-0.9925, 0.1029, 0.0652], 8 deg
+    from the camera x axis (that fit is REJECTED as a measurement -- bootstrap std 45.6 deg, reprojection p50
+    20.3 px -- but 8 deg is decisive among candidates 90 deg apart). Approach axis: the camera-to-pinch-centre
+    direction is [0, 0.41, 0.91], 24 deg from camera z and 66 deg from camera y.
+
+rebot_side:
+  status: OPEN -- one physical check left
+  question: >
+    the same rule has to be applied to the reBot gripper, and its URDF has no camera link, so the one thing
+    still missing is which side of gripper_link the wrist camera is on. The finger direction in gripper_link
+    coordinates is [0, 0.993, 0.115]; taking +y along it gives z = x cross y = [0, -0.115, 0.993], i.e.
+    roughly +z of gripper_link. So the check is simply: does gripper_link +z point toward the wrist camera?
+    If yes, reBot's y is the left-finger-to-right-finger direction; if no, it is the reverse.
+  consequence_if_unresolved: >
+    none for SLAM, mapping or localisation -- this only matters once a human-learned rotation is executed on
+    the robot.

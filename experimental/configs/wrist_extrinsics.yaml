@@ -1,0 +1,34 @@
+# Hand tags: one rigid wrist tag per glove/hand-back + thumb/index dorsal (fingernail-side) tags.
+# T_tag_wrist defaults to identity: in V0 the wrist tag frame *is* the wrist frame. Calibrating
+# it later (e.g. pivot) never requires re-recording: apriltags.parquet keeps raw detections.
+#
+# Finger tags: T_tag_tip = fingertip CONTACT POINT in the tag frame (tag: centre origin,
+# +X right, +Y up, +Z out of the tag). The tag sits on the nail, recessed from the very tip,
+# so the real pad contact is a rigid offset - measure it once with a ruler and fill it in
+# (typical: a bit towards -Y along the finger and -Z into the finger, e.g. [0, -0.015, -0.008]).
+# Aperture and pinch centre are computed from these offset points, not the tag centres.
+tag_family: tag36h11
+left:
+  tag_id: 10
+  tag_size_m: 0.028   # detector quad; printed footprint 35 mm (tag36h11 = 10/8 x) - hand-back plate; keep hands within ~0.6 m of the camera
+  T_tag_wrist: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}
+  thumb:
+    tag_id: 11
+    tag_size_m: 0.016  # detector quad; printed footprint 20 mm - thumbnail plate
+    T_tag_tip: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}
+  index:
+    tag_id: 12
+    tag_size_m: 0.016  # detector quad; printed footprint 20 mm - index fingernail plate
+    T_tag_tip: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}
+right:
+  tag_id: 20
+  tag_size_m: 0.028   # detector quad; printed footprint 35 mm (tag36h11 = 10/8 x) - hand-back plate; keep hands within ~0.6 m of the camera
+  T_tag_wrist: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}
+  thumb:
+    tag_id: 21
+    tag_size_m: 0.016
+    T_tag_tip: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}
+  index:
+    tag_id: 22
+    tag_size_m: 0.016
+    T_tag_tip: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}

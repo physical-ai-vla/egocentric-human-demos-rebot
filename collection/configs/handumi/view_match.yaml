@@ -1,0 +1,25 @@
+# tools.view_match_qa — human(virtual) vs robot wrist view matching QA.
+# Correspondences: MANUAL picking is the trusted path (--pick, 7-10 points); the colour-blob detector below is a convenience
+# for repeated fixed layouts. Every threshold lives here; nothing is hard-coded.
+landmarks:                                        # OpenCV HSV (H 0-179); each entry -> largest blob centre + bbox
+  red_cube:    {hsv_lo: [[0, 120, 70], [170, 120, 70]], hsv_hi: [[8, 255, 255], [179, 255, 255]], min_area: 150, depth: near}
+  blue_cube:   {hsv_lo: [[100, 120, 60]], hsv_hi: [[125, 255, 255]], min_area: 150, depth: near}
+  purple_cube: {hsv_lo: [[130, 60, 50]], hsv_hi: [[160, 255, 255]], min_area: 150, depth: near}
+  plate:       {hsv_lo: [[0, 0, 190]], hsv_hi: [[179, 40, 255]], min_area: 3000, depth: far}
+thresholds:
+  # THE GATE IS THE MEAN. `pass_px` / `warn_px` are compared against E_view_all_px (the MEAN over this scene's landmarks).
+  # E_view_median_px and E_view_p95_px are DIAGNOSTIC only — they never change the verdict, so e.g.
+  # `mean 6.9 / median 6.8 / p95 8.9` is a correct PASS, not a bug. To gate on p95 later, add a separate `p95_pass_px` here
+  # and extend verdict_and_flags(); do not silently reinterpret pass_px.
+  # ENGINEERING acceptance criterion, not a fixed scientific bound: revisit once the distribution over 5-10 real 3-cube
+  # layouts is known.
+  pass_px: 8.0                                    # E_view_all_px (mean) verdict
+  warn_px: 20.0
+  edge_radius_frac: 0.6                           # |p - image centre| / (half-diagonal) above this = "edge"
+  mount_mismatch_rpy_deg: 5.0                     # a fitted residual rotation larger than this means: fix the MOUNT, not the rpy
+  near_far_ratio_warn: 2.0                        # E_near / E_far above this = parallax (translation) mismatch, not rotation
+  scale_ratio_tol: 0.08                           # |mean(scale ratio) - 1| above this = wrong K_target (FOV mismatch)
+picking:                                          # suggested manual correspondence set (order matters; skip with 's')
+  points: [red cube centre, blue cube centre, purple cube centre, plate corner near-left, plate corner near-right,
+           plate corner far-left, plate corner far-right, gripper fingertip left, gripper fingertip right, TCP pinch centre]
+  depths: [near, near, near, near, near, far, far, near, near, near]

@@ -1,0 +1,137 @@
+created: 2026-09-16T09:38:39+0900
+schema: ego_teleop_wrist_calibration_bundle/v1
+side: right
+hardware:
+  unit_id: handumi-wristR-01
+  mount_revision: handumi_v1
+  camera_serial: UC684
+  imu_serial: '20778070'
+  side: right
+hardware_hash: a6242ad1e341
+camera:
+  model: kannala_brandt
+  K:
+  - - 791.2815196166999
+    - 0.0
+    - 956.9037509633266
+  - - 0.0
+    - 793.1533782322238
+    - 523.4778704088599
+  - - 0.0
+    - 0.0
+    - 1.0
+  D:
+  - -0.0521682968099971
+  - 0.02869505460550566
+  - -0.015969967053319805
+  - 0.0033807032560574635
+  image_size:
+  - 1920
+  - 1080
+  reprojection_rms_px: null
+  n_views: null
+  target: null
+imu_noise:
+  gyroscope_noise_density: 0.00133385256704486
+  gyroscope_random_walk: 1.971294390591075e-05
+  accelerometer_noise_density: 0.0009805968834199718
+  accelerometer_random_walk: 0.00010328782337154156
+  update_rate: 197.9
+camera_imu:
+  T_camera_imu:
+  - - -0.994185642
+    - -0.097619618
+    - 0.045445779
+    - -0.047653075
+  - - -0.090658146
+    - 0.531095214
+    - -0.842448203
+    - 0.076982584
+  - - 0.058103436
+    - -0.841669938
+    - -0.53685725
+    - -0.006278259
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  time_offset_ms: 32.77
+  source: kalibr
+provenance:
+  imu_noise:
+    source: allan_variance
+    tool: ego_teleop.tools.imu_allan
+    date: 2026-09-15T11:26:35+0900
+    runs:
+    - allan_20260915_090818/imu_right_20260915_090818_clean
+    notes: '1.46 h static log, 1039537 samples, 197.90 Hz. PRIMARY source is the longest
+      unbroken segment (87.5 min, 1,039,537 samples) of imu_right_20260915_090818,
+      NOT the whole session. That session FAILS integrity: 1901 samples lost across
+      40 sequence gaps inside one 40 s window at 87.5 min, plus an 833.7 ms stall.
+      Device-side dropped 0, ring high-water 2/256, CRC 0, so the loss was on the
+      host/USB transport path, not firmware; which layer is not established. The full
+      session remains on disk as diagnostic-only.'
+  time_offset_ms:
+    source: gyro_correlation
+    tool: handumi_collector.tools.temporal_sync (pose.timing.estimate_camera_imu_offset)
+    date: 2026-09-15T14:50:08+0900
+    runs:
+    - TSYNC/TSYNC_20260915_144622/episode_000001
+    notes: 'confidence 0.96; vo_valid_ratio 0.471; backend opencv_vo; search +/-100.0
+      ms step 0.5 ms, peak at 32.77 ms. Sense: imu_time + offset ~ camera_time. camera:
+      ''Arducam 1080P Low Light'' usb_location_id 0x00140000 serial UC684 0x0c45:0x0261
+      (measured OpenCV index 1; the device listing order is NOT the index order on
+      this host). imu serial 20778070. hardware profile temporal_sync_calib / hardware_version
+      handumi_v1 / calibration_version uncalibrated. git efd3569. ACCEPTED EXCEPTION:
+      vo_valid_ratio 0.471 is BELOW the nominal 0.5 gate. The gate was not lowered;
+      the measurement is accepted on independent evidence -- correlation peak 0.96,
+      peak at 32.77 ms is nowhere near the +/-100 ms search bound, left and right
+      agree to 2.6 ms, and the camera/IMU pairing was verified in this same take from
+      raw frame difference against gyro magnitude (no VO involved). T_camera_imu still
+      unmeasured - needs Kalibr. CROSS-CHECK: Kalibr (calib_right-camchain-imucam.yaml)
+      independently estimated +33.386 ms, 0.616 ms from this frozen value; the frozen
+      value is kept.'
+  camera:
+    source: kalibr
+    tool: kalibr_calibrate_cameras
+    date: 2026-09-16T09:38:39+0900
+    runs:
+    - calib_right-camchain-imucam.yaml
+    notes: 'Kalibr 2-step on gpu-4090 (docker kalibr:noetic). Step1 pinhole-equi intrinsics
+      from calib_right.bag (901 frames, 9x6 checkerboard 25mm, 8x5 internal corners);
+      step2 kalibr_calibrate_imu_camera converged in 6 iters (deltaX 8.7e-6). Reprojection
+      mean 5.64 px / gyro 0.0129 rad/s / accel 0.206 m/s^2 -- residuals are high (rolling
+      shutter + motion blur, not modelled), so acceptance rests on three EXTERNAL
+      checks, all passed: lever arm 9.08 cm vs 8.5 cm measured by hand; rotation within
+      1.75 deg of an independent board+gyro hand-eye estimate; timeshift +33.39 ms
+      vs the frozen 32.77 ms (0.62 ms). Translation direction (IMU 7.7 cm below /
+      4.8 cm inboard of the lens, same plane fore-aft) confirmed against the physical
+      mount by the user.'
+  T_camera_imu:
+    source: kalibr
+    tool: kalibr_calibrate_imu_camera
+    date: 2026-09-16T09:38:39+0900
+    runs:
+    - calib_right-camchain-imucam.yaml
+    notes: 'Kalibr 2-step on gpu-4090 (docker kalibr:noetic). Step1 pinhole-equi intrinsics
+      from calib_right.bag (901 frames, 9x6 checkerboard 25mm, 8x5 internal corners);
+      step2 kalibr_calibrate_imu_camera converged in 6 iters (deltaX 8.7e-6). Reprojection
+      mean 5.64 px / gyro 0.0129 rad/s / accel 0.206 m/s^2 -- residuals are high (rolling
+      shutter + motion blur, not modelled), so acceptance rests on three EXTERNAL
+      checks, all passed: lever arm 9.08 cm vs 8.5 cm measured by hand; rotation within
+      1.75 deg of an independent board+gyro hand-eye estimate; timeshift +33.39 ms
+      vs the frozen 32.77 ms (0.62 ms). Translation direction (IMU 7.7 cm below /
+      4.8 cm inboard of the lens, same plane fore-aft) confirmed against the physical
+      mount by the user.'
+missing: []
+production_ready: true
+notes: 'kalibr import: calib_right-camchain-imucam.yaml. Kalibr 2-step on gpu-4090
+  (docker kalibr:noetic). Step1 pinhole-equi intrinsics from calib_right.bag (901
+  frames, 9x6 checkerboard 25mm, 8x5 internal corners); step2 kalibr_calibrate_imu_camera
+  converged in 6 iters (deltaX 8.7e-6). Reprojection mean 5.64 px / gyro 0.0129 rad/s
+  / accel 0.206 m/s^2 -- residuals are high (rolling shutter + motion blur, not modelled),
+  so acceptance rests on three EXTERNAL checks, all passed: lever arm 9.08 cm vs 8.5
+  cm measured by hand; rotation within 1.75 deg of an independent board+gyro hand-eye
+  estimate; timeshift +33.39 ms vs the frozen 32.77 ms (0.62 ms). Translation direction
+  (IMU 7.7 cm below / 4.8 cm inboard of the lens, same plane fore-aft) confirmed against
+  the physical mount by the user.'

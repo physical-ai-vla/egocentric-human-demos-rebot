@@ -1,0 +1,33 @@
+# Temporal sync calibration: the cameras and IMUs, and nothing else.
+#
+# Measuring the camera<->IMU offset needs the wrist camera and the wrist IMU in one recording, which handumi_v1 can
+# supply -- but it also demands both jaw encoders, and a calibration take has no use for them. Requiring hardware the
+# measurement does not need means the recording is blocked by a 12 V supply that is irrelevant to it.
+#
+# HEAD = C922 RGB, not the Orbbec (2026-09-15). The Orbbec cannot share this host with the wrist cameras: opening it
+# breaks a UVC camera that is already streaming, and opening it FIRST stops the next UVC camera from opening at all --
+# 0/3 takes survived either ordering, on three separate host controllers, at every resolution tried. Without it the
+# same rig went 3/3 with both wrists at 1920x1080 and clean validate_episode. 640x480 because that is the frozen
+# shared human/robot policy observation, and the robot head is a C922 too.
+#
+# Everything else is copied from handumi_v1 verbatim, including the IMU serials: the point of the take is to measure
+# this rig, so it must be this rig. Captures land under datasets/human_handumi_calib/ (see config.load_config) because
+# a deliberately shaken, tapped, instruction-less 30 seconds is not training data and should not be reachable by a
+# dataset build that goes looking for episodes.
+hardware_version: handumi_v1
+profile: temporal_sync_calib
+calibration_version: uncalibrated
+cameras:
+  - {name: left_wrist, role: pose_estimation, backend: uvc, match_name: "FisheyeCamLeft", ordinal: 0, width: 1920, height: 1080, fps: 30, fourcc: MJPG, required: true}                        # 2026-09-15: the remaining module after the centre was identified
+  - {name: right_wrist, role: pose_estimation, backend: uvc, match_name: "Arducam 1080P Low Light", ordinal: 0, width: 1920, height: 1080, fps: 30, fourcc: MJPG, required: true}            # the product names do NOT track the wrists; they are just flashed strings
+  - {name: head, role: policy_obs, backend: uvc, match_name: "C922", ordinal: 0, width: 640, height: 480,
+     fps: 30, fourcc: MJPG, required: true,
+     # 2026-09-15: autofocus made this a DIFFERENT LENS every session -- fx came out 417 / 531 / 501 across
+     # three calibration batches that each fitted themselves to rms 0.19-0.26, and no single K could fit them
+     # together (rms went to 1.06). Locked at the sharpest focus measured on the real scene, which is also
+     # where autofocus settled. The register does not report what autofocus chose, so it had to be measured.
+     uvc_controls: {auto-focus: false, focus-abs: 20}}
+imus:
+  - {side: left,  backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "20540160", baud: 2000000, rate_hz: 200, required: true}
+  - {side: right, backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "20778070", baud: 2000000, rate_hz: 200, required: true}
+grippers: []

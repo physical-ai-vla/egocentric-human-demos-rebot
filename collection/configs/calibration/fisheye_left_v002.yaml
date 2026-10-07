@@ -1,0 +1,24 @@
+created: 2026-09-16T11:51:36+0900
+schema: handumi_fisheye_intrinsics/v1
+model: kannala_brandt
+side: left
+K:
+- - 788.9385178282296
+  - 0.0
+  - 939.1683702914798
+- - 0.0
+  - 780.9929235715126
+  - 546.8760402767231
+- - 0.0
+  - 0.0
+  - 1.0
+D:
+- -0.03932998104988185
+- 0.01762759255879042
+- -0.015519489763592518
+- 0.0034164807370739235
+image_size:
+- 1920
+- 1080
+source: wrist_bundle:wrist_bundle_left_v005
+notes: from wrist_bundle_left_v005

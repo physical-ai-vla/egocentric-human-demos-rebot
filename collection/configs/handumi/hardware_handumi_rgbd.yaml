@@ -1,0 +1,70 @@
+hardware_version: handumi_v1_preimu
+profile: handumi_rgbd
+calibration_version: auto_v001   # 2026-09-19: manual freeze removed at the operator's call;
+                                 # the wrist cameras run their own auto exposure and auto white balance.
+                                 # Takes recorded under auto_v001 are NOT photometrically comparable
+                                 # to exposure_v005 takes, and intrinsics tied to a frozen imaging
+                                 # state (pose/calibration.py) no longer have one -- if a wrist camera
+                                 # is ever used for geometry again, that has to be revisited.
+cameras:
+- name: head_depth
+  role: aux_depth
+  backend: orbbec
+  width: 848
+  height: 480
+  fps: 30
+  required: true
+- name: left_wrist
+  role: pose_estimation
+  backend: uvc
+  match_name: FisheyeCamLeft
+  ordinal: 0
+  width: 1920
+  height: 1080
+  fps: 30
+  fourcc: MJPG
+  required: true
+  strict_identity: false
+  strict_format: true
+  index: 2
+- name: right_wrist
+  role: pose_estimation
+  backend: uvc
+  match_name: Arducam 1080P Low Light
+  ordinal: 0
+  width: 1920
+  height: 1080
+  fps: 30
+  fourcc: MJPG
+  required: true
+  strict_identity: false
+  strict_format: true
+  index: 1
+# Restored 2026-09-18. The wrist IMUs were always part of the intended design; they were absent from this profile by
+# configuration, not by decision, and that absence is why ego16's IMU-gravity R_align could not be used on the pilot.
+# Their job in the final fusion is ORIENTATION, never translation:
+#     translation = Orbbec RGB-D HandUMI body tracking   rotation = wrist IMU gyro + gravity   grip = Feetech
+# IMU double integration is NOT a translation source here (measured: 139 mm drift over 0.5 s).
+imus:
+  - {side: left,  backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "20540160", baud: 2000000, rate_hz: 200, required: true}
+  - {side: right, backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "20778070", baud: 2000000, rate_hz: 200, required: true}
+grippers:
+- side: left
+  backend: feetech
+  port_serial: 5B3D048082
+  port: /dev/cu.usbmodem5B3D0480821
+  servo_id: 1
+  baud: 1000000
+  sample_hz: 100
+  norm_one_is: open
+  required: true
+- side: right
+  backend: feetech
+  port_serial: 5B3D049747
+  port: /dev/cu.usbmodem5B3D0497471
+  servo_id: 1
+  baud: 1000000
+  sample_hz: 100
+  norm_one_is: open
+  required: true
+gripper_calibration: latest

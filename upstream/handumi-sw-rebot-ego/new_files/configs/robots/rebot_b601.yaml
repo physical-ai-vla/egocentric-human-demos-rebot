@@ -1,0 +1,77 @@
+# Seeed reBot B601-DM bimanual (DAMIAO CAN followers), 63 cm base baseline.
+# Source URDF: ~/robot-cockpit/urdf/reBot_B601_DM_dualarm.urdf (single-arm URDF from
+# EclipseaHime017/reBotArmController_ROS2, composed by make_dualarm_urdf.py) plus a
+# fixed `{side}_tcp` link 70 mm along the gripper +x axis (finger direction; validated
+# against 80 teleop grasps on 2026-08-25, see ~/robot-cockpit/eval/rebot_fk.py).
+kind: rebot_b601
+urdf: assets/rebot_b601/rebot_b601_bimanual.urdf
+pkg_root: assets/rebot_b601
+# No MJCF yet: `handumi teleop --scene` (contact physics) is unavailable for this robot;
+# kinematic replay / IK conversion do not need it.
+arms:
+  left:
+    ee_link: left_tcp
+    joint_names:
+      - left_joint1
+      - left_joint2
+      - left_joint3
+      - left_joint4
+      - left_joint5
+      - left_joint6
+      - left_gripper_joint1
+      - left_gripper_joint2
+    gripper_joints:
+      # Prismatic finger travel from the URDF (0..0.0715 m each). `open` is the joint
+      # value for a fully open HandUMI jaw. TODO(measure): confirm on the real gripper.
+      - name: left_gripper_joint1
+        open: 0.0715
+      - name: left_gripper_joint2
+        open: 0.0715
+  right:
+    ee_link: right_tcp
+    joint_names:
+      - right_joint1
+      - right_joint2
+      - right_joint3
+      - right_joint4
+      - right_joint5
+      - right_joint6
+      - right_gripper_joint1
+      - right_gripper_joint2
+    gripper_joints:
+      - name: right_gripper_joint1
+        open: 0.0715
+      - name: right_gripper_joint2
+        open: 0.0715
+# home_q layout = URDF actuated order: [left_joint1..6, left_gripper_joint1..2,
+# right_joint1..6, right_gripper_joint1..2]. Arm values are the mean first frame of the
+# 2026-08 teleop episodes (ep028-like "ready" pose, TCP ~0.3 m ahead, ~0.2 m up).
+home_q: [-0.30, -0.05, -0.25, 0.55, -0.10, -0.40, 0.0715, 0.0715,
+          0.30, -0.05, -0.25, 0.55,  0.10,  0.40, 0.0715, 0.0715]
+# TODO(measure): physical max jaw opening of the B601 gripper (finger pad to pad).
+gripper_max_width_m: 0.070
+# HandUMI tool assembly used for reBot demonstrations. Until the reBot-specific tip is
+# printed we use the AgileX-Piper tip from handumi-hw as a temporary generic tip.
+handumi_tool:
+  gripper: piper_tip_temp
+  controller_mount: handumi_v1
+controller_tcp_calibrations:
+  # Produced by `handumi calibrate tcp pivot` (RUNBOOK step 4); absent until measured.
+  meta: configs/calibration/controller_tcp/meta_piper_tip_temp.yaml
+  # AprilTag backend: "controller" = bundle anchor tag frame (see configs/calibration/apriltag/bundles.yaml)
+  apriltag: configs/calibration/controller_tcp/apriltag_piper_tip_temp.yaml
+ik_weights:
+  pos: 125.0
+  ori: 20.0
+  rest: 20.0
+  max_joint_delta: 0.03490659   # 2 deg per 30 Hz frame
+  max_reach: 0.60               # B601 reach ~0.6 m from base
+replay:
+  gripper_retarget: normalized
+real:
+  # No HandUMI real backend for reBot yet (teleop-real unsupported); the LeRobot
+  # bi_seeed_b601_dm_follower plugin in ~/lerobot-plugins drives the hardware.
+  backend: null
+  command_rate_hz: 30
+  max_joint_speed_deg_s: 90
+  max_joint_acceleration_deg_s2: 360

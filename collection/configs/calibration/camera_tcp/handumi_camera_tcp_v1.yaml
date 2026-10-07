@@ -1,0 +1,49 @@
+schema: handumi_camera_tcp/v1
+created: 2026-09-18T14:52:21+0900
+version: camera_to_tcp_v1
+frame_convention: pose7=[x,y,z,qx,qy,qz,qw], metres, xyzw quaternion; offset expressed
+  in the WRIST CAMERA optical frame and applied as T_world_tcp = T_world_camera @
+  T_camera_tcp
+camera_to_grasp_tcp:
+  left:
+    position:
+    - -0.000663
+    - 0.040061
+    - 0.104796
+    quaternion:
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+    note: translation only; the camera->TCP rotation is not yet measured, so the camera
+      orientation is carried through unchanged
+  right:
+    position:
+    - -0.004421
+    - 0.072534
+    - 0.123638
+    quaternion:
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+    note: translation only; the camera->TCP rotation is not yet measured, so the camera
+      orientation is carried through unchanged
+provenance:
+  method: 'back-projection of a GRASPED 50 mm cube: on frames the gripper labels closed,
+    the held cube is the grasp point, and detections are kept only where the cube
+    stays still in the camera frame across consecutive frames (a cube on the table
+    does not)'
+  cube_mm: 50.0
+  accepted_frames:
+    left: 33
+    right: 14
+  raw_detections:
+    left: 53
+    right: 20
+  intrinsics:
+    left: wrist_bundle_left_v005.yaml
+    right: wrist_bundle_right_v005.yaml
+  tool: scripts/camera_to_grasp_offset.py
+  caveat: rotation component NOT measured; supersede with a pivot calibration (handumi
+    calibrate tcp) when available

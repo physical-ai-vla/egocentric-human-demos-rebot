@@ -1,0 +1,16 @@
+# Everything mocked (no hardware). Same stream names/rates as production so the pipeline is exercised end to end.
+hardware_version: mock
+profile: mock
+calibration_version: uncalibrated
+cameras:
+  - {name: head, role: policy_obs, backend: mock, width: 640, height: 480, fps: 30, required: true}
+  - {name: left_wrist, role: pose_estimation, backend: mock, width: 1920, height: 1080, fps: 30, required: true}
+  - {name: right_wrist, role: pose_estimation, backend: mock, width: 1920, height: 1080, fps: 30, required: true}
+  - {name: head_depth, role: aux_depth, backend: mock, width: 848, height: 480, fps: 30, required: false}
+imus:
+  - {side: left,  backend: mock, rate_hz: 400, required: true}
+  - {side: right, backend: mock, rate_hz: 400, required: true}
+grippers:
+  - {side: left,  backend: mock, servo_id: 0, sample_hz: 100, norm_one_is: open, required: true}
+  - {side: right, backend: mock, servo_id: 1, sample_hz: 100, norm_one_is: open, required: true}
+gripper_calibration: latest

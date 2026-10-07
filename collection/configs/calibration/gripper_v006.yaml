@@ -1,0 +1,13 @@
+schema: handumi_gripper_calibration/v1
+created: 2026-09-16T14:48:37+0900
+hardware_version: handumi_v1
+notes: UI
+convention: normalized 0 = closed, 1 = open (human raw convention; exporters transform
+  to robot grip01)
+sides:
+  left:
+    ticks_closed: 2833
+    ticks_open: 2048
+  right:
+    ticks_closed: 2110
+    ticks_open: 3946

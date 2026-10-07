@@ -1,0 +1,1003 @@
+# HandUMI collection contract v1 — Step 0 (camera / session preparation)
+#
+# Every calibration, mapping and demonstration video recorded under this contract uses these settings.
+# Changing any frozen field means a new contract version, not an edit.
+#
+# Values below are READ FROM configs/handumi/hardware_handumi_v1.yaml and the collector source, not
+# assumed. Fields that could not be established without the hardware connected are marked UNVERIFIED and
+# are what Gate 0 is currently blocked on.
+
+contract_version: v1
+created: 2026-09-22
+source_profile: configs/handumi/hardware_handumi_v1.yaml
+hardware_version: handumi_v1
+calibration_version: uncalibrated          # bump when camera->TCP / intrinsics change; never mid-session
+
+# --- 0-1 inventory -----------------------------------------------------------------------------------
+cameras:
+  left_wrist:
+    role: pose_estimation
+    match_name: "FisheyeCamLeft"           # identity is the PRODUCT NAME, see identity_risk below
+    ordinal: 0
+    usb_serial: "UC684"                    # NOT unique -- shared with right_wrist
+    usb_path: "03:1.1"                     # MEASURED 2026-09-22 with the rig connected. The two wrists sit
+                                           # on different ports, so the port IS a working L/R discriminator
+                                           # even though the serial is not. Keep each unit on its own port.
+    resolution: [1920, 1080]
+    fps: 30
+    fourcc: MJPG
+    codec: h264_videotoolbox               # falls back to libx264
+    bitrate_kbps: 6000
+    exposure_mode: AUTO                    # no uvc_controls and no exposure_auto in the profile
+    white_balance_mode: AUTO               # ditto
+    focus: AUTO                            # ditto
+    stabilization: none                    # nothing in the pipeline applies it
+    orientation: as-captured               # no rotate/flip/transpose anywhere in the recorder
+    timestamp_source: monotonic capture_ns (threaded grab, devices/camera.py)
+    imu: teensy serial 20540160, 200 Hz
+    filename: "<episode>/left_wrist.mp4"
+  right_wrist:
+    role: pose_estimation
+    match_name: "Arducam 1080P Low Light"
+    ordinal: 0
+    usb_serial: "UC684"                    # same as left_wrist
+    usb_path: "03:1.3.1"                   # MEASURED 2026-09-22
+    resolution: [1920, 1080]
+    fps: 30
+    fourcc: MJPG
+    codec: h264_videotoolbox
+    bitrate_kbps: 6000
+    exposure_mode: AUTO
+    white_balance_mode: AUTO
+    focus: AUTO
+    stabilization: none
+    orientation: as-captured
+    timestamp_source: monotonic capture_ns
+    imu: teensy serial 20778070, 200 Hz
+    filename: "<episode>/right_wrist.mp4"
+  head:
+    role: policy_obs
+    match_name: "C922"
+    ordinal: 0
+    usb_serial: "B5FBCE9F"                 # MEASURED; C922 serials ARE unique (unlike the wrists)
+    usb_path: "01:1"                       # MEASURED 2026-09-22
+    resolution: [640, 480]
+    fps: 30
+    fourcc: MJPG
+    uvc_controls: {auto-focus: false, focus-abs: 20}   # locked 2026-09-15; autofocus gave fx 417/531/501
+    exposure_mode: AUTO
+    white_balance_mode: AUTO
+    filename: "<episode>/head.mp4"
+
+grippers:
+  left:  {backend: feetech, port: "/dev/cu.usbmodem5B3D0480821", servo_id: 1, sample_hz: 100, norm_one_is: open}
+  right: {backend: feetech, port: "/dev/cu.usbmodem5B3D0497471", servo_id: 1, sample_hz: 100, norm_one_is: open}
+gripper_calibration: versioned file, configs/calibration/gripper_vNNN.yaml (latest wins)
+
+# --- 0-2 identity ------------------------------------------------------------------------------------
+identity_risk:
+  severity: RESOLVED for this rig, STRUCTURAL in general
+  finding: |
+    The two wrist cameras SHARE USB serial "UC684" -- stated in hardware_handumi_v1.yaml itself:
+    "the two units share USB serial UC684; only the product name separates them".
+    So the requested binding (serial -> logical side) CANNOT be satisfied with this hardware. Side
+    identity currently rests entirely on the product name, and "FisheyeCamLeft" is a name programmed
+    into one unit rather than a manufacturer identity -- if a unit is reflashed or replaced, the binding
+    breaks with no error.
+  aggravating: |
+    Neither wrist camera sets `strict_identity`, which defaults to false, so the collector opens
+    whatever matches and records rather than refusing. The mechanism exists (CameraCfg.strict_identity
+    makes it REFUSE to record) and is simply not enabled for these two.
+  status_2026_09_22: |
+    With the rig connected all three cameras report IDENTITY: PASS and each sits on its own USB port
+    (left 03:1.1, right 03:1.3.1, head 01:1), so the L/R binding is currently unambiguous. The underlying
+    weakness stands: the discriminator is a programmed product name plus a port, not a unit identity, so
+    moving a camera to another port or reflashing a unit still breaks it -- silently for the port, loudly
+    for the name now that strict_identity is on.
+  required_before_gate0:
+    - set strict_identity true for left_wrist and right_wrist
+    - print EXPECTED vs OBSERVED product name and unique-ID per side at start-up, and block on mismatch
+    - record per-session the AVFoundation Unique ID actually opened, so a swap is detectable after the fact
+    - decide a physical marking (label on each unit + mount) so the human can verify before a session
+    DONE 2026-09-22: strict_identity is on for both wrists, EXPECTED-vs-OBSERVED is printed per side at
+    start-up, and a live run reports IDENTITY: PASS on all three. The physical L/R label is the one item
+    still open.
+
+# --- 0-3 frozen settings -----------------------------------------------------------------------------
+frozen_during_session:
+  - resolution
+  - fps
+  - fourcc / codec / bitrate
+  - lens/FOV mode
+  - orientation
+  - crop
+  - stabilization
+  - camera processing pipeline
+auto_controls_note: |
+  Wrist exposure / white balance / focus are AUTO. That is permitted only because it is IDENTICAL across
+  calibration, mapping and demonstrations within a session -- the contract forbids changing settings
+  between those stages, not auto mode as such. The head camera's focus is already locked because
+  autofocus was measured to change the intrinsics between sessions (fx 417/531/501); the same failure
+  mode is UNTESTED on the wrists and should be checked during Step 0-5.
+
+# --- 0-8 raw provenance (verified in source) ---------------------------------------------------------
+pipeline_transforms:
+  resize: |
+    collector/video_writer.py:68 resizes ONLY when the incoming frame does not match the configured
+    size -- a guard against a camera that opened at another format, not a transform applied to conforming
+    frames.
+  rotate: none
+  crop: none
+  flip: none
+  colour_convert: none beyond bgr24 into the encoder
+  fps_resample: none -- "Frames are written in capture order; the writer never drops"
+  timestamp_rewrite: none -- capture_ns is carried through to mcap frame_meta
+  naming: left_wrist / right_wrist / head, fixed by profile name
+  drop_detection: recorder emits `camera_drop` (skipped frames) and `timestamp_jump` (gap) events
+  historical_evidence: |
+    349 recorded episodes carry skipped_capture_indices == 0 on every stream. No frame loss has occurred
+    under this pipeline to date. This is historical, not a substitute for the live preflight.
+
+# --- 0-7 session layout ------------------------------------------------------------------------------
+session_layout: |
+  session_YYYYMMDD_HHMMSS/
+      session_meta.yaml
+      calibration/
+      mapping/
+      demonstrations/
+      qa/
+session_meta_fields:
+  - session_id
+  - collection_contract_version
+  - left_camera_serial          # plus unique_id, since serial is not unique
+  - right_camera_serial
+  - left_camera_unique_id
+  - right_camera_unique_id
+  - left_gripper_id
+  - right_gripper_id
+  - resolution
+  - fps
+  - lens_mode
+  - timestamp_source
+  - task
+  - scene_id
+  - operator
+migration_note: |
+  The current collector writes session_meta.JSON with a different field set and a flat
+  episode_NNNNNN/ layout, with no calibration/ mapping/ qa/ subdirectories. Adopting this layout is a
+  collector change, not a config change.
+
+# --- 0-4 live timing, MEASURED 2026-09-22 ------------------------------------------------------------
+# Source: 20.0 s headless take, all seven devices connected, hardware_handumi_v1, gripper_v014.
+#   .venv/bin/python -m handumi_collector.collect --hardware handumi_v1 --session <dir> --headless-smoke 20
+live_timing:
+  verdict: PASS
+  frames:      {left_wrist: 601, right_wrist: 601, head: 600}     # 30 Hz x 20 s = 600 expected
+  fps_measured: {left_wrist: 30.01, right_wrist: 30.02, head: 30.00}
+  skipped_capture_indices: {left_wrist: 0, right_wrist: 0, head: 0}
+  encoder_error: none          # h264_videotoolbox, backlog_max 1 on every stream
+  events: []                   # no camera_drop, no timestamp_jump
+  monotonic: true              # every frame_meta dt > 0 on all three streams
+  dt_ms:
+    left_wrist:  {min: 30.60, p50: 33.02, p95: 34.64, max: 66.32}
+    right_wrist: {min: 23.05, p50: 33.02, p95: 34.85, max: 66.44}
+    head:        {min: 29.68, p50: 33.00, p95: 34.80, max: 66.39}
+  max_gap_finding: |
+    Each stream has exactly six 66 ms intervals in 20 s, and they are PERIODIC -- right every 3.335 s,
+    left every 3.33 s, head every 3.30 s, i.e. one per ~100 frames. They are NOT simultaneous across the
+    three cameras (no onset matches another within 0.15 s), so this is not a host stall, a GIL pause or a
+    disk hiccup; each sensor beats independently. Nor is it loss: the frame count matches 30 Hz exactly
+    and skipped_capture_indices is 0, so the sensor paces at 33.0 ms and inserts one long period per 100
+    to stay locked to 30.000 Hz average.
+    Consequence for Track A: production resamples to 15 Hz (66.7 ms), so a 66 ms gap falls inside one
+    output period and is invisible. The three streams are free-running relative to each other and drift
+    by up to one frame at any instant; capture_ns carries that, and the resampler is what reconciles it.
+  sensors:
+    imu:     {left: 3960, right: 4034}    # 198 / 202 Hz against a configured 200
+    gripper: {left: 2002, right: 2002}    # 100 Hz, configured 100
+
+# --- 0-5 image quality, PARTIAL 2026-09-22 -----------------------------------------------------------
+image_quality:
+  verdict: PASS for optics, NOT YET MEASURED for workspace framing
+  measured_frame: 300 of the 20 s take
+  left_wrist:  {mean: 118, lap_var: 324, clip_lo_pct: 4.6, clip_hi_pct: 0.0}
+  right_wrist: {mean: 129, lap_var: 260, clip_lo_pct: 1.0, clip_hi_pct: 0.4}
+  head:        {mean: 107, lap_var: 201, clip_lo_pct: 0.3, clip_hi_pct: 0.0}
+  reading: |
+    Exposure is mid-range on all three with no meaningful highlight clipping, focus is sharp, and no lens
+    obstruction is visible -- the right wrist's 2026-09-18 obstruction is gone. What this take CANNOT
+    establish is workspace visibility: the two wrist units were lying on the desk, not worn, so they were
+    pointed at cables and a monitor. The head camera IS mounted over the task table and sees the cube,
+    the plate and two of the four ArUco markers.
+  outstanding:
+    - re-shoot 0-5 with both units WORN and the hands in the task volume, and confirm each wrist sees the
+      table, the cubes and its own jaw
+    - confirm all four markers are inside the head FOV, or accept that the head only needs the task area
+    - wrist auto-exposure / auto-focus drift between stages is still untested (the head's focus is locked
+      because that drift was measured there; the wrists are still AUTO)
+
+# --- what is still UNVERIFIED ------------------------------------------------------------------------
+unverified_requires_hardware:
+  - 0-5 workspace framing with the units worn (see image_quality.outstanding)
+  - 0-6 mount rigidity -- cannot be read off a static take; needs a worn shake/tap test
+  - wrist auto-exposure / auto-focus drift between stages
+
+# --- Step 3 mapping: marker layout and pass protocol (2026-09-22) -------------------------------------
+mapping:
+  markers:
+    purpose: THREE SEPARATE ROLES -- see roles below. The earlier "texture only" reading was WRONG.
+    CORRECTION_2026_09_22: |
+      This block previously said "ORB-SLAM3 sees the marker corners as ordinary ORB features. Nothing
+      detects the IDs, so nothing needs undistortion." Both halves are false for the image we run.
+      orb_slam3:prod6b is the UMI fork, and it:
+        * calls cv::aruco::detectMarkers on EVERY frame (Frame.cc:274) with a dictionary that defaults to
+          DICT_4X4_50 -- the dictionary we print. Our markers ARE detected: 90 % of sampled frames on the
+          right take, 93 % on the left, all four IDs seen.
+        * DOES undistort the tag corners itself, with cv::fisheye::undistortPoints and the KannalaBrandt8
+          k1..k4 (KannalaBrandt8.cpp:246-247), before estimating the tag pose. The stated reason for not
+          using IDs therefore never applied.
+      What was true is that the detections went unused, but for a different reason: the only consumer is
+      ReconstructWithTwoViewsAndTags with init_tag_id=13 / init_tag_size=0.16 m, and we printed IDs 0-3 at
+      80 mm. tag_init_success=0 fired 83 times per build and the run fell back to feature-based init
+      (init_success=1). The mixed state -- markers laid for mapping, fork looking for a tag that is not
+      there -- is the thing to avoid.
+    roles:
+      1_init_tag: |
+        ONE tag, used by the fork's two-view initialisation. Must be present in BOTH frames of the init
+        (KannalaBrandt8.cpp:230-235) and its pose seeds T21 as a FIXED relative pose.
+        Sheet: ~/Desktop/handumi_init_tag_M13_160mm.png -- M13 at 160 mm, the fork's own defaults.
+        STATUS: under test. Pointing the init at our existing M0 at 80 mm made the build WORSE, not
+        better (see init_tag_experiment).
+      2_table_reference: |
+        The four 80 mm M0-M3 give a table/world frame, the equivalent of UMI's 04_detect_aruco.py ->
+        tx_slam_tag. This runs in PYTHON AFTER SLAM, under our control, and a unit test shows it is sound:
+        the pairwise marker distances, which must be constant because the markers are fixed to the table,
+        come out M0-M1 56.6 +/- 1.0 cm, M2-M3 51.1 +/- 0.4, M1-M3 40.9 +/- 1.0, M1-M2 66.1 +/- 1.4, with
+        the two diagonals agreeing (66.7 vs 66.1). Metric pose from our markers is good to ~1 cm.
+        NOT YET IMPLEMENTED.
+      3_gripper_tags: |
+        UMI puts tags on the gripper fingers to recover identity and aperture. We read aperture directly
+        off the Feetech encoder at 100 Hz, so this role is probably unnecessary -- decide explicitly, do
+        not inherit it from UMI by default.
+    init_tag_experiment: |
+      Measured 2026-09-22, 3 runs each on the same episode_000003 right take.
+        init_tag_id 13 / 0.16 (not present)  resets 0/0/0   KFs 66/67/67   tracked 95 %   <- v1 atlas
+        init_tag_id 0  / 0.08 (our marker)   resets 3/9/12  KFs 68/65/64   tracked 99/94/93 %
+      tag_init_success DID fire on the second (2-4 times per run), so the path works; it simply produced a
+      worse map. Two candidate causes, and they call for different fixes:
+        a) KannalaBrandt8.cpp:250 builds `cv::Mat distCoeffs = cv::Mat1f(5,1)` and passes it straight to
+           estimatePoseSingleMarkers. That constructor allocates without zeroing, so uninitialised floats
+           are used as distortion coefficients. Freshly mapped pages are usually zero, which would make
+           this intermittent -- consistent with the run-to-run spread. ID-independent: changing the tag
+           would NOT fix it.
+        b) an 80 mm tag spans only ~65 px at the 49 cm median working distance (fx 396), which is a badly
+           conditioned single-marker pose, and that pose is then frozen into T21. 160 mm doubles it to
+           ~130 px. This would explain UMI's choice of 0.16 m.
+      RESOLVED 2026-09-22 WITHOUT RESHOOTING. Two corrections came out of it.
+
+      (i) My reset counts above were WRONG -- `grep -c Reseting` also matches the follow-up
+          "LM: Reseting current map in Local Mapping" lines and overcounted roughly 3x. Counting
+          "SYSTEM-> Reseting active map" instead:
+            tag OFF (v1)            0 / 0 / 0
+            tag ON, unpatched       1 / 3 / 4        (not 3/9/12)
+            tag ON, distCoeffs=0    1 / 1 / 2        (not 3/3/6)
+
+      (ii) Cause (a) is REAL and is fixed. Patching KannalaBrandt8.cpp:250 to
+           `cv::Mat::zeros(5,1,CV_32F)` and rebuilding (image orb_slam3:prod6b_dcfix) cut the spread from
+           1/3/4 to 1/1/2 and made two of three runs byte-for-byte alike (tag_init ok2/f3, 1 reset,
+           VIBA 1+2, 99 % tracked). Uninitialised memory was indeed driving the run-to-run variance.
+
+      (iii) Cause (b) is REFUTED, and printing a 160 mm M13 would NOT help. Every reset logs
+            "IMU is not or recently initialized. Reseting active map", i.e. the tag pose is not wrong --
+            the map is created TOO EARLY. The tag lets the visual init succeed at t=0.2 s with no parallax
+            at all, while inertial init still has nothing to work with because the take opens with
+            |a|-g p50 0.12 m/s2. ORB-SLAM3 then resets the active map. A LARGER tag would initialise
+            earlier and more reliably, making this worse, not better.
+
+      DECISION: mapping runs with the init tag ABSENT (fork default id 13 / 0.16 m, which the scene does
+      not contain), i.e. the v1 configuration. This is a measured choice, not the accidental mixed state:
+      tag ON is worse on resets (1/1/2 vs 0/0/0) on these takes. Recorded so it is not re-litigated.
+      Keep the orb_slam3:prod6b_dcfix image anyway -- the fix is correct and costs nothing, and the tag
+      path returns false at KannalaBrandt8.cpp:232 before ever reaching line 250 when the tag is absent,
+      so the v1 atlas was never touched by the bug.
+      REOPEN IF: a future take opens with real translation (the figure-of-eight). Tag ON tracked from
+      0.2 s against 3.3 s for tag OFF, so on such a take it could strictly dominate -- the resets are the
+      only thing costing it, and they are an artefact of the still opening, not of the tag.
+    caveat: |
+      ArUco is NOT the densest texture per unit area -- a 4x4 binary marker has few internal corners, and
+      newsprint or a random-texture poster yields more ORB features. ArUco is chosen for the optional
+      path to metric anchoring, not because it maximises features. Adding newsprint around the markers
+      increases map density further at no cost.
+    dictionary: DICT_4X4_50            # matches the fork's aruco_dict_id default, so detection is live
+    size_mm: 80                        # BLACK SQUARE side. generateImageMarker renders the 6x6 cell grid
+                                       # (4x4 bits + 1 border bit) across the whole image, so the image
+                                       # edge IS the black edge. Verify the print with a ruler: a
+                                       # fit-to-page scaling silently changes the metric scale.
+    count: 4
+    ids: [0, 1, 2, 3]                  # four, not eight -- reduced 2026-09-22 because the table is small
+    sheets: ["~/Desktop/handumi_markers_4up_80mm.png"]
+    count_rationale: |
+      Four, not eight: the table is small and eight 80 mm markers would take working area away from the
+      task. A marker does not have to appear in every frame -- four rigid, well-separated landmarks around
+      the perimeter are enough for initialisation and relocalisation. If map QA shows weak coverage on one
+      side, add markers there rather than everywhere.
+    print: A4, 300 dpi, 100% scale (no fit-to-page), matte paper, flat and fixed
+    layout: |
+      +----------------------------------------+
+      | [M0]                              [M1] |
+      |                                        |
+      |              task area                 |
+      |         cube / stacking zone           |
+      |                                        |
+      | [M2]                              [M3] |
+      +----------------------------------------+
+      Four corners, flat, as far out as the table allows. If 80 mm still crowds the surface, regenerate
+      at 60 mm -- make_markers.py takes MM as a constant; the size is not otherwise load-bearing since
+      the markers are texture, not metric anchors.
+    placement_rule: |
+      Perimeter only. The centre task area stays clear for two reasons: it must not obstruct the
+      manipulation, and the markers are REMOVED for demonstrations -- a map that leans on features
+      sitting where the cubes go would degrade exactly when it is needed.
+  pass_protocol:
+    - fix 6-8 markers flat on the table perimeter
+    - LEFT camera: slowly cover the table perimeter once
+    - LEFT: observe the centre task area from several heights and orientations
+    - LEFT: slowly mimic the real motion -- approach, grasp, lift, transport, place, retreat
+    - RIGHT: repeat all of the above
+    - both cameras see the centre bimanual overlap region well
+    - total about one minute
+  note_on_coverage: |
+    A marker does not have to be visible in every frame. The goal is a map that initialises reliably and
+    carries strong landmarks for loop closure and relocalisation.
+  map_qa:
+    - keyframe count
+    - lost frame %
+    - relocalisation success rate
+    - whether left and right land in the SAME map
+    - trajectory continuity when 2-3 demos are relocalised against it
+  next_step_if_better: |
+    If this beats the existing separate-atlas result, re-relocalise the existing 349 raw episodes that
+    were shot in the same scene against the new map and measure how many are recovered.
+
+  # --- RESULT 2026-09-22 ------------------------------------------------------------------------------
+  result:
+    verdict: PASS
+    atlas: "gpu node bh-aiteam@100.64.0.2 : ~/umi_slam/FROZEN_map_v1/atlas_v1.osa"
+    md5: f1142f9ed0b88c3e3a24eb338eb90bea
+    keyframes: 286
+    pass1_build: "RIGHT wrist, Hpilot_20260922_180900/episode_000003, 74.5 s"
+    pass2_grow:  "LEFT wrist, Hpilot_20260922_180900/episode_000004, 55.2 s, --load_map of pass 1"
+    gate1_build: "3/3 runs: resets 0, maps 1, VIBA 1 done, 66/67/67 KFs, 95% tracked"
+    gate1_grow:  "3/3 runs: resets 0, maps 1, 265/286/264 KFs, 98-99% tracked"
+    gate2_heldout:
+      episode_000001_right: {coverage: 1.000, relocalisations: 1, failures: 0, resets: 0, maps: 1}
+      episode_000002_left:  {coverage: 0.960, relocalisations: 2, failures: 71, resets: 0, maps: 1}
+    shared_frame: |
+      Both arms relocalise into ONE atlas, which is what TRACKA_UMI_V2_CONTRACT.md §5 requires before §8 (2)
+      inter-gripper relative proprioception can be computed. The left wrist localised into a map built
+      entirely by the right wrist despite different Kalibr intrinsics and a different camera-IMU extrinsic:
+      the atlas is side-agnostic, only the settings yaml is per-side.
+  shooting_protocol_correction: |
+    MEASURED, and it overturned the reading of pass_protocol item 2 ("excite the IMU") as "move harder".
+    The FAILING 18:09 take was the more vigorous one (gyro p50 10.4 deg/s, |a|-g p50 0.33 m/s2): 3-9 resets,
+    22-64 KFs, tracking starting anywhere from 7.9 s to 47.3 s across four runs of identical input.
+    episode_000003 is GENTLER (gyro p50 7.5, |a|-g 0.26) and passes every gate on 3/3 runs. Peak angular
+    rate drives motion blur and inter-frame displacement; a smoother sweep keeps visual tracking continuous,
+    and that is what lets inertial initialisation complete. Shoot SMOOTH, not hard.
+  reproducibility_warning: |
+    ORB-SLAM3 is multi-threaded and NOT deterministic. Identical input gave 22-64 KFs and 3-9 resets across
+    four runs of the 18:09 take, and one of those runs terminated with no atlas at all. A single good build
+    is not evidence; run the build at least 3x and require every run to pass before freezing an atlas.
+  # --- marker-free demo relocalisation, 2026-09-22: the test was INVALID, and measurably so -----------
+  markerfree_demo_test:
+    intent: |
+      Does an atlas built in a marker-bearing scene still hold demonstrations recorded WITHOUT markers?
+      Run on three legacy demos from Hpilot_20260917_150545, picked by wrist angular rate rather than by
+      eye: ep017 (easy, max gyro p95 85 deg/s), ep099 (medium, 108), ep009 (hard, 118). Both wrists each,
+      --start-at-go, --load_map of atlas_v1, no --save_map.
+    raw_result: |
+      All six: coverage 0.000, relocalisations 0, Relocalization() failed ~603x (once per frame),
+      maps 1, active-map resets 0. Nothing tracked, so first-stable-reloc time, lost/recovered segment
+      length, pose-continuity jump, L/R common-frame sanity and gyro-vs-failure correlation are all N/A --
+      every one of them needs at least one tracked frame to exist.
+    verdict: FAIL as a run, but INVALID as a test of the marker question.
+    why_invalid: |
+      Three variables moved together and none could be separated from the outcome: markers present vs
+      absent, same day vs five days earlier, and mapping motion (gyro p95 ~25 deg/s) vs demo motion
+      (85-118). Every take that has ever localised into this atlas was same-day AND marker-bearing;
+      every take that failed was five days old AND marker-free.
+    disambiguation: |
+      Measured directly with brute-force ORB matching under the SLAM run's own extractor settings
+      (nFeatures 1500, scaleFactor 1.2, nLevels 8, iniThFAST 20), ratio test then essential-matrix RANSAC.
+      ORB-SLAM3 needs roughly 20+ verified matches against one keyframe for PnP to converge.
+
+        9/17 demo  vs  9/17 demo   (same day, same scene)   max 116  mean 34.3   well above
+        9/22 sweep vs  9/22 map    (same day, this atlas)   max  56  mean 21.6   above
+        9/17 demo  vs  9/22 map    (five days apart)        max  15  mean  8.2   BELOW
+
+      The demos match EACH OTHER richly, so demo motion blur and fast rotation are not the blocker --
+      demo frames carry plenty of matchable structure. What collapses is specifically the 9/17-to-9/22
+      correspondence. The scene drifted over five days by more than ORB descriptors tolerate.
+    markers_are_not_the_mechanism: |
+      Marker keypoints are a small minority of the map and are not what relocalisation rides on. In the
+      mapping frames only 0-222 of 1500 keypoints fall inside a marker quad (mean ~114, 7.6 %), and in the
+      SUCCESSFUL same-day control just 6 of 127 verified matches (4.7 %) sit on a marker. Removing the
+      markers would remove a few percent of the features, not the relocalisation.
+    what_this_does_not_show: |
+      It does NOT invalidate atlas_v1, which still localises same-day held-out takes at 0.960-1.000.
+      It does NOT answer the marker question, which remains open.
+    the_only_confound_free_test: |
+      SUPERSEDED -- no new recording was needed. A digital ablation moves marker visibility alone on a
+      take that already worked, which is strictly stronger than re-shooting. See marker_ablation.
+
+  # --- RETRACTION 2026-09-22: every --load_map run produces NON-METRIC poses ---------------------------
+  load_map_is_not_metric:
+    severity: BLOCKING, and it invalidates claims made earlier in this file
+    finding: |
+      Coverage was never evidence that the poses are usable. Checking the trajectories themselves:
+
+        PASS 1, built from scratch   |p| p50 0.23 m, max 0.49 m, extent 0.40 x 0.17 x 0.43 m,
+                                     per-frame step p50 2.2 mm            <- physically sane, 3/3 runs
+        PASS 2, grown (--load_map)   |p| up to 432 m, extent up to 555 m, step up to 53.6 m
+        held-out localisation        |p| up to 549 m (right), 2114 m (left)
+        marker ablation (load)       |p| up to 121 m
+
+      The shape is monotonic unbounded drift, not discrete jumps: ho_right walks 0.17 m -> 450 m across
+      its 1597 frames, grow2 walks 0.02 m -> 328 m across 1649. Only 9 % and 36 % of frames stay inside
+      1 m of the origin. This is unconstrained monocular scale drift -- the map's metric anchor is not
+      reaching the new frames.
+    mechanism: |
+      VIBA never runs on a loaded atlas. Every from-scratch build logs "end VIBA 1" and usually "end
+      VIBA 2"; every single --load_map run logs 0 of both, across grow, held-out and ablation runs alike.
+      Map::mbImuInitialized IS serialised (Map.h:64), so the loaded map believes it is initialised, and
+      Atlas::PostLoad() does not re-establish the inertial optimisation for the incoming sequence -- the
+      same function the sweep spec already flagged for not setting mpCurrentMap.
+    what_this_retracts: |
+      * "Gate 2 PASS, coverage 1.000 / 0.960" -- the coverage numbers are real as TRACKING coverage and
+        nothing more. They do not show the atlas is usable.
+      * "both arms land in one atlas, so TRACKA_UMI_V2_CONTRACT.md §5 shared coordinate is satisfied" --
+        NOT established. The left pass's own trajectory is metric nonsense, so a shared frame has not
+        been demonstrated, and inter-gripper proprioception cannot be built on it yet.
+      * "FROZEN_map_v1 is a Track A production shared atlas candidate" -- withdrawn.
+      The sweep spec said this in advance and it was quoted without being applied: "tracking that does not
+      lose frames says nothing about whether poses are metric or in one frame."
+    what_survives: |
+      * PASS 1 build quality: the right-wrist atlas build is metrically sane and reproducible 3/3.
+      * The marker ablation, as a RELATIVE comparison: both arms of it are load runs and are equally
+        affected, so "marker visibility changes nothing about relocalisation behaviour" still holds.
+      * The cross-day scene-drift finding: measured by brute-force ORB matching on raw frames, with no
+        SLAM pose involved at all.
+      * The distCoeffs bug and its fix, and the init-tag experiment -- those were from-scratch builds.
+    gate_change: |
+      Metric sanity is now a GATE, not an afterthought, and it runs on every trajectory:
+        max |p| < 3 m, per-frame step p99 < 0.12 m, bounding-box extent < 2 m
+      for a wrist working over a ~0.6 m table. tools/metric_qa.py. No atlas is frozen and no coverage
+      number is reported without it.
+    blocks: |
+      Role 2 (T_table_slam) is blocked upstream by this: it consumes the grow pass's trajectory, and that
+      trajectory is the broken one. The right-pass fit alone gave per-marker bias 0.4-3.5 mm and plane
+      residual +-13 to 33 mm, which is what this should look like; the left pass gave metre-scale nonsense
+      and a 757 mm / 173.8 deg L/R disagreement that is a readout of this bug, not of the markers.
+
+  # --- marker ablation, 2026-09-22: the markers are not load-bearing, on either side -------------------
+  marker_ablation:
+    method: |
+      The markers were erased from an already-passing take by INPAINTING from the surrounding tabletop
+      (tools: mask_markers.py), not by drawing filled rectangles -- a black box would add four new
+      high-contrast edges and a fresh crop of ORB corners, the opposite of the intent. Quads dilated 25 %
+      because the strongest corners sit on the marker's outer border. Frame COUNT preserved exactly, since
+      gopro_slam pairs video to CORI by index. Motion, blur, timestamps, IMU, lighting and scene are
+      bit-identical to the control; only marker visibility changes.
+      Effect on the video: ArUco detection 88 % -> 5 % of frames, ORB keypoint count 1497 -> 1491 (the
+      1500 cap simply refills from elsewhere). The 5 % residue is markers present but undetected.
+    query_side:
+      question: does relocalisation need to SEE markers?
+      control:  "9/22 ep001 right, markers visible:  coverage 1.000, reloc ok1/f0, resets 0, maps 1"
+      ablated:  "same take, markers erased, 3 runs:  coverage 1.000, reloc ok1/f0, resets 0, maps 1"
+      answer: NO. Zero degradation, three runs out of three, not a single lost frame.
+    map_side:
+      question: does the ATLAS need markers to be built?
+      control:  "original mapping ep003 right, 3 runs: maps 1, KFs 66/67/67, resets 0/0/0, 95% tracked"
+      ablated:  "markers erased, 3 runs:            maps 1, KFs 62/93/94, resets 1/0/0, 81/94/94% tracked"
+      answer: NO. Gate 1 still passes. Slightly wider spread, and more keyframes rather than fewer.
+    consistency_with_the_counts: |
+      Expected, given how few features the markers are: 0-222 of 1500 keypoints per mapping frame fall
+      inside a marker quad (mean ~114, 7.6 %), and in the successful control only 6 of 127 verified
+      matches (4.7 %) sit on one.
+    motion_ruled_out: |
+      The remaining confound was that demos move 3-5x faster than the sweep. Taking each 9/17 demo's
+      LOWEST-gyro 3 s window -- p50 2.1-4.2 deg/s, slower than the mapping sweep itself -- and matching it
+      against the mapping frames still gives only max 18-40 / mean 10-18 verified matches, against
+      116/34 for 9/17-to-9/17 and 56/22 for the working 9/22-to-9/22 pair. The deficit survives at 2 deg/s,
+      so motion blur and fast rotation are not what breaks it.
+    conclusion: |
+      Marker removal: RULED OUT, both sides, reproducibly.
+      Demo motion:    RULED OUT at matched low angular rate.
+      What is left:   the five-day appearance/scene drift between 2026-09-17 and 2026-09-22. Same-day
+                      correspondence is roughly twice the cross-day level at matched motion, and the
+                      cross-day mean sits below the ~20 verified matches PnP needs.
+    caveat_on_the_method: |
+      Brute-force ORB matching is an UPPER BOUND on what relocalisation could achieve, not a prediction of
+      it. ORB-SLAM3 must first retrieve a candidate keyframe through DBoW2 place recognition; if the bag-
+      of-words similarity is too low the keyframe is never nominated and PnP is never attempted. So
+      hard_left reaching max 40 verified matches while relocalising 0 times out of 603 frames is not a
+      contradiction -- it means the matches exist but are not reachable through the retrieval stage.
+    consequence_for_collection: |
+      The markers may be kept or removed for demonstrations without affecting relocalisation -- that
+      question is settled and should not be re-run. The binding constraint is SCENE STABILITY: an atlas
+      serves takes from its own scene state, and five days was already too long. Either map the scene
+      again at the start of each collection day, or measure the drift before reusing an older atlas.
+  post_freeze_todo:
+    - localise a real DEMONSTRATION episode (all four takes so far are mapping sweeps; Gate 2 currently
+      rests on held-out sweeps, which is the weaker test)
+    - keep the scene fixed -- table, markers, monitors and clutter -- or every number above is void
+    - re-relocalise the 349 legacy raw episodes only if they were shot in this same scene (they were not)
+
+# --- Role 2: SLAM -> table frame, 2026-09-22 ----------------------------------------------------------
+# Built the way the shared frame actually has to work, after --load_map was found non-metric: each wrist
+# gets its OWN from-scratch atlas, and the two are tied together through the physical table rather than
+# through a shared .osa. What has to match is not "are both arms in one atlas" but "are both arms'
+# poses expressed correctly in one physical table frame".
+#
+#     T_table_cam_R = T_table_slam_R @ T_slam_cam_R          two unrelated SLAM origins,
+#     T_table_cam_L = T_table_slam_L @ T_slam_cam_L          one physical table frame
+#     T_L_R         = inv(T_table_cam_L) @ T_table_cam_R     inter-gripper geometry, now defined
+table_frame:
+  tool: scripts/fit_table_frame.py
+  convention: |
+    T_table_slam, and ONLY this direction is stored:  p_table = T_table_slam @ p_slam
+    origin = centroid of the marker centres; +z = table-plane normal toward the cameras;
+    +x = lowest-id -> next-lowest-id marker projected into the plane; +y = z cross x.
+    Storing one direction under a name that states it is deliberate -- a silent inverse downstream is
+    exactly how the Track B Ry(90 deg) deployment mismatch happened.
+  orientations_unused: |
+    Marker CENTRES only. A square planar marker has a four-fold orientation ambiguity and was measured
+    flipping between branches: the right pass gave M1 a rotation residual p95 of 152.8 deg while its
+    centre stayed sound. Nothing in the frame definition touches a single marker's orientation.
+  weighting: |
+    Each observation is prior-weighted by sqrt(marker pixel area) x cos(incidence). A marker filling
+    5000 px face-on constrains its centre far better than one covering 200 px at 70 deg, and the earlier
+    unweighted fit showed it -- M0/M1, seen most often but often obliquely, carried 26-41 mm bias against
+    0.5-0.9 mm for M2/M3. Huber IRLS on top.
+  results:
+    coplanarity: "marker z in the fitted table plane: right +-0.2 mm, left +-0.3 mm"
+    leave_one_out: |
+      Measured in the SLAM frame, which every subset shares. Dropping any one marker tilts the plane by
+      0.078-0.112 deg and moves no retained centre at all. The frame does not hang off any one marker.
+      NOTE a first version of this check compared TABLE frames across subsets and reported 146 deg and
+      86 deg for M0/M1 against 0.08 deg for M2/M3. That was the +x definition changing hands, not the fit
+      moving -- the origin is the centroid of whichever markers were used. Convention artefacts look like
+      instability; measure in the common frame.
+    lr_agreement: |
+      Two INDEPENDENT scratch atlases, each fitted separately, compared through the board they both see:
+        rotation 0.143 deg, scale +2.90 % (left larger), residual rms 9.56 mm / max 12.52 mm
+        with scale forced to 1: rms 13.31 mm / max 15.10 mm
+      The orientation agreement is excellent. The scale disagreement is the real finding.
+  slam_scale_is_short:
+    severity: affects every Track A pose label
+    method: |
+      Marker centres in the CAMERA frame are metric by construction -- solvePnP is given the 80 mm size --
+      so the distance between two markers seen in the SAME frame carries no SLAM scale. That makes the
+      board an independent metric ruler. Only observations above the median apparent area are used.
+    ruler: |
+      The two wrist cameras, with different Kalibr intrinsics and different units, measure the same board
+      to within 1-7 mm on 379-673 mm baselines:
+        M0-M1 567.1 / 565.1   M0-M2 378.6 / 384.2   M0-M3 672.5 / 673.9
+        M1-M2 660.8 / 655.1   M1-M3 409.0 / 410.2   M2-M3 508.7 / 501.5   (right / left, mm)
+      That agreement validates the ArUco path and the 80 mm assumption at the same time.
+    measured:
+      right_pass: "SLAM scale / ruler = 0.9519  (-4.81 %)"
+      left_pass:  "SLAM scale / ruler = 0.9849  (-1.51 %)"
+    reading: |
+      Both monocular-inertial scales come out SHORT, by 1.5 % and 4.8 %. On a 30 cm reach that is 5-14 mm.
+      It is not noise between the two passes -- both err in the same direction against a ruler that is
+      itself consistent to ~1 %. The markers therefore buy something beyond the frame: a per-pass scale
+      correction that can be measured from the same footage.
+    do_not: |
+      Do not apply a scale correction silently inside the fit. Measure it, store it, and decide once
+      whether trajectories are corrected at export -- with the factor recorded per pass, not baked in.
+  blocked_on: |
+    Demonstrations still have to reach the atlas through --load_map, which is non-metric (see
+    load_map_is_not_metric). The table frame is ready; what it will be applied to is not.
+  left_pass_is_weak: |
+    The left mapping take (episode_000004) does not build reproducibly: 3 scratch runs gave maps 0 / 1 / 1,
+    resets 4 / 1 / 2, and tracked 0 % / 61 % / 36 %. It is the GENTLEST take of the four (|a|-g p50 0.16
+    against 0.26 for the right), so it overshot in the other direction from the 18:09 failures. The fit
+    above uses its best run. A left re-shoot between those two levels is the cheapest improvement
+    available, and would likely tighten both the 2.9 % scale gap and the 9.6 mm residual.
+
+# --- load_map root cause, INSTRUMENTED 2026-09-23 -----------------------------------------------------
+# Read-only per-frame dumps added to Tracking::Track() ([INERT]) and Tracking::PreintegrateIMU() ([SYNC]);
+# no behaviour was changed. Images: orb_slam3:prod6b_instr, orb_slam3:prod6b_sync, both on top of
+# prod6b_dcfix. Same held-out clip (Hpilot_20260922_180900 ep001 right) run scratch and --load_map.
+load_map_root_cause:
+  verdict: stale inherited accelerometer bias, with the re-estimation path closed by the restored BA flags
+  evidence: |
+                      t=0                         t=15.5s                first 16 s
+      scratch   ba 0.0000  imu/BA1/BA2 0/0/0   ba 0.0084  |v| 0.101   |ba| p50 0.0028 max 0.0094
+      load      ba 2.3843  imu/BA1/BA2 1/1/1   ba 0.2021  |v| 3.836   |ba| p50 0.2025 max 2.3843
+
+    1. The accelerometer bias is already 2.38 m/s2 on frame ZERO of the load run, before the frame has any
+       velocity at all (hasV=0). Nothing collapsed into it; it arrived inherited from the atlas.
+    2. isImuInitialized / BA1 / BA2 all come back TRUE from the serialised map (Map.h serialises all
+       three). LocalMapping runs inertial initialisation and BA1/BA2 only when the corresponding flag is
+       false, so on a loaded atlas every path that could re-estimate the bias is closed. The scratch run
+       starts 0/0/0 and reaches 1/0/0, i.e. BA1 remains available to it.
+    3. The bias partially self-corrects to 0.20 m/s2 at t=2.5 s and then FREEZES: 0.2002 -> 0.2021 over
+       the next twelve seconds.
+    4. That residual integrates. Velocity grows 0.304 -> 3.836 m/s over 12 s = 0.294 m/s2, the same order
+       as the frozen |ba| of 0.202 (body frame and gravity rotation keep it from matching exactly), and
+       position grows quadratically -- which is the 0.5*a*t^2 fit at R^2 0.97-0.99 measured earlier.
+    5. visV, the speed differenced from consecutive camera centres, tracks |v| to three digits
+       (3.8546 vs 3.8363). The visual trajectory runs away with it, so correcting velocity alone is not
+       enough.
+  ordering: |
+    This settles the question the instrumentation was built to answer. The velocity does NOT collapse
+    first and drag the bias after it -- the bias is wrong before a velocity exists. Cause (A), bias
+    inheritance, is primary; (B), the velocity seed, is downstream of it.
+  time_sync_ruled_out:
+    method: |
+      Both modes are fed byte-identical raw_video.mp4 and imu_data.json, so any difference in which IMU
+      samples back a frame would come from the code path. [SYNC] prints, per frame, the frame interval and
+      the interval of IMU actually consumed for it.
+    result: |
+                  frame dt ms      firstIMU-prevFrame ms        lastIMU-curFrame ms      IMU per frame
+                  p50/p95          p50 / p95|.| / max           p50 / p95|.| / max
+        scratch   33.33/33.33      1.480 / 3.719 / 48736.1      -2.482 / 4.707 / 4.957        7.0
+        load      33.33/33.33      1.478 / 3.715 /     3.960    -2.482 / 4.707 / 4.957        7.0
+      Identical to three decimals, identical sample count per frame, and flat over time (per-fifth p95
+      3.69-3.74 ms in both, no growth). The two scratch outliers are frames 478 and 1463, both with
+      prevT = 0.000 -- map-reset boundaries where the previous frame was cleared, not timing. The load run
+      has none because it never reset.
+    conclusion: |
+      Camera-IMU alignment is the same in both modes and is good in absolute terms: p50 1.48 ms, p95
+      3.7 ms against a 33.3 ms frame interval. Timecode sync is NOT the cause of this blocker and the
+      branch is closed. It stays worth keeping good for its own sake -- a bad in-sequence offset would
+      degrade preintegration and bias estimation after this is fixed -- but it explains nothing here.
+  fix_candidates:
+    A1: "do not inherit the accelerometer bias for a new sequence; inherit the gyro bias, which is stable"
+    A2: |
+      REJECTED 2026-09-23 after reading the path. Clearing BA1/BA2 WOULD rescale the loaded atlas.
+        LocalMapping.cc  VIBA 1 calls InitializeIMU(1.f, 1e5, true), VIBA 2 calls InitializeIMU(0,0,true).
+        InitializeIMU   on an already-initialised map takes the `else` branch: mRwg = Identity, and mbg/mba
+                        are SEEDED FROM mpCurrentKeyFrame's biases -- i.e. from the inherited stale bias.
+                        mScale = 1.0, then Optimizer::InertialOptimization(map, mRwg, mScale, mbg, mba, ...)
+                        with mRwg and mScale passed BY REFERENCE, so both are optimisation outputs.
+        InertialOptimization
+                        vpKFs = pMap->GetAllKeyFrames() -- the WHOLE map, every loaded keyframe included.
+                        Poses are fixed (VP->setFixed(true)), but VertexGDir is free and VertexScale is
+                        free in monocular (VS->setFixed(!bMono)). Gravity direction and scale are estimated
+                        across old and new keyframes together, and written back into Rwg and scale.
+                        Worse: VertexGyroBias and VertexAccBias are a SINGLE vertex each, built from
+                        vpKFs.front(). One bias is estimated for the entire map, so a five-day-old
+                        session's bias and the new recording's share one variable -- wrong on its face.
+        back in InitializeIMU
+                        if (fabs(mScale - 1.f) > 0.00001) map->ApplyScaledRotation(Twg, mScale, true),
+                        which rescales and rotates EVERY keyframe and map point in the map.
+      So re-enabling BA1 hands the loaded atlas's metric frame to an optimiser fed by the corrupt new
+      segment. That defeats map reuse as surely as clearing isImuInitialized would.
+    A3: "A1 plus a LOCAL inertial BA restricted to the new sequence's keyframes -- never BA1, which is global"
+  where_the_inheritance_actually_happens: |
+    Not in upstream code. The stale bias enters through the fork's own [UMI_PATCH] block in
+    Tracking.cc INIT_RELOCALIZE: on a successful relocalisation into an IMU-initialised map it walks to
+    the last non-bad keyframe, takes its IMU::Bias, and applies it to mCurrentFrame, mLastFrame and
+    mLastBias. That is where ba = 2.38 m/s2 comes from, and it is fork-local, so A1 is a small edit to
+    code this project already owns rather than a change to ORB-SLAM3 proper.
+    The upstream `else` branch in InitializeIMU would also re-seed mba from the current keyframe, but it
+    is never reached on a loaded map because BA1/BA2 are already true.
+  do_not: |
+    Do not set isImuInitialized(false). That discards the atlas's gravity and scale and defeats map reuse,
+    which is the entire point of --load_map.
+  gate_for_any_fix:
+    - relocalisation succeeds and maps == 1
+    - no pathological reset loop
+    - metric_qa PASS on the loaded trajectory
+    - same clip scratch vs load, Sim(3) aligned: scale ~ 1.0 AND constant over time
+    - absolute check against the ArUco/table ruler, which is independent of SLAM scale
+
+# --- A-1 tried and REFUTED, 2026-09-23 ----------------------------------------------------------------
+a1_accel_bias_fix:
+  change: |
+    Tracking.cc INIT_RELOCALIZE, the fork's own [UMI_PATCH] reloc-bias-seed block: inherit the donor
+    keyframe's GYRO bias, start the ACCELEROMETER bias at zero. Image orb_slam3:prod6b_a1.
+  it_did_what_it_was_designed_to_do:
+    frame0_ba: "2.3843 -> 0.0000"
+    ba_p50_max: "0.2130 / 2.3843  ->  0.1151 / 0.1155"
+  but_the_drift_got_WORSE:
+    max_position: "846 m  ->  1244 / 1484 / 1823 m across three runs"
+    velocity_p50_first16s: "1.41 -> 1.83 m/s"
+  why_that_refutes_A:
+    - |
+      The numbers stop matching. Before the patch the velocity grew at 0.203 m/s2 while the frozen |ba|
+      was 0.213 -- which is what made bias look causal. After the patch the velocity grows at 0.395 m/s2
+      while |ba| is 0.115, a factor of 3.4 apart. The earlier agreement was coincidence: the bias is
+      whatever the local optimiser settles on, not the thing injecting the acceleration.
+    - |
+      Cutting the inherited bias by twenty-fold made the runaway faster, not slower. A cause cannot behave
+      that way.
+  what_the_drift_actually_looks_like:
+    direction: |
+      Not gravity. Fitting 0.5*a*t^2 and comparing the direction to the world z axis (ORB-SLAM3 uses
+      gI = (0,0,-1)) gives 42-84 degrees off the gravity axis, and the dominant term is +x, reproducibly:
+      the three A-1 runs give a_x = +1.360 / +1.356 / +1.303 while y and z scatter. A fixed, largely
+      horizontal direction in the map frame. Gravity misalignment would be z-dominant.
+    velocity: |
+      The real symptom, and it is not subtle. Median |v| per octile of the run:
+        scratch   0.03  0.05  0.06  0.09  0.09  0.06  0.06  0.03   m/s
+        load      0.48  1.51  3.28  7.32 13.76 22.45 32.56 46.37
+        A-1       0.27  2.55  5.75 11.90 21.48 33.21 47.27 65.16
+      A hand-held camera reaching 46-65 m/s. It is already diverging in the first octile and never
+      recovers, while the scratch run of the SAME clip stays between 0.03 and 0.09 m/s throughout.
+  conclusion: |
+    The question is not why the bias is wrong. It is why the VELOCITY state diverges from the first
+    seconds on a loaded map. Bias inheritance was a real defect worth fixing on its own terms, but it is
+    not this blocker's cause.
+  status: |
+    prod6b_a1 is NOT adopted -- it is strictly worse on the only metric that matters. The working base
+    stays orb_slam3:prod6b_dcfix. Keep the image for the record; do not build on it.
+  next_measurement: |
+    Explain the velocity divergence directly rather than through the bias. Two things to establish before
+    touching code again: whether tracking keeps matching against the LOADED map's points after the single
+    splice (relocalisation fires exactly once, and the splice keyframe is created once by a static guard,
+    so everything after it may be a free-floating chain anchored to the map at a single point); and what
+    the visual inlier count does over the run. Neither is instrumented yet.
+
+# --- A2: the ego trajectories oscillate, 2026-09-23 ---------------------------------------------------
+ego_trajectory_oscillation:
+  severity: BLOCKING for Track A UMI labels, and for Track C pseudo-joints from the same poses
+  measure: |
+    reversal rate = fraction of consecutive translation-step PAIRS, both steps > 5 mm so neither is noise,
+    whose directions differ by more than 120 deg. Computed identically on ego and on R150 by chaining the
+    robot dataset's action[0] (which is inv(T_t) @ T_{t+1} in both representations) back into an absolute
+    trajectory.
+  result:
+    r150_real_robot: "left 0.1 %, right 0.0 %"
+    handumi_ego: "left 30.8 % median (p90 55.7 %), right 23.9 % (p90 66.3 %)"
+    step_and_rotation_magnitudes_are_FINE: |
+      ego step p50 1.4-2.5 mm against R150's 0.7-1.0, and rotation p99 6.8-7.7 deg against 5.0-7.2.
+      Same regime. Only the DIRECTION behaviour differs, by two to three orders of magnitude.
+  not_an_artefact_of_our_processing:
+    subsampling: |
+      produce/*.npz is stride 2 off the SLAM output, so every census figure is 15 Hz. Recomputed from the
+      original 30 Hz CSVs: 27.1 % at 30 Hz with the same 5 mm floor, 26.9 % at 30 Hz with the floor halved
+      to 2.5 mm so a comparable FRACTION of pairs is evaluated, 29.8 % at 15 Hz. The decimation adds about
+      three points. It is in the raw SLAM output.
+    threshold: "5.0 mm and 2.5 mm give 27.1 % and 26.9 %. Not a threshold artefact."
+  it_is_a_toggle_not_jitter: |
+    Over 7519 reversing pairs: turn angle p50 169 deg, p75 177, p90 180, with 34 % falling in 175-180 and
+    58 % above 165. The two step lengths match (min/max ratio p50 0.75, p90 1.00; 25.0 mm against 23.9 mm)
+    and 43 % have a net displacement under a fifth of the path they took. Broadband noise would spread the
+    angle across 120-180 and leave the lengths unrelated. This is the pose alternating between two
+    estimates about 25 mm apart -- a discrete ambiguity, not a tremor.
+  keyframe_association:
+    numbers: |
+      vertex condition          pairs   reversals    rate   enrichment
+      is_keyframe                2668        1418   53.1%        1.96x
+      map_updated                2825        1458   51.6%        1.91x
+      both                        739         319   43.2%        1.60x
+      neither                   23035        4962   21.5%        0.80x
+    reading: |
+      Keyframe insertion and map update each roughly double the rate, so they are genuinely involved. But
+      66 % of all reversals occur at vertices with NEITHER flag, and the rate there is still 21.5 % --
+      against R150's 0.05 %. And the turn angle is the same in all three groups (172 / 167 / 168 deg), so
+      it is one phenomenon whose rate these events modulate, not two mechanisms.
+      Conclusion: keyframe handoff is a contributing factor, not the cause.
+  cannot_yet_distinguish: |
+    The trajectory CSV carries is_keyframe and map_updated but NOT the reference keyframe id, so a
+    reference HANDOFF cannot be told from a keyframe INSERTION. System.cc's writer already holds the
+    reference keyframe in `pKF` at write time, so emitting pKF->mnId is a one-line change; the cost is
+    re-running the affected episodes, not the build.
+  consequence_for_the_plan: |
+    Subset selection does not rescue this. Requiring both arms under 10 % leaves 0 of 104 episodes;
+    under 20 % leaves 7 (2 once at least 10 evaluable motion pairs per arm are also required).
+    Width recovery for the other 78 episodes is therefore DEPROIRITISED: more episodes at this pose
+    fidelity adds labels, not good labels.
+    The blocker for Track A is no longer gripper coverage or the exporter. It is local SLAM trajectory
+    fidelity -- and fixing it serves Track C's pseudo-joints from the same poses.
+
+# --- CORRECTION 2026-09-23: the production data was itself built through --load_map -------------------
+production_used_load_map:
+  finding: |
+    hu_prod.sh runs every episode-side as
+        ATLAS_left  = ~/umi_slam/grow/a1/out.osa
+        ATLAS_right = ~/umi_slam/trim/demos/ep_000017/atlas154.osa
+        gopro_slam ... --load_map /data/atlas.osa
+    so all 583 legacy trajectories came out of the path that was measured to produce non-metric poses.
+    metric_qa had never been run on them. Doing so:
+        504 evaluated   PASS 300   FAIL 204   (59.5 % pass)
+        max |p|      p50 0.359 m   p90 3.029   p99  61.661   max 109.114 m
+        bbox extent  p50 0.229 m   p90 3.057   p99  57.562   max  87.593 m
+        step p99     p50 0.087 m   p90 1.899   p99  23.700   max  72.526 m
+    Forty percent of the legacy trajectories are physically impossible for a wrist over a 0.6 m table.
+  what_i_got_wrong: |
+    "the shared/global atlas is not a blocker for a local UMI dataset" is right in principle and was wrong
+    in practice, and I did not check which. UMI does not require a global atlas -- but our existing local
+    pose source was already buggy --load_map output, so the defect reached Track A directly. Sorting the
+    two SLAM issues into "Track A-Data" and "a lower-priority Track A-SLAM" assumed a separation that the
+    production script does not have.
+  but_it_does_not_explain_the_oscillation: |
+    Splitting the reversal statistic on metric QA changes nothing:
+        metric PASS  n=247   p10 12.7 %   median 27.6 %   p90 50.0 %
+        metric FAIL  n=191   p10 13.6 %   median 28.2 %   p90 50.0 %
+        left PASS  median 27.7 % / p90 44.9 %      right PASS  median 27.6 % / p90 53.0 %
+    0.6 points apart. Removing every diverging trajectory leaves the toggle untouched, so these are TWO
+    INDEPENDENT defects, not one with two symptoms.
+  yield_under_both_gates:
+                                         episodes   umi_queries   padding_free
+      RECOVERABLE_DIRECT                      104          6591           2216
+      both arms metric PASS                    45          3263           1184
+      both arms PASS AND both rev <= 20 %       1            84             28
+    Of the 104, 45 have both arms metric-clean, 51 have one arm clean, 8 have neither.
+  standing_hold: |
+    No smoothing, no pseudo-q full conversion, and no width recovery for the other 78 episodes until the
+    frame-level instrumentation says where the toggle enters. More episodes at this fidelity would add
+    labels, not good labels.
+
+# --- localising the 25 mm toggle: what it is NOT, 2026-09-23 ------------------------------------------
+toggle_localisation:
+  method: read-only instrumentation on orb_slam3:prod6b_dcfix, plus one env-gated ablation
+  rejected:
+    pose_optimisation_resurrection: |
+      P1_MONOTONIC_OUTLIER -- an edge ruled outlier stays outlier for the rest of the call, in both
+      inertial optimisers and the final recovery pass, thresholds and iterations untouched, env-gated so
+      one binary serves both arms.
+      The mechanism is real and enormous: 173k resurrection attempts on the load cell, of which P1 blocked
+      146k (84 %). It changed nothing that matters.
+          scratch  reversal 22.3 % -> 20.5 %,  Jaccard 0.626 -> 0.612,  coverage -16 %, padfree -17 %
+          load     reversal 20.0 % -> 27.5 %,  Jaccard 0.380 -> 0.434
+      Blocking 146k resurrections moved the frame-to-frame Jaccard by 0.05. Within-call re-entry and
+      between-frame set change are different phenomena. P1 stays as an env toggle, default OFF, not a fix.
+    update_local_keyframes: "Jaccard 1.000 at reversals and at controls. The covisibility selection is stable."
+    update_local_points:    "Jaccard 0.980-0.990 at reversals, 1.000 at controls. The candidate pool is stable."
+    search_radius_th: |
+      th is state-dependent (2 after VIBA 2, 6 before, 5 just after relocalisation, 15 while LOST), which
+      looked like a toggle mechanism. Measured: th = 6 at every reversal AND every control frame, and it
+      differed from the previous frame on 0.0 % of reversals against 4.2 % of controls. Not involved.
+  where_it_does_show:
+    layer_3a_frustum: "Jaccard 0.879 reversal / 0.943 control, dropped 87 / 39"
+    layer_3b_matching: "Jaccard 0.322 reversal / 0.416 control, dropped 270 / 181"
+    acceptance_ratio: "0.365 / 0.385 -- the SAME. Not fewer matches, DIFFERENT matches."
+    candidate_count: "1247 / 1241 -- the same pool size reaching the matcher."
+  the_honest_reading: |
+    No single broken component was found, and the measurements say why. isInFrustum is evaluated against
+    the CURRENT pose estimate, so a prediction that is already off yields a different frustum set, which
+    yields different matches, which moves the pose, which changes the next prediction. The stage dump
+    already showed about 30 % of reversals present at the motion-model stage, BEFORE any of this layer
+    runs. What has been localised is a feedback loop -- predict, project, match, optimise, predict -- in
+    which the matching layer amplifies rather than originates.
+    That is a weaker conclusion than "here is the bug", and it is the one the data supports. Calling the
+    matcher the cause would require showing the prediction is sound at those frames, and it is not.
+  what_this_leaves:
+    - the loop is not fixable by tightening one predicate; the 3a/3b split and th are all ruled out
+    - an offline, named robust filter on the exported trajectory stays available and is now the least
+      speculative option, since every in-loop hypothesis tested has been rejected
+    - a lower-level question is still open and untested: why the initial prediction is already wrong on
+      30 % of these frames, which is upstream of everything measured here
+
+# --- REPAIRED_V1: reversal-specific local SE(3) repair, 2026-09-23 -------------------------------------
+repaired_v1:
+  status: "candidate / method validation PASS / task-domain production validation BLOCKED"
+  what_it_is: |
+    umi_bridge/ego_traj_repair.py. NOT a fix for the cause and not named as one: the cause is a prediction
+    feedback loop that goes unstable, and five in-loop hypotheses were tested and rejected. This is
+    trajectory repair for UMI label production, in its own branch beside an untouched RAW.
+    A frame is replaced only when all four hold: both neighbouring steps exceed 5 mm, the turn exceeds
+    120 deg, the excursion returns (|d1+d2|/(|d1|+|d2|) under a threshold), and all three frames share a
+    segment. Position is linear and rotation is slerp over the SAME parameter, between the frames
+    bracketing the burst, so translation and orientation cannot come from different instants.
+    Bursts of up to 3 frames are handled; measurement showed burst length makes NO difference (3 and 5
+    give identical results), which is itself evidence the artefact is a single-frame spike.
+  trade_off_curve:
+    note: "measured, not tuned. Endpoint displacement is preserved EXACTLY at every threshold (0.0 %)."
+    table: |
+      thr    rev%   shrink%  rotpath%  endpt%  step50%  step99%  rep frm%   per-episode shrink p50/p90
+      RAW   31.8%
+      0.20  24.0%    9.4%     -5.7%     0.0%    -6.5%    -2.8%    1.16%        5.8 / 22.4
+      0.30  19.8%   12.7%     -7.0%     0.0%    -6.5%    -5.4%    1.77%        9.2 / 27.8
+      0.35  17.4%   14.5%     -7.5%     0.0%    -6.5%    -6.7%    2.14%       10.8 / 30.5
+      0.50  11.1%   18.1%     -8.9%     0.0%    -7.5%    -8.8%    3.02%       13.2 / 31.9
+      1.00   8.3%   19.9%     -9.7%     0.0%    -7.5%   -14.6%    3.61%       15.9 / 33.9
+    reading: |
+      Monotonic throughout -- there is no knee where geometry preservation improves. Only 0.20 meets a
+      10 % pooled shrinkage bar, and even there the per-episode p90 is 22.4 %, so the pooled figure hides
+      individual trajectories losing a fifth of their path. Reversal bottoms out at 8.3 % even with the
+      return condition removed entirely, which is 160x R150 -- the residual is not single-frame spikes.
+  independent_validation_A:
+    why: |
+      Every other metric here is self-referential: the smoothness of a trajectory measured from that same
+      trajectory. A repair that flattens real motion scores well on all of them. Marker poses come from
+      solvePnP with a known 80 mm side, so the camera motion between two frames sharing a marker is metric
+      and owes nothing to SLAM. Relative motion is the primary score because a single marker's absolute
+      pose carries calibration bias that is common to both frames and cancels in the relative term.
+    result: |
+                                  relative translation mm     relative rotation deg    repaired-frame paired delta
+      map3_right  RAW    n=1905      p50 6.85  p90 25.71        p50 0.691  p90 1.448
+                  0.20                   6.77      24.28            0.687      1.426      -10.86 mm  -0.177 deg (n=30)
+                  0.35                   6.59      23.97            0.683      1.423       -6.77 mm  -0.151 deg (n=76)
+      map3_left   RAW    n= 909          5.73      25.96            0.616      1.310
+                  0.20                   5.62      25.96            0.615      1.303       -8.61 mm  -0.269 deg (n=16)
+                  0.35                   5.34      24.59            0.606      1.260       -8.02 mm  -0.355 deg (n=50)
+    verdict: |
+      The pooled distributions barely move, which is expected when 2 % of frames are touched. What matters
+      is the paired comparison on the frames the repair actually edited: translation error falls by 6.8 to
+      10.9 mm and rotation by 0.15 to 0.36 deg, NEGATIVE in all four cells, both arms and both thresholds.
+      The repair moves those poses toward an independent reference. It is not a filter that fakes the
+      metric by smoothing. And 0.35 fixes more frames than 0.20 without doing worse, so the "conservative
+      only" case does not apply.
+      Consequence: path shrinkage must NOT be read as damage by default. At least some of it is the
+      removal of genuine SLAM round-trips.
+    limits: |
+      The only marker-bearing takes are the 2026-09-22 mapping sweeps -- the markers were first laid that
+      day and the 104 target episodes are from 9/16-9/17. Those sweeps move far more gently than a demo
+      (gyro p95 ~25 deg/s against 85-118), and the repaired frames that a marker also observes number only
+      16-76. This validates the METHOD. It does not validate it on the data it would be applied to.
+  validation_B_required:
+    what: "5-10 demonstrations recorded WITH the markers in place, in the normal collection style"
+    why_it_is_safe: |
+      The marker ablation already showed relocalisation does not depend on marker visibility -- coverage
+      1.000 with markers and 1.000 with them digitally erased, three runs each, and the map builds equally
+      well either way. Leaving them on the table for a demo changes nothing that matters.
+    protocol:
+      - normal manipulation speed -- do NOT shoot deliberately smoothly, the point is to reproduce the
+        motion domain the 104 episodes came from
+      - include wrist rotation, both arms, the usual workspace
+      - keep the markers in view; they are only needed as a reference, not in every frame
+    promotion_gate:
+      - repaired-subset translation and rotation error clearly down against RAW, paired on the same frames
+      - non-repaired frames essentially unchanged
+      - one of 0.20 / 0.35 consistently better, chosen on this evidence rather than on the curve
+      - per-demo path shrinkage p90 not excessive
+  do_not_until_B: |
+    REPAIRED_V1 stays a candidate. It is not promoted to Track C or UMI exporter input, RAW is never
+    overwritten, and no threshold is declared production.
+
+# --- (B) task-domain validation: BLOCKED, and why, 2026-09-23 -----------------------------------------
+validation_B_blocked:
+  what_was_recorded: |
+    Fourteen demonstrations across two sessions (nine at 12:32/12:35, five at 12:52), all quality PASS,
+    690-693 frames each, markers detected in 74-100 % of sampled frames with all four ids, and motion in
+    the right domain: gyro p95 50-87 deg/s against the 104 target episodes' 85-118 and the (A) validation
+    sweeps' ~25. The capture is not the problem.
+  three_configurations_all_fail:
+    prod_atlas: |
+      grow/a1 (left) and atlas154 (right), the pair hu_prod.sh used. The RIGHT arm relocalised into
+      nothing on 19 of 19 sides across both sessions. Not sporadic -- structural. Those atlases predate
+      2026-09-17 and the scene has since changed, which is the cross-day drift already measured in the
+      other direction (9/17 demos into a 9/22 atlas: coverage 0.000).
+    atlas_v1: |
+      Built 09-22 in THIS scene with the markers in place, so one day old rather than six. It attaches
+      sporadically -- mostly 1 to 6 frames -- and where it does track properly the trajectory diverges:
+      415 frames with a 74.6 m extent, 396 frames at 22.1 m, 270 at 79.5 m. The --load_map inertial defect
+      reproduces on a same-day atlas, which rules out staleness as its cause.
+    scratch: |
+      No atlas, so neither defect applies, and it passes metric QA most often (6 of 10). But it tracks
+      least: 321 frames total against prod's 1706, with several sides producing no trajectory at all. A
+      23-second demo whose opening is nearly static does not bootstrap a map reliably.
+  the_measurement: |
+                        metric_qa PASS      total tracked frames
+      prod atlas              3/10                  1706          (right arm 0/10)
+      atlas_v1                2/10                   439          (diverges where it tracks)
+      scratch                 6/10                   321
+    No configuration gives sufficient LENGTH and metric validity at the same time.
+  verdict: |
+    (B) cannot be run, because the production condition it is meant to validate does not currently work.
+    REPAIRED_V1 stays a candidate on its (A) method validation and is not promoted. Recording more demos
+    does not help -- fourteen good ones are already on disk and the wall is downstream of capture.
+  blocker_redefined: |
+    Track A's blocker is not the repair threshold. It is production pose generation:
+      cross-day atlas invalidation      an atlas serves its own scene state, and days are enough to break it
+      --load_map inertial divergence    reproduces even on a same-day atlas
+      scratch coverage insufficiency    short demo clips with static openings do not bootstrap
+    The next question is reliable EPISODE-LOCAL METRIC POSE GENERATION, not repair. Directions worth
+    testing, in order:
+      1. a local metric trajectory path that does not need --load_map at all
+      2. if a same-day atlas is used, a new-sequence initialisation that fully separates the loaded
+         inertial state instead of inheriting it (the A-1 ablation showed inheriting the accel bias is not
+         the mechanism, so this is a different change from the one already rejected)
+      3. a hybrid: markers and the table frame as the GLOBAL anchor, episode-local pose from scratch or
+         local odometry -- Role 2 already showed the marker path is metrically sound to ~1 cm and is
+         independent of SLAM
+  artifacts:
+    recordings: "datasets/human_handumi_raw/Hpilot/Hpilot_20260923_{123256,123532,125213} -- 14 episodes, kept"
+    exports: "~/.claude/jobs/e649aef3/tmp/{valB,valC} and ~/umi_slam/{valB,valC} on the node"
+    tools: "umi_bridge/ego_traj_repair.py, ~/.claude/jobs/e649aef3/tmp/{aruco_validate,valB_analyze}.py"

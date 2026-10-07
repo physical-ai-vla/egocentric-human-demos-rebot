@@ -1,0 +1,101 @@
+{
+ "convention": "T_table_slam",
+ "meaning": "p_table = T_table_slam @ p_slam ; T_table_cam = T_table_slam @ T_slam_cam",
+ "warning": "only this direction is stored; do not infer an inverse without renaming it",
+ "frame": {
+  "origin": "centroid of marker centres",
+  "+z": "table-plane normal, toward the cameras",
+  "+x": "lowest-id -> next-lowest-id marker, projected into the plane",
+  "+y": "z cross x"
+ },
+ "translation_m": [
+  -0.18898193416521064,
+  -0.29647918257125,
+  0.156482435952543
+ ],
+ "quaternion_xyzw": [
+  0.890249305026638,
+  0.04375073036205906,
+  -0.04322564132441058,
+  -0.45130210771108514
+ ],
+ "matrix_4x4": [
+  [
+   0.9924348350497596,
+   0.03888246852472203,
+   -0.11645278794936771,
+   -0.18898193416521064
+  ],
+  [
+   0.11691376067220155,
+   -0.5888245623366367,
+   0.7997604687370781,
+   -0.29647918257125
+  ],
+  [
+   -0.037473600644181225,
+   -0.8073250822503236,
+   -0.5889159030152507,
+   0.156482435952543
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "marker_size_m": 0.08,
+ "markers_used": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "marker_layout_table_frame_m": {
+  "M0": [
+   -0.28140922073305125,
+   0.19285586137654986,
+   0.0002548214534413562
+  ],
+  "M1": [
+   0.2788575405380546,
+   0.1928558613765499,
+   -0.00023487782973247162
+  ],
+  "M2": [
+   -0.24901843896717207,
+   -0.17882570786313343,
+   -0.00028411312653565945
+  ],
+  "M3": [
+   0.25157011916216876,
+   -0.20688601488996636,
+   0.0002641695028266777
+  ]
+ },
+ "orientation_note": "marker ORIENTATIONS are deliberately unused: a square planar marker has a four-fold ambiguity and was measured flipping (M1 rot p95 152.8 deg)",
+ "estimated_from_pass": "left",
+ "num_observations": 2225,
+ "centre_residual_p50_mm": 12.06,
+ "centre_residual_p95_mm": 511.39,
+ "leave_one_out": {
+  "without_M0": {
+   "plane_tilt_deg": 0.0955,
+   "worst_centre_shift_mm": 0.0
+  },
+  "without_M1": {
+   "plane_tilt_deg": 0.1118,
+   "worst_centre_shift_mm": 0.0
+  },
+  "without_M2": {
+   "plane_tilt_deg": 0.0845,
+   "worst_centre_shift_mm": 0.0
+  },
+  "without_M3": {
+   "plane_tilt_deg": 0.0933,
+   "worst_centre_shift_mm": 0.0
+  }
+ },
+ "leave_one_out_note": "measured in the SLAM frame; comparing table frames across subsets would report the +x/origin convention changing, not the fit moving"
+}

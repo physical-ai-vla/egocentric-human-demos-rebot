@@ -1,0 +1,16 @@
+# Episode QA thresholds (Tier A "action_labelled" requires every hard check to pass).
+qa:
+  min_world_valid_fraction: 0.95
+  min_wrist_valid_fraction: 0.95
+  min_hand_valid_fraction: 0.80
+  max_catastrophic_jumps: 0
+  max_world_reprojection_px: 2.0      # soft (warning only)
+  max_wrist_reprojection_px: 2.0      # soft
+  max_video_drop_fraction: 0.01
+  min_duration_s: 1.0
+  require_both_hands: true
+  min_fps_warn: 28.0                 # soft: actual fps below this = exposure too long
+  require_world: true                 # false while recording without world tags (head-frame-only)
+  sides: right                       # both | left | right - single-hand collection sets this to the recorded hand
+  min_aperture_valid_fraction: 0.80  # hard when finger tags were processed (thumb+index both solved)
+  max_aperture_noise_mm: 5.0         # soft: median frame-to-frame grip-width step

@@ -1,0 +1,44 @@
+created: 2026-09-14T17:26:31+0900
+schema: handumi_head_mount/v1
+camera: head_depth
+mount: fixed_table_holder
+T_table_camera:
+- - -0.02927457158301627
+  - -0.8864041030789187
+  - 0.46198567672979696
+  - -0.15356345636685298
+- - -0.9971137142495156
+  - -0.006494242568656883
+  - -0.07564433666174296
+  - -0.08191741045705944
+- - 0.07005169743958045
+  - -0.46286670960257775
+  - -0.8836555713780775
+  - 0.4816496551418198
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+geometry:
+  height_cm: 48.2
+  board_distance_cm: 17.4
+  pitch_deg: 62.1
+  yaw_deg: -9.3
+  roll_deg: -8.6
+  edge_cm: 35.0
+board:
+  name: charuco 6x8 31/23mm DICT_5X5_50
+  plane_from_depth: true
+rms_reproj_px: 0.4136
+source: table_frame_ui --live
+notes: ''
+view_spread:
+  translation_mm: 1.993
+  rotation_deg: 0.4906
+depth_check:
+  valid_fraction: 1.0
+  n_points: 15936
+  plane_rms_mm: 1.143
+  plane_p95_mm: 2.259
+  tilt_vs_board_deg: 0.343
+  mean_distance_m: 0.5399

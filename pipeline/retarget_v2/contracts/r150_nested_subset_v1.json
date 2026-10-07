@@ -1,8 +1,8 @@
 {
  "schema": "r150_nested_subset/v1",
  "source_dataset": "rebot/rebot_3stack_R150_headview",
- "source_root_4090": "${REMOTE_HOME}/holobrain-data/lerobot/rebot_3stack_R150_headview",
- "mac_copy": "${HOME}/c8/r150_ds",
+ "source_root_4090": "/home/bh-aiteam/holobrain-data/lerobot/rebot_3stack_R150_headview",
+ "mac_copy": "/Users/jeonghwanlee/c8/r150_ds",
  "meta_episodes_md5": "a4dca63346f938d0ef252e7a6b50e8b4",
  "converter_log_md5": "6b881a34910c923a75916108c467ddab",
  "set_to_session": {

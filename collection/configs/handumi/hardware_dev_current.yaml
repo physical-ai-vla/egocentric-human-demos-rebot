@@ -1,0 +1,14 @@
+# DEV ONLY — whatever is on this desk right now (2026-09-10): C922 #0 = head, the single Arducam = left_wrist,
+# C922 #1 stands in for the missing right Arducam, LEFT gripper = the real Feetech unit (id 1 on CH343 5B3D048082), right gripper mocked, no IMU/Orbbec. Validates real multi-camera recording; NOT data.
+hardware_version: dev_current
+profile: dev_current
+calibration_version: uncalibrated
+cameras:
+  - {name: head, role: policy_obs, backend: uvc, match_name: "C922", ordinal: 0, width: 640, height: 480, fps: 30, fourcc: MJPG, required: true}
+  - {name: left_wrist, role: pose_estimation, backend: uvc, match_name: "Arducam", ordinal: 0, width: 1920, height: 1080, fps: 30, fourcc: MJPG, required: true}
+  - {name: right_wrist, role: pose_estimation, backend: uvc, match_name: "C922", ordinal: 1, width: 640, height: 480, fps: 30, fourcc: MJPG, required: true}   # STAND-IN
+imus: []
+grippers:
+  - {side: left,  backend: feetech, port_serial: "5B3D048082", port: "/dev/cu.usbmodem5B3D0480821", servo_id: 1, baud: 1000000, sample_hz: 100, norm_one_is: open, required: true}   # the one real HandUMI unit
+  - {side: right, backend: mock, servo_id: 1, sample_hz: 100, norm_one_is: open, required: true}
+gripper_calibration: latest

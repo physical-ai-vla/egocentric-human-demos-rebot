@@ -1,0 +1,41 @@
+camera_name: c922
+model: pinhole
+image_width: 1920
+image_height: 1080
+camera_matrix:
+- - 1577.727766418605
+  - 0.0
+  - 937.6144422309073
+- - 0.0
+  - 1586.1210733817754
+  - 440.72522910038407
+- - 0.0
+  - 0.0
+  - 1.0
+distortion_coefficients:
+- -7.896959402978631
+- 284.9584186880896
+- 0.013884252305916715
+- -0.008737797117766713
+- -411.12505373704016
+- -7.858514050852777
+- 283.88270562368
+- -404.7079259486272
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+rms_reprojection_error: 0.33017814475935026
+mean_reprojection_error: 0.2910479009151459
+num_views: 30
+calibration_date: '2026-09-03T06:57:45.051836+00:00'
+charuco:
+  squares_x: 5
+  squares_y: 7
+  square_length_m: 0.03
+  marker_length_m: 0.015
+  dictionary: DICT_5X5_100
+  legacy_pattern: false
+# recalibrated 2026-09-03 on C922 index 2, focus-abs=0 zoom-abs=100 (autofocus locked)

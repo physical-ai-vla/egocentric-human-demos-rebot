@@ -1,0 +1,23 @@
+# ChArUco board for the HandUMI WRIST fisheye cameras (160 deg lenses).
+#
+# Why a separate file from configs/charuco.yaml: that board (5x7 @30 mm,
+# 150x210 mm) is shared with the C922 head path and must not change.  It is
+# too small for the 160 deg wrist lenses -- measured board span across 34 real
+# views was 14-32 % of frame width (median 19 %), so the distant-view bins were
+# unreachable and the right camera yielded only 3 usable views.
+#
+# This board is the largest that fits A4 inside scripts/generate_charuco.py's
+# printable area (<=190 x 257 mm, the rest is margin + scale bar + caption):
+#   6x8 squares @ 31 mm  ->  186 x 248 mm   (1.47x the area of the 150x210 board)
+#   35 interior corners  (vs 24)            -- more corners per view at the same span
+#   24 ArUco markers from DICT_5X5_100      -- fits the 100-marker dictionary
+#   marker 23 mm = 0.74 x square            -- fatter markers than the 0.5 ratio
+#                                              above, which detect further out
+# A3 (6x8 @45 mm, span median ~33 %) would be better but is not available here.
+charuco:
+  squares_x: 6
+  squares_y: 8
+  square_length_m: 0.031
+  marker_length_m: 0.023
+  dictionary: DICT_5X5_100
+  legacy_pattern: false

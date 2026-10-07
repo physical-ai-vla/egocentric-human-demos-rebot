@@ -1,0 +1,12 @@
+schema: handumi_virtual_wrist/v1
+# Virtual C922-like wrist camera rendered from the Arducam fisheye (policy input; raw fisheye is kept for VIO).
+# K_target = head C922 1080p calibration (calibration/c922_2026-09-03.yaml, RMS 0.33 px) scaled to a 4:3 640x480 mode with the
+# vertical FOV preserved (horizontal centre crop). ESTIMATE: measure the robot wrist C922 in its actual 640x480 mode and write v002.
+K_target:
+- [701.2, 0.0, 310.0]
+- [0.0, 705.0, 195.9]
+- [0.0, 0.0, 1.0]
+size: [640, 480]
+# virtual camera orientation relative to the Arducam optical frame (deg, extrinsic xyz): use to match the robot wrist C922 mount tilt
+rpy_deg: {left: [0, 0, 0], right: [0, 0, 0]}
+source: c922_2026-09-03.yaml scaled; rotation identity until the HandUMI/robot mount tilt is measured

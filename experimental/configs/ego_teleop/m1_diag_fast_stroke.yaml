@@ -1,0 +1,25 @@
+# Fast-stroke translation diagnostic, right wrist, 1080p30 (2026-09-16). Follow-up to m1_diag_translation: the slow
+# 10 cm / 2.5 s moves came out 2-2.8x too long with the accelerometer bias climbing to 0.26 m/s^2 -- at that speed the
+# peak acceleration (~0.06 m/s^2) is below the bias wander, so the translation scale is not observable and the take could
+# not tell "scale broken" from "scale unobservable". A ~0.5 s stroke is ~1 m/s^2, ten times the bias. Distance between the
+# two tape marks (operator, 2026-09-16 take: X 55 cm, Y 38 cm, Z 50 cm) is MEASURED with a ruler and written into physical_pp_m below before evaluation; "about 10 cm" is not a
+# number. Orientation held as fixed as possible. Segment boundaries come from the IMU after the take.
+gates:
+  scale_min: 0.8
+  scale_max: 1.2
+  stationary_drift_mm: 10
+  post_init_valid: 0.95
+segments:
+  S0:  {kind: stationary,  note: "0-3 s fully still (static init window)"}
+  X1:  {kind: translation, physical_pp_m: 0.550, note: "X out, ~0.5 s"}
+  X1s: {kind: stationary,  note: "1 s still"}
+  X2:  {kind: translation, physical_pp_m: 0.550, note: "X back, ~0.5 s"}
+  X2s: {kind: stationary,  note: "2 s still"}
+  Y1:  {kind: translation, physical_pp_m: 0.380, note: "Y out"}
+  Y1s: {kind: stationary,  note: "1 s still"}
+  Y2:  {kind: translation, physical_pp_m: 0.380, note: "Y back"}
+  Y2s: {kind: stationary,  note: "2 s still"}
+  Z1:  {kind: translation, physical_pp_m: 0.500, note: "Z out"}
+  Z1s: {kind: stationary,  note: "1 s still"}
+  Z2:  {kind: translation, physical_pp_m: 0.500, note: "Z back"}
+  S9:  {kind: stationary,  note: "final 3 s still"}

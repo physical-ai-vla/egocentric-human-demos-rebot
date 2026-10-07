@@ -1,0 +1,24 @@
+# The profile `FusedLiveRig` takes: the WRIST sensors only.
+#   f5_teleop_hud --live --hardware fusion_live     |     f4_fusion --live --hardware fusion_live
+#
+# The Orbbec is DELIBERATELY absent. The fusion opens the chest camera itself as an RGB-D source (it needs colour +
+# aligned depth + intrinsics, not the collector's raw CameraFrame), and one process cannot open it twice —
+# `FusedLiveRig.open()` refuses a profile that lists it. Use hardware_fusion_p0.yaml for the P0 bring-up instead.
+hardware_version: handumi_v1_fusion
+profile: fusion_live
+calibration_version: auto_v001
+cameras:
+- name: right_wrist
+  role: pose_estimation
+  backend: uvc
+  match_name: Arducam 1080P Low Light
+  ordinal: 0
+  width: 1920
+  height: 1080
+  fps: 30
+  fourcc: MJPG
+  required: true
+  strict_identity: false
+  strict_format: true
+imus:
+  - {side: right, backend: teensy, port_glob: "/dev/cu.usbmodem*", serial_number: "D2FB7365FE48ED0F", baud: 2000000, rate_hz: 416, required: true}

@@ -1,0 +1,18 @@
+schema_version: 1
+kind: handumi_robot_table_calibration
+robot: rebot_b601
+source: configured_layout
+# Set to true only after measuring the ChArUco board pose relative to the reBot `base`
+# link on the physical rig (RUNBOOK step 10).
+verified: false
+calibration:
+  frame_convention: pose7=[x,y,z,qx,qy,qz,qw], meters, xyzw quaternion
+  # Table convention: +X right, +Y away from the operator, +Z up (board centre = origin).
+  # reBot world (`base` link): +X forward, +Y left (left arm at y=+0.315), +Z up,
+  # z=0 at the arm mounting surface = table top. The operator demonstrates from the
+  # robot's side of the table, so table +Y == robot +X and table +X == robot -Y:
+  # rotation = -90 deg about Z. Position = board centre 0.35 m ahead of the midpoint
+  # between the two arm bases. TODO(measure) on the real rig.
+  robot_from_table:
+    position: [0.35, 0.0, 0.0]
+    quaternion: [0.0, 0.0, -0.70710678, 0.70710678]

@@ -1,0 +1,110 @@
+{
+ "02_CT6_back6_down4": {
+  "start_joint_margin_deg": 20.6,
+  "old": {
+   "n": 88,
+   "start_dp_mm": "55/122",
+   "start_rot_deg": "14/21",
+   "cam_dist_mm": "48/104",
+   "cam_axis_deg": "6/12",
+   "lift_mm": "0/18",
+   "lift_gt30": 1,
+   "endpoint_reject": 0,
+   "ik_fail_eps": 1,
+   "joint_margin_min_p10": "-0.0/11.5"
+  },
+  "new": {
+   "n": 25,
+   "start_dp_mm": "183/246",
+   "start_rot_deg": "15/24",
+   "cam_dist_mm": "166/216",
+   "cam_axis_deg": "11/15",
+   "lift_mm": "6/28",
+   "lift_gt30": 1,
+   "endpoint_reject": 3,
+   "ik_fail_eps": 4,
+   "joint_margin_min_p10": "-0.0/0.6"
+  }
+ },
+ "04_median_all": {
+  "start_joint_margin_deg": 21.1,
+  "old": {
+   "n": 88,
+   "start_dp_mm": "53/119",
+   "start_rot_deg": "7/13",
+   "cam_dist_mm": "47/99",
+   "cam_axis_deg": "6/11",
+   "lift_mm": "0/18",
+   "lift_gt30": 1,
+   "endpoint_reject": 0,
+   "ik_fail_eps": 1,
+   "joint_margin_min_p10": "-0.0/13.0"
+  },
+  "new": {
+   "n": 25,
+   "start_dp_mm": "180/247",
+   "start_rot_deg": "12/18",
+   "cam_dist_mm": "163/211",
+   "cam_axis_deg": "8/13",
+   "lift_mm": "6/28",
+   "lift_gt30": 1,
+   "endpoint_reject": 3,
+   "ik_fail_eps": 1,
+   "joint_margin_min_p10": "0.0/2.5"
+  }
+ },
+ "05_medoid_all": {
+  "start_joint_margin_deg": 18.8,
+  "old": {
+   "n": 88,
+   "start_dp_mm": "59/133",
+   "start_rot_deg": "8/14",
+   "cam_dist_mm": "53/111",
+   "cam_axis_deg": "6/12",
+   "lift_mm": "0/18",
+   "lift_gt30": 1,
+   "endpoint_reject": 0,
+   "ik_fail_eps": 1,
+   "joint_margin_min_p10": "-0.0/11.0"
+  },
+  "new": {
+   "n": 25,
+   "start_dp_mm": "164/231",
+   "start_rot_deg": "11/16",
+   "cam_dist_mm": "151/201",
+   "cam_axis_deg": "9/13",
+   "lift_mm": "6/28",
+   "lift_gt30": 1,
+   "endpoint_reject": 3,
+   "ik_fail_eps": 6,
+   "joint_margin_min_p10": "-0.0/-0.0"
+  }
+ },
+ "08_medoid_back6_right6_down4": {
+  "start_joint_margin_deg": 9.1,
+  "old": {
+   "n": 88,
+   "start_dp_mm": "126/196",
+   "start_rot_deg": "8/14",
+   "cam_dist_mm": "120/175",
+   "cam_axis_deg": "6/12",
+   "lift_mm": "0/18",
+   "lift_gt30": 1,
+   "endpoint_reject": 0,
+   "ik_fail_eps": 2,
+   "joint_margin_min_p10": "-0.0/4.6"
+  },
+  "new": {
+   "n": 25,
+   "start_dp_mm": "147/242",
+   "start_rot_deg": "11/16",
+   "cam_dist_mm": "149/223",
+   "cam_axis_deg": "9/13",
+   "lift_mm": "6/28",
+   "lift_gt30": 1,
+   "endpoint_reject": 3,
+   "ik_fail_eps": 17,
+   "joint_margin_min_p10": "-0.0/-0.0"
+  }
+ }
+}

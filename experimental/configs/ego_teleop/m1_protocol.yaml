@@ -1,0 +1,21 @@
+# M1 real-hardware validation protocol (right wrist only). Recording: VIO_STABLE gate first, THEN the protocol below.
+# Physical values are what the operator actually moved (two-stop fixture / ruler); edit them to match the take.
+# Segment boundaries: events.json `segment` marks, or --segments "S0:0-10,S1:10-25,..." (seconds from episode start).
+gates:
+  scale_min: 0.9
+  scale_max: 1.1
+  stationary_drift_mm: 20
+  post_init_valid: 0.95
+  rotation_ratio_min: 0.7
+  rotation_ratio_max: 1.3
+segments:
+  S0: {kind: stationary, note: "10 s still (after VIO_STABLE) = HOME start window"}
+  S1: {kind: translation, physical_pp_m: 0.20, note: "slow X, 20-30 cm out and back between two stops"}
+  S2: {kind: translation, physical_pp_m: 0.20, note: "slow Y"}
+  S3: {kind: translation, physical_pp_m: 0.15, note: "slow Z"}
+  S4: {kind: rotation, physical_deg: 90, note: "yaw +-90"}
+  S5: {kind: rotation, physical_deg: 60, note: "pitch +-60"}
+  S6: {kind: rotation, physical_deg: 60, note: "roll +-60"}
+  S7: {kind: mixed, note: "translation + rotation"}
+  S8: {kind: fast, runaway_speed_m_s: 5.0, note: "fast wrist motion / deliberate blur — loss allowed, runaway not"}
+  S9: {kind: stationary, note: "back at HOME, 10 s still = HOME end window (return-to-start)"}

@@ -1,0 +1,29 @@
+# Ego CART20 v2 pretrain (example config; the run itself is launched by launch/submit_ego_cart20v2.sh)
+dataset:
+  representation: CART20
+  row_fps: 15                 # storage rate
+  target_dt_s: 0.050050050    # UMI_DT = 3/59.94; REL16 spans 0.80 s (D1)
+  state: relcart20_task_anchor   # [L pose9 | R pose9 | gL gR] (D3); state_prevrel = diagnostic only
+  semantic_action_dim: 20
+  model_action_dim: 32
+  action_horizon: 16
+  action_contract: current_anchor_relative
+  auxiliary_action_mode: zero
+  gripper: continuous, 0 = closed, 1 = open (D2)
+  lerobot_train: ego_cart20_v2_train
+  lerobot_val: ego_cart20_v2_val
+sampling:                      # native XVLAEgoDataset only; lerobot_train samples uniformly
+  order_balanced: true
+  stage_3_weight: 2.0          # inert until stage annotations exist (all stage_id = -1)
+model:
+  initialize_from: /home/bh-aiteam/xvla_base_cart20v3_d6   # lerobot/xvla-base -> widen_v3 -> widen_cart20 -> domain_id 6
+  domain_id: 6
+training:                      # RELCART20_RELONLY_D6_RECIPE.md, REL-only (loss on 0:20, 20:32 hard-zeroed)
+  stage: ego_only
+  full_finetune: true
+  steps: 100000
+  scheduler_decay_steps: 100000   # must equal steps (LeRobot auto-scales decay otherwise)
+  save_freq: 10000
+  batch_size: 4
+  seed: 1000
+  dtype: float32

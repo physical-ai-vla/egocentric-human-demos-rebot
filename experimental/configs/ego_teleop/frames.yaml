@@ -1,0 +1,10 @@
+# HumanRobotFrameMapper — the ONLY place human<->robot axes are related. robot axis i <- human axis translation_axis_map[i] * sign[i].
+# Human wrist control frame H (set by wrist_camera calibration): x forward (along the forearm toward the fingers), y left, z up.
+# reBot EEF frame RE: x = finger/tool direction (+0.07 m TCP offset, see handumi-sw rebot_b601.yaml), verify y/z on the arm.
+# Overridden by configs/calibration/human_robot_frame_vNNN.yaml when present (so the episode records the mapping used).
+translation_axis_map: [x, y, z]
+translation_sign: [1, 1, 1]
+rotation_axis_map: null          # null => same basis change as translation
+rotation_sign: null
+translation_scale: [1.0, 1.0, 1.0]   # human 10 cm -> robot 10 cm; try 0.5-0.8 on first tests
+rotation_scale: 1.0

@@ -1,0 +1,45 @@
+created: 2026-09-15T14:48:51+0900
+schema: ego_teleop_wrist_calibration_bundle/v1
+side: left
+hardware: {}
+hardware_hash: 44136fa355b3
+camera: null
+imu_noise:
+  gyroscope_noise_density: 0.00022788240400063565
+  gyroscope_random_walk: 4.537594075233024e-06
+  accelerometer_noise_density: 0.0012517393685132084
+  accelerometer_random_walk: 0.00019649099243886181
+  update_rate: 201.57
+camera_imu:
+  T_camera_imu: null
+  time_offset_ms: 30.17
+  source: null
+provenance:
+  imu_noise:
+    source: allan_variance
+    tool: ego_teleop.tools.imu_allan
+    date: 2026-09-15T11:26:33+0900
+    runs:
+    - allan_20260915_090818/imu_left_20260915_090818
+    notes: '2.00 h static log, 1451331 samples, 201.57 Hz. Session integrity PASS
+      on every gate: 0 lost samples in 1,451,331, 0 CRC errors, ring high-water 2/256,
+      clock_sanity 1.00x. Full session used.'
+  time_offset_ms:
+    source: gyro_correlation
+    tool: handumi_collector.tools.temporal_sync (pose.timing.estimate_camera_imu_offset)
+    date: 2026-09-15T14:48:51+0900
+    runs:
+    - TSYNC/TSYNC_20260915_144622/episode_000001
+    notes: "confidence 0.95, VO valid_ratio 0.802 (opencv_vo). Sense: imu_time + offset\
+      \ ~ camera_time. Peak far from the +/-100 ms search bound; left and right agree\
+      \ to 2.6 ms. Identity confirmed IN THIS TAKE: raw frame difference and gyro\
+      \ magnitude rise together per side (img_left with gyr_left at 5-12 s, img_right\
+      \ with gyr_right at 15-20 s), after the camera index binding was measured rather\
+      \ than taken from the device listing order. IMU serial 20540160. T_camera_imu\
+      \ still unmeasured \u2014 needs Kalibr."
+missing:
+- camera
+- T_camera_imu
+- hardware.unit_id
+production_ready: false
+notes: camera<->IMU time offset, first measurement

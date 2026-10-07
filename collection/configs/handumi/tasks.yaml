@@ -11,6 +11,27 @@ datasets:
   # 2026-09-28 robot-like ego (protocol robot_like_v1, run with --protocol robot_like_v1): first goal ~80 on top of the
   # 259 C8 episodes, compared as `old ego only` vs `old + robot-like ego`. Own dataset dir so it can never mix with Hpilot.
   HRL80:  {target_per_order: 14, note: "robot_like_v1 first batch, 6 orders x 14 = 84; +50-100 later if it helps"}
+  # 2026-10-03 single-prompt approach take (right hand only, hardware_handumi_v1_right.yaml). One fixed instruction;
+  # the order label is unused (one order so AUTO never rotates it).
+  HRA_red: {target_per_order: 100, orders: [RBP], instruction: "Approach to the red cube",
+            instruction_voice: "빨간 큐브로 접근하세요",          # spoken in AUTO at each reset instead of the order colours
+            auto_loop: {episode_s: 10.0, reset_s: 5.0},           # user 2026-10-03: AUTO 10 s episode; reset 10 s -> 5 s (same day)
+            # user 2026-10-03: approach-only -> no grasp, so the jaw-travel REJECT and the robot-like grasp/rot/rot-acc
+            # FAIL were failing every take; then a jaw at rest read one tick for a whole take (frozen). All three off for this
+            # mode (still shown + logged); too few jaw samples / out-of-span still REJECT.
+            qa: {gripper_checks: false, robot_like: advisory},   # user: "이런거 꺼줘" -- no jaw checks at all for this mode
+            note: "single prompt 'Approach to the red cube'; order label unused"}
+  # 2026-10-06 user: NEW-EGO-A, 100 approach takes starting from the robot-A-matched view (right hand only, hardware_handumi_v1_right).
+  # Cycle: rest 5 s ("다음 시작 위치로 가세요") -> hand still 2 s at the start pose -> REC + 2 s still hold ("2, 1") -> GO -> 10 s.
+  # The record tab shows a ROBOT C922 VIEW tile (live fisheye -> measured robot camera, robot pose-A frame overlaid) to match the start.
+  HRA_A100: {target_per_order: 100, orders: [RBP], instruction: "Approach to the red cube",
+             instruction_voice: "영 영 영 위치로 가세요",                # user 2026-10-06: taped origin pose first
+             # REC starts after 2 s still at the taped 0,0,0 pose, "2, 1" origin hold inside the recording, "준비" -> 3 s to reach the
+             # robot-like start pose, "시작" -> 10 s approach. Events: go_cue (origin hold end), prep_start, go (training starts here).
+             auto_loop: {episode_s: 10.0, reset_s: 5.0, min_still_s: 2.0, hold_after_rec_s: 2.0, prep_s: 3.0, cue_prep: "준비", cue_go: "시작"},
+             qa: {gripper_checks: false, robot_like: advisory},
+             record_c922_view: true,                               # user 2026-10-06: raw fisheye + right_wrist_c922.mp4 together
+             note: "robot-A start view (cam ~28 cm above table, ~59 deg down); cube layout 40 centre / 20 L-R / 20 F-B / 20 edge"}
   # 2026-09-18 RGB-D teacher-sensor pilot: depth is recorded to LABEL human metric xyz/EEF, never as policy
   # input. Ten episodes, then QA -- no 100-episode collection until the QA report is read.
   HRGBD_qa10: {target_per_order: 2, orders: [RBP, RPB, BRP, BPR, PRB],

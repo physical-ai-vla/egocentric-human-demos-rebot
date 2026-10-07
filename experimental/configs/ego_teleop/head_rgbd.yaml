@@ -1,0 +1,56 @@
+# Head RGB-D hand branch (spec sections 6-9, 13-18). Head camera = observation + human hand reconstruction ONLY:
+# no IMU, no 6-DoF head tracking, never a control input for the arm. Intrinsics/extrinsics/depth-scale live in
+# configs/calibration/head_rgbd_vNNN.yaml (versioned, imported from the device), NOT here.
+enabled: true
+provider: head_rgbd              # head_rgbd (metric, B1) | mediapipe_mono (official monocular baseline, B0)
+side: right                      # the human hand that drives Aero in v1; the interfaces stay side-aware
+selfie_mirrored: false           # head camera looks OUTWARD -> MediaPipe handedness labels are swapped, geometry is not
+num_hands: 2                     # detect both so an identity conflict is visible instead of silently accepted
+fill_missing: true               # depth-less landmarks reconstructed from the monocular shape prior (still valid=false)
+max_fill: 6                      # more missing than this -> frame reported LOST instead of invented
+depth:                           # DepthSampler — robust neighbourhood median, never a single pixel (spec section 8)
+  window: 5
+  min_range_m: 0.15
+  max_range_m: 1.20
+  min_valid_px: 4
+  max_spread_m: 0.06
+  edge_reject_m: 0.04
+identity:                        # temporal hand identity; a swap must degrade, never drive the wrong hand
+  max_jump_px: 120
+  max_jump_m: 0.25
+  track_timeout_ms: 400
+  min_detector_confidence: 0.5
+  label_vote_len: 5
+  label_flip_votes: 4
+hand_pose:                       # HandPoseSupervisor: INITIALIZING / OK / DEGRADED / LOST (separate from wrist VIO)
+  min_valid_landmarks_ok: 18
+  min_valid_landmarks_degraded: 12
+  min_valid_tips_ok: 5
+  min_valid_tips_degraded: 3
+  min_depth_confidence_ok: 0.35
+  max_wrist_jump_m: 0.20
+  max_local_jump_m: 0.06
+  max_local_jump_lost_m: 0.15
+  stale_after_ms: 120
+  recover_stable_ms: 300         # HAND_LOST holds the Aero target; resuming needs this much continuous good tracking
+  degraded_streak_to_lost: 30
+backend: dexpilot                # dexpilot (primary) | semantic7d (existing baseline / debug / fallback)
+dexpilot:                        # official dex_retargeting config — do not tune without re-reading the A0 audit
+  method: dexpilot               # dexpilot | vector | position
+  scaling_factor: 1.2
+  low_pass_alpha: 0.9
+  apply_scale_factors: true
+  apply_hacks: true              # the two undocumented upstream alignment hacks (base offset, pinky lift)
+  base_offset_m: [0.0, 0.01, 0.0]
+  pinky_lift: [0.12, 0.02]
+  rescale_palm_to_m: null        # null = upstream behaviour; set to normalise operator hand size before retargeting
+aero_limits:                     # AeroCommandLimiter (spec section 17) — lower the rate for the first real-hand runs
+  max_joint_rate_rad_s: 6.0
+  max_step_rad: 0.25
+  command_timeout_ms: 200
+gates:                           # A1 acceptance gate (spec section 28) — report distributions, not just averages
+  min_rate_hz: 30
+  min_metric_landmark_fraction: 0.9
+  max_identity_swaps: 0
+  max_stationary_jitter_mm_p95: 10.0
+  max_palm_local_drift_mm_p95: 10.0    # palm-local geometry change while the camera moves and the hand does not

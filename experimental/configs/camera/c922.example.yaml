@@ -1,0 +1,9 @@
+# Example only - run `python -m ego_collector calibrate-camera --name c922` to produce configs/camera/c922.yaml.
+camera_name: c922
+model: pinhole
+image_width: 1920
+image_height: 1080
+camera_matrix: [[1400.0, 0.0, 960.0], [0.0, 1400.0, 540.0], [0.0, 0.0, 1.0]]
+distortion_coefficients: [0.05, -0.1, 0.0, 0.0, 0.0]
+rms_reprojection_error: null
+calibration_date: ""

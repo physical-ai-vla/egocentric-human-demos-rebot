@@ -1,0 +1,54 @@
+created: 2026-09-15T14:50:08+0900
+schema: ego_teleop_wrist_calibration_bundle/v1
+side: right
+hardware: {}
+hardware_hash: 44136fa355b3
+camera: null
+imu_noise:
+  gyroscope_noise_density: 0.00133385256704486
+  gyroscope_random_walk: 1.971294390591075e-05
+  accelerometer_noise_density: 0.0009805968834199718
+  accelerometer_random_walk: 0.00010328782337154156
+  update_rate: 197.9
+camera_imu:
+  T_camera_imu: null
+  time_offset_ms: 32.77
+  source: null
+provenance:
+  imu_noise:
+    source: allan_variance
+    tool: ego_teleop.tools.imu_allan
+    date: 2026-09-15T11:26:35+0900
+    runs:
+    - allan_20260915_090818/imu_right_20260915_090818_clean
+    notes: '1.46 h static log, 1039537 samples, 197.90 Hz. PRIMARY source is the longest
+      unbroken segment (87.5 min, 1,039,537 samples) of imu_right_20260915_090818,
+      NOT the whole session. That session FAILS integrity: 1901 samples lost across
+      40 sequence gaps inside one 40 s window at 87.5 min, plus an 833.7 ms stall.
+      Device-side dropped 0, ring high-water 2/256, CRC 0, so the loss was on the
+      host/USB transport path, not firmware; which layer is not established. The full
+      session remains on disk as diagnostic-only.'
+  time_offset_ms:
+    source: gyro_correlation
+    tool: handumi_collector.tools.temporal_sync (pose.timing.estimate_camera_imu_offset)
+    date: 2026-09-15T14:50:08+0900
+    runs:
+    - TSYNC/TSYNC_20260915_144622/episode_000001
+    notes: 'confidence 0.96; vo_valid_ratio 0.471; backend opencv_vo; search +/-100.0
+      ms step 0.5 ms, peak at 32.77 ms. Sense: imu_time + offset ~ camera_time. camera:
+      ''Arducam 1080P Low Light'' usb_location_id 0x00140000 serial UC684 0x0c45:0x0261
+      (measured OpenCV index 1; the device listing order is NOT the index order on
+      this host). imu serial 20778070. hardware profile temporal_sync_calib / hardware_version
+      handumi_v1 / calibration_version uncalibrated. git efd3569. ACCEPTED EXCEPTION:
+      vo_valid_ratio 0.471 is BELOW the nominal 0.5 gate. The gate was not lowered;
+      the measurement is accepted on independent evidence -- correlation peak 0.96,
+      peak at 32.77 ms is nowhere near the +/-100 ms search bound, left and right
+      agree to 2.6 ms, and the camera/IMU pairing was verified in this same take from
+      raw frame difference against gyro magnitude (no VO involved). T_camera_imu still
+      unmeasured - needs Kalibr.'
+missing:
+- camera
+- T_camera_imu
+- hardware.unit_id
+production_ready: false
+notes: camera<->IMU time offset, first measurement (full provenance)

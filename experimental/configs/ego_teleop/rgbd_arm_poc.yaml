@@ -1,0 +1,89 @@
+# RGB-D-only reBot arm teleoperation POC — a TEMPORARY arm pose source while the wrist IMU/VIO hardware is not built.
+# Runbook: docs/ego_teleop/RGBD_ARM_POC.md. Tool: ego_teleop/tools/p1_rgbd_arm.py.
+#
+# This does NOT change the production architecture. That stays:
+#     wrist fisheye + IMU -> OpenVINS -> WristPoseProvider -> relative SE(3) -> reBot     (teleop.yaml, frames.yaml)
+# Everything here is a parallel, clearly-named pose source (`rgbd_hand_palm` -> raw/rgbd_hand_pose_live_*) feeding the
+# SAME downstream: HumanRobotFrameMapper, RelativeSE3Retargeter, ArmSafetyPipeline, reBot client, IK.
+enabled: false                   # flip on only while running the POC; production runs never read this branch
+side: right
+camera_mode: fixed               # INVARIANT. A head-mounted RGB-D camera turns head motion into apparent hand motion
+                                 # and the robot follows the operator's head. Only "fixed" is accepted by the tooling.
+rate_hz: 30
+
+palm:                            # how the arm-root pose is read out of the metric hand (hand3d/palm_pose.py)
+  origin: palm_centroid          # palm_centroid (robust: wrist + 4 MCPs) | wrist (single canonical landmark)
+  orientation: fixed             # fixed = phase 1, 3-DoF (robot keeps its ENGAGE orientation)
+                                 # palm  = phase 2, 6-DoF (canonical aero_mocap palm basis; only after 3-DoF is stable)
+  min_palm_landmarks: 3          # of 5, REAL measured depth only — a shape-prior `filled` landmark never counts
+  min_palm_landmarks_ok: 5       # fewer (but >= min_palm_landmarks) -> ARM_POSE_DEGRADED, the arm slows down. All
+                                 # five by default: the origin is the MEDIAN of the valid palm landmarks, and the
+                                 # median shifts when the set changes, so a partial palm is declared, not absorbed.
+  max_palm_depth_spread_m: null  # null = measure only. There is deliberately no per-landmark outlier threshold: the
+                                 # palm spans 5-9 cm by anatomy, all of it on the depth axis when the hand points at
+                                 # the camera. Gross outliers are already removed by the depth sampler upstream.
+  min_origin_depth_m: 0.20       # arm-root depth band; tighter than the depth sampler's own range on purpose
+  max_origin_depth_m: 1.00
+  hand_degraded_is_arm_degraded: true
+  require_real_depth_for_rotation: true   # 6-DoF: refuse a palm basis built on invented landmarks
+  # Hand-scale / palm-geometry sanity (plan section 6A/6B). Every threshold is null = MEASURE ONLY on purpose: the
+  # numbers are supposed to come from a real V0 run, and a guessed threshold silently eats real motion. V0 prints the
+  # measured distributions (palm_scale_m, palm_scale_ratio, span jumps) — set these from that table afterwards.
+  reference_palm_scale_m: null       # s_op; null -> median of the first `scale_reference_frames` OK frames
+  scale_reference_frames: 30
+  max_palm_scale_deviation: null     # |scale/s_op - 1| above this -> ARM_POSE_DEGRADED
+  max_palm_scale_jump: null          # |dscale|/s_op between frames above this -> ARM_POSE_LOST
+  max_span_jump_m: null              # jump in either palm span between frames -> ARM_POSE_LOST
+  # Frame-to-frame palm MOTION limits (plan section 6C) live in `tracking:` below — TrackingSupervisor.max_jump_m /
+  # max_jump_deg, the same jump policy OpenVINS uses. It is not reimplemented here.
+
+tracking:                        # TrackingSupervisor for THIS source (reused class, different numbers: palm-from-depth
+                                 # and fisheye VIO do not fail on the same scale). teleop.yaml `tracking:` is untouched.
+  degraded_after_ms: 80
+  lost_after_ms: 200             # one dropped RGB-D frame at 30 Hz is 33 ms; 200 ms = 6 frames with no hand -> HOLD
+  min_confidence_ok: 0.5         # MediaPipe detector confidence
+  min_features_ok: 0             # disabled: landmark counts are judged by HandPoseSupervisor + ArmPoseHealth already
+  recover_after_n_ok: 3            # good frames needed to leave LOST. With lost_after_ms this IS the "short dropout
+                                   # hold" of plan section 9: a 1-2 frame dropout holds the robot target for ~4 frames
+                                   # and resumes; a long one just keeps holding. Nothing is ever extrapolated.
+  max_jump_m: 0.10               # palm origin jump between frames -> LOST for that frame (0.10 m at 30 Hz = 3 m/s)
+  max_jump_deg: 30
+
+stable:                          # VioStableGate, reused: "the pose source has proven itself before anything anchors"
+  min_stable_s: 1.5
+  max_lin_vel_m_s: 0.05
+  max_ang_vel_deg_s: 10
+  max_pos_drift_m: 0.02
+
+frames:                          # HumanRobotFrameMapper for the POC ONLY (configs/ego_teleop/frames.yaml is production)
+  # Human side here is the FIXED CAMERA frame (OpenCV: x right, y down, z forward/away from the lens), because in
+  # 3-DoF mode the anchor palm frame has identity rotation. This default only converts OpenCV axes into the repo's
+  # forward-left-up convention (the same convention frames.yaml documents for H):
+  #     robot x (forward) = +camera z,  robot y (left) = -camera x,  robot z (up) = -camera y
+  # The remaining camera-mount -> robot-base rotation is UNVERIFIED and is exactly what Gate A measures: run
+  # `p1_rgbd_arm --gate a` with the right/up/forward segments and edit this block from the printed table.
+  translation_axis_map: [z, x, y]
+  translation_sign: [1, -1, -1]
+  rotation_axis_map: null        # null => same basis change as translation
+  rotation_sign: null
+  translation_scale: [0.4, 0.4, 0.4]   # POC section 5: start low (0.3-0.5), raise only after Gate C is clean
+  rotation_scale: 1.0
+
+safety:                          # POC numbers: slower than production teleop.yaml, and clamped, never held
+  workspace: {min_xyz: [0.05, -0.45, 0.02], max_xyz: [0.65, 0.45, 0.55]}   # outer bound; the live box is built around
+  workspace_mode: clamp                                                    # the ENGAGE TCP (workspace_from_anchor)
+  max_lin_vel_m_s: 0.06          # first real runs: half the production limit
+  max_ang_vel_deg_s: 20
+  max_lin_acc_m_s2: 0.5
+  robot_obs_max_age_ms: 200
+workspace_from_anchor: true      # POC section 8: "a small Cartesian box around the initial TCP"
+workspace_half_extent_m: [0.10, 0.10, 0.10]
+
+gates:                           # Gate A / Gate B acceptance thresholds — pre-hardware starting points
+  min_rate_hz: 25
+  min_arm_pose_ok_fraction: 0.90
+  max_stationary_jitter_mm_p95: 8.0
+  max_stationary_orientation_jitter_deg_p95: 5.0   # measured even in 3-DoF runs (POC section 7)
+  max_return_to_origin_mm: 25.0
+  max_ik_failure_fraction: 0.02
+  max_workspace_clamp_fraction: 0.05

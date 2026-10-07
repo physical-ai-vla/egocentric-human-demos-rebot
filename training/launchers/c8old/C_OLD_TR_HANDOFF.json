@@ -1,0 +1,12 @@
+{
+ "schema": "c_old_v2_tr_pretrain_handoff/v1",
+ "decided": "2026-09-29 (user)",
+ "primary_init": "TR100k  (~14.4 effective epochs over 27,776 valid chunk starts)",
+ "secondary_ablation": "TR200k (pretrain-length ablation only)",
+ "not_used": ["TR300k (never produced; run stopped by user at 211.7k, 2026-09-29 10:49)", "211.7k partial (no checkpoint, not canonical)"],
+ "location": {"nfs_5090": "/srv/data/johann/c8old5090/handoff/{TR100k,TR200k}  (= /mnt/shared/johann/c8old5090/handoff on the 4090)",
+              "ssd": "/Volumes/PortableSSD/rebot_ckpts_archive/5090_c8old_c8oldv2_finalTR_300k/{100000,200000}"},
+ "dataset": "~/c8/c8oldv2_final_data (tree sha 50c6ed88...), 996 TR segments, train 896 / val 100",
+ "launch_record": "~/c8/c8old/FINAL_TR300K_LAUNCH.json (env parity, recipe, launcher sha)",
+ "owner": "C-old owner (downstream R30/R60/R90 FT on 4090); this pipeline no longer maintains C-old"
+}

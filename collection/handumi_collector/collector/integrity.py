@@ -187,7 +187,7 @@ def validate_episode(ep: Path, *, expect_streams: list[str] | None = None, expec
 
 
 def gripper_integrity(side: str, st: dict | None, ticks_closed, ticks_open, *, duration_s: float | None = None, min_rate_hz: float = 20.0,
-                      margin_ticks: int = 300) -> tuple[str, str | None]:
+                      margin_ticks: int = 300, require_travel: bool = True) -> tuple[str, str | None]:
     """Raw-integrity verdict for one jaw from the recorder's running stats. Returns (level, note); level in PASS|REVIEW|REJECT.
 
     REJECT  frozen reading (the value never changed over the episode) -- the servo stopped answering, or
@@ -196,16 +196,21 @@ def gripper_integrity(side: str, st: dict | None, ticks_closed, ticks_open, *, d
     REJECT  jaw never travelled (normalized span < MIN_GRIPPER_TRAVEL). Protocol (user, 2026-09-16): both hands are used in
             every episode, so "the left jaw did not move" is a gripper signal anomaly, never an operator choice. On the
             2026-09-16 raw re-audit the left jaw's raw range was 90-220 ticks (a real grasp is 300-500) in the very
-            episodes that read travel 0 -- telemetry, not behaviour."""
+            episodes that read travel 0 -- telemetry, not behaviour.
+            `require_travel=False` (a non-stacking dataset, e.g. approach-only) drops this check AND the frozen-reading
+            one: there the jaw staying put is the protocol. Too few samples or an out-of-span reading still REJECT."""
     min_samples = max(5, int(min_rate_hz * duration_s)) if duration_s else 5          # the stream must exist at a sane rate, however short the take
     if not st or st.get("n", 0) < min_samples: return "REJECT", f"gripper {side}: only {0 if not st else st.get('n', 0)} samples in {duration_s or 0:.1f} s"
-    if st["raw_changes"] == 0: return "REJECT", f"gripper {side}: reading frozen at {st['raw_min']} for {st['n']} samples (servo not answering?)"
+    # a reading that never changes is only evidence of a dead servo when the jaw was supposed to move: samples are
+    # appended only on a SUCCESSFUL read, so the rate check above already proves the servo answers. In an approach-only
+    # take (require_travel=False) a jaw at rest can legitimately read the same tick for the whole episode (2026-10-03).
+    if require_travel and st["raw_changes"] == 0: return "REJECT", f"gripper {side}: reading frozen at {st['raw_min']} for {st['n']} samples (servo not answering?)"
     if ticks_closed is not None and ticks_open is not None:
         lo, hi = min(ticks_closed, ticks_open) - margin_ticks, max(ticks_closed, ticks_open) + margin_ticks
         if st["raw_max"] < lo or st["raw_min"] > hi:
             return "REJECT", (f"gripper {side}: raw {st['raw_min']}..{st['raw_max']} is entirely outside the calibrated span "
                               f"{min(ticks_closed, ticks_open)}..{max(ticks_closed, ticks_open)} -- servo counter moved (power cycle?), RECALIBRATE this gripper")
-    if st["norm_max"] >= st["norm_min"] and (st["norm_max"] - st["norm_min"]) < MIN_GRIPPER_TRAVEL:
+    if require_travel and st["norm_max"] >= st["norm_min"] and (st["norm_max"] - st["norm_min"]) < MIN_GRIPPER_TRAVEL:
         return "REJECT", (f"gripper {side}: jaw travel {st['norm_max'] - st['norm_min']:.3f} < {MIN_GRIPPER_TRAVEL} over the episode "
                           f"(raw {st['raw_min']}..{st['raw_max']}) -- both hands are used every episode, so this is a signal anomaly")
     return "PASS", None

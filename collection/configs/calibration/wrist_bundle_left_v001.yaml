@@ -1,0 +1,33 @@
+created: 2026-09-15T11:26:33+0900
+schema: ego_teleop_wrist_calibration_bundle/v1
+side: left
+hardware: {}
+hardware_hash: 44136fa355b3
+camera: null
+imu_noise:
+  gyroscope_noise_density: 0.00022788240400063565
+  gyroscope_random_walk: 4.537594075233024e-06
+  accelerometer_noise_density: 0.0012517393685132084
+  accelerometer_random_walk: 0.00019649099243886181
+  update_rate: 201.57
+camera_imu:
+  T_camera_imu: null
+  time_offset_ms: null
+  source: null
+provenance:
+  imu_noise:
+    source: allan_variance
+    tool: ego_teleop.tools.imu_allan
+    date: 2026-09-15T11:26:33+0900
+    runs:
+    - allan_20260915_090818/imu_left_20260915_090818
+    notes: '2.00 h static log, 1451331 samples, 201.57 Hz. Session integrity PASS
+      on every gate: 0 lost samples in 1,451,331, 0 CRC errors, ring high-water 2/256,
+      clock_sanity 1.00x. Full session used.'
+missing:
+- camera
+- T_camera_imu
+- time_offset_ms
+- hardware.unit_id
+production_ready: false
+notes: imu_allan

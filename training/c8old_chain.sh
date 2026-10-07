@@ -8,19 +8,19 @@
 #                 (= the real-robot-verified B1 schedule; 250k is the primary comparison ckpt), EEF_TARGET_SOURCE=legacy
 # Guards: NaN/Inf in the training log -> kill + FAIL; OOM / nonzero rc -> FAIL. The Mac supervisor archives checkpoints,
 # evaluates them, enforces the disk guard and writes SUMMARY.md.
-B=${HOME}/c8old; W=${HOME}/workspace/bh_rebot_LeRobot; PY=$W/.venv/bin/python; X=$B/xvla; S=$B/stage_status.json
-R150=${HOME}/holobrain-data/lerobot/rebot_3stack_R150_headview; DS=$B/data/c8old_train
+B=/home/bh-aiteam/c8old; W=/home/bh-aiteam/workspace/bh_rebot_LeRobot; PY=$W/.venv/bin/python; X=$B/xvla; S=$B/stage_status.json
+R150=/home/bh-aiteam/holobrain-data/lerobot/rebot_3stack_R150_headview; DS=$B/data/c8old_train
 mkdir -p $B/runs
 st() { $PY - "$@" <<'P'
 import json, sys, time, os
-p = "${HOME}/c8old/stage_status.json"; d = json.load(open(p)) if os.path.exists(p) else {}
+p = "/home/bh-aiteam/c8old/stage_status.json"; d = json.load(open(p)) if os.path.exists(p) else {}
 for kv in sys.argv[1:]:
     k, v = kv.split("=", 1); d[k] = v
 d["last_update"] = time.strftime("%Y-%m-%d %H:%M:%S"); json.dump(d, open(p, "w"), indent=1)
 P
 }
 common_env() {
-  export HF_HOME=${HOME}/.cache/huggingface HF_HUB_OFFLINE=1 HUMANIK_DELTA=1 HUMANIK_LEAD=5 HUMANIK_ROBOT=1 HUMANIK_TARGET=cmd
+  export HF_HOME=/home/bh-aiteam/.cache/huggingface HF_HUB_OFFLINE=1 HUMANIK_DELTA=1 HUMANIK_LEAD=5 HUMANIK_ROBOT=1 HUMANIK_TARGET=cmd
   export XVLA_EE_AUX=1 EE_AUX_SOURCE=state EE_AUX_SCALE=10 EE_AUX_LAMBDA=2.0 EE_FK_LAMBDA=20 EE_LOG_EVERY=1000
   export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True XVLA_TF32=1 XVLA_FUSED_ADAM=1
 }
@@ -43,7 +43,7 @@ train() {  # train <run> <dataset_repo> <dataset_root> <policy_path> <steps> <de
   grep -qi "out of memory" $B/runs/$N.log && { st "$N=FAIL" "fail_reason=cuda_oom"; return 4; }
   [ $rc -eq 0 ] || { st "$N=FAIL" "fail_reason=train_rc_$rc"; return 5; }
   return 0; }
-echo "GPU $CUDA_VISIBLE_DEVICES: $(nvidia-smi --query-gpu=name,memory.used,memory.total --format=csv,noheader -i $CUDA_VISIBLE_DEVICES)"; df -h ${HOME} | tail -1
+echo "GPU $CUDA_VISIBLE_DEVICES: $(nvidia-smi --query-gpu=name,memory.used,memory.total --format=csv,noheader -i $CUDA_VISIBLE_DEVICES)"; df -h /home/bh-aiteam | tail -1
 st chain=RUNNING
 # ---- smoke_real
 common_env; export EEF_TARGET_SOURCE=measured EE_LOG_EVERY=1   # [2026-09-26] smoke logs EVERY step / batch (the 1000/100 defaults printed nothing in 20 steps -> false FAIL)

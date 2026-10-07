@@ -1,0 +1,47 @@
+created: 2026-09-14T17:15:30+0900
+schema: handumi_head_mount/v1
+camera: head_depth
+mount: fixed_table_holder
+T_table_camera:
+- - 0.9647030736674652
+  - 0.2588621579562595
+  - -0.048356621416035014
+  - 0.07789546850422639
+- - 0.25162758131621854
+  - -0.8519672569667651
+  - 0.4591681101486425
+  - -0.2792019924652697
+- - 0.07766298975377535
+  - -0.45512874687801763
+  - -0.887032290160708
+  - 0.4826877051197213
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+geometry:
+  height_cm: 48.3
+  board_distance_cm: 29.0
+  pitch_deg: 62.5
+  yaw_deg: 96.0
+  roll_deg: 4.5
+  edge_cm: 35.0
+board:
+  name: charuco 6x8 31/23mm DICT_5X5_50
+  plane_from_depth: true
+rms_reproj_px: 0.3619
+source: table_frame_ui --live
+notes: 'Correction of v001, same measurement: its table frame had Z pointing into
+  the table, so the camera came out at height -48.3 cm and pitch -62.5 deg -- under
+  the table, looking up. Half turn about X applied (keeps the board''s in-plane X,
+  stays right-handed). Roll also recomputed: v001 read 170.3 deg from a formula built
+  on the camera''s +Y, which is image *down* in OpenCV; roll is now the tip of the
+  image''s horizontal axis out of the table plane, 4.5 deg. The solve itself was sound:
+  0.36 px reprojection, depth plane agreeing with the board to 0.46 deg.'
+depth_check:
+  valid_fraction: 1.0
+  n_points: 17346
+  plane_rms_mm: 1.32
+  plane_p95_mm: 2.537
+  tilt_vs_board_deg: 0.459
+  mean_distance_m: 0.5836

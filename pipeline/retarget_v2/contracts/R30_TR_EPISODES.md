@@ -16,7 +16,7 @@ R_n = collection `set_id < n/6` in `~/c8/r150_nested_subset_v1.json` (sha256 `89
 Global set_id = chronological rank within order. R30 = set_id 0–4 → 5 sets × 6 stacking orders = 30.
 
 - **Source dataset:** `rebot/rebot_3stack_R150_headview`
-  - 4090: `${REMOTE_HOME}/holobrain-data/lerobot/rebot_3stack_R150_headview`
+  - 4090: `/home/bh-aiteam/holobrain-data/lerobot/rebot_3stack_R150_headview`
   - Mac: `~/c8/r150_ds`
 - **Session:** all 30 from `local_rebot_R120_headview_20260907_144206`.
 - **Total frames:** 37512 (30 fps).

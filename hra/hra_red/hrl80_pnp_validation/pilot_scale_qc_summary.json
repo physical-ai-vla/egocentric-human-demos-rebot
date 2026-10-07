@@ -1,0 +1,31 @@
+{
+ "episodes": 2,
+ "scale_valid": 2,
+ "rejected": {},
+ "s_pnp_p5_p50_p95": [
+  0.5304,
+  0.5393,
+  0.5482
+ ],
+ "r_pnp_over_imu_p5_p50_p95": [
+  7.53,
+  16.33,
+  25.13
+ ],
+ "centre_resid_cm_p50": 0.87,
+ "n_valid_pnp_p50": 25.0,
+ "exported_ok": 2,
+ "export_status": {
+  "ok": 2
+ },
+ "home_to_cube_tcp_net_m_p5_p50_p95": [
+  0.536,
+  0.536,
+  0.537
+ ],
+ "action_0p8s_right_translation_cm_p50_p95": [
+  1.09,
+  11.03
+ ],
+ "train_rows_total": 259
+}

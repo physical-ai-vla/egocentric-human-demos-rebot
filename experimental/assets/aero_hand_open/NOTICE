@@ -1,0 +1,7 @@
+aero_hand_open_{right,left}.urdf are copied from TetherIA/aero-hand-open
+(https://github.com/TetherIA/aero-hand-open), licensed Apache-2.0.
+Mesh references (package://aero_hand_open_description/meshes/*.STL) are NOT
+included; only the kinematic tree is used (link origins/axes) for FK.
+
+Tendon coupling coefficients used in ego_collector/hands3d/aero.py are from
+the same repo's sdk/src/aero_open_sdk/joints_to_actuations.py.

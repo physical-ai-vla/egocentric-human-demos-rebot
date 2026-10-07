@@ -1,0 +1,122 @@
+{
+ "20261006_212240_000064_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 5.17
+ },
+ "20261006_212240_000065_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 5.2
+ },
+ "20261006_212240_000066_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 1,
+  "mae0": 4.87
+ },
+ "20261006_212240_000067_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 4,
+  "mae0": 4.76
+ },
+ "20261006_212240_000068_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 5.18
+ },
+ "20261006_212240_000069_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 4.96
+ },
+ "20261006_212240_000070_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 5.21
+ },
+ "20261006_212240_000071_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 4.69
+ },
+ "20261006_212240_000072_right": {
+  "frames": 457,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 4.38
+ },
+ "20261006_212240_000073_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 5.31
+ },
+ "20261006_212240_000074_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 4.72
+ },
+ "20261006_212240_000075_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 4.86
+ },
+ "20261006_212240_000076_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 5.15
+ },
+ "20261006_212240_000077_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 4.56
+ },
+ "20261006_212240_000078_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 5.78
+ },
+ "20261006_212240_000079_right": {
+  "frames": 457,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 5.47
+ },
+ "20261006_212240_000080_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 5.8
+ },
+ "20261006_212240_000081_right": {
+  "frames": 455,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 4.97
+ },
+ "20261006_212240_000082_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 3,
+  "mae0": 4.94
+ },
+ "20261006_212240_000083_right": {
+  "frames": 456,
+  "offset": 0,
+  "exporter_drop": 2,
+  "mae0": 5.76
+ }
+}

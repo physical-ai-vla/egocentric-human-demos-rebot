@@ -78,6 +78,17 @@ class EpisodeRecorder:
                 self._depth_dir = self.episode_dir / f"{c.name}_depth"; self._depth_dir.mkdir(exist_ok=True)
                 intr = c.status().detail.get("intrinsics"); ds = c.status().detail.get("depth_scale")
                 if intr: (self._depth_dir / "intrinsics.json").write_text(json.dumps(dict(intrinsics=intr, depth_scale=ds), indent=1))
+        self._c922 = None
+        if getattr(self.cfg.collector, "record_c922_view", False) and "right_wrist" in self._videos:
+            # [2026-10-06 user "두 버전 다 동시 녹화"] right_wrist_c922.mp4: every right_wrist frame remapped to the measured robot
+            # C922 (640x480). Frame i of right_wrist_c922.mp4 == frame i of right_wrist.mp4 (same timestamps in sensors.mcap).
+            from ..robotlike.c922_view import C922View
+            rcfg = next(c for c in self.devices.cameras.values() if c.name == "right_wrist").cfg
+            self._c922 = C922View()
+            self._videos["right_wrist_c922"] = VideoStreamWriter(self.episode_dir / "right_wrist_c922.mp4", width=640, height=480, fps=rcfg.fps,
+                                                                 codec=rcfg.codec, bitrate_kbps=rcfg.bitrate_kbps)
+            self.extra_meta = dict(self.extra_meta, derived_streams=dict(right_wrist_c922=dict(source="right_wrist", frames="1:1 with right_wrist.mp4",
+                                   model="robotlike/c922_view.C922View (configs/calibration/robot_right_wrist_c922_v001.json)", size=[640, 480])))
         cc = self.cfg.collector
         # the newest ~1 s of IMU samples per side, kept AFTER the buffer is drained into the mcap, so the session's post-REC
         # hold-still check can read what is being recorded without stealing from (or racing) this loop
@@ -133,6 +144,7 @@ class EpisodeRecorder:
                 g = self._gaps[name].update(f.capture_ns)
                 if g is not None: self.event("timestamp_jump", name, dict(gap_ms=round(g, 1)), f.capture_ns)
                 vf = self._videos[name].put(f.image)
+                if name == "right_wrist" and self._c922 is not None: self._videos["right_wrist_c922"].put(self._c922.render(f.image, overlay=False))
                 if f.depth is not None and self._depth_dir is not None:
                     cv2.imwrite(str(self._depth_dir / f"{vf:06d}.png"), np.asarray(f.depth, np.uint16))
                 self.mcap.frame_meta(name, f.frame_index, vf, f.capture_ns, skipped)

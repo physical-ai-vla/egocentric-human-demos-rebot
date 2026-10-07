@@ -1,0 +1,33 @@
+schema: handumi_retarget_shakedown/v1
+robot: rebot_b601
+source: rebot_b601 home_q FK via handumi.robots (2026-09-16)
+quat_order: xyzw
+robot_home_tcp:
+  left:
+  - 0.28730830550193787
+  - 0.25257954001426697
+  - 0.13885881006717682
+  - 0.8159412145614624
+  - 0.06951671838760376
+  - 0.551811695098877
+  - 0.15783312916755676
+  right:
+  - 0.28730839490890503
+  - -0.25257983803749084
+  - 0.13885918259620667
+  - 0.8159412145614624
+  - -0.06951174885034561
+  - 0.5518136024475098
+  - -0.15782853960990906
+scale: 1.0
+max_pose_gap_ms: 100
+ik:
+  max_joint_delta: 0.35
+  ori_weight: 8.0
+  presolve_iters: 25
+  fk_max_mm: 30.0
+  posture_margin_deg: 5.0
+notes: anchor = robot home TCP for the operator's HOME at GO; orientation fixed (arm-only
+  IK, 2026-09-04 audit) unless --orientation relative
+max_reach_from_home_m: 0.8      # a wrist pose farther than this from the robot home TCP is a VIO blow-up, not a reach
+max_speed_m_s: 2.0              # frame-to-frame TCP speed above this is not a hand

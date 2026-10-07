@@ -1,0 +1,73 @@
+dataset_root: datasets/human_handumi_raw
+session_prefix: Hpilot
+operator: op01
+slam_gate_recording: false
+preview_hz: 15
+warn_camera_drop_frames: 3
+warn_imu_gap_ms: 25
+warn_gripper_gap_ms: 100
+warn_timestamp_jump_ms: 200
+min_episode_s: 2.0
+notes: ""
+# IMU live-quality thresholds (UI colour). Not hard-coded anywhere.
+imu_quality:
+  green: {min_hz: 380, max_loss: 0.001, max_age_ms: 50}
+  yellow: {min_hz: 300, max_loss: 0.01, max_age_ms: 250}
+  # anything worse (or disconnected / stale) = red
+gripper_quality:
+  green: {min_hz: 80, max_age_ms: 100}
+  yellow: {min_hz: 40, max_age_ms: 500}
+# --- M1.5 production UI ---
+disk:                                   # free space on the dataset volume
+  warn_gb: 50                           # YELLOW below this
+  block_gb: 10                          # START blocked below this
+  gb_per_minute_estimate: 0.6           # 3 cams (1080p x2 + 480p) + mcap, for the "capacity" readout
+preflight:                              # manual checklist shown before START (informational unless preflight_required)
+  - C922 framing matches the workspace guide
+  - Left wrist camera live and unobstructed
+  - Right wrist camera live and unobstructed
+  - Left grip calibrated (norm reads 0 closed / 1 open)
+  - Right grip calibrated
+  - Correct order selected, cubes reset on the plate
+  - Both HandUMI units at HOME
+preflight_required: false
+polarity_test_required: false        # 2026-09-19: the at-rest open/closed check already catches a moved servo zero
+home_countdown_s: 3                     # legacy timer, no longer used for START (see stillness below)
+# VIO init readiness gate (2026-09-16): START enters WAITING_FOR_STILLNESS; REC begins only after EVERY IMU has been still
+# for min_still_s, then countdown_s. OpenVINS static init needs a still window before the first motion -- the pilots
+# had none and lost 4-12 s of every episode to initialization. Thresholds were measured on the DIAG_T30 still windows
+# (gyro mean p99 3.6 deg/s, accel-norm std p99 0.16 m/s^2 with hand tremor): 6 / 0.35 pass 100% of real stillness.
+stillness:
+  enabled: true
+  min_still_s: 3.0                      # consecutive still time required per IMU
+  window_s: 0.25                        # rolling window judged each poll
+  gyro_max_deg_s: 6.0                   # mean |gyro| over the window
+  accel_std_max: 0.35                   # std of |accel| over the window (m/s^2)
+  max_gap_ms: 25.0                      # a sample gap above this breaks the run (stalled stream != still)
+  min_window_fill: 0.6                  # fraction of rate_hz*window_s samples the window must contain
+  countdown_s: 0.0                      # READY -> REC delay. 0: REC the moment the gate opens (stillness before REC is wasted)
+  hold_gyro_max_deg_s: 12.0             # bound for the post-REC hold JUDGEMENT (moved_before_go); 6 flagged settling tremor at 6-8 deg/s
+  hold_after_rec_s: 3.0                 # operator keeps still THIS long after REC starts, so the still window is IN the data.
+                                        # UI shows HOLD STILL -> GO; moving early is logged (events: moved_before_go) not blocked.
+                                        # 3.0 so the auto loop's spoken countdown is "셋 둘 하나 고" (it counts the hold down).
+# Hands-free loop (AUTO button / A): RESET reset_s ("리셋, 다음 순서 ...") -> "정지" -> stillness gate -> REC -> hold countdown
+# spoken -> "고" -> episode_s of stacking -> "스톱" -> auto KEEP -> RESET ... Stops when every order reached target_per_order.
+auto_loop:
+  enabled: true                         # feature available (AUTO button / A). It never starts by itself; the operator arms it.
+  episode_s: 20.0                       # stacking time after GO (10 s was tight on the 2026-09-16 dry run; raised 13 -> 15 -> 20 same day)
+  reset_s: 10.0                         # time to put the cubes back; "준비하세요" is spoken ready_cue_s before it ends
+  min_still_s: 1.0                      # pre-REC gate while AUTO is on: just confirm the hands are still (the 3 s hold below is the VIO window)
+  hold_after_rec_s: 3.0                 # post-REC still hold while AUTO is on (overrides stillness.hold_after_rec_s); spoken "3 2 1"
+  auto_keep_pass: true                  # PASS -> KEEP and on to the next order
+  pause_on_fail: true                   # REJECT -> loop PAUSES, "에피소드 실패. 확인하세요", take stays in REVIEW for KEEP/DISCARD
+  on_warn: keep                         # REVIEW verdict: keep (warning noted in the episode) | pause
+  balance_orders: true                  # next order = least-collected (EpisodeManager.next_order); false = repeat the current order
+  ready_cue_s: 2.0
+  voice: true                           # macOS `say`; silently off elsewhere
+  voice_name: Yuna                      # Korean voice; null = system default (often English). Under sudo the cues are spoken as the console user.
+  rate_wpm: null
+  stop_when_targets_met: false          # never stop by itself -- target_per_order only steers the order balance; the operator stops with A
+head_overlay: {x0: 0.15, y0: 0.20, x1: 0.85, y1: 0.95}    # workspace guide drawn on the C922 preview only (never baked into video)
+head_motion_warn: 12.0                  # mean abs frame difference (0-255) above which "HEAD MOTION HIGH" is shown
+replay_fps: 30
+depth_preview: {near_m: 0.30, far_m: 1.20}   # depth-preview colour ramp (m): the HandUMI working distance
