@@ -1,0 +1,232 @@
+{
+  "005000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.12424694890817763,
+      "sample_weighted": 0.12479306837743838,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.11015874445438385,
+      "sample_weighted": 0.11015874445438385,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.12424694890817763,
+    "gap_val_minus_train": 0.014088204453793773,
+    "runtime_s": 360.1907298564911
+  },
+  "015000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.12549139731276807,
+      "sample_weighted": 0.1260300855600598,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.05790967709384859,
+      "sample_weighted": 0.05790967709384859,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.12549139731276807,
+    "gap_val_minus_train": 0.06758172021891948,
+    "runtime_s": 374.37330889701843
+  },
+  "030000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.14063775346047527,
+      "sample_weighted": 0.14125322335627646,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.031006540074944498,
+      "sample_weighted": 0.031006540074944498,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.14063775346047527,
+    "gap_val_minus_train": 0.10963121338553078,
+    "runtime_s": 389.76383996009827
+  },
+  "045000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.17331062587217658,
+      "sample_weighted": 0.17408096678919405,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.021299964491277933,
+      "sample_weighted": 0.021299964491277933,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.17331062587217658,
+    "gap_val_minus_train": 0.15201066138089864,
+    "runtime_s": 377.90840196609497
+  },
+  "010000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.13673762523272223,
+      "sample_weighted": 0.13733649510107224,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.07234043187182397,
+      "sample_weighted": 0.07234043187182397,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.13673762523272223,
+    "gap_val_minus_train": 0.06439719336089826,
+    "runtime_s": 379.6820967197418
+  },
+  "020000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.1663653949322854,
+      "sample_weighted": 0.16708977449154847,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.047490083002485334,
+      "sample_weighted": 0.047490083002485334,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.1663653949322854,
+    "gap_val_minus_train": 0.11887531192980005,
+    "runtime_s": 377.70138692855835
+  },
+  "025000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.1512577168127198,
+      "sample_weighted": 0.15191712732883586,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.029155972349457444,
+      "sample_weighted": 0.029155972349457444,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.1512577168127198,
+    "gap_val_minus_train": 0.12210174446326236,
+    "runtime_s": 378.8447370529175
+  },
+  "035000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.17542530906190962,
+      "sample_weighted": 0.17621031238399174,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.02632302221097052,
+      "sample_weighted": 0.02632302221097052,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.17542530906190962,
+    "gap_val_minus_train": 0.1491022868509391,
+    "runtime_s": 401.8773319721222
+  },
+  "040000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.16507504551301952,
+      "sample_weighted": 0.16580099380999683,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.022542072915006428,
+      "sample_weighted": 0.022542072915006428,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.16507504551301952,
+    "gap_val_minus_train": 0.1425329725980131,
+    "runtime_s": 387.2131791114807
+  },
+  "050000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.22361326110852964,
+      "sample_weighted": 0.22459798700915984,
+      "n_batches": 138,
+      "n_samples": 1099,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.020373904462903738,
+      "sample_weighted": 0.020373904462903738,
+      "n_batches": 125,
+      "n_samples": 1000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.22361326110852964,
+    "gap_val_minus_train": 0.2032393566456259,
+    "runtime_s": 413.8461399078369
+  }
+}

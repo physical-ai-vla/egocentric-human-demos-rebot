@@ -1,0 +1,269 @@
+{
+ "val_v1": {
+  "15": {
+   "val": 0.15,
+   "train": 0.066,
+   "n_val": 2011
+  },
+  "30": {
+   "val": 0.198,
+   "train": 0.053,
+   "n_val": 2011
+  },
+  "60": {
+   "val": 0.213,
+   "train": 0.032,
+   "n_val": 2011
+  },
+  "90": {
+   "val": 0.265,
+   "train": 0.025,
+   "n_val": 2011
+  },
+  "105": {
+   "val": 0.299,
+   "train": 0.018,
+   "n_val": 2011
+  }
+ },
+ "val_a93_start": {
+  "5": {
+   "val": 0.124,
+   "train": 0.11,
+   "n_val": 1099
+  },
+  "10": {
+   "val": 0.137,
+   "train": 0.072,
+   "n_val": 1099
+  },
+  "15": {
+   "val": 0.125,
+   "train": 0.058,
+   "n_val": 1099
+  },
+  "20": {
+   "val": 0.166,
+   "train": 0.047,
+   "n_val": 1099
+  },
+  "25": {
+   "val": 0.151,
+   "train": 0.029,
+   "n_val": 1099
+  },
+  "30": {
+   "val": 0.141,
+   "train": 0.031,
+   "n_val": 1099
+  },
+  "35": {
+   "val": 0.175,
+   "train": 0.026,
+   "n_val": 1099
+  },
+  "40": {
+   "val": 0.165,
+   "train": 0.023,
+   "n_val": 1099
+  },
+  "45": {
+   "val": 0.173,
+   "train": 0.021,
+   "n_val": 1099
+  },
+  "50": {
+   "val": 0.224,
+   "train": 0.02,
+   "n_val": 1099
+  }
+ },
+ "val_a93_origin": {
+  "5": {
+   "val": 0.132,
+   "train": 0.097,
+   "n_val": 1099
+  },
+  "10": {
+   "val": 0.137,
+   "train": 0.066,
+   "n_val": 1099
+  },
+  "15": {
+   "val": 0.147,
+   "train": 0.057,
+   "n_val": 1099
+  },
+  "20": {
+   "val": 0.156,
+   "train": 0.04,
+   "n_val": 1099
+  },
+  "25": {
+   "val": 0.157,
+   "train": 0.031,
+   "n_val": 1099
+  },
+  "30": {
+   "val": 0.174,
+   "train": 0.031,
+   "n_val": 1099
+  },
+  "35": {
+   "val": 0.169,
+   "train": 0.03,
+   "n_val": 1099
+  },
+  "40": {
+   "val": 0.18,
+   "train": 0.027,
+   "n_val": 1099
+  },
+  "45": {
+   "val": 0.19,
+   "train": 0.022,
+   "n_val": 1099
+  }
+ },
+ "table_aware": {
+  "C": {
+   "episodes": 107,
+   "status": {
+    "HARD REJECT": 11,
+    "PASS": 74,
+    "REJECT": 10,
+    "PASS-CORRECTED": 7,
+    "REVIEW": 1,
+    "EXCLUDED": 4
+   },
+   "accepted": 81,
+   "clear_p50_mm": 19.5,
+   "clear_min_mm": 7.0,
+   "hard_reject_reasons": {
+    "old protocol (no origin hold)": 7,
+    "z correction 88.3 mm > 80": 1,
+    "z correction 109.5 mm > 80": 1,
+    "no still run >= 12 rows (longest 11)": 1,
+    "z correction 125.9 mm > 80": 1
+   }
+  },
+  "C4": {
+   "episodes": 107,
+   "status": {
+    "HARD REJECT": 8,
+    "PASS": 80,
+    "REJECT": 10,
+    "REVIEW": 2,
+    "PASS-CORRECTED": 7
+   },
+   "accepted": 87,
+   "clear_p50_mm": 20.6,
+   "clear_min_mm": 7.9,
+   "hard_reject_reasons": {
+    "old protocol (no origin hold)": 7,
+    "no still run >= 12 rows (longest 11)": 1
+   }
+  },
+  "C5": {
+   "episodes": 107,
+   "status": {
+    "HARD REJECT": 20,
+    "PASS": 79,
+    "PASS-CORRECTED": 7,
+    "REVIEW": 1
+   },
+   "accepted": 86,
+   "clear_p50_mm": 12.6,
+   "clear_min_mm": 7.6,
+   "hard_reject_reasons": {
+    "old protocol (no origin hold)": 7,
+    "origin yaw not measured (image match failed)": 9,
+    "origin hold moved (median 63 mm from the still-run origin)": 1,
+    "IK ok ratio 0.667": 1,
+    "origin hold moved (median 18 mm from the still-run origin)": 1,
+    "no still run >= 12 rows (longest 11)": 1
+   }
+  },
+  "C6": {
+   "episodes": 107,
+   "status": {
+    "HARD REJECT": 20,
+    "PASS": 79,
+    "PASS-CORRECTED": 7,
+    "REVIEW": 1
+   },
+   "accepted": 86,
+   "clear_p50_mm": 12.6,
+   "clear_min_mm": 7.6,
+   "hard_reject_reasons": {
+    "old protocol (no origin hold)": 7,
+    "origin yaw not measured (image match failed)": 9,
+    "origin hold moved (median 63 mm from the still-run origin)": 1,
+    "IK ok ratio 0.613": 1,
+    "origin hold moved (median 18 mm from the still-run origin)": 1,
+    "no still run >= 12 rows (longest 11)": 1
+   }
+  },
+  "C7": {
+   "episodes": 134,
+   "status": {
+    "HARD REJECT": 40,
+    "PASS": 81,
+    "PASS-CORRECTED": 9,
+    "REVIEW": 1,
+    "REJECT": 3
+   },
+   "accepted": 90,
+   "clear_p50_mm": 12.4,
+   "clear_min_mm": 7.6,
+   "hard_reject_reasons": {
+    "old protocol (no origin hold)": 7,
+    "origin yaw not measured (image match failed)": 11,
+    "origin hold moved (median 63 mm from the still-run origin)": 1,
+    "IK ok ratio 0.44": 1,
+    "origin hold moved (median 18 mm from the still-run origin)": 1,
+    "IK ok ratio 0.94": 2,
+    "no still run >= 12 rows (longest 11)": 1,
+    "IK ok ratio 0.914": 1,
+    "IK ok ratio 0.762": 2,
+    "IK ok ratio 0.849": 1,
+    "IK ok ratio 0.834": 1,
+    "IK ok ratio 0.894": 2,
+    "IK ok ratio 0.046": 1,
+    "IK ok ratio 0.947": 1,
+    "IK ok ratio 0.801": 1,
+    "IK ok ratio 0.882": 1,
+    "IK ok ratio 0.695": 1,
+    "IK ok ratio 0.967": 2,
+    "IK ok ratio 0.953": 1,
+    "IK ok ratio 0.868": 1
+   }
+  }
+ },
+ "G": {
+  "origin_base_mm": [
+   59.0,
+   -74.9,
+   6.2
+  ],
+  "x_heading_base_deg": 47.09,
+  "baseline_mm": 60.4,
+  "collinearity_resid_mm": [
+   0.0,
+   0.38,
+   0.0
+  ],
+  "table_z_mm": -27.1,
+  "plate_thickness_mm": 35.0
+ },
+ "handeye_keys": [
+  "K",
+  "dist",
+  "rms",
+  "views",
+  "X_tcp_cam"
+ ],
+ "handeye": {
+  "rms": 0.16228864493205064
+ }
+}

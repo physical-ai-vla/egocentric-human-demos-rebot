@@ -1,0 +1,35 @@
+{
+ "schema": "v4_run_status/v1",
+ "as_of": "2026-10-07 15:30 KST",
+ "source": "Ray job API (status, start/end) and each job's console log (steps reached, curves in results/v4/loss_curves/); archive logs for checkpoint ranges",
+ "shared_recipe": "as results/v3/RUN_STATUS_v3.json (X-VLA, D20, REL-only CART20, AdamW8bit, bf16, batch 8, seed 1000); R30 runs use R312c statistics",
+ "datasets": {
+  "R30": {"episodes": 30, "frames": 17600, "kind": "R312c episodes 150-179 (5 per stacking order)"},
+  "HRA_red_v1": {"episodes_train": 151, "rows_train": 20319, "episodes_val": 15, "rows_val": 2011, "wrist": "guessed pinhole robotization"},
+  "HRA_red_robotcam_v2": {"split": "as v1", "wrist": "measured robot C922 model + hand-eye, robot-TCP labels"},
+  "HRA_A100_A93": {"episodes_train": 82, "rows_train": 8300, "episodes_val": 11, "rows_val": 1099, "variants": "A = start-anchored, B = origin(F)-anchored"},
+  "HRA_A100_CT7_old85": {"episodes_train": 85, "rows_train": 8599, "val": "none"}
+ },
+ "runs": [
+  {"id": "ROBOT100-PT", "run": "EGO-CART20V2-RELONLY-D20-B8-300K-V2B-ROBOT100", "node": "RTX 5090, torch 2.7.1", "planned": 300000, "reached": 300000, "status": "FINISHED 2026-10-05 11:37 (log: End of training; Ray reported FAILED, exit 1 after the final save, cause not determined)", "final_loss": 0.007},
+  {"id": "R30-scratch", "run": "R30-RELCART20-RELONLY-D20-B8-600K", "init": "base", "node": "RTX 4090 GPU1, torch 2.6.0", "planned": 600000, "reached": 471400, "status": "STOPPED 2026-10-06 19:48 (by us, GPU needed)", "ckpts": "10k-470k every 10k (archive)"},
+  {"id": "R30-ego100k", "run": "FT-R312C-R30-FROM-EGOROBOT100PT100K-RELONLY-D20-B8-600K", "init": "ROBOT100-PT step 100000 (mid-schedule)", "node": "RTX 4090 GPU0, torch 2.6.0", "planned": 600000, "reached": 305400, "status": "STOPPED 2026-10-06 20:08 (by us, GPU needed)", "ckpts": "5k-305k every 5k (archive)"},
+  {"id": "R30-ego300k", "run": "FT-R30-FROM-EGOROBOT100PT300K-RELONLY-D20-B8-600K", "init": "ROBOT100-PT step 300000", "node": "RTX 5090, torch 2.7.1", "planned": 600000, "reached": 310200, "status": "STOPPED 2026-10-06 09:50 (by us, after the 310k save)", "ckpts": "5k-310k on the training node"},
+  {"id": "HRA-v1", "run": "HRA-RIGHTONLY-LOSSMASK-D20-B8-300K", "node": "RTX 4090", "planned": 300000, "reached": 300000, "status": "SUCCEEDED 2026-10-05 15:29", "final_loss": 0.002},
+  {"id": "HRA-robotcam-v2", "run": "HRA robotcam v2, loss-masked", "node": "RTX 4090", "reached": "about 64000", "status": "STOPPED 2026-10-07", "loss_at_stop": 0.026},
+  {"id": "HRA-A100-A", "run": "A93 start-anchored", "node": "RTX 4090", "reached": "about 53000", "status": "STOPPED 2026-10-07 11:28"},
+  {"id": "HRA-A100-B", "run": "A93 origin-anchored", "node": "RTX 4090", "reached": "about 55000", "status": "STOPPED 2026-10-07 12:00"},
+  {"id": "HRA-A100-CT5", "reached": "about 7000", "status": "STOPPED 2026-10-07 13:26"},
+  {"id": "HRA-A100-CT6", "reached": "about 3000", "status": "STOPPED 2026-10-07 13:53"},
+  {"id": "HRA-A100-CT7-old85", "planned": 100000, "status": "RUNNING since 2026-10-07 15:06 (start pose 08, 6 Oct data only)"}
+ ],
+ "robot": {
+  "bimanual_2026-10-05_to_07": "one R384-scratch 200k run (4 control cycles); no R30 checkpoint run on the robot; trial logger unused (0 trials)",
+  "B300_checkpoints": "robot-tested 75k-205k; after the 2026-10-04 storage prune only 150k and 200k remain",
+  "approach_plan_sessions": "results/v4/hra/plan_sessions.csv (192 sessions, stop reasons only, no outcomes)"
+ },
+ "comparability": {
+  "R30_three_arms": "training loss only, one seed per arm; 100k-init differs from 300k-init in pretrain length AND node/torch",
+  "HRA_A_vs_B": "same 93 takes and split; held-out loss only"
+ }
+}

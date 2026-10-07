@@ -4,9 +4,18 @@ Research code, calibration, processing records and a small data sample from one 
 human demonstrations with a hand-worn UMI-style gripper (HandUMI), converted them into pseudo-joint trajectories
 for a reBot B601 dual-arm robot, and used them to pretrain X-VLA. Version 3 (October 2026) replaces the joint-space
 retargeting with a Cartesian conversion that matches the robot's own action contract, and tests what transfers to the
-robot ([Update v3](#update-v3-cartesian-ego-pretraining-and-transfer)). The earlier state is tagged `report-v2-2026-09-30`.
+robot ([Update v3](#update-v3-cartesian-ego-pretraining-and-transfer)). Version 4 (7 October 2026) adds a 30-episode
+low-data ablation and splits the write-up into two reports, each in English and Korean
+([Update v4](#update-v4-two-reports-r30-ablation-and-single-arm-approach)). Earlier states are tagged `report-v2-2026-09-30`
+and `report-v3-2026-10-04`.
 
-The write-up is [`report/report.pdf`](report/report.pdf) (LaTeX source `report/report.tex`, figures rebuilt by `report/figures/make_figures.py`).
+| Report | English | 한국어 |
+|---|---|---|
+| Part I: three-cube stacking (bimanual) | [`report/part1_stacking_en.pdf`](report/part1_stacking_en.pdf) | [`report/part1_stacking_ko.pdf`](report/part1_stacking_ko.pdf) |
+| Part II: single-arm approach to a cube | [`report/part2_approach_en.pdf`](report/part2_approach_en.pdf) | [`report/part2_approach_ko.pdf`](report/part2_approach_ko.pdf) |
+
+LaTeX sources sit next to the PDFs; figures are rebuilt by `report/figures/make_figures*.py`, `analysis/v4_r30_ablation.py`
+and `analysis/v4_hra_summary.py`. The v3 single report is kept in `report/archive/`.
 
 **Status: offline evaluation and training diagnostics.** Version-3 checkpoints were executed on the robot, and an
 ego-initialized model fine-tuned on 312 robot episodes completed full three-cube stacks in closed loop (operator
@@ -245,7 +254,7 @@ Renderer: `analysis/v3/viz_mast3r_episode.py`.
 - **Robotized wrist** (`cart20/ego_cart20/scripts/export_lerobot_robotized.py`): fisheye → virtual pinhole (hfov 62–70°,
   jaws low), blur, JPEG. ROBOT100 (all frames) sharpness 181 / 132, still 2–3× the robot. The MIX70 pretrain was stopped at 5k.
   Co-training (4 ego + 4 robot per batch, `training/relonly/train_cotrain.py`) was stopped at 88.6k without evaluation. The
-  ROBOT100 300k pretrain is running (74k), then R30 fine-tuning. **No result yet.**
+  The ROBOT100 300k pretrain finished on 10-05 (loss 0.007); its 100k and 300k checkpoints initialize the R30 ablation (v4).
 
 ### HRA_red: right-hand approach with cube-based scale
 
@@ -255,11 +264,58 @@ Renderer: `analysis/v3/viz_mast3r_episode.py`.
   37 / 57 valid, PnP/IMU median 1.062 (p16–p84 0.959–1.274).
 - Funnel 200 → 181 (scale gates) → 166 (physical sanity). Train 151 episodes / 20,319 rows; val 15 / 2,011.
 - Loss-masked training (left arm and gripper masked; 9 / 20 dims supervised; `training/relonly/rel16_relonly_lossmask.py`).
-  The run is at 100k / 300k.
-- Held-out loss at 15k: 0.150 vs train-subset 0.066. A partial 30k evaluation (one seed) gives 0.198, a possible overfit.
-- No offline direction probe has been run, and robot runs (8,397 cycles) logged no outcome.
+  The 300k run finished on 10-05 (training loss 0.002).
+- Held-out loss at 15k: 0.150 vs train-subset 0.066, rising to 0.299 at 105k: the model overfits 151 episodes.
+- Robot runs (8,397 cycles on 10-04) logged no outcome. Everything after v3 on this task is in Part II (v4).
 
 Evidence: `results/v3/hra_red/`.
+
+## Update v4: two reports, R30 ablation and single-arm approach
+
+### Part I: low-data ablation on 30 robot episodes
+
+Three otherwise identical fine-tuning runs on **R30** (R312c episodes 150–179, 17,600 frames), 600k cosine schedule, from
+the base model (scratch) and from the ROBOT100 ego pretrain at 100k and 300k steps. Training loss only, one seed per arm;
+the 100k-init and scratch ran on an RTX 4090 (torch 2.6), the 300k-init on an RTX 5090 (torch 2.7.1).
+
+| window | ego-PT 100k init / scratch | ego-PT 300k init / scratch |
+|---|---|---|
+| 1k–5k | 0.544 | 0.493 |
+| 10k–20k | 0.823 | 0.697 |
+| 50k–100k | 0.970 | 0.856 |
+| 100k–150k | 1.021 | 0.914 |
+
+Both ego initializations start below half the scratch loss; the advantage is gone by ~100k (100k-init) and ~200k
+(300k-init). All three runs were stopped (471k / 305k / 310k, 139–214 epochs): every arm memorizes 30 episodes. **No R30
+checkpoint has been run on the robot and there is no held-out robot evaluation**, so this is not a transfer result. The
+trial logger in the deployment UI exists but has recorded no trial. Evidence: `results/v4/loss_curves/`,
+`results/v4/r30_ablation_summary.json`, `results/v4/RUN_STATUS_v4.json`.
+
+### Part II: single-arm approach (HRA_red → robot camera rendering → HRA_A100)
+
+- **Robot-side calibration:** head C922 (checkerboard, RMS 1.05 px), robot right-wrist hand-eye (13 views, 0.16 px RMS; camera
+  169.5 mm behind the TCP, optical axis 33° below TCP x). The IK stack's TCP lies ~82 mm ahead of the physical jaw tip; contact
+  now uses the URDF fingertip box.
+- **robotcam v2:** wrist frames re-rendered with the measured robot camera (hfov 52°), labels as robot-TCP poses via hand-eye.
+- **HRA_A100 protocol:** every take starts with the HandUMI jaw tip held 2 s on a taped cross that the robot jaw tip also
+  touched → shared task frame G (3-point line fit, collinearity 0.38 mm; table z −27.1 mm). Scale from cube PnP or the table
+  plane at the origin (ratio to PnP 0.999); origin yaw measured per take.
+- **Table-aware conversion** (fingertip floor = table + 5 mm): CT5/CT6 keep 86 of 107 takes, clearance p50 12.6 mm, min 7.6 mm.
+- **Training:** start- vs origin-anchored state give the same held-out loss (0.124 vs 0.132 at 5k); every run overfits from the
+  first checkpoint.
+- **Robot:** 192 planned-execution sessions on 10-06/07; on 10-07, 69 of 127 ended on a cube-size stop (a proximity proxy, not
+  contact). **No trial outcome was logged; no success rate.**
+
+Evidence: `results/v4/hra/` (validation losses, calibration files, table-aware reports, start poses, plan-session summary).
+
+### Repository map additions (v4)
+
+| path | contents |
+|---|---|
+| `report/part{1,2}_*_{en,ko}.{tex,pdf}` | the four v4 reports; `report/archive/` = v3 |
+| `analysis/v4_r30_ablation.py` | R30 matched-step comparison + Fig. 8 |
+| `analysis/v4_hra_summary.py` | Part II numbers (validation loss, table-aware tallies, G frame, hand-eye) + Fig. 9 |
+| `results/v4/` | loss curves (ROBOT100 pretrain, three R30 arms), R30 summary, run status, `hra/` evidence |
 
 ### Repository map additions (v3)
 
@@ -291,7 +347,7 @@ the deployment/inference client (`infer_core_v4`) used by the diagnostics, and t
 | `results/` | `episode_manifest.csv` (349 episodes: session, order, time, domain, funnel outcome, split), `model_config/` (X-VLA `config.json`, `train_config.json`), `pose_benchmark/`, census/funnel JSONs, domain manifest, quarantine list, gripper census, split index, run provenance/summary, per-checkpoint eval JSONs (`eval/`, `eval_gated/`) and `selection.json` |
 | `sample_data/` | 3 episodes (see below) |
 | `analysis/` | `verify_claims.py` recomputes every number in the report and this README from the files in this repo (see `analysis/out/claim_audit.md` for the count; table in `analysis/out/claim_audit.md`). Post-hoc analyses of the final checkpoint: `prompt_swap.py` (6 order instructions, same noise seed, + 2 extra seeds), `summarize_prompt_swap.py`, `per_order_breakdown.py`; summaries in `analysis/out/*.json` |
-| `report/` | Technical report (PDF + LaTeX) and figure script |
+| `report/` | Technical reports (Part I stacking, Part II approach; English + Korean; PDF + LaTeX) and figure scripts |
 
 ## Verifying the numbers
 
@@ -299,13 +355,18 @@ the deployment/inference client (`infer_core_v4`) used by the diagnostics, and t
 python3 analysis/verify_claims.py --md analysis/out/claim_audit.md   # needs pyyaml; exits 1 on any mismatch
 python3 analysis/paired_bootstrap_r150.py                            # R150 250k episode-level bootstrap
 python3 analysis/v3/ego_init_loss_compare.py                         # v3 matched initialization comparison
-python3 report/figures/make_figures.py && python3 report/figures/make_figures_v3.py && tectonic report/report.tex
+python3 analysis/v4_r30_ablation.py && python3 analysis/v4_hra_summary.py   # v4 numbers + Figs. 8-9 (need matplotlib)
+python3 report/figures/make_figures.py && python3 report/figures/make_figures_v3.py
+cd report && for f in part1_stacking_en part1_stacking_ko part2_approach_en part2_approach_ko; do tectonic $f.tex; done
+# the Korean reports use xeCJK with the macOS fonts AppleMyungjo / Apple SD Gothic Neo
 ```
 
 ## What this repository does not show
 
 - No closed-loop success rate (three-cube stacking was observed with B300, but trials were not counted or recorded).
-- No held-out or closed-loop comparison of ego-initialized vs scratch v3 models; the matched comparison is training loss to 60k.
+- No held-out or closed-loop comparison of ego-initialized vs scratch v3 models; the matched comparisons are training loss
+  (312 episodes to 60k; 30 episodes to 300k).
+- No success rate for the single-arm approach (Part II): robot sessions logged stop reasons, not outcomes.
 - No transfer of the ego-only policy, or of the robotized wrist images, to robot cameras.
 - No generalization to unseen cube layouts (layouts were not recorded) or to unseen stacking orders (all six are in training).
 - No benefit on disjoint robot test data: the 10 % R150 gain is measured on episodes inside both fine-tuning sets.
@@ -316,6 +377,9 @@ python3 report/figures/make_figures.py && python3 report/figures/make_figures_v3
 - `training/robot/reBot_B601_DM_dualarm.urdf` (vendor robot model) and `pipeline/mast3r_pose/build_compat_5090.patch`
   (a diff against MASt3R-SLAM) are withheld until their licences are confirmed. The FK code in `training/robot/`
   expects the URDF at that path.
+- Part II (v4) processing code for HRA_A100 (origin-plane scale, origin-yaw matching, G-frame calibration, the table-aware
+  conversion and the robot-camera re-rendering) lives in internal tooling and is not included; its outputs and per-take
+  reports are in `results/v4/hra/`.
 
 ## Running it
 

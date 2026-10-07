@@ -1,7 +1,7 @@
 # Headline claims and their evidence
 
 Every row is also a row of `analysis/out/claim_audit.md`, which `analysis/verify_claims.py` regenerates from the
-files below (it exits 1 on any mismatch). Status as of 2026-10-04 (version 3): all rows VERIFIED (`analysis/verify_claims.py`: 436 checks, 0 failed).
+files below (it exits 1 on any mismatch). Status as of 2026-10-07 (version 4): all rows VERIFIED (`analysis/verify_claims.py`: 511 checks, 0 failed). From version 4 the report is split into Part I (stacking) and Part II (approach); the checks run on the English sources, and the Korean versions are translations of them.
 
 | Claim | Evidence file | Exact value | Status |
 |---|---|---|---|
@@ -50,6 +50,16 @@ files below (it exits 1 on any mismatch). Status as of 2026-10-04 (version 3): a
 | Cube-PnP scale vs IMU on HRL80 | `results/v3/hra_red/hrl_val_1face.json` | 37 / 57 valid; ratio 1.062 (p16–p84 0.959–1.274) | VERIFIED |
 | HRA_red funnel and split | `results/v3/hra_red/scale_qc_summary*.json`, `sanity_rejected.jsonl` | 200 → 181 → 166; 151 / 20,319 train, 15 / 2,011 val | VERIFIED |
 | HRA_red held-out loss | `results/v3/hra_red/val_loss_results.json`, `val_loss_run_log_excerpt.txt` | 15k 0.150 (train subset 0.066); 30k partial 0.198 | VERIFIED |
+| R30 ablation: training-loss ratio to scratch, 1k–5k | `results/v4/r30_ablation_summary.json` | ego-PT 100k init 0.544, 300k init 0.493 | VERIFIED |
+| R30 ablation: ratio over 50k–100k / 100k–150k | `results/v4/r30_ablation_summary.json` | 100k init 0.970 / 1.021; 300k init 0.856 / 0.914 | VERIFIED |
+| R30 arms stopped (scratch / 100k / 300k) | `results/v4/loss_curves/R30_*.csv`, `results/v4/RUN_STATUS_v4.json` | 471.4k / 305.4k / 310.2k steps | VERIFIED |
+| ROBOT100 pretrain finished | `results/v4/loss_curves/ROBOT100_pretrain_300k.csv` | 300k, loss 0.007, 49.6 epochs | VERIFIED |
+| HRA_red v1 held-out loss rises (overfit) | `results/v4/hra/val_eval/v1_results.json` | 15k 0.150 → 105k 0.299 (train subset 0.066 → 0.018) | VERIFIED |
+| HRA_A100 start vs origin anchoring | `results/v4/hra/val_eval/a93_*_results.json` | held-out 5k: 0.124 vs 0.132 | VERIFIED |
+| Shared task frame G | `results/v4/hra/calib/G_frame_calib.json` | origin (59.0, −74.9, 6.2) mm, heading 47.09°, collinearity 0.38 mm, table z −27.1 mm | VERIFIED |
+| Robot wrist hand-eye | `results/v4/hra/calib/robot_right_wrist_handeye.json` | 13 views, RMS 0.16 px, camera 169.5 mm behind TCP, axis 33° below TCP x | VERIFIED |
+| Table-aware conversion CT5/CT6 | `results/v4/hra/table_aware/table_aware_C5_report.json` | 86 / 107 accepted, clearance p50 12.6 mm, min 7.6 mm | VERIFIED |
+| Approach robot sessions | `results/v4/hra/plan_sessions.csv` | 192 (10-06: 65, 10-07: 127, of which 69 cube-size stops); no outcomes | VERIFIED |
 
 ## Not shown anywhere in this repository
 
@@ -60,4 +70,6 @@ files below (it exits 1 on any mismatch). Status as of 2026-10-04 (version 3): a
 - any robot fine-tuning result from the final 996-segment pretraining checkpoints;
 - a closed-loop success rate for any v3 checkpoint (B300 stacking was observed, trials not counted);
 - a held-out or closed-loop advantage of ego initialization (only matched training loss to 60k);
-- transfer of the ego-only policy or the robotized wrist images to robot cameras.
+- transfer of the ego-only policy or the robotized wrist images to robot cameras;
+- any robot or held-out evaluation of the three R30 arms;
+- a success rate for the single-arm approach models (Part II).

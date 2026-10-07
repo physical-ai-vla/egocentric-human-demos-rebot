@@ -334,68 +334,140 @@
 | v3_hra | train-subset loss 15k | 0.066 | 0.0662 | `results/v3/hra_red/val_loss_results.json` | PASS |
 | v3_hra | partial val loss 30k seed 0 | 0.198 | 0.1982 | `results/v3/hra_red/val_loss_run_log_excerpt.txt` | PASS |
 | v3_runs | run status entries | 11 | 11.0 | `results/v3/RUN_STATUS_v3.json` | PASS |
-| text | retired value absent: 16.5\% | True | True | `report/report.tex` | PASS |
-| text | retired value absent: 20.8/23.8 | True | True | `report/report.tex` | PASS |
-| text | retired value absent: versus 0.09 | True | True | `report/report.tex` | PASS |
-| text | retired value absent: five early | True | True | `report/report.tex` | PASS |
-| text | retired value absent: 6.1 and 5.6 | True | True | `report/report.tex` | PASS |
-| text | retired value absent: 128\textdegree | True | True | `report/report.tex` | PASS |
-| text | public repo URL present | True | True | `report/report.tex` | PASS |
-| text | value present: 211.7k | True | True | `report/report.tex` | PASS |
-| text | value present: $-33\%$ | True | True | `report/report.tex` | PASS |
-| text | value present: $+13\%$ | True | True | `report/report.tex` | PASS |
-| text | value present: 36.5\% | True | True | `report/report.tex` | PASS |
-| text | value present: 56.1\% | True | True | `report/report.tex` | PASS |
-| text | value present: 58.9\% | True | True | `report/report.tex` | PASS |
-| text | value present: 14.7 | True | True | `report/report.tex` | PASS |
-| text | value present: 996 segments | True | True | `report/report.tex` | PASS |
-| text | value present: 4.6/17.0 | True | True | `report/report.tex` | PASS |
-| text | value present: 18.5/23.8 | True | True | `report/report.tex` | PASS |
-| text | value present: versus 0.03 | True | True | `report/report.tex` | PASS |
-| text | value present: ten early | True | True | `report/report.tex` | PASS |
-| text | value present: 6.0 and 5.6 | True | True | `report/report.tex` | PASS |
-| text | value present: 0.24 versus 0.07 | True | True | `report/report.tex` | PASS |
-| text | value present: 39.9 | True | True | `report/report.tex` | PASS |
-| text | value present: 3.55 | True | True | `report/report.tex` | PASS |
-| text | value present: 233 train | True | True | `report/report.tex` | PASS |
-| text | value present: 561 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 48{,}411 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: $-6.20$\% | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 57{,}283 (51.4\%) | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 1{,}482 of the 2{,}598 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 422.5 to 90.5 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 99.7\% (left) and 99.5\% | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 72.3\%/74.6\% | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 45.2\%/52.2\% | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 1{,}854/1{,}487 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 59/64 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: slots 10--17 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 22.80 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: $+0.81$/$+0.77$ | True | True | `report/report.tex` | PASS |
-| text | v3 value present: $-0.05$/$-0.03$ | True | True | `report/report.tex` | PASS |
-| text | v3 value present: $+0.16$ | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 0.69--0.90 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: $-0.25$ and $+0.49$ | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 0.945 for A and 0.244 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 3.9$\times$ | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 0.49 over the first 5k | True | True | `report/report.tex` | PASS |
-| text | v3 value present: (0.0733 versus 0.0745 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 181/132 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 88.6k | True | True | `report/report.tex` | PASS |
+| v4_r30 | loss scratch @200 | 0.801 | 0.801 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego100k @200 | 0.239 | 0.239 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego300k @200 | 0.446 | 0.446 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss scratch @1000 | 0.312 | 0.312 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego100k @1000 | 0.103 | 0.103 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego300k @1000 | 0.117 | 0.117 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss scratch @10000 | 0.065 | 0.065 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego100k @10000 | 0.056 | 0.056 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego300k @10000 | 0.04 | 0.04 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss scratch @50000 | 0.019 | 0.019 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego100k @50000 | 0.017 | 0.017 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego300k @50000 | 0.014 | 0.014 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss scratch @100000 | 0.009 | 0.009 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego100k @100000 | 0.009 | 0.009 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | loss ego300k @100000 | 0.007 | 0.007 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego100k 1k-5k | 0.544 | 0.544 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego300k 1k-5k | 0.493 | 0.493 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego100k 10k-20k | 0.823 | 0.823 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego300k 10k-20k | 0.697 | 0.697 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego100k 50k-100k | 0.97 | 0.97 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego300k 50k-100k | 0.856 | 0.856 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego100k 100k-150k | 1.021 | 1.021 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ratio ego300k 100k-150k | 0.914 | 0.914 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | last steps scratch/100k/300k | 471400/305400/310200 | 471400/305400/310200 | `results/v4/r30_ablation_summary.json` | PASS |
+| v4_r30 | ROBOT100 pretrain final loss | 0.007 | 0.007 | `results/v4/loss_curves/ROBOT100_pretrain_300k.csv` | PASS |
+| v4_r30 | ROBOT100 pretrain epochs | 49.6 | 49.58 | `results/v4/loss_curves/ROBOT100_pretrain_300k.csv` | PASS |
+| v4_r30 | R30_scratch epochs | 214 | 214.27 | `results/v4/loss_curves/R30_scratch.csv` | PASS |
+| v4_r30 | R30_init_robot100pt100k epochs | 139 | 138.82 | `results/v4/loss_curves/R30_init_robot100pt100k.csv` | PASS |
+| v4_r30 | R30_init_robot100pt300k epochs | 141 | 141.0 | `results/v4/loss_curves/R30_init_robot100pt300k.csv` | PASS |
+| v4_hra | v1 val/train @15k | 0.15/0.066 | 0.15/0.066 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | v1 val/train @30k | 0.198/0.053 | 0.198/0.053 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | v1 val/train @105k | 0.299/0.018 | 0.299/0.018 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A val/train @5k | 0.124 | 0.124 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A train @5k | 0.11 | 0.11 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A val/train @15k | 0.125 | 0.125 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A train @15k | 0.058 | 0.058 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A val/train @30k | 0.141 | 0.141 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A train @30k | 0.031 | 0.031 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A val/train @50k | 0.224 | 0.224 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | A train @50k | 0.02 | 0.02 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B val @5k | 0.132 | 0.132 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B train @5k | 0.097 | 0.097 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B val @15k | 0.147 | 0.147 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B train @15k | 0.057 | 0.057 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B val @30k | 0.174 | 0.174 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B train @30k | 0.031 | 0.031 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B val @45k | 0.19 | 0.19 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | B train @45k | 0.022 | 0.022 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C takes/accepted | 107/81 | 107/81 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C clearance p50/min | 19.5/7.0 | 19.5/7.0 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C4 takes/accepted | 107/87 | 107/87 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C4 clearance p50/min | 20.6/7.9 | 20.6/7.9 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C5 takes/accepted | 107/86 | 107/86 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C5 clearance p50/min | 12.6/7.6 | 12.6/7.6 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C6 takes/accepted | 107/86 | 107/86 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C6 clearance p50/min | 12.6/7.6 | 12.6/7.6 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C7 takes/accepted | 134/90 | 134/90 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | C7 clearance p50/min | 12.4/7.6 | 12.4/7.6 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | G origin mm | 59.0/-74.9/6.2 | 59.0/-74.9/6.2 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | G heading deg | 47.09 | 47.09 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | G collinearity max mm | 0.38 | 0.38 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | G baseline mm | 60.4 | 60.4 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | table z mm | -27.1 | -27.1 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | hand-eye RMS px | 0.16 | 0.1623 | `results/v4/hra/summary.json` | PASS |
+| v4_hra | camera behind TCP mm | 169.5 | 169.4598 | `results/v4/hra/calib/robot_right_wrist_handeye.json` | PASS |
+| v4_hra | camera off-axis mm | 76 | 75.9951 | `results/v4/hra/calib/robot_right_wrist_handeye.json` | PASS |
+| v4_hra | optical axis below TCP x deg | 33 | 33.0544 | `results/v4/hra/calib/robot_right_wrist_handeye.json` | PASS |
+| v4_hra | head cam f / rms / frames | 728.7/1.05/48 | 728.7/1.05/48 | `results/v4/hra/calib/global_cam_intrinsics.json` | PASS |
+| v4_hra | origin-plane scale computed for | 107 | 107.0 | `results/v4/hra/calib/origin_scale_kf_107.json` | PASS |
+| v4_hra | plan sessions total / 10-06 / 10-07 | 192/65/127 | 192/65/127 | `results/v4/hra/plan_sessions.csv` | PASS |
+| v4_hra | 10-06 glitch holds | 1 | 1.0 | `results/v4/hra/plan_sessions.csv` | PASS |
+| v4_hra | 10-07 cube-size stops / user stops | 69/58 | 69/58 | `results/v4/hra/plan_sessions.csv` | PASS |
+| text | retired value absent: 16.5\% | True | True | `report/part*_en.tex` | PASS |
+| text | retired value absent: 20.8/23.8 | True | True | `report/part*_en.tex` | PASS |
+| text | retired value absent: versus 0.09 | True | True | `report/part*_en.tex` | PASS |
+| text | retired value absent: five early | True | True | `report/part*_en.tex` | PASS |
+| text | retired value absent: 6.1 and 5.6 | True | True | `report/part*_en.tex` | PASS |
+| text | retired value absent: 128\textdegree | True | True | `report/part*_en.tex` | PASS |
+| text | repository marked available on request (private since 2026-10-07) | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 211.7k | True | True | `report/part*_en.tex` | PASS |
+| text | value present: $-33\%$ | True | True | `report/part*_en.tex` | PASS |
+| text | value present: $+13\%$ | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 36.5\% | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 56.1\% | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 58.9\% | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 14.7 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 996 segments | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 4.6/17.0 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 18.5/23.8 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: versus 0.03 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: ten early | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 6.0 and 5.6 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 0.24 versus 0.07 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 39.9 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 3.55 | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 233 train | True | True | `report/part*_en.tex` | PASS |
+| text | value present: 561 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 48{,}411 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: $-6.20$\% | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 57{,}283 (51.4\%) | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 1{,}482 of the 2{,}598 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 422.5 to 90.5 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 99.7\% (left) and 99.5\% | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 72.3\%/74.6\% | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 45.2\%/52.2\% | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 1{,}854/1{,}487 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 59/64 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: slots 10--17 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 22.80 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: $+0.81$/$+0.77$ | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: $-0.05$/$-0.03$ | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: $+0.16$ | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 0.69--0.90 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: $-0.25$ and $+0.49$ | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 0.945 for A and 0.244 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 3.9$\times$ | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 0.49 over the first 5k | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: (0.0733 versus 0.0745 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 181/132 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 88.6k | True | True | `report/part*_en.tex` | PASS |
 | text | v3 value present: 71
-checkpoints, 49{,}431 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: median of 0.012 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 95 of them | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 37 of 57 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 1.062 (p16--p84 0.959--1.274 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 151 train episodes (20{,}319 rows) | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 0.354 (p5 0.188, p95 0.500) | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 0.150 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 0.198 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: 8{,}397 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: version 3 | True | True | `report/report.tex` | PASS |
-| text | v3 value present: completed the full three-cube stack | True | True | `report/report.tex` | PASS |
-| text | v3 value present: with no success rate | True | True | `report/report.tex` | PASS |
+checkpoints, 49{,}431 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: median of 0.012 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 95 of them | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 37 of 57 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 1.062 (p16--p84 0.959--1.274 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 151 train episodes (20{,}319 rows) | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 0.354 (p5 0.188, p95 0.500) | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 0.150 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 0.198 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: 8{,}397 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: version 3 | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: completed the full three-cube stack | True | True | `report/part*_en.tex` | PASS |
+| text | v3 value present: with no success rate | True | True | `report/part*_en.tex` | PASS |
 | readme | value present: 349 recorded | True | True | `README.md` | PASS |
 | readme | value present: 284 pass sync | True | True | `README.md` | PASS |
 | readme | value present: 259 source | True | True | `README.md` | PASS |
@@ -441,4 +513,4 @@ checkpoints, 49{,}431 | True | True | `report/report.tex` | PASS |
 | readme | stale text absent: This repository reports no closed-loop robot results | True | True | `README.md` | PASS |
 | readme | stale text absent: outcomes were not logged). | True | True | `README.md` | PASS |
 
-439 claims checked, 0 failed.
+511 claims checked, 0 failed.

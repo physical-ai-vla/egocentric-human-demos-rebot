@@ -1,0 +1,30 @@
+{
+ "T_base_F": [
+  [
+   0.6809102852757069,
+   -0.7323668366370474,
+   0.0,
+   0.05896093212272367
+  ],
+  [
+   0.7323668366370474,
+   0.6809102852757069,
+   0.0,
+   -0.07485537013319685
+  ],
+  [
+   0.0,
+   0.0,
+   1.0,
+   0.006233487550741115
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "note": "2026-10-07 CT5: RIGHT anchor = G (X origin, tape x, up z) from the URDF-contact X touches; state = absolute robot-TCP pose in G",
+ "frame_names": "G = X-anchor task frame (origin = X tape centre on the head-cam base plate, x = tape, z = up). H = head-camera base frame (not used; H_T_G is a fixed transform, not measured). Training and robot inference both use G."
+}

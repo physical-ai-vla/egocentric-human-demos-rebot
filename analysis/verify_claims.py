@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Check every quantitative claim of report/report.tex against the files in this repository.
+"""Check every quantitative claim of the report (version 4: report/part1_stacking_en.tex + report/part2_approach_en.tex;
+the Korean versions are translations of these) against the files in this repository.
 
 Each row: claim as written in the report, value recomputed from the evidence file, PASS/FAIL. Numbers are compared at
 the precision the report prints them. Run from the repo root:  python3 analysis/verify_claims.py [--md out.md]
@@ -416,20 +417,67 @@ check("v3_hra", "partial val loss 30k seed 0", 0.198, float(re.search(r"\[030000
 rs3 = J(V + "RUN_STATUS_v3.json")
 check("v3_runs", "run status entries", 11, len(rs3["runs"]), V + "RUN_STATUS_v3.json")
 
+# ---------------------------------------------------------------- v4: R30 ablation (Part I) and approach data (Part II)
+r30 = J("results/v4/r30_ablation_summary.json"); src = "results/v4/r30_ablation_summary.json"
+for step, vals in {"200": (0.801, 0.239, 0.446), "1000": (0.312, 0.103, 0.117), "10000": (0.065, 0.056, 0.040), "50000": (0.019, 0.017, 0.014), "100000": (0.009, 0.009, 0.007)}.items():
+    for arm, v in zip(("scratch", "ego100k", "ego300k"), vals):
+        check("v4_r30", f"loss {arm} @{step}", v, r30["points"][step][arm], src, tol=0.0005)
+for win, (a, b) in {"1k-5k": (0.544, 0.493), "10k-20k": (0.823, 0.697), "50k-100k": (0.970, 0.856), "100k-150k": (1.021, 0.914)}.items():
+    check("v4_r30", f"ratio ego100k {win}", a, r30["ratio_vs_scratch"][win]["ego100k"], src, tol=0.0005)
+    check("v4_r30", f"ratio ego300k {win}", b, r30["ratio_vs_scratch"][win]["ego300k"], src, tol=0.0005)
+check("v4_r30", "last steps scratch/100k/300k", "471400/305400/310200", "/".join(str(r30["last_step"][a]) for a in ("scratch", "ego100k", "ego300k")), src)
+lc = list(csv.DictReader(open(R / "results/v4/loss_curves/ROBOT100_pretrain_300k.csv"))); src = "results/v4/loss_curves/ROBOT100_pretrain_300k.csv"
+check("v4_r30", "ROBOT100 pretrain final loss", 0.007, float(lc[-1]["loss"]), src)
+check("v4_r30", "ROBOT100 pretrain epochs", 49.6, float(lc[-1]["epoch"]), src, tol=0.05)
+for name, p in (("R30_scratch", 214), ("R30_init_robot100pt100k", 139), ("R30_init_robot100pt300k", 141)):
+    e = float(list(csv.DictReader(open(R / f"results/v4/loss_curves/{name}.csv")))[-1]["epoch"])
+    check("v4_r30", f"{name} epochs", p, e, f"results/v4/loss_curves/{name}.csv", tol=1.0)
+hs = J("results/v4/hra/summary.json"); src = "results/v4/hra/summary.json"
+for k, v in {"15": (0.150, 0.066), "30": (0.198, 0.053), "105": (0.299, 0.018)}.items():
+    check("v4_hra", f"v1 val/train @{k}k", f"{v[0]}/{v[1]}", f"{hs['val_v1'][k]['val']}/{hs['val_v1'][k]['train']}", src)
+for k, v in {"5": (0.124, 0.110), "15": (0.125, 0.058), "30": (0.141, 0.031), "50": (0.224, 0.020)}.items():
+    check("v4_hra", f"A val/train @{k}k", v[0], hs["val_a93_start"][k]["val"], src, tol=0.0005)
+    check("v4_hra", f"A train @{k}k", v[1], hs["val_a93_start"][k]["train"], src, tol=0.0005)
+for k, v in {"5": (0.132, 0.097), "15": (0.147, 0.057), "30": (0.174, 0.031), "45": (0.190, 0.022)}.items():
+    check("v4_hra", f"B val @{k}k", v[0], hs["val_a93_origin"][k]["val"], src, tol=0.0005)
+    check("v4_hra", f"B train @{k}k", v[1], hs["val_a93_origin"][k]["train"], src, tol=0.0005)
+for c, (n, acc, p50, mn) in {"C": (107, 81, 19.5, 7.0), "C4": (107, 87, 20.6, 7.9), "C5": (107, 86, 12.6, 7.6), "C6": (107, 86, 12.6, 7.6), "C7": (134, 90, 12.4, 7.6)}.items():
+    t = hs["table_aware"][c]
+    check("v4_hra", f"{c} takes/accepted", f"{n}/{acc}", f"{t['episodes']}/{t['accepted']}", src)
+    check("v4_hra", f"{c} clearance p50/min", f"{p50}/{mn}", f"{t['clear_p50_mm']}/{t['clear_min_mm']}", src)
+check("v4_hra", "G origin mm", "59.0/-74.9/6.2", "/".join(str(x) for x in hs["G"]["origin_base_mm"]), src)
+check("v4_hra", "G heading deg", 47.09, hs["G"]["x_heading_base_deg"], src)
+check("v4_hra", "G collinearity max mm", 0.38, max(hs["G"]["collinearity_resid_mm"]), src)
+check("v4_hra", "G baseline mm", 60.4, hs["G"]["baseline_mm"], src)
+check("v4_hra", "table z mm", -27.1, hs["G"]["table_z_mm"], src)
+check("v4_hra", "hand-eye RMS px", 0.16, hs["handeye"]["rms"], src, tol=0.005)
+he = J("results/v4/hra/calib/robot_right_wrist_handeye.json")["X_tcp_cam"]["tsai"]; src = "results/v4/hra/calib/robot_right_wrist_handeye.json"
+check("v4_hra", "camera behind TCP mm", 169.5, -1000 * he[0][3], src, tol=0.05)
+check("v4_hra", "camera off-axis mm", 76, -1000 * he[2][3], src, tol=0.5)
+check("v4_hra", "optical axis below TCP x deg", 33, math.degrees(math.atan2(he[2][2], he[0][2])), src, tol=0.5)
+gc = J("results/v4/hra/calib/global_cam_intrinsics.json"); src = "results/v4/hra/calib/global_cam_intrinsics.json"
+check("v4_hra", "head cam f / rms / frames", "728.7/1.05/48", f"{gc['fx']:.1f}/{gc['rms_px']:.2f}/{gc['frames']}", src)
+osk = J("results/v4/hra/calib/origin_scale_kf_107.json"); check("v4_hra", "origin-plane scale computed for", 107, len(osk), "results/v4/hra/calib/origin_scale_kf_107.json")
+ps = list(csv.DictReader(open(R / "results/v4/hra/plan_sessions.csv"))); src = "results/v4/hra/plan_sessions.csv"
+d6 = [r for r in ps if r["end_local"].startswith("2026-10-06")]; d7 = [r for r in ps if r["end_local"].startswith("2026-10-07")]
+check("v4_hra", "plan sessions total / 10-06 / 10-07", "192/65/127", f"{len(ps)}/{len(d6)}/{len(d7)}", src)
+check("v4_hra", "10-06 glitch holds", 1, sum(r["end_class"] == "glitch_hold" for r in d6), src)
+check("v4_hra", "10-07 cube-size stops / user stops", "69/58", f"{sum(r['end_class'] == 'cube_size_stop' for r in d7)}/{sum(r['end_class'] == 'user_stop' for r in d7)}", src)
+
 # ---------------------------------------------------------------- retired values must not reappear in the report
-tex = open(R / "report/report.tex").read()
+tex = open(R / "report/part1_stacking_en.tex").read() + open(R / "report/part2_approach_en.tex").read()
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
-    check("text", f"retired value absent: {bad}", "True", str(bad not in tex), "report/report.tex")
-check("text", "public repo URL present", "True", str("github.com/physical-ai-vla/egocentric-human-demos-rebot" in tex), "report/report.tex")
+    check("text", f"retired value absent: {bad}", "True", str(bad not in tex), "report/part*_en.tex")
+check("text", "repository marked available on request (private since 2026-10-07)", "True", str("available on request" in tex), "report/part*_en.tex")
 for need in ("211.7k", "$-33\\%$", "$+13\\%$", "36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
-    check("text", f"value present: {need}", "True", str(need in tex), "report/report.tex")
+    check("text", f"value present: {need}", "True", str(need in tex), "report/part*_en.tex")
 
 for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,}598", "422.5 to 90.5", "99.7\\% (left) and 99.5\\%", "72.3\\%/74.6\\%",
              "45.2\\%/52.2\\%", "1{,}854/1{,}487", "59/64", "slots 10--17", "22.80", "$+0.81$/$+0.77$", "$-0.05$/$-0.03$", "$+0.16$",
              "0.69--0.90", "$-0.25$ and $+0.49$", "0.945 for A and 0.244", "3.9$\\times$", "0.49 over the first 5k", "(0.0733 versus 0.0745",
              "181/132", "88.6k", "71\ncheckpoints, 49{,}431", "median of 0.012", "95 of them", "37 of 57", "1.062 (p16--p84 0.959--1.274",
              "151 train episodes (20{,}319 rows)", "0.354 (p5 0.188, p95 0.500)", "0.150", "0.198", "8{,}397", "version 3", "completed the full three-cube stack", "with no success rate"):
-    check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/report.tex")
+    check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/part*_en.tex")
 # ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
 rd = open(R / "README.md").read()
 for need in ("349 recorded", "284 pass sync", "259 source", "561 bimanual", "233 train", "26 held-out", "1.5 / 5.7 mm", "11.2 / 39.9 mm",

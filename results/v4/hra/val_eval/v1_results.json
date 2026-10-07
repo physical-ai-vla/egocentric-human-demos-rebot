@@ -1,0 +1,124 @@
+{
+  "015000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.1494707915569759,
+      "sample_weighted": 0.1498133790161051,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_seed1": {
+      "mean_batch_loss": 0.1509774831014626,
+      "sample_weighted": 0.15132445796688787,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.06623646686971188,
+      "sample_weighted": 0.06623646686971188,
+      "n_batches": 250,
+      "n_samples": 2000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.15022413732921924,
+    "gap_val_minus_train": 0.08398767045950736,
+    "runtime_s": 1245.7246887683868
+  },
+  "030000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.19818260641916405,
+      "sample_weighted": 0.19865027473742083,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.0525945166554302,
+      "sample_weighted": 0.0525945166554302,
+      "n_batches": 250,
+      "n_samples": 2000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.19818260641916405,
+    "gap_val_minus_train": 0.14558808976373386,
+    "runtime_s": 773.5191559791565
+  },
+  "060000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.21299708081272592,
+      "sample_weighted": 0.2135064876853701,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.03249055241048336,
+      "sample_weighted": 0.03249055241048336,
+      "n_batches": 250,
+      "n_samples": 2000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.21299708081272592,
+    "gap_val_minus_train": 0.18050652840224257,
+    "runtime_s": 758.6501181125641
+  },
+  "090000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.2653657429997573,
+      "sample_weighted": 0.26600348670406093,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.024504458322422578,
+      "sample_weighted": 0.024504458322422578,
+      "n_batches": 250,
+      "n_samples": 2000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.2653657429997573,
+    "gap_val_minus_train": 0.24086128467733472,
+    "runtime_s": 735.8259952068329
+  },
+  "105000": {
+    "dtype": "bf16",
+    "domain": [
+      20
+    ],
+    "val_seed0": {
+      "mean_batch_loss": 0.2986587600760339,
+      "sample_weighted": 0.29937287822619546,
+      "n_batches": 252,
+      "n_samples": 2011,
+      "supervised_frac": 0.45000001788139343
+    },
+    "train_seed0": {
+      "mean_batch_loss": 0.01830317019671202,
+      "sample_weighted": 0.01830317019671202,
+      "n_batches": 250,
+      "n_samples": 2000,
+      "supervised_frac": 0.45000001788139343
+    },
+    "val_mean": 0.2986587600760339,
+    "gap_val_minus_train": 0.2803555898793219,
+    "runtime_s": 762.3600680828094
+  }
+}
