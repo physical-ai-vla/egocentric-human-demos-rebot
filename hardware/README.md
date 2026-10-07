@@ -2,8 +2,9 @@
 
 HandUMI is a hand-worn variant of UMI. We use it as the human-side "skill capture gripper" for the reBot B601
 instead of designing our own. The base design is **[robonet-ai/handumi-hw](https://github.com/robonet-ai/handumi-hw)**
-(Apache-2.0, released 2026-08-20). Our print package was generated from commit `e58de33` of that repo. We have made no
-geometry changes to the upstream parts; the only thing left to design is a reBot-specific gripper tip (see below).
+(Apache-2.0, released 2026-08-20). Our print package was generated from commit `e58de33` of that repo. The upstream parts in
+`print/` are unchanged; **our modified parts (controller-support connector with a +10 mm plate, camera mount, servo cover)
+are in `mods/`**. A reBot-specific gripper tip is still to be designed (see below).
 License text and attribution are in `../upstream/` (`LICENSE-handumi-hw-apache-2.0.txt`, `NOTICE.md`).
 
 ## What is here
