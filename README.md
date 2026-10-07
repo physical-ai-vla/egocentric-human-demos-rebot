@@ -9,13 +9,14 @@ low-data ablation and splits the write-up into two reports, each in English and 
 ([Update v4](#update-v4-two-reports-r30-ablation-and-single-arm-approach)). Earlier states are tagged `report-v2-2026-09-30`
 and `report-v3-2026-10-04`.
 
-| Report | English | 한국어 |
-|---|---|---|
-| Part I: three-cube stacking (bimanual) | [`report/part1_stacking_en.pdf`](report/part1_stacking_en.pdf) | [`report/part1_stacking_ko.pdf`](report/part1_stacking_ko.pdf) |
-| Part II: single-arm approach to a cube | [`report/part2_approach_en.pdf`](report/part2_approach_en.pdf) | [`report/part2_approach_ko.pdf`](report/part2_approach_ko.pdf) |
+| Report | English | 한국어 | Full-length version |
+|---|---|---|---|
+| Part I: three-cube stacking (bimanual), 5 pp | [`report/part1_stacking_en.pdf`](report/part1_stacking_en.pdf) | [`report/part1_stacking_ko.pdf`](report/part1_stacking_ko.pdf) | `report/archive/part1_stacking_{en,ko}_full.pdf` (10 pp) |
+| Part II: single-arm approach to a cube, 2 pp | [`report/part2_approach_en.pdf`](report/part2_approach_en.pdf) | [`report/part2_approach_ko.pdf`](report/part2_approach_ko.pdf) | `report/archive/part2_approach_{en,ko}_full.pdf` (5 pp) |
 
-LaTeX sources sit next to the PDFs; figures are rebuilt by `report/figures/make_figures*.py`, `analysis/v4_r30_ablation.py`
-and `analysis/v4_hra_summary.py`. The v3 single report is kept in `report/archive/`.
+The main reports are short versions; the full-length versions in `report/archive/` carry every detail and table. LaTeX
+sources sit next to the PDFs; figures are rebuilt by `report/figures/make_figures*.py`, `analysis/v4_r30_ablation.py` and
+`analysis/v4_hra_summary.py`. The v3 single report is also in `report/archive/`.
 
 **Status: offline evaluation and training diagnostics.** Version-3 checkpoints were executed on the robot, and an
 ego-initialized model fine-tuned on 312 robot episodes completed full three-cube stacks in closed loop (operator
@@ -312,7 +313,7 @@ Evidence: `results/v4/hra/` (validation losses, calibration files, table-aware r
 
 | path | contents |
 |---|---|
-| `report/part{1,2}_*_{en,ko}.{tex,pdf}` | the four v4 reports; `report/archive/` = v3 |
+| `report/part{1,2}_*_{en,ko}.{tex,pdf}` | the four v4 short reports; `report/archive/` = full-length v4 versions and v3 |
 | `analysis/v4_r30_ablation.py` | R30 matched-step comparison + Fig. 8 |
 | `analysis/v4_hra_summary.py` | Part II numbers (validation loss, table-aware tallies, G frame, hand-eye) + Fig. 9 |
 | `results/v4/` | loss curves (ROBOT100 pretrain, three R30 arms), R30 summary, run status, `hra/` evidence |
@@ -357,7 +358,7 @@ python3 analysis/paired_bootstrap_r150.py                            # R150 250k
 python3 analysis/v3/ego_init_loss_compare.py                         # v3 matched initialization comparison
 python3 analysis/v4_r30_ablation.py && python3 analysis/v4_hra_summary.py   # v4 numbers + Figs. 8-9 (need matplotlib)
 python3 report/figures/make_figures.py && python3 report/figures/make_figures_v3.py
-cd report && for f in part1_stacking_en part1_stacking_ko part2_approach_en part2_approach_ko; do tectonic $f.tex; done
+cd report && for f in part1_stacking_en part1_stacking_ko part2_approach_en part2_approach_ko; do tectonic $f.tex; done   # full versions: cd archive
 # the Korean reports use xeCJK with the macOS fonts AppleMyungjo / Apple SD Gothic Neo
 ```
 

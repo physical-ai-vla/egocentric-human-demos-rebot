@@ -465,19 +465,32 @@ check("v4_hra", "10-06 glitch holds", 1, sum(r["end_class"] == "glitch_hold" for
 check("v4_hra", "10-07 cube-size stops / user stops", "69/58", f"{sum(r['end_class'] == 'cube_size_stop' for r in d7)}/{sum(r['end_class'] == 'user_stop' for r in d7)}", src)
 
 # ---------------------------------------------------------------- retired values must not reappear in the report
-tex = open(R / "report/part1_stacking_en.tex").read() + open(R / "report/part2_approach_en.tex").read()
+# Full-length v4 reports (report/archive/*_full.tex) carry every detail; the short main reports (5 + 2 pages) a subset.
+tex = open(R / "report/archive/part1_stacking_en_full.tex").read() + open(R / "report/archive/part2_approach_en_full.tex").read()
+short = " ".join((open(R / "report/part1_stacking_en.tex").read() + open(R / "report/part2_approach_en.tex").read()).split())
+for need in ("349", "561 (43.0\\%)", "233 train / 26", "39.9\\mm", "0.72 to 0.90", "13--32\\%", "6.59 versus 8.68", "4.8\\mm", "3.55 of 6",
+             "36.5\\% to 56.1\\%", "1.49$\\to$0.27", "58.9\\%", "5.6--14.7\\%", "48{,}411", "$-6.20$\\%", "1{,}482 of the 2{,}598", "422.5 to 90.5",
+             "99.7\\% (left) and 99.5\\%", "1{,}854/1{,}487", "59/64", "slots 10--17", "$-0.05$/$-0.03$", "$+0.81$/$+0.77$", "$+0.16$", "0.69--0.90",
+             "$-0.25$ and $+0.49$", "181/132", "0.945 for A and 0.244", "3.9$\\times$", "(0.0733 versus 0.0745", "0.544 and 0.493", "0.970 over 50k--100k",
+             "1.021 over 100k--150k", "471k, 305k and 310k", "71 checkpoints ran 49{,}431", "completed the full three-cube stack", "no success rate",
+             "median of 0.012", "95 takes", "37 of 57", "1.062 (p16--p84 0.959--1.274", "151 train, 20{,}319 rows", "0.354 (p5 0.188, p95 0.500)",
+             "0.16\\,px RMS", "169.5\\mm", "0.38\\mm over 60.4\\mm", "$z=-27.1$\\mm", "0.999", "0.21\\textdegree", "12.6\\mm, minimum 7.6\\mm",
+             "0.150 (0.066)", "0.299 (0.018)", "0.124 (0.110)", "0.132 (0.097)", "0.224 (0.020)", "0.190 (0.022)", "69 of the day's 127", "available on request"):
+    check("text_short", f"short version contains: {need[:40]}", "True", str(need in short), "report/part*_en.tex")
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
-    check("text", f"retired value absent: {bad}", "True", str(bad not in tex), "report/part*_en.tex")
-check("text", "repository marked available on request (private since 2026-10-07)", "True", str("available on request" in tex), "report/part*_en.tex")
+    check("text_short", f"retired value absent (short): {bad}", "True", str(bad not in short), "report/part*_en.tex")
+for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
+    check("text", f"retired value absent: {bad}", "True", str(bad not in tex), "report/archive/part*_en_full.tex")
+check("text", "repository marked available on request (private since 2026-10-07)", "True", str("available on request" in tex), "report/archive/part*_en_full.tex")
 for need in ("211.7k", "$-33\\%$", "$+13\\%$", "36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
-    check("text", f"value present: {need}", "True", str(need in tex), "report/part*_en.tex")
+    check("text", f"value present: {need}", "True", str(need in tex), "report/archive/part*_en_full.tex")
 
 for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,}598", "422.5 to 90.5", "99.7\\% (left) and 99.5\\%", "72.3\\%/74.6\\%",
              "45.2\\%/52.2\\%", "1{,}854/1{,}487", "59/64", "slots 10--17", "22.80", "$+0.81$/$+0.77$", "$-0.05$/$-0.03$", "$+0.16$",
              "0.69--0.90", "$-0.25$ and $+0.49$", "0.945 for A and 0.244", "3.9$\\times$", "0.49 over the first 5k", "(0.0733 versus 0.0745",
              "181/132", "88.6k", "71\ncheckpoints, 49{,}431", "median of 0.012", "95 of them", "37 of 57", "1.062 (p16--p84 0.959--1.274",
              "151 train episodes (20{,}319 rows)", "0.354 (p5 0.188, p95 0.500)", "0.150", "0.198", "8{,}397", "version 3", "completed the full three-cube stack", "with no success rate"):
-    check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/part*_en.tex")
+    check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/archive/part*_en_full.tex")
 # ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
 rd = open(R / "README.md").read()
 for need in ("349 recorded", "284 pass sync", "259 source", "561 bimanual", "233 train", "26 held-out", "1.5 / 5.7 mm", "11.2 / 39.9 mm",

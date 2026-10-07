@@ -406,68 +406,132 @@
 | v4_hra | plan sessions total / 10-06 / 10-07 | 192/65/127 | 192/65/127 | `results/v4/hra/plan_sessions.csv` | PASS |
 | v4_hra | 10-06 glitch holds | 1 | 1.0 | `results/v4/hra/plan_sessions.csv` | PASS |
 | v4_hra | 10-07 cube-size stops / user stops | 69/58 | 69/58 | `results/v4/hra/plan_sessions.csv` | PASS |
-| text | retired value absent: 16.5\% | True | True | `report/part*_en.tex` | PASS |
-| text | retired value absent: 20.8/23.8 | True | True | `report/part*_en.tex` | PASS |
-| text | retired value absent: versus 0.09 | True | True | `report/part*_en.tex` | PASS |
-| text | retired value absent: five early | True | True | `report/part*_en.tex` | PASS |
-| text | retired value absent: 6.1 and 5.6 | True | True | `report/part*_en.tex` | PASS |
-| text | retired value absent: 128\textdegree | True | True | `report/part*_en.tex` | PASS |
-| text | repository marked available on request (private since 2026-10-07) | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 211.7k | True | True | `report/part*_en.tex` | PASS |
-| text | value present: $-33\%$ | True | True | `report/part*_en.tex` | PASS |
-| text | value present: $+13\%$ | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 36.5\% | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 56.1\% | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 58.9\% | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 14.7 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 996 segments | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 4.6/17.0 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 18.5/23.8 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: versus 0.03 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: ten early | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 6.0 and 5.6 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 0.24 versus 0.07 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 39.9 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 3.55 | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 233 train | True | True | `report/part*_en.tex` | PASS |
-| text | value present: 561 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 48{,}411 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: $-6.20$\% | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 57{,}283 (51.4\%) | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 1{,}482 of the 2{,}598 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 422.5 to 90.5 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 99.7\% (left) and 99.5\% | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 72.3\%/74.6\% | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 45.2\%/52.2\% | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 1{,}854/1{,}487 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 59/64 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: slots 10--17 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 22.80 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: $+0.81$/$+0.77$ | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: $-0.05$/$-0.03$ | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: $+0.16$ | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 0.69--0.90 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: $-0.25$ and $+0.49$ | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 0.945 for A and 0.244 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 3.9$\times$ | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 0.49 over the first 5k | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: (0.0733 versus 0.0745 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 181/132 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 88.6k | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 349 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 561 (43.0\%) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 233 train / 26 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 39.9\mm | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.72 to 0.90 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 13--32\% | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 6.59 versus 8.68 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 4.8\mm | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 3.55 of 6 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 36.5\% to 56.1\% | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 1.49$\to$0.27 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 58.9\% | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 5.6--14.7\% | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 48{,}411 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: $-6.20$\% | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 1{,}482 of the 2{,}598 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 422.5 to 90.5 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 99.7\% (left) and 99.5\% | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 1{,}854/1{,}487 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 59/64 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: slots 10--17 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: $-0.05$/$-0.03$ | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: $+0.81$/$+0.77$ | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: $+0.16$ | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.69--0.90 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: $-0.25$ and $+0.49$ | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 181/132 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.945 for A and 0.244 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 3.9$\times$ | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: (0.0733 versus 0.0745 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.544 and 0.493 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.970 over 50k--100k | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 1.021 over 100k--150k | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 471k, 305k and 310k | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 71 checkpoints ran 49{,}431 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: completed the full three-cube stack | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: no success rate | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: median of 0.012 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 95 takes | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 37 of 57 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 1.062 (p16--p84 0.959--1.274 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 151 train, 20{,}319 rows | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.354 (p5 0.188, p95 0.500) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.16\,px RMS | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 169.5\mm | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.38\mm over 60.4\mm | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: $z=-27.1$\mm | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.999 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.21\textdegree | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 12.6\mm, minimum 7.6\mm | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.150 (0.066) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.299 (0.018) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.124 (0.110) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.132 (0.097) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.224 (0.020) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 0.190 (0.022) | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: 69 of the day's 127 | True | True | `report/part*_en.tex` | PASS |
+| text_short | short version contains: available on request | True | True | `report/part*_en.tex` | PASS |
+| text_short | retired value absent (short): 16.5\% | True | True | `report/part*_en.tex` | PASS |
+| text_short | retired value absent (short): 20.8/23.8 | True | True | `report/part*_en.tex` | PASS |
+| text_short | retired value absent (short): versus 0.09 | True | True | `report/part*_en.tex` | PASS |
+| text_short | retired value absent (short): five early | True | True | `report/part*_en.tex` | PASS |
+| text_short | retired value absent (short): 6.1 and 5.6 | True | True | `report/part*_en.tex` | PASS |
+| text_short | retired value absent (short): 128\textdegree | True | True | `report/part*_en.tex` | PASS |
+| text | retired value absent: 16.5\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | retired value absent: 20.8/23.8 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | retired value absent: versus 0.09 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | retired value absent: five early | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | retired value absent: 6.1 and 5.6 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | retired value absent: 128\textdegree | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | repository marked available on request (private since 2026-10-07) | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 211.7k | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: $-33\%$ | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: $+13\%$ | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 36.5\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 56.1\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 58.9\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 14.7 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 996 segments | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 4.6/17.0 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 18.5/23.8 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: versus 0.03 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: ten early | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 6.0 and 5.6 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 0.24 versus 0.07 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 39.9 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 3.55 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 233 train | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | value present: 561 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 48{,}411 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: $-6.20$\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 57{,}283 (51.4\%) | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 1{,}482 of the 2{,}598 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 422.5 to 90.5 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 99.7\% (left) and 99.5\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 72.3\%/74.6\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 45.2\%/52.2\% | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 1{,}854/1{,}487 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 59/64 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: slots 10--17 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 22.80 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: $+0.81$/$+0.77$ | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: $-0.05$/$-0.03$ | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: $+0.16$ | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 0.69--0.90 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: $-0.25$ and $+0.49$ | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 0.945 for A and 0.244 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 3.9$\times$ | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 0.49 over the first 5k | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: (0.0733 versus 0.0745 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 181/132 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 88.6k | True | True | `report/archive/part*_en_full.tex` | PASS |
 | text | v3 value present: 71
-checkpoints, 49{,}431 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: median of 0.012 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 95 of them | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 37 of 57 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 1.062 (p16--p84 0.959--1.274 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 151 train episodes (20{,}319 rows) | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 0.354 (p5 0.188, p95 0.500) | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 0.150 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 0.198 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: 8{,}397 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: version 3 | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: completed the full three-cube stack | True | True | `report/part*_en.tex` | PASS |
-| text | v3 value present: with no success rate | True | True | `report/part*_en.tex` | PASS |
+checkpoints, 49{,}431 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: median of 0.012 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 95 of them | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 37 of 57 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 1.062 (p16--p84 0.959--1.274 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 151 train episodes (20{,}319 rows) | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 0.354 (p5 0.188, p95 0.500) | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 0.150 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 0.198 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: 8{,}397 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: version 3 | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: completed the full three-cube stack | True | True | `report/archive/part*_en_full.tex` | PASS |
+| text | v3 value present: with no success rate | True | True | `report/archive/part*_en_full.tex` | PASS |
 | readme | value present: 349 recorded | True | True | `README.md` | PASS |
 | readme | value present: 284 pass sync | True | True | `README.md` | PASS |
 | readme | value present: 259 source | True | True | `README.md` | PASS |
@@ -513,4 +577,4 @@ checkpoints, 49{,}431 | True | True | `report/part*_en.tex` | PASS |
 | readme | stale text absent: This repository reports no closed-loop robot results | True | True | `README.md` | PASS |
 | readme | stale text absent: outcomes were not logged). | True | True | `README.md` | PASS |
 
-511 claims checked, 0 failed.
+575 claims checked, 0 failed.

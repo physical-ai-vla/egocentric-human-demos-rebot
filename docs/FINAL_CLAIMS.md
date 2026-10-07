@@ -1,7 +1,7 @@
 # Headline claims and their evidence
 
 Every row is also a row of `analysis/out/claim_audit.md`, which `analysis/verify_claims.py` regenerates from the
-files below (it exits 1 on any mismatch). Status as of 2026-10-07 (version 4): all rows VERIFIED (`analysis/verify_claims.py`: 511 checks, 0 failed). From version 4 the report is split into Part I (stacking) and Part II (approach); the checks run on the English sources, and the Korean versions are translations of them.
+files below (it exits 1 on any mismatch). Status as of 2026-10-07 (version 4): all rows VERIFIED (`analysis/verify_claims.py`: 575 checks, 0 failed). From version 4 the report is split into Part I (stacking) and Part II (approach), each as a short main version and a full-length version in `report/archive/`; the checks run on the English sources of both, and the Korean versions are translations of them.
 
 | Claim | Evidence file | Exact value | Status |
 |---|---|---|---|
