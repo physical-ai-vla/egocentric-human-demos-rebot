@@ -1,14 +1,15 @@
-# Upstream: HandUMI (robonet-ai)
+# Upstream: HandUMI (murobotics-ai, formerly robonet-ai)
 
 Our HandUMI → reBot work builds on two open-source repositories. Both are licensed Apache-2.0.
 
-| repo | URL (our `origin`) | base commit we build on | commit date |
+| repo | URL (our clones' `origin` still says `robonet-ai`, which redirects) | base commit we build on | commit date |
 |---|---|---|---|
-| handumi-sw | https://github.com/robonet-ai/handumi-sw | `33cc437229e43ed4bb92b25d4465248f0edbbcd9` ("feat(visualize): replace Rerun preview with lightweight OpenCV wrist view") | 2026-08-26 |
-| handumi-hw | https://github.com/robonet-ai/handumi-hw | `e58de33b9a88bd208e1a40e52ea575eaf68963db` ("docs link updated") | 2026-08-20 |
+| handumi-sw | https://github.com/murobotics-ai/handumi-sw | `33cc437229e43ed4bb92b25d4465248f0edbbcd9` ("feat(visualize): replace Rerun preview with lightweight OpenCV wrist view") | 2026-08-26 |
+| handumi-hw | https://github.com/murobotics-ai/handumi-hw | `e58de33b9a88bd208e1a40e52ea575eaf68963db` ("docs link updated") | 2026-08-20 |
 
-Note that the upstream READMEs link to `github.com/murobotics-ai/...`. That looks like the same project under another
-org name. The hashes above are the source of truth.
+The project moved from the `robonet-ai` to the `murobotics-ai` GitHub organization; the old `robonet-ai/...` URLs redirect
+there (checked 2026-10-12) and both base commits are in the moved repositories. Upstream `handumi-hw` has one newer commit,
+`fc7462a` (BOM priced per pair, camera switched to IMX335), which we have not adopted. The hashes above are the source of truth.
 
 ## handumi-sw → local branch `rebot-ego`
 
@@ -51,7 +52,7 @@ The fork adds **ego-bimanual capture for the reBot B601** (runbook: `new_files/d
 ### Reconstructing the fork
 
 ```bash
-git clone https://github.com/robonet-ai/handumi-sw && cd handumi-sw
+git clone https://github.com/murobotics-ai/handumi-sw && cd handumi-sw
 git checkout -b rebot-ego 33cc437229e43ed4bb92b25d4465248f0edbbcd9
 git apply ../handumi-rebot/upstream/handumi-sw-rebot-ego/tracked.patch
 cp -R ../handumi-rebot/upstream/handumi-sw-rebot-ego/new_files/. .

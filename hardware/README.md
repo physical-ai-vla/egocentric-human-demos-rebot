@@ -1,8 +1,11 @@
 # HandUMI hardware (reBot skill-capture gripper)
 
-HandUMI is a hand-worn variant of UMI. We use it as the human-side "skill capture gripper" for the reBot B601
-instead of designing our own. The base design is **[robonet-ai/handumi-hw](https://github.com/robonet-ai/handumi-hw)**
-(Apache-2.0, released 2026-08-20). Our print package was generated from commit `e58de33` of that repo. The upstream parts in
+HandUMI is an open-source, hand-worn variant of UMI for robot arms with parallel-jaw grippers, by BrikHMP18 (Apache-2.0):
+thumb + index/middle cradles, a natural pinch drives the jaw, the jaw width is read from a Feetech servo encoder, detachable
+robot-specific tips, and upstream wrist SE(3) comes from a PICO 4 Ultra / Quest 3 controller. We use it as the human-side
+"skill capture gripper" for the reBot B601 instead of designing our own. The base design is
+**[murobotics-ai/handumi-hw](https://github.com/murobotics-ai/handumi-hw)** (released 2026-08-20 as `robonet-ai/handumi-hw`;
+that URL now redirects). Upstream has since moved to an IMX335 camera and a per-pair BOM (`fc7462a`); we did not follow. Our print package was generated from commit `e58de33` of that repo. The upstream parts in
 `print/` are unchanged; **our modified parts (controller-support connector with a +10 mm plate, camera mount, servo cover)
 are in `mods/`**. A reBot-specific gripper tip is still to be designed (see below).
 The same hardware files (plus the upstream STEP sources and BOM) are kept as a standalone repository,

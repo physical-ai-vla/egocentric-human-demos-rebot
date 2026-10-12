@@ -24,7 +24,7 @@
 \end{abstract}
 
 \section{실험 구성}
-작업자는 오른손에 HandUMI~\cite{chi2024umi} 한 대(손목 어안 카메라, IMU, 조 엔코더)를 착용하며, 손목 자세는
+작업자는 오른손에 손 착용형 UMI~\cite{chi2024umi} 변형인 HandUMI~\cite{handumi_hw} 한 대(손목 어안 카메라, IMU, 조 엔코더)를 착용하며, 손목 자세는
 MASt3R-SLAM~\cite{murai2025mast3rslam}에서 얻는다(제1부). 레이블은 제1부의 데카르트 계약(50.05\,ms 간격의 상대 자세 16개,
 15\,Hz 행)을 따른다. 왼팔과 그리퍼는 더미로서 손실에서 마스킹되므로 20차원 중 9차원만 지도된다. 모델은 X-VLA
 (0.9B)~\cite{zheng2025xvla}이며 제1부의 레시피(소프트 프롬프트 슬롯 20, 배치 8, 8-bit AdamW, bf16)로 RTX~4090에서 학습한다.
@@ -102,5 +102,6 @@ v1은 가까운 시작점에서는 큐브를 향해 움직였고, 먼 큐브에 
 \bibitem{chi2024umi} C.~Chi \emph{et al.}, ``Universal manipulation interface,'' in \emph{RSS}, 2024.
 \bibitem{murai2025mast3rslam} R.~Murai, E.~Dexheimer, and A.~J. Davison, ``MASt3R-SLAM,'' in \emph{CVPR}, 2025.
 \bibitem{zheng2025xvla} J.~Zheng \emph{et al.}, ``X-VLA: Soft-prompted transformer as scalable cross-embodiment VLA model,'' in \emph{ICLR}, 2026.
+\bibitem{handumi_hw} BrikHMP18, ``HandUMI: Hardware,'' \url{https://github.com/murobotics-ai/handumi-hw}, 2026.
 \end{thebibliography}
 \end{document}

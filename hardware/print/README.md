@@ -1,4 +1,4 @@
-# HandUMI full print package  (2026-08-26, from robonet-ai/handumi-hw @ e58de33)
+# HandUMI full print package  (2026-08-26, from murobotics-ai/handumi-hw (formerly robonet-ai) @ e58de33)
 
 PLA, Bambu 0.20mm Standard, 2 walls / 20% infill. All 3mf are X1C projects (open in Bambu Studio;
 for H2D just switch printer and re-slice). STLs are the originals translated to positive coords.

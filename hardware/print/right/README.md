@@ -1,6 +1,6 @@
 # HandUMI Right — print package (generated 2026-08-26)
 
-Source: https://github.com/robonet-ai/handumi-hw  (commit e58de33, 2026-08-20)
+Source: https://github.com/murobotics-ai/handumi-hw  (commit e58de33, 2026-08-20)
 `stl/` = hardware/STL/right_handumi/*.stl, geometry untouched, only translated so
 all coords are positive (original files had negative Z; Bambu CLI refused them).
 

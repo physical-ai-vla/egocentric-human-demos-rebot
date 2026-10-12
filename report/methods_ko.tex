@@ -57,7 +57,9 @@
 \end{figure*}
 
 \section{기록 장치와 수집 프로토콜}\label{sec:rig}
-\textbf{장치} (\code{collection/configs/handumi/hardware_handumi_v1.yaml}). 각 HandUMI 유닛에는 Arducam 어안 UVC 카메라
+\textbf{장치} (\code{collection/configs/handumi/hardware_handumi_v1.yaml}). HandUMI~\cite{handumi_hw}는 오픈소스 손 착용형 UMI 변형이다
+(\url{https://github.com/murobotics-ai/handumi-hw}, 이전 \texttt{robonet-ai}). 커밋 \texttt{e58de33}의 본체, 링크, 서보 엔코더 조를 쓰고
+VR 추적은 쓰지 않는다(제1부 III절). 각 HandUMI 유닛에는 Arducam 어안 UVC 카메라
 (1920$\times$1080, 30\,fps, MJPG), Teensy~4.1에 연결된 ICM-42688-P IMU(공칭 200\,Hz, 보드마다 자체 오실레이터를 가지므로 실측은
 201.6, 197.9\,Hz), 조(jaw) 인코더로 쓰는 Feetech STS3215 서보(4096 ticks/rev, 100\,Hz 폴링)가 달려 있다. 두 손목 카메라가 같은
 USB 시리얼을 보고하므로 제품 이름으로 구분한다. 고정된 Logitech C922(640$\times$480, 30\,fps, 자동 초점 끔)가 탁자를 기록한다.
@@ -369,5 +371,6 @@ gcal1 캘리퍼 보간점, 수집기의 열림/닫힘 파일). 각 데이터셋�
 \bibitem{lipman2023flow} Y.~Lipman \emph{et al.}, ``Flow matching for generative modeling,'' in \emph{ICLR}, 2023.
 \bibitem{caron2024pink} S.~Caron \emph{et al.}, ``Pink: Python inverse kinematics based on Pinocchio,'' \url{https://github.com/stephane-caron/pink}, 2024.
 \bibitem{black2025rtc} K.~Black, M.~Y. Galliker, and S.~Levine, ``Real-time execution of action chunking flow policies,'' \emph{arXiv:2506.07339}, 2025.
+\bibitem{handumi_hw} BrikHMP18 and HandUMI contributors, ``HandUMI: Hardware,'' GitHub repository, \url{https://github.com/murobotics-ai/handumi-hw} (first published as \texttt{robonet-ai/handumi-hw}), Apache-2.0, 2026. Commit \texttt{e58de33} used.
 \end{thebibliography}
 \end{document}

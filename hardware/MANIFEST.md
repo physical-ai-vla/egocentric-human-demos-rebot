@@ -28,5 +28,5 @@ The STL, 3MF and STEP files are allowed above 5 MB. Two STLs are larger than 5 M
 The 3MF plate projects (0.7–3.4 MB each) embed sliced G-code for the X1C. The 3MF metadata was checked and holds no
 printer serial or access code.
 
-The upstream STEP sources are not copied. They live in `robonet-ai/handumi-hw` at `e58de33`, under `hardware/STEP/`;
+The upstream STEP sources are not copied. They live in `murobotics-ai/handumi-hw` (formerly robonet-ai) at `e58de33`, under `hardware/STEP/`;
 see `../upstream/README.md`.

@@ -81,8 +81,8 @@ scratch 학습 손실의 절반 미만에서 출발하며, 그 이점은 약 100
 
 \section{관련 연구 및 동기}
 \textbf{휴대형 시연 인터페이스.} UMI~\cite{chi2024umi}는 손목 어안 카메라로 손에 든 그리퍼 시연을 기록하고, 장면별 지도에 대해
-ORB-SLAM3로 자세를 복원한다. DexCap~\cite{wang2024dexcap} 등 관련 시스템은 다지 손을 대상으로 한다. 본 장치는 UMI의 손목 카메라
-설계를 따르되 손마다 IMU와 조 인코더를, 그리고 고정 헤드 카메라를 추가하였다.
+ORB-SLAM3로 자세를 복원한다. DexCap~\cite{wang2024dexcap} 등 관련 시스템은 다지 손을 대상으로 한다. 본 장치는 서보 엔코더 조를 갖춘
+오픈소스 손 착용형 UMI 변형인 HandUMI~\cite{handumi_hw}이며, VR 추적을 손목 IMU로 대체하고 고정 헤드 카메라를 추가하였다(\ref{sec:hw}절).
 \textbf{에고센트릭 인간으로부터의 학습.} EgoMimic~\cite{kareer2024egomimic}과 MimicPlay~\cite{wang2023mimicplay}는 인간 에고센트릭
 영상과 로봇 데이터로 로봇 정책을 공동 학습하며, Ego4D~\cite{grauman2022ego4d}와 같은 대규모 에고센트릭 코퍼스는 스케일링 논거의
 동기가 된다. 이들 연구는 폐루프 성능 향상을 보고하는 반면, 본 연구는 처리 후 무엇이 남고 모델이 오프라인에서 무엇을 학습하는지를
@@ -121,9 +121,25 @@ Kalibr~\cite{furgale2013kalibr}로 캘리브레이션한 IMU 기반 스케일 �
 \end{figure*}
 
 \section{HandUMI 하드웨어}\label{sec:hw}
-수집 장치는 직접 설계하지 않았다. 양손에 각각 착용하는 HandUMI 장치는 \texttt{robonet-ai/handumi-hw}(Apache-2.0, 2026년 8월 20일
-공개)로 공개된 손 착용형 UMI 변형이다. 업스트림 커밋 \texttt{e58de33}에서 출력하였고, 부품 세 개를 수정했으며, 업스트림의 추적 방식을
-교체하였다. 출력 패키지, 수정 부품, STEP 원본, BOM, IMU 펌웨어는 별도의 하드웨어 저장소(\texttt{umihand})로 관리하며, 코드 저장소의
+수집 장치는 직접 설계하지 않았다. 양손에 각각 HandUMI 장치~\cite{handumi_hw}를 착용한다. 업스트림 커밋 \texttt{e58de33}에서
+출력하였고, 부품 세 개를 수정했으며, 업스트림의 추적 방식을 교체하였다.
+
+\textbf{업스트림 HandUMI.} HandUMI는 평행 조 그리퍼를 쓰는 로봇 팔을 위한 오픈소스 손 착용형 UMI~\cite{chi2024umi} 변형이다.
+BrikHMP18이 Apache-2.0으로 GitHub \texttt{murobotics-ai} 조직에 공개하였다(\url{https://github.com/murobotics-ai/handumi-hw}.
+2026년 8월 20일 \texttt{robonet-ai/handumi-hw}로 처음 공개되었고, 지금은 그 주소가 이곳으로 연결된다). UMI는 데이터 수집에서 로봇을
+없앴고, YUBI~\cite{ohkawa2026yubi}는 그 아이디어를 손가락으로 구동하는 그리퍼에 적용하였다. HandUMI는 그 평행 조 버전이다. 엄지와
+검지·중지에 장착하며 자연스러운 집기 동작으로 닫힌다. 그리퍼 팁은 탈착식이어서(AgileX Piper, ARX X5, Dream Gripper, WidowX AI,
+UMI 그리퍼) 본체 하나로 여러 로봇을 지원한다. 업스트림은 세 가지 신호를 기록한다. 손목 SE(3)는 VR 헤드셋(PICO 4 Ultra 또는 Meta
+Quest 3)과 그 컨트롤러에서 얻으며, 컨트롤러는 출력한 컨트롤러 지지대로 장치에 고정된다. 조 폭은 피두셜이나 영상 분할로 추정하지
+않고 Feetech 서보 엔코더에서 직접 읽는다. 세 번째 신호는 손목 시점 영상이다. 손가락 받침은 저자의 손 3D 스캔을 바탕으로 모델링되었다.
+동반 저장소 \texttt{handumi-sw}~\cite{handumi_sw}는 시연을 기록·시각화하고 양팔 로봇으로 리타게팅한다.
+
+\textbf{우리가 가져온 것.} 하드웨어는 Arducam 어안 카메라를 쓰는 커밋 \texttt{e58de33}이다. 업스트림은 이후 BOM을 한 쌍 기준으로 바꾸고
+카메라를 IMX335로 교체했지만(커밋 \texttt{fc7462a}), 우리는 이 변경을 반영하지 않았다. \texttt{handumi-sw}는 커밋 \texttt{33cc437}에서
+포크하여 reBot B601용 초기 에고 양팔 경로로 사용하였다. 이 포크에는 Quest~3S 추적, AprilTag 엔드이펙터 추적, Feetech 조 텔레메트리,
+reBot B601 로봇 프로파일, 추적 품질 게이트를 추가하였다. 제1부와 제2부의 시연은 이 경로로 기록하지 않았다. 시연은 우리 자체
+수집기로 기록하였으며, 이 수집기는 업스트림 본체와 조 엔코더는 그대로 쓰고 VR 추적을 손목 카메라와 추가한 IMU로 대체한다(아래).
+출력 패키지, 수정 부품, STEP 원본, BOM, IMU 펌웨어는 별도의 하드웨어 저장소(\texttt{umihand})로 관리하며, 코드 저장소의
 \texttt{hardware/}와 \texttt{collection/firmware/}에도 같은 내용이 있다.
 
 \textbf{기구 및 출력.} 장치는 엄지와 검지/중지 받침이 있는 손 지지 베이스, 어안 카메라 지지대, 그리고 손가락을 오므리는 동작을 탈착식
@@ -637,5 +653,8 @@ held-out 또는 폐루프 비교, 로봇에서의 결과 로깅(로거는 있으
 \bibitem{murai2025mast3rslam} R.~Murai, E.~Dexheimer, and A.~J. Davison, ``MASt3R-SLAM: Real-time dense SLAM with 3D reconstruction priors,'' in \emph{CVPR}, 2025.
 \bibitem{furgale2013kalibr} P.~Furgale, J.~Rehder, and R.~Siegwart, ``Unified temporal and spatial calibration for multi-sensor systems,'' in \emph{IROS}, 2013.
 \bibitem{xiao2024florence2} B.~Xiao \emph{et al.}, ``Florence-2: Advancing a unified representation for a variety of vision tasks,'' in \emph{CVPR}, 2024.
+\bibitem{handumi_hw} BrikHMP18 and HandUMI contributors, ``HandUMI: Hardware,'' GitHub repository, \url{https://github.com/murobotics-ai/handumi-hw} (first published as \texttt{robonet-ai/handumi-hw}), Apache-2.0, 2026. Commit \texttt{e58de33} used.
+\bibitem{handumi_sw} BrikHMP18 and HandUMI contributors, ``HandUMI: Software,'' GitHub repository, \url{https://github.com/murobotics-ai/handumi-sw} (first published as \texttt{robonet-ai/handumi-sw}), Apache-2.0, 2026. Commit \texttt{33cc437} used.
+\bibitem{ohkawa2026yubi} T.~Ohkawa, J.~Arima, Y.~Noguchi \emph{et al.}, ``YUBI: Yielding universal bidigital interface for bimanual dexterous manipulation at scale,'' arXiv:2606.10244, 2026.
 \end{thebibliography}
 \end{document}

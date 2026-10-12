@@ -90,7 +90,8 @@ do not make.
 \section{Related and Motivating Work}
 \textbf{Portable demonstration interfaces.} UMI~\cite{chi2024umi} records hand-held gripper demonstrations with a wrist fisheye
 camera and recovers poses with ORB-SLAM3 against a per-scene map; DexCap~\cite{wang2024dexcap} and related systems target dexterous
-hands. Our device follows UMI's wrist-camera design but adds an IMU and a jaw encoder per hand and a fixed head camera.
+hands. Our device is HandUMI~\cite{handumi_hw}, an open-source hand-worn UMI variant for parallel-jaw grippers with a
+servo-encoder jaw. We replace its VR tracking with a wrist IMU and add a fixed head camera (Sec.~\ref{sec:hw}).
 \textbf{Learning from egocentric humans.} EgoMimic~\cite{kareer2024egomimic} and MimicPlay~\cite{wang2023mimicplay} co-train robot
 policies on human egocentric video and robot data; large egocentric corpora such as Ego4D~\cite{grauman2022ego4d} motivate the
 scaling argument. These works report closed-loop gains; we instead audit what survives processing and what a model learns
@@ -129,9 +130,27 @@ and evaluation. No stage uses robot rollouts.}
 \end{figure*}
 
 \section{HandUMI Hardware}\label{sec:hw}
-We did not design a capture device. Each hand wears a HandUMI unit, the hand-worn UMI variant released as
-\texttt{robonet-ai/handumi-hw} (Apache-2.0, 20 August 2026). We printed it from upstream commit \texttt{e58de33}, changed three
-parts, and replaced the upstream tracking. The print package, our modified parts, the STEP sources, the BOM and the IMU
+We did not design a capture device. Each hand wears a HandUMI unit~\cite{handumi_hw}; we printed it from upstream commit
+\texttt{e58de33}, changed three parts, and replaced the upstream tracking.
+
+\textbf{Upstream HandUMI.} HandUMI is an open-source, hand-worn variant of UMI~\cite{chi2024umi} for robot arms with
+parallel-jaw grippers, published by BrikHMP18 under Apache-2.0 in the \texttt{murobotics-ai} GitHub organization
+(\url{https://github.com/murobotics-ai/handumi-hw}; first released on 20 August 2026 as \texttt{robonet-ai/handumi-hw}, which
+now redirects there). UMI removed the robot from data collection, and YUBI~\cite{ohkawa2026yubi} applied that idea to a
+finger-driven gripper. HandUMI is the parallel-jaw counterpart. It mounts on the thumb and the index and middle fingers and
+closes with a natural pinch. Its gripper tips are detachable (AgileX Piper, ARX X5, Dream Gripper, WidowX AI and the UMI
+gripper), so one body serves several robots. Upstream records three signals. Wrist SE(3) comes from a VR headset (PICO 4
+Ultra or Meta Quest 3) and its controllers, which a printed controller support holds on the device. Jaw width is read
+directly from a Feetech servo encoder, not inferred from fiducials or image segmentation. The third signal is wrist-view
+video. The finger cradles were modeled on a 3D scan of the author's hand. A companion repository,
+\texttt{handumi-sw}~\cite{handumi_sw}, records, visualizes and retargets the demonstrations to bimanual arms.
+
+\textbf{What we took from it.} The hardware is commit \texttt{e58de33}, which uses an Arducam fisheye camera. Upstream has since
+priced the BOM per pair and moved to an IMX335 camera (commit \texttt{fc7462a}); we did not adopt that change. We forked
+\texttt{handumi-sw} at commit \texttt{33cc437} for an early ego-bimanual path to the reBot B601. The fork added Quest~3S
+tracking, AprilTag end-effector tracking, Feetech jaw telemetry, a reBot B601 robot profile and tracking-quality gates.
+None of the demonstrations in Parts~I and~II were recorded with that path. They come from our own collector, which keeps
+the upstream body and jaw encoder but replaces VR tracking with the wrist camera and an added IMU (below). The print package, our modified parts, the STEP sources, the BOM and the IMU
 firmware are kept as a separate hardware repository (\texttt{umihand}) and are mirrored in \texttt{hardware/} and
 \texttt{collection/firmware/} of the code repository.
 
@@ -697,5 +716,8 @@ checkpoints is the next experiment.
 \bibitem{murai2025mast3rslam} R.~Murai, E.~Dexheimer, and A.~J. Davison, ``MASt3R-SLAM: Real-time dense SLAM with 3D reconstruction priors,'' in \emph{CVPR}, 2025.
 \bibitem{furgale2013kalibr} P.~Furgale, J.~Rehder, and R.~Siegwart, ``Unified temporal and spatial calibration for multi-sensor systems,'' in \emph{IROS}, 2013.
 \bibitem{xiao2024florence2} B.~Xiao \emph{et al.}, ``Florence-2: Advancing a unified representation for a variety of vision tasks,'' in \emph{CVPR}, 2024.
+\bibitem{handumi_hw} BrikHMP18 and HandUMI contributors, ``HandUMI: Hardware,'' GitHub repository, \url{https://github.com/murobotics-ai/handumi-hw} (first published as \texttt{robonet-ai/handumi-hw}), Apache-2.0, 2026. Commit \texttt{e58de33} used.
+\bibitem{handumi_sw} BrikHMP18 and HandUMI contributors, ``HandUMI: Software,'' GitHub repository, \url{https://github.com/murobotics-ai/handumi-sw} (first published as \texttt{robonet-ai/handumi-sw}), Apache-2.0, 2026. Commit \texttt{33cc437} used.
+\bibitem{ohkawa2026yubi} T.~Ohkawa, J.~Arima, Y.~Noguchi \emph{et al.}, ``YUBI: Yielding universal bidigital interface for bimanual dexterous manipulation at scale,'' arXiv:2606.10244, 2026.
 \end{thebibliography}
 \end{document}

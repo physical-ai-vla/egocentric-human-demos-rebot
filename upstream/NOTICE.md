@@ -2,10 +2,10 @@
 
 This repository contains material derived from:
 
-- **HandUMI software**: https://github.com/robonet-ai/handumi-sw, Copyright 2026 BrikHMP18 and HandUMI contributors,
+- **HandUMI software**: https://github.com/murobotics-ai/handumi-sw, Copyright 2026 BrikHMP18 and HandUMI contributors,
   licensed under the Apache License, Version 2.0 (`LICENSE-handumi-apache-2.0.txt`). It includes third-party
   components under their own notices, reproduced in that file.
-- **HandUMI hardware**: https://github.com/robonet-ai/handumi-hw, Copyright 2026 BrikHMP18, licensed under the
+- **HandUMI hardware**: https://github.com/murobotics-ai/handumi-hw, Copyright 2026 BrikHMP18, licensed under the
   Apache License, Version 2.0 (`LICENSE-handumi-hw-apache-2.0.txt`).
 
 As required by Apache-2.0 §4(b), modified files carry this prominent notice: **the files under

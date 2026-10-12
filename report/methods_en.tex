@@ -60,7 +60,9 @@ deployment. Every arrow is followed by a gate with a logged reason.}
 \end{figure*}
 
 \section{Recording Rig and Collection Protocols}\label{sec:rig}
-\textbf{Rig} (\code{collection/configs/handumi/hardware_handumi_v1.yaml}). Each HandUMI unit carries an Arducam fisheye UVC
+\textbf{Rig} (\code{collection/configs/handumi/hardware_handumi_v1.yaml}). HandUMI~\cite{handumi_hw} is an open-source hand-worn
+UMI variant (\url{https://github.com/murobotics-ai/handumi-hw}, formerly \texttt{robonet-ai}); we use its body, linkage and
+servo-encoder jaw from commit \texttt{e58de33} but not its VR tracking (Part~I, Sec.~III). Each unit carries an Arducam fisheye UVC
 camera (1920$\times$1080, 30\,fps, MJPG), an ICM-42688-P IMU on a Teensy~4.1 (nominal 200\,Hz; measured 201.6 and 197.9\,Hz
 because each board has its own oscillator) and a Feetech STS3215 servo used as a jaw encoder (4096 ticks/rev, polled at
 100\,Hz). Both wrist cameras report the same USB serial, so they are matched by product name. A fixed Logitech C922
@@ -397,5 +399,6 @@ their outputs are.
 \bibitem{lipman2023flow} Y.~Lipman \emph{et al.}, ``Flow matching for generative modeling,'' in \emph{ICLR}, 2023.
 \bibitem{caron2024pink} S.~Caron \emph{et al.}, ``Pink: Python inverse kinematics based on Pinocchio,'' \url{https://github.com/stephane-caron/pink}, 2024.
 \bibitem{black2025rtc} K.~Black, M.~Y. Galliker, and S.~Levine, ``Real-time execution of action chunking flow policies,'' \emph{arXiv:2506.07339}, 2025.
+\bibitem{handumi_hw} BrikHMP18 and HandUMI contributors, ``HandUMI: Hardware,'' GitHub repository, \url{https://github.com/murobotics-ai/handumi-hw} (first published as \texttt{robonet-ai/handumi-hw}), Apache-2.0, 2026. Commit \texttt{e58de33} used.
 \end{thebibliography}
 \end{document}

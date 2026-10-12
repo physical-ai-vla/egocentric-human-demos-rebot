@@ -49,7 +49,7 @@ corrections that turned out to matter (Secs.~\ref{sec:deploy}--\ref{sec:corr}). 
 of the deployment interface was not used during these runs.
 
 \section{Setup}\label{sec:setup}
-\textbf{Device and poses.} The operator wears one HandUMI unit, a UMI-style~\cite{chi2024umi} hand-worn gripper (Part I, Sec.~III), on the right hand: a 1080p30 fisheye wrist
+\textbf{Device and poses.} The operator wears one HandUMI unit~\cite{handumi_hw}, a UMI-style~\cite{chi2024umi} hand-worn gripper (Part I, Sec.~III), on the right hand: a 1080p30 fisheye wrist
 camera, a 200\,Hz IMU and a jaw encoder; a fixed Logitech C922 records the table. Wrist poses come from MASt3R-SLAM~\cite{murai2025mast3rslam} on the RGB
 video alone; Part I describes the pipeline.
 
@@ -314,5 +314,6 @@ towards the cube from nearby starts; with no logged outcomes, how often they rea
 \bibitem{zheng2025xvla} J.~Zheng \emph{et al.}, ``X-VLA: Soft-prompted transformer as scalable cross-embodiment vision-language-action model,'' in \emph{ICLR}, 2026 (arXiv:2510.10274).
 \bibitem{murai2025mast3rslam} R.~Murai, E.~Dexheimer, and A.~J. Davison, ``MASt3R-SLAM: Real-time dense SLAM with 3D reconstruction priors,'' in \emph{CVPR}, 2025.
 \bibitem{tsai1989handeye} R.~Y. Tsai and R.~K. Lenz, ``A new technique for fully autonomous and efficient 3D robotics hand/eye calibration,'' \emph{IEEE Trans. Robotics and Automation}, 1989.
+\bibitem{handumi_hw} BrikHMP18 and HandUMI contributors, ``HandUMI: Hardware,'' GitHub repository, \url{https://github.com/murobotics-ai/handumi-hw} (first published as \texttt{robonet-ai/handumi-hw}), Apache-2.0, 2026. Commit \texttt{e58de33} used.
 \end{thebibliography}
 \end{document}

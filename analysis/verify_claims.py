@@ -494,9 +494,14 @@ for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,
 # ---------------------------------------------------------------- v4.1: HandUMI hardware section (Part I full, Sec. III)
 # Each pair: text in the report  ->  the same fact in the hardware / collector docs kept in this repository.
 hw_ev = {p: open(R / p).read() for p in ("hardware/README.md", "hardware/mods/README.md", "hardware/print/README.md",
-                                          "collection/README.md", "collection/firmware/teensy_imu/PROTOCOL.md")}
+                                          "collection/README.md", "collection/firmware/teensy_imu/PROTOCOL.md",
+                                          "upstream/README.md", "upstream/NOTICE.md")}
 for need, src, ev in (("\\texttt{e58de33}", "hardware/README.md", "`e58de33`"),
-                      ("Apache-2.0, 20 August 2026", "hardware/README.md", "Apache-2.0, released 2026-08-20"),
+                      ("first released on 20 August 2026 as \\texttt{robonet-ai/handumi-hw}", "hardware/README.md", "released 2026-08-20 as `robonet-ai/handumi-hw`"),
+                      ("which\nnow redirects there", "upstream/README.md", "the old `robonet-ai/...` URLs redirect"),
+                      ("published by BrikHMP18 under Apache-2.0", "upstream/NOTICE.md", "Copyright 2026 BrikHMP18"),
+                      ("(commit \\texttt{fc7462a})", "upstream/README.md", "`fc7462a` (BOM priced per pair, camera switched to IMX335)"),
+                      ("\\texttt{handumi-sw} at commit \\texttt{33cc437}", "upstream/README.md", "`33cc437229e43ed4bb92b25d4465248f0edbbcd9`"),
                       ("9 plates and 26 parts", "hardware/print/README.md", "9 plates, 26 parts"),
                       ("about 9\\,h and 250\\,g", "hardware/print/README.md", "**~9h** | **~250 g**"),
                       ("One unit is 12 printed parts", "hardware/README.md", "(12 parts per hand)"),

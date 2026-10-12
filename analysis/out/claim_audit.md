@@ -534,8 +534,17 @@ checkpoints, 49{,}431 | True | True | `report/archive/part*_en_full.tex` | PASS 
 | text | v3 value present: with no success rate | True | True | `report/archive/part*_en_full.tex` | PASS |
 | v41_hw | report: \texttt{e58de33} | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | v41_hw | evidence: `e58de33` | True | True | `hardware/README.md` | PASS |
-| v41_hw | report: Apache-2.0, 20 August 2026 | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
-| v41_hw | evidence: Apache-2.0, released 2026-08-20 | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: first released on 20 August 2026 as \tex | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: released 2026-08-20 as `robonet-ai/handu | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: which
+now redirects there | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: the old `robonet-ai/...` URLs redirect | True | True | `upstream/README.md` | PASS |
+| v41_hw | report: published by BrikHMP18 under Apache-2.0 | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: Copyright 2026 BrikHMP18 | True | True | `upstream/NOTICE.md` | PASS |
+| v41_hw | report: (commit \texttt{fc7462a}) | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: `fc7462a` (BOM priced per pair, camera s | True | True | `upstream/README.md` | PASS |
+| v41_hw | report: \texttt{handumi-sw} at commit \texttt{33 | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: `33cc437229e43ed4bb92b25d4465248f0edbbcd | True | True | `upstream/README.md` | PASS |
 | v41_hw | report: 9 plates and 26 parts | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | v41_hw | evidence: 9 plates, 26 parts | True | True | `hardware/print/README.md` | PASS |
 | v41_hw | report: about 9\,h and 250\,g | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
@@ -608,4 +617,4 @@ hand | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | readme | stale text absent: This repository reports no closed-loop robot results | True | True | `README.md` | PASS |
 | readme | stale text absent: outcomes were not logged). | True | True | `README.md` | PASS |
 
-605 claims checked, 0 failed.
+613 claims checked, 0 failed.

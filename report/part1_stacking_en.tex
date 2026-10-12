@@ -39,7 +39,7 @@ recorded and all six orders appear in training, so we test neither spatial nor t
 condenses the full report (kept in the repository) and brings run status to 7 October 2026.
 
 \section{Data and Poses}\label{sec:data}
-\textbf{Device and task.} Each hand wears a HandUMI unit: a 1080p30 fisheye wrist camera, a 200\,Hz IMU and a jaw encoder; a
+\textbf{Device and task.} Each hand wears a HandUMI unit~\cite{handumi_hw} (open source; VR tracking replaced by a wrist IMU): a 1080p30 fisheye wrist camera, a 200\,Hz IMU and a jaw encoder; a
 fixed Logitech C922 records the table. Three 50\mm cubes are stacked on a plate in one of six orders named by the instruction.
 One operator recorded 349 episodes in 15 sessions on 15--17 September 2026 (2.20\,h; median 23.05\,s), with the next order chosen
 as the least collected (51--64 per order), so orders are balanced, not randomized. Cube layouts varied through manual resets but
@@ -249,5 +249,6 @@ checkpoints (10k--150k); record layouts and hold out layout regions and two orde
 \bibitem{murai2025mast3rslam} R.~Murai, E.~Dexheimer, and A.~J. Davison, ``MASt3R-SLAM: Real-time dense SLAM with 3D reconstruction priors,'' in \emph{CVPR}, 2025.
 \bibitem{zheng2025xvla} J.~Zheng \emph{et al.}, ``X-VLA: Soft-prompted transformer as scalable cross-embodiment vision-language-action model,'' in \emph{ICLR}, 2026.
 \bibitem{cadene2024lerobot} R.~Cadene \emph{et al.}, ``LeRobot: State-of-the-art machine learning for real-world robotics in PyTorch,'' 2024.
+\bibitem{handumi_hw} BrikHMP18, ``HandUMI: Hardware,'' \url{https://github.com/murobotics-ai/handumi-hw}, 2026.
 \end{thebibliography}
 \end{document}

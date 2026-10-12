@@ -40,7 +40,7 @@ MimicPlay~\cite{wang2023mimicplay}는 인간 영상으로부터의 폐루프 성
 전체 보고서(저장소에 보관)를 압축하고 실행 상태를 2026년 10월 7일 기준으로 갱신한다.
 
 \section{데이터와 자세}\label{sec:data}
-\textbf{장치와 과제.} 양손에 각각 HandUMI 장치를 착용한다. 1080p30 어안(fisheye) 손목 카메라, 200\,Hz IMU, 조(jaw) 인코더로
+\textbf{장치와 과제.} 양손에 각각 HandUMI 장치~\cite{handumi_hw}(오픈소스, VR 추적은 손목 IMU로 대체)를 착용한다. 1080p30 어안(fisheye) 손목 카메라, 200\,Hz IMU, 조(jaw) 인코더로
 구성되며, 고정된 Logitech C922가 탁자를 기록한다. 50\mm{} 큐브 세 개를 지시문이 지정하는 여섯 순서 중 하나로 접시 위에 쌓는다.
 조작자 한 명이 2026년 9월 15--17일에 15개 세션에서 에피소드 349개(2.20\,h, 중앙값 23.05\,s)를 기록하였다. 다음 순서는 가장 적게
 수집된 순서로 정해지므로(순서당 51--64개) 순서는 무작위가 아니라 균형을 맞춘 것이다. 큐브 배치는 수동 리셋을 통해 달라졌지만 기록되지
@@ -249,5 +249,6 @@ IK 추적을 기록한다. R312c로 300k 파인튜닝한 에고 초기화 모델
 \bibitem{murai2025mast3rslam} R.~Murai, E.~Dexheimer, and A.~J. Davison, ``MASt3R-SLAM: Real-time dense SLAM with 3D reconstruction priors,'' in \emph{CVPR}, 2025.
 \bibitem{zheng2025xvla} J.~Zheng \emph{et al.}, ``X-VLA: Soft-prompted transformer as scalable cross-embodiment vision-language-action model,'' in \emph{ICLR}, 2026.
 \bibitem{cadene2024lerobot} R.~Cadene \emph{et al.}, ``LeRobot: State-of-the-art machine learning for real-world robotics in PyTorch,'' 2024.
+\bibitem{handumi_hw} BrikHMP18, ``HandUMI: Hardware,'' \url{https://github.com/murobotics-ai/handumi-hw}, 2026.
 \end{thebibliography}
 \end{document}
