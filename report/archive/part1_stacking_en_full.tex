@@ -12,7 +12,7 @@
 \begin{document}
 \title{Egocentric Human Demonstrations for a Bimanual Robot\\Part I: Three-Cube Stacking}
 \author{\IEEEauthorblockN{Jeong Hwan Lee}
-\IEEEauthorblockA{Technical report, version 4, 7 October 2026 \quad alnrg2arg@gmail.com\\
+\IEEEauthorblockA{Technical report, version 4.1, 12 October 2026 \quad alnrg2arg@gmail.com\\
 Part II covers single-arm approach data. Code, results and sample data are available on request.}}
 \maketitle
 
@@ -49,7 +49,8 @@ Both ego initializations start at less than half the scratch training loss; the 
 them has yet been run on the robot. An ego-initialized model fine-tuned on 312 robot episodes completed full three-cube
 stacks in closed loop, but trials were not counted, so we report a demonstration, not a success rate. No experiment tests
 new spatial layouts or unseen stacking orders; we state explicitly which claims this data can and cannot support. The
-single-arm approach work that was Sec.~XII of version 3 now forms Part II.
+single-arm approach work that was Sec.~XII of version 3 now forms Part II. Version 4.1 adds a description of the capture
+hardware: the upstream HandUMI design we built, the parts we changed, and the IMU we added.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -65,6 +66,8 @@ This report documents one complete pass through that chain on real data and asks
 \emph{after all processing, how much robot-executable action structure does a pretrained vision-language-action (VLA) model
 learn from retargeted egocentric human demonstrations, and does it use the task-order instruction?} Our contributions are:
 \begin{itemize}
+\item a build record of the hand-worn capture hardware: the upstream design, three modified parts, an added wrist IMU
+with its firmware protocol, and the device-identity pitfalls (Sec.~\ref{sec:hw});
 \item a 349-episode bimanual egocentric dataset of three-cube stacking with six balanced stacking orders, with full sensor
 calibration and per-episode metadata (Sec.~\ref{sec:data});
 \item a documented processing funnel from raw human video to robot joint-space segments, reporting what each gate removes
@@ -79,7 +82,7 @@ exposed (Sec.~\ref{sec:v3}), and transfer diagnostics that separate visual, stat
 We are explicit about scope. The evaluation is open-loop on held-out \emph{episodes}; it is not a closed-loop robot test,
 and because layouts were not recorded and all six orders appear in training, it measures neither spatial nor task-order
 generalization. Sections~\ref{sec:intro}--\ref{sec:follow} are unchanged in substance from version 2 (30 September 2026) and
-Sections~\ref{sec:v3}--\ref{sec:transfer} from version 3 (4 October 2026), apart from run status; Sec.~\ref{sec:r30} is new.
+Sections~\ref{sec:v3}--\ref{sec:transfer} from version 3 (4 October 2026), apart from run status; Sec.~\ref{sec:r30} is new in version 4 and Sec.~\ref{sec:hw} in version 4.1 (12 October 2026).
 Version 3 also contained a single-arm approach study; it has grown into a separate report (Part II), which reuses the
 device, pose pipeline and action contract described here. Sec.~\ref{sec:lim} lists the experiments needed for the claims we
 do not make.
@@ -125,8 +128,59 @@ and evaluation. No stage uses robot rollouts.}
 \label{fig:pipeline}
 \end{figure*}
 
+\section{HandUMI Hardware}\label{sec:hw}
+We did not design a capture device. Each hand wears a HandUMI unit, the hand-worn UMI variant released as
+\texttt{robonet-ai/handumi-hw} (Apache-2.0, 20 August 2026). We printed it from upstream commit \texttt{e58de33}, changed three
+parts, and replaced the upstream tracking. The print package, our modified parts, the STEP sources, the BOM and the IMU
+firmware are kept as a separate hardware repository (\texttt{umihand}) and are mirrored in \texttt{hardware/} and
+\texttt{collection/firmware/} of the code repository.
+
+\textbf{Mechanics and print.} The unit is a hand-support base with thumb and index/middle cradles, a fisheye camera support,
+and a crank linkage (MR63ZZ bearings, LM4UU linear bearings on a 4\mm shaft) that couples the finger closure to a detachable
+gripper tip and to a servo read as the jaw encoder. One unit is 12 printed parts. The package has 9 plates and 26 parts for both hands
+plus a generic tip, about 9\,h and 250\,g of PLA (0.20\mm layers, 2 walls, 20\% infill, Bambu X1C), about 4\,h and 110\,g per
+hand. Supports are needed only on the controller support. The cradles come from the upstream author's hand scan, so a
+fit-check plate (cradles and base, about 1\,h) is printed first for each hand. Tight holes are fixed with $+0.05$ to $0.1$\mm XY
+hole compensation, not by scaling parts. The upstream STLs have negative $z$, which the slicer CLI rejects; we only translate
+them. The tip in the package is the AgileX-Piper parallel-jaw tip, kept as a temporary tip for mechanism and pinch tests; no
+reBot-specific tip has been designed yet.
+
+\textbf{Electronics.} Each unit carries an Arducam 160\textdegree{} fisheye USB camera (1920$\times$1080 MJPG, 30\,fps), a
+Feetech STS3215 servo read as the jaw encoder through a Waveshare serial-bus adapter (CH343, 1\,Mbaud, servo id 1, needs its
+12\,V supply before the servo answers), and a wrist IMU. The upstream BOM is about US\$110 per unit.
+
+\textbf{Deviations from upstream.} (i) No VR tracking: upstream takes wrist SE(3) from a PICO/Quest controller, we recover it from
+the wrist camera plus IMU (Sec.~\ref{sec:proc}). The controller support is therefore replaced by our connector. (ii) An added
+IMU per unit: a Teensy~4.1 with an ICM-42688-P on SPI. The sensor has no 400\,Hz rate, so it runs at 200\,Hz; the data-ready
+interrupt time-stamps each sample on the device, and packets (40-byte payload, CRC-16) go over USB CDC with a 1\,Hz status
+packet that reports dropped samples and buffer high-water. The host stamps arrival times and fits the device-to-host clock
+offline, so USB jitter does not enter the timeline. The board must be flashed as USB Serial; a RawHID build shows no serial
+port and looks dead. (iii) A fixed Logitech C922 head camera at 640$\times$480, autofocus off with a fixed focus, because
+autofocus changed $f_x$ between sessions (417, 531, 501\,px).
+
+\textbf{Our part changes.} Three parts were edited in Shapr3D (Fusion~360 and FreeCAD were tried and rejected), shown in
+Fig.~\ref{fig:hwmods}: a new left controller-support connector (8 September, 85.7$\times$21.4$\times$42.1\mm, printed twice),
+whose clamp plate was then lengthened by 10\mm (14 September, depth 21.4$\to$31.4\mm; 15\mm and three $z{+}30$\mm variants
+were rejected); a camera mount with a second window (8 September); and a servo cover with a cable opening widened to almost
+its full width (11 September). Outlines and mounting points are unchanged.
+
+\textbf{Device identity.} Both Arducams report the same USB serial (\texttt{UC684}), so the recorder matches them by product
+name and refuses to record unless exactly one device matches each name; IMUs are matched by Teensy USB serial and jaws by
+adapter serial plus servo id, never by port order. One jaw crosses the encoder's 4095$\to$0 seam, so jaw normalization is
+circular. A 12.2\,V supply sets the servo's ``voltage'' error bit against its 12.0\,V limit; this is telemetry, not a fault.
+Part~I uses both units (profile \texttt{handumi\_v1}); Part~II uses the right unit only.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig10_handumi_mods.pdf}
+\caption{Our changes to the upstream HandUMI parts (renders of the printed meshes). (a,b) camera mount: a second window cut
+above the existing one; (c,d) servo controller cover: the cable opening widened; (e) the new left controller-support connector
+that replaces the upstream VR-controller support; (f) its clamp plate lengthened by 10\mm, the current version.}
+\label{fig:hwmods}
+\end{figure*}
+
 \section{Dataset and Task Design}\label{sec:data}
-\textbf{Hardware.} Each hand wears a HandUMI unit: a 1920$\times$1080, 30\,fps fisheye camera, a 200\,Hz IMU and a jaw encoder
+\textbf{Recording.} Each hand wears a HandUMI unit (Sec.~\ref{sec:hw}): a 1920$\times$1080, 30\,fps fisheye camera, a 200\,Hz IMU and a jaw encoder
 sampled at 100\,Hz. A fixed head-mounted Logitech C922 records a 640$\times$480, 30\,fps view of the table; this is the global
 view given to the policy (Fig.~\ref{fig:dataset}a). All streams are written to one MCAP file and three videos per episode.
 

@@ -532,6 +532,37 @@ checkpoints, 49{,}431 | True | True | `report/archive/part*_en_full.tex` | PASS 
 | text | v3 value present: version 3 | True | True | `report/archive/part*_en_full.tex` | PASS |
 | text | v3 value present: completed the full three-cube stack | True | True | `report/archive/part*_en_full.tex` | PASS |
 | text | v3 value present: with no success rate | True | True | `report/archive/part*_en_full.tex` | PASS |
+| v41_hw | report: \texttt{e58de33} | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: `e58de33` | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: Apache-2.0, 20 August 2026 | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: Apache-2.0, released 2026-08-20 | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: 9 plates and 26 parts | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: 9 plates, 26 parts | True | True | `hardware/print/README.md` | PASS |
+| v41_hw | report: about 9\,h and 250\,g | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: **~9h** | **~250 g** | True | True | `hardware/print/README.md` | PASS |
+| v41_hw | report: One unit is 12 printed parts | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: (12 parts per hand) | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: about 4\,h and 110\,g per
+hand | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: about 4 h and 110 g per hand | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: US\$110 per unit | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: roughly US$110 per unit | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: CH343, 1\,Mbaud, servo id 1 | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: servo id 1 on our units | True | True | `hardware/README.md` | PASS |
+| v41_hw | report: runs at 200\,Hz | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: the firmware runs it at 200 Hz | True | True | `collection/README.md` | PASS |
+| v41_hw | report: 40-byte payload, CRC-16 | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: ### type 0x01 IMU (len = 40) | True | True | `collection/firmware/teensy_imu/PROTOCOL.md` | PASS |
+| v41_hw | report: (417, 531, 501\,px) | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: fx by session (417/531/501) | True | True | `collection/README.md` | PASS |
+| v41_hw | report: (\texttt{UC684}) | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: same USB serial `UC684` | True | True | `collection/README.md` | PASS |
+| v41_hw | report: 85.7$\times$21.4$\times$42.1\mm, printed | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: 85.7 × 21.4 × 42.1 mm | True | True | `hardware/mods/README.md` | PASS |
+| v41_hw | report: depth 21.4$\to$31.4\mm | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: depth 21.4 → 31.4 mm | True | True | `hardware/mods/README.md` | PASS |
+| v41_hw | report: 12.2\,V supply | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| v41_hw | evidence: 12.2 V supply against the 12.0 V EEPROM  | True | True | `collection/README.md` | PASS |
 | readme | value present: 349 recorded | True | True | `README.md` | PASS |
 | readme | value present: 284 pass sync | True | True | `README.md` | PASS |
 | readme | value present: 259 source | True | True | `README.md` | PASS |
@@ -577,4 +608,4 @@ checkpoints, 49{,}431 | True | True | `report/archive/part*_en_full.tex` | PASS 
 | readme | stale text absent: This repository reports no closed-loop robot results | True | True | `README.md` | PASS |
 | readme | stale text absent: outcomes were not logged). | True | True | `README.md` | PASS |
 
-575 claims checked, 0 failed.
+605 claims checked, 0 failed.

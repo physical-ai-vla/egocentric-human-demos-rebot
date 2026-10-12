@@ -491,6 +491,28 @@ for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,
              "181/132", "88.6k", "71\ncheckpoints, 49{,}431", "median of 0.012", "95 of them", "37 of 57", "1.062 (p16--p84 0.959--1.274",
              "151 train episodes (20{,}319 rows)", "0.354 (p5 0.188, p95 0.500)", "0.150", "0.198", "8{,}397", "version 3", "completed the full three-cube stack", "with no success rate"):
     check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/archive/part*_en_full.tex")
+# ---------------------------------------------------------------- v4.1: HandUMI hardware section (Part I full, Sec. III)
+# Each pair: text in the report  ->  the same fact in the hardware / collector docs kept in this repository.
+hw_ev = {p: open(R / p).read() for p in ("hardware/README.md", "hardware/mods/README.md", "hardware/print/README.md",
+                                          "collection/README.md", "collection/firmware/teensy_imu/PROTOCOL.md")}
+for need, src, ev in (("\\texttt{e58de33}", "hardware/README.md", "`e58de33`"),
+                      ("Apache-2.0, 20 August 2026", "hardware/README.md", "Apache-2.0, released 2026-08-20"),
+                      ("9 plates and 26 parts", "hardware/print/README.md", "9 plates, 26 parts"),
+                      ("about 9\\,h and 250\\,g", "hardware/print/README.md", "**~9h** | **~250 g**"),
+                      ("One unit is 12 printed parts", "hardware/README.md", "(12 parts per hand)"),
+                      ("about 4\\,h and 110\\,g per\nhand", "hardware/README.md", "about 4 h and 110 g per hand"),
+                      ("US\\$110 per unit", "hardware/README.md", "roughly US$110 per unit"),
+                      ("CH343, 1\\,Mbaud, servo id 1", "hardware/README.md", "servo id 1 on our units"),
+                      ("runs at 200\\,Hz", "collection/README.md", "the firmware runs it at 200 Hz"),
+                      ("40-byte payload, CRC-16", "collection/firmware/teensy_imu/PROTOCOL.md", "### type 0x01 IMU (len = 40)"),
+                      ("(417, 531, 501\\,px)", "collection/README.md", "fx by session (417/531/501)"),
+                      ("(\\texttt{UC684})", "collection/README.md", "same USB serial `UC684`"),
+                      ("85.7$\\times$21.4$\\times$42.1\\mm, printed twice", "hardware/mods/README.md", "85.7 × 21.4 × 42.1 mm"),
+                      ("depth 21.4$\\to$31.4\\mm", "hardware/mods/README.md", "depth 21.4 → 31.4 mm"),
+                      ("12.2\\,V supply", "collection/README.md", "12.2 V supply against the 12.0 V EEPROM limit")):
+    check("v41_hw", f"report: {need[:40]}", "True", str(need in tex), "report/archive/part1_stacking_en_full.tex")
+    check("v41_hw", f"evidence: {ev[:40]}", "True", str(ev in hw_ev[src]), src)
+
 # ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
 rd = open(R / "README.md").read()
 for need in ("349 recorded", "284 pass sync", "259 source", "561 bimanual", "233 train", "26 held-out", "1.5 / 5.7 mm", "11.2 / 39.9 mm",

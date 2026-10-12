@@ -11,13 +11,17 @@ and `report-v3-2026-10-04`.
 
 | Report | English | 한국어 | Full-length version |
 |---|---|---|---|
-| Part I: three-cube stacking (bimanual), 4 pp | [`report/part1_stacking_en.pdf`](report/part1_stacking_en.pdf) | [`report/part1_stacking_ko.pdf`](report/part1_stacking_ko.pdf) | `report/archive/part1_stacking_{en,ko}_full.pdf` (10 pp) |
+| Part I: three-cube stacking (bimanual), 4 pp | [`report/part1_stacking_en.pdf`](report/part1_stacking_en.pdf) | [`report/part1_stacking_ko.pdf`](report/part1_stacking_ko.pdf) | `report/archive/part1_stacking_{en,ko}_full.pdf` (11 pp, v4.1) |
 | Part II: single-arm approach to a cube, 2 pp | [`report/part2_approach_en.pdf`](report/part2_approach_en.pdf) | [`report/part2_approach_ko.pdf`](report/part2_approach_ko.pdf) | `report/archive/part2_approach_{en,ko}_full.pdf` (5 pp) |
 | Methods and pipeline (how every stage works), 6 pp | [`report/methods_en.pdf`](report/methods_en.pdf) | [`report/methods_ko.pdf`](report/methods_ko.pdf) | — |
 
 The main reports are short versions; the full-length versions in `report/archive/` carry every detail and table. LaTeX
 sources sit next to the PDFs; figures are rebuilt by `report/figures/make_figures*.py`, `analysis/v4_r30_ablation.py` and
 `analysis/v4_hra_summary.py`. The v3 single report is also in `report/archive/`.
+The Part I full version 4.1 (2026-10-12) adds Sec. III, *HandUMI hardware*: the upstream design we built (robonet-ai/handumi-hw
+`e58de33`), print and electronics, our deviations (no VR tracking, added Teensy 4.1 + ICM-42688-P wrist IMU, fixed-focus head
+C922), our three modified parts (Fig. 2, `report/figures/make_fig10_handumi_mods.py`) and device-identity pitfalls. The hardware
+files are in `hardware/` and in the standalone hardware repository [`physical-ai-vla/umihand`](https://github.com/physical-ai-vla/umihand).
 
 **Status: offline evaluation and training diagnostics.** Version-3 checkpoints were executed on the robot, and an
 ego-initialized model fine-tuned on 312 robot episodes completed full three-cube stacks in closed loop (operator
@@ -320,7 +324,7 @@ The full working code of the project was added, so the repository is no longer o
 | `collection/` | latest `handumi_collector` (robot_like_v1, HRA_red, HRA_A100 origin protocol, C922-view tile), firmware, calibration configs; depends on `experimental/` (uv path dependency) |
 | `hra/` | single-arm approach pipeline: base-frame linking, robot camera and hand-eye calibration, robotcam v2 rendering, origin-plane scale, origin yaw, G frame, table-aware QP, held-out evaluation |
 | `deploy/` | inference core, robot UI (PLAN/RTC/cube-size stop/trial logger), Pink IK, checkpoint loaders, MIT robot service |
-| `hardware/` | HandUMI print package (3MF/STL) and build notes |
+| `hardware/` | HandUMI print package (3MF/STL), our modified parts (`mods/`) and build notes; standalone copy in `physical-ai-vla/umihand` |
 | `experimental/` | wearable teleop (VIO), AprilTag V0 collector, RGB-D body tracking |
 | `upstream/` | patch and new files on top of robonet-ai/handumi-sw (Apache-2.0) |
 | `training/launchers/`, `training/archivers/`, `training/umi76/` | node launchers (4090 / 5090), archivers, base widening |
@@ -328,7 +332,8 @@ The full working code of the project was added, so the repository is no longer o
 
 Path placeholders that had been substituted for the public release were restored to the real working paths, and the reBot
 URDF and MASt3R build patch are included. Many scripts hard-code the roots they ran from; each folder's `MANIFEST.md` lists
-the source of every file. Datasets and checkpoints are still not included. The same tree is in `physical-ai-vla/umihand`.
+the source of every file. Datasets and checkpoints are still not included. `physical-ai-vla/umihand` holds the hardware only (print files, modified parts,
+STEP, BOM, IMU firmware).
 
 ### Repository map additions (v4)
 

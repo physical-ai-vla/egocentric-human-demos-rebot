@@ -5,6 +5,9 @@ instead of designing our own. The base design is **[robonet-ai/handumi-hw](https
 (Apache-2.0, released 2026-08-20). Our print package was generated from commit `e58de33` of that repo. The upstream parts in
 `print/` are unchanged; **our modified parts (controller-support connector with a +10 mm plate, camera mount, servo cover)
 are in `mods/`**. A reBot-specific gripper tip is still to be designed (see below).
+The same hardware files (plus the upstream STEP sources and BOM) are kept as a standalone repository,
+[`physical-ai-vla/umihand`](https://github.com/physical-ai-vla/umihand). The build is described in the Part I full
+report, Sec. III (`../report/archive/part1_stacking_en_full.pdf`).
 License text and attribution are in `../upstream/` (`LICENSE-handumi-hw-apache-2.0.txt`, `NOTICE.md`).
 
 ## What is here
@@ -50,12 +53,12 @@ Our capture rig deviates from upstream in three ways:
 - **No VR tracking.** The upstream design gets wrist SE(3) from a PICO/Quest controller. Our collector gets wrist
   motion from the fisheye camera plus an IMU. The Quest-tracker variant lives in our `handumi-sw` fork; see
   `../upstream/`.
-- **Added wrist IMU per unit**: a Teensy 4.1 with an ICM-42688-P on SPI. Firmware is in `../collector/firmware/`
+- **Added wrist IMU per unit**: a Teensy 4.1 with an ICM-42688-P on SPI. Firmware is in `../collection/firmware/`
   (`teensy_imu/`, plus a `xiao_imu/` variant and the `bringup/` probes).
 - **Head camera**: a Logitech C922 at 640x480@30 is the shared human/robot policy view.
 
-Device identities (USB serials, product names) and the bring-up procedure are in `../collector/README.md` and
-`../collector/docs/IMU_BRINGUP.md`.
+Device identities (USB serials, product names) and the bring-up procedure are in `../collection/README.md` and
+`../collection/docs/IMU_BRINGUP.md`.
 
 ## Open items
 
