@@ -467,6 +467,7 @@ check("v4_hra", "10-07 cube-size stops / user stops", "69/58", f"{sum(r['end_cla
 # ---------------------------------------------------------------- retired values must not reappear in the report
 # Full-length v4 reports (report/archive/*_full.tex) carry every detail; the short main reports (5 + 2 pages) a subset.
 tex = open(R / "report/archive/part1_stacking_en_full.tex").read() + open(R / "report/archive/part2_approach_en_full.tex").read()
+_full_needs = []  # every string required in the full-length reports; re-checked in the unified report below
 short = " ".join((open(R / "report/part1_stacking_en.tex").read() + open(R / "report/part2_approach_en.tex").read()).split())
 for need in ("349", "561 (43.0\\%)", "233 train / 26", "39.9\\mm", "0.72 to 0.90", "13--32\\%", "6.59 versus 8.68", "4.8\\mm", "3.55 of 6",
              "36.5\\% to 56.1\\%", "1.49$\\to$0.27", "58.9\\%", "5.6--14.7\\%", "48{,}411", "$-6.20$\\%", "1{,}482 of the 2{,}598", "422.5 to 90.5",
@@ -477,6 +478,7 @@ for need in ("349", "561 (43.0\\%)", "233 train / 26", "39.9\\mm", "0.72 to 0.90
              "0.16\\,px RMS", "169.5\\mm", "0.38\\mm over 60.4\\mm", "$z=-27.1$\\mm", "0.999", "0.21\\textdegree", "12.6\\mm, minimum 7.6\\mm",
              "0.150 (0.066)", "0.299 (0.018)", "0.124 (0.110)", "0.132 (0.097)", "0.224 (0.020)", "0.190 (0.022)", "69 of the day's 127", "available on request"):
     check("text_short", f"short version contains: {need[:40]}", "True", str(need in short), "report/part*_en.tex")
+    _full_needs.append(need)
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
     check("text_short", f"retired value absent (short): {bad}", "True", str(bad not in short), "report/part*_en.tex")
 for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
@@ -484,6 +486,7 @@ for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", 
 check("text", "repository marked available on request (private since 2026-10-07)", "True", str("available on request" in tex), "report/archive/part*_en_full.tex")
 for need in ("211.7k", "$-33\\%$", "$+13\\%$", "36.5\\%", "56.1\\%", "58.9\\%", "14.7", "996 segments", "4.6/17.0", "18.5/23.8", "versus 0.03", "ten early", "6.0 and 5.6", "0.24 versus 0.07", "39.9", "3.55", "233 train", "561"):
     check("text", f"value present: {need}", "True", str(need in tex), "report/archive/part*_en_full.tex")
+    _full_needs.append(need)
 
 for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,}598", "422.5 to 90.5", "99.7\\% (left) and 99.5\\%", "72.3\\%/74.6\\%",
              "45.2\\%/52.2\\%", "1{,}854/1{,}487", "59/64", "slots 10--17", "22.80", "$+0.81$/$+0.77$", "$-0.05$/$-0.03$", "$+0.16$",
@@ -491,6 +494,7 @@ for need in ("48{,}411", "$-6.20$\\%", "57{,}283 (51.4\\%)", "1{,}482 of the 2{,
              "181/132", "88.6k", "71\ncheckpoints, 49{,}431", "median of 0.012", "95 of them", "37 of 57", "1.062 (p16--p84 0.959--1.274",
              "151 train episodes (20{,}319 rows)", "0.354 (p5 0.188, p95 0.500)", "0.150", "0.198", "8{,}397", "version 3", "completed the full three-cube stack", "with no success rate"):
     check("text", f"v3 value present: {need[:40]}", "True", str(need in tex), "report/archive/part*_en_full.tex")
+    _full_needs.append(need)
 # ---------------------------------------------------------------- v4.1: HandUMI hardware section (Part I full, Sec. III)
 # Each pair: text in the report  ->  the same fact in the hardware / collector docs kept in this repository.
 hw_ev = {p: open(R / p).read() for p in ("hardware/README.md", "hardware/mods/README.md", "hardware/print/README.md",
@@ -516,6 +520,7 @@ for need, src, ev in (("\\texttt{e58de33}", "hardware/README.md", "`e58de33`"),
                       ("depth 21.4$\\to$31.4\\mm", "hardware/mods/README.md", "depth 21.4 → 31.4 mm"),
                       ("12.2\\,V supply", "collection/README.md", "12.2 V supply against the 12.0 V EEPROM limit")):
     check("v41_hw", f"report: {need[:40]}", "True", str(need in tex), "report/archive/part1_stacking_en_full.tex")
+    _full_needs.append(need)
     check("v41_hw", f"evidence: {ev[:40]}", "True", str(ev in hw_ev[src]), src)
 
 # HandUMI attribution: every English report must say the device is BrikHMP18's design, not ours (user requirement 2026-10-12).
@@ -527,6 +532,29 @@ for f, need in (("report/archive/part1_stacking_en_full.tex", "The capture devic
                 ("report/part2_approach_en.tex", "designed by BrikHMP18, not by us"),
                 ("report/methods_en.tex", "designed and published by BrikHMP18, not by us")):
     check("attribution", f"{f.split('/')[-1]}: {need[:40]}", "True", str(need in open(R / f).read()), f)
+
+# ---------------------------------------------------------------- v5: unified report (report/report_en.tex)
+# The unified report merges Part I full, Part II full and Methods. Every string required above must be in it; where the
+# unified text words a value differently, the same value is required in its new wording.
+uni = " ".join(open(R / "report/report_en.tex").read().split())
+REPHRASED = {
+    "0.72 to 0.90": "0.72 at $k{=}1$ to 0.90", "3.55 of 6": "is 3.55 (chance 3.5", "36.5\\% to 56.1\\%": "v1 single anchor & 36.5\\%",
+    "1.49$\\to$0.27": "from 1.49 to 0.27\\,rad", "5.6--14.7\\%": "$-14.7$ to $-5.6\\%$", "0.544 and 0.493": "& 0.544 & 0.493",
+    "0.970 over 50k--100k": "& 0.970 & 0.856", "1.021 over 100k--150k": "& 1.021 & 0.914",
+    "71 checkpoints ran 49{,}431": "71 checkpoints, 49{,}431 control cycles", "95 takes": "in 95 of them",
+    "151 train, 20{,}319 rows": "151 train episodes (20{,}319 rows)", "0.38\\mm over 60.4\\mm": "0.38\\mm over a 60.4\\mm baseline",
+    "12.6\\mm, minimum 7.6\\mm": "p50 12.6\\mm and minimum 7.6\\mm", "69 of the day's 127": "69 of the 127 ended on the cube-size stop",
+    "first released on 20 August 2026 as \\texttt{robonet-ai/handumi-hw}": "first released on 20 August 2026 under \\texttt{robonet-ai}, which now redirects",
+    "which\nnow redirects there": "which now redirects",
+    "published by BrikHMP18 under Apache-2.0": "by BrikHMP18 (\\url{https://github.com/murobotics-ai/handumi-hw}, Apache-2.0)",
+}
+for need in dict.fromkeys(_full_needs):
+    want = " ".join(REPHRASED.get(need, need).split())
+    check("v5_unified", f"unified contains: {want[:40]}", "True", str(want in uni), "report/report_en.tex")
+for bad in ("16.5\\%", "20.8/23.8", "versus 0.09", "five early", "6.1 and 5.6", "128\\textdegree"):
+    check("v5_unified", f"retired value absent (unified): {bad}", "True", str(bad not in uni), "report/report_en.tex")
+for need in ("The capture device is \\emph{not our design}", "designed and published by BrikHMP18 (not our design)"):
+    check("attribution", f"report_en.tex: {need[:40]}", "True", str(need in uni), "report/report_en.tex")
 
 # ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
 rd = open(R / "README.md").read()

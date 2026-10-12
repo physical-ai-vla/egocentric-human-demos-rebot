@@ -579,6 +579,122 @@ hand | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | attribution | part2_approach_en_full.tex: designed and published by BrikHMP18, not | True | True | `report/archive/part2_approach_en_full.tex` | PASS |
 | attribution | part2_approach_en.tex: designed by BrikHMP18, not by us | True | True | `report/part2_approach_en.tex` | PASS |
 | attribution | methods_en.tex: designed and published by BrikHMP18, not | True | True | `report/methods_en.tex` | PASS |
+| v5_unified | unified contains: 349 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 561 (43.0\%) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 233 train / 26 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 39.9\mm | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.72 at $k{=}1$ to 0.90 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 13--32\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 6.59 versus 8.68 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 4.8\mm | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: is 3.55 (chance 3.5 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: v1 single anchor & 36.5\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: from 1.49 to 0.27\,rad | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 58.9\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $-14.7$ to $-5.6\%$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 48{,}411 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $-6.20$\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 1{,}482 of the 2{,}598 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 422.5 to 90.5 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 99.7\% (left) and 99.5\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 1{,}854/1{,}487 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 59/64 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: slots 10--17 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $-0.05$/$-0.03$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $+0.81$/$+0.77$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $+0.16$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.69--0.90 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $-0.25$ and $+0.49$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 181/132 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.945 for A and 0.244 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 3.9$\times$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: (0.0733 versus 0.0745 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: & 0.544 & 0.493 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: & 0.970 & 0.856 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: & 1.021 & 0.914 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 471k, 305k and 310k | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 71 checkpoints, 49{,}431 control cycles | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: completed the full three-cube stack | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: no success rate | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: median of 0.012 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: in 95 of them | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 37 of 57 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 1.062 (p16--p84 0.959--1.274 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 151 train episodes (20{,}319 rows) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.354 (p5 0.188, p95 0.500) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.16\,px RMS | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 169.5\mm | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.38\mm over a 60.4\mm baseline | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $z=-27.1$\mm | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.999 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.21\textdegree | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: p50 12.6\mm and minimum 7.6\mm | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.150 (0.066) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.299 (0.018) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.124 (0.110) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.132 (0.097) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.224 (0.020) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.190 (0.022) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 69 of the 127 ended on the cube-size sto | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: available on request | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 211.7k | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $-33\%$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: $+13\%$ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 36.5\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 56.1\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 14.7 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 996 segments | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 4.6/17.0 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 18.5/23.8 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: versus 0.03 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: ten early | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 6.0 and 5.6 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.24 versus 0.07 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 39.9 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 3.55 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 233 train | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 561 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 57{,}283 (51.4\%) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 72.3\%/74.6\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 45.2\%/52.2\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 22.80 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.49 over the first 5k | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 88.6k | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 71 checkpoints, 49{,}431 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 95 of them | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 151 train episodes (20{,}319 rows) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.150 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 0.198 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 8{,}397 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: version 3 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: with no success rate | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: \texttt{e58de33} | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: first released on 20 August 2026 under \ | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: which now redirects | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: by BrikHMP18 (\url{https://github.com/mu | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: (commit \texttt{fc7462a}) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: \texttt{handumi-sw} at commit \texttt{33 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 9 plates and 26 parts | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: about 9\,h and 250\,g | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: One unit is 12 printed parts | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: about 4\,h and 110\,g per hand | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: US\$110 per unit | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: CH343, 1\,Mbaud, servo id 1 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: runs at 200\,Hz | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 40-byte payload, CRC-16 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: (417, 531, 501\,px) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: (\texttt{UC684}) | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 85.7$\times$21.4$\times$42.1\mm, printed | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: depth 21.4$\to$31.4\mm | True | True | `report/report_en.tex` | PASS |
+| v5_unified | unified contains: 12.2\,V supply | True | True | `report/report_en.tex` | PASS |
+| v5_unified | retired value absent (unified): 16.5\% | True | True | `report/report_en.tex` | PASS |
+| v5_unified | retired value absent (unified): 20.8/23.8 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | retired value absent (unified): versus 0.09 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | retired value absent (unified): five early | True | True | `report/report_en.tex` | PASS |
+| v5_unified | retired value absent (unified): 6.1 and 5.6 | True | True | `report/report_en.tex` | PASS |
+| v5_unified | retired value absent (unified): 128\textdegree | True | True | `report/report_en.tex` | PASS |
+| attribution | report_en.tex: The capture device is \emph{not our desi | True | True | `report/report_en.tex` | PASS |
+| attribution | report_en.tex: designed and published by BrikHMP18 (not | True | True | `report/report_en.tex` | PASS |
 | readme | value present: 349 recorded | True | True | `README.md` | PASS |
 | readme | value present: 284 pass sync | True | True | `README.md` | PASS |
 | readme | value present: 259 source | True | True | `README.md` | PASS |
@@ -624,4 +740,4 @@ hand | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | readme | stale text absent: This repository reports no closed-loop robot results | True | True | `README.md` | PASS |
 | readme | stale text absent: outcomes were not logged). | True | True | `README.md` | PASS |
 
-620 claims checked, 0 failed.
+736 claims checked, 0 failed.

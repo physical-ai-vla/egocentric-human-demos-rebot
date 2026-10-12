@@ -7,8 +7,10 @@ for a reBot B601 dual-arm robot, and used them to pretrain X-VLA. Version 3 (Oct
 retargeting with a Cartesian conversion that matches the robot's own action contract, and tests what transfers to the
 robot ([Update v3](#update-v3-cartesian-ego-pretraining-and-transfer)). Version 4 (7 October 2026) adds a 30-episode
 low-data ablation and splits the write-up into two reports, each in English and Korean
-([Update v4](#update-v4-two-reports-r30-ablation-and-single-arm-approach)). Earlier states are tagged `report-v2-2026-09-30`
-and `report-v3-2026-10-04`.
+([Update v4](#update-v4-two-reports-r30-ablation-and-single-arm-approach)). Version 5 (12 October 2026) merges everything
+into **one technical report**: [`report/report_en.pdf`](report/report_en.pdf) ([한국어](report/report_ko.pdf)), 15 pages
+covering hardware, every pipeline stage, all results and their limits, with no result changed. Earlier states are tagged
+`report-v2-2026-09-30` and `report-v3-2026-10-04`.
 
 ### Hardware source: HandUMI is not our design
 
@@ -20,22 +22,22 @@ The capture device is **HandUMI**, an open-source hand-worn UMI variant designed
 | Original hardware design | [murobotics-ai/handumi-hw](https://github.com/murobotics-ai/handumi-hw) (first published as `robonet-ai/handumi-hw`, which now redirects) | the source of the design; we printed it from commit `e58de33` |
 | Original software | [murobotics-ai/handumi-sw](https://github.com/murobotics-ai/handumi-sw) (formerly `robonet-ai/handumi-sw`) | we forked it at `33cc437` for an early path; the reported data were not recorded with it |
 | Our build copy | [physical-ai-vla/umihand](https://github.com/physical-ai-vla/umihand) | the upstream print files and STEP/BOM as we used them, plus our own changes: 3 modified parts (`mods/`) and the wrist-IMU firmware |
-| In this repository | [`hardware/`](hardware/), [`upstream/`](upstream/) (licence, NOTICE, our patch) | same build copy; Part I full report Sec. III describes the upstream design and what we changed |
+| In this repository | [`hardware/`](hardware/), [`upstream/`](upstream/) (licence, NOTICE, our patch) | same build copy; the technical report, Sec. III, describes the upstream design and what we changed |
 
 Our own contributions on the hardware side are limited to the three modified parts (connector, camera mount, servo
 cover), the added Teensy 4.1 + ICM-42688-P wrist IMU that replaces upstream VR tracking, and the fixed head camera.
 
 | Report | English | 한국어 | Full-length version |
 |---|---|---|---|
+| **Technical report (v5, one document, 15 pp)** | [`report/report_en.pdf`](report/report_en.pdf) | [`report/report_ko.pdf`](report/report_ko.pdf) | (is the full report) |
 | Part I: three-cube stacking (bimanual), 4 pp | [`report/part1_stacking_en.pdf`](report/part1_stacking_en.pdf) | [`report/part1_stacking_ko.pdf`](report/part1_stacking_ko.pdf) | `report/archive/part1_stacking_{en,ko}_full.pdf` (11 pp, v4.1) |
 | Part II: single-arm approach to a cube, 2 pp | [`report/part2_approach_en.pdf`](report/part2_approach_en.pdf) | [`report/part2_approach_ko.pdf`](report/part2_approach_ko.pdf) | `report/archive/part2_approach_{en,ko}_full.pdf` (5 pp) |
 | Methods and pipeline (how every stage works), 6 pp | [`report/methods_en.pdf`](report/methods_en.pdf) | [`report/methods_ko.pdf`](report/methods_ko.pdf) | — |
-| **Combined: Part I full + Part II full + Methods**, 24 pp | [`report/archive/combined_en.pdf`](report/archive/combined_en.pdf) | [`report/archive/combined_ko.pdf`](report/archive/combined_ko.pdf) | (is the full-length set) |
 
-The main reports are short versions; the full-length versions in `report/archive/` carry every detail and table. LaTeX
+The v5 technical report is the main document. The earlier split documents remain: short versions in `report/`, full-length
+versions in `report/archive/`. LaTeX
 sources sit next to the PDFs; figures are rebuilt by `report/figures/make_figures*.py`, `analysis/v4_r30_ablation.py` and
-`analysis/v4_hra_summary.py`. The v3 single report is also in `report/archive/`. The combined report is generated, never hand-edited: `cd report && python3 build_combined.py && cd archive &&
-tectonic combined_en.tex && tectonic combined_ko.tex` (labels prefixed per part, section numbers restart per part, bibliographies merged).
+`analysis/v4_hra_summary.py`. The v3 single report is also in `report/archive/`. `analysis/verify_claims.py` also checks that every value required in the full-length reports appears in the v5 report.
 All reports now cite the upstream HandUMI hardware repository.
 The Part I full version 4.1 (2026-10-12) adds Sec. III, *HandUMI hardware*: the upstream HandUMI project (murobotics-ai/handumi-hw by BrikHMP18,
 formerly robonet-ai; we built `e58de33` and forked handumi-sw at `33cc437`, the fork not used for the reported data), print and electronics, our deviations (no VR tracking, added Teensy 4.1 + ICM-42688-P wrist IMU, fixed-focus head
