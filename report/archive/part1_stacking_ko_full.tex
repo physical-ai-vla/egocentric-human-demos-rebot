@@ -17,7 +17,7 @@
 \maketitle
 
 \begin{abstract}
-본 연구는 손에 착용하는 UMI 방식 그리퍼로 기록한 자연스러운 에고센트릭(egocentric) 인간 시연을 양팔 로봇 정책의 학습
+본 연구는 BrikHMP18이 설계·공개한 오픈소스 손 착용형 UMI 방식 그리퍼 HandUMI(우리가 설계한 장치가 아님)로 기록한 자연스러운 에고센트릭(egocentric) 인간 시연을 양팔 로봇 정책의 학습
 데이터로 어디까지 바꿀 수 있는지 살펴본다. 양손 손목 어안(fisheye) 카메라, IMU, 조(jaw) 인코더와 고정 헤드 카메라를 사용하여,
 수집 시점에 균형을 맞춘 여섯 가지 쌓기 순서(순서당 51--64 에피소드)로 큐브 세 개를 쌓는 과제의 양팔 시연 349개를 수집하였다.
 다단계 파이프라인(에피소드별 시각--관성 스케일을 적용한 MASt3R-SLAM 손목 자세, 6-DoF 로봇 팔로의 리타게팅, 그리고 동기화·작업공간·
@@ -121,8 +121,11 @@ Kalibr~\cite{furgale2013kalibr}로 캘리브레이션한 IMU 기반 스케일 �
 \end{figure*}
 
 \section{HandUMI 하드웨어}\label{sec:hw}
-수집 장치는 직접 설계하지 않았다. 양손에 각각 HandUMI 장치~\cite{handumi_hw}를 착용한다. 업스트림 커밋 \texttt{e58de33}에서
-출력하였고, 부품 세 개를 수정했으며, 업스트림의 추적 방식을 교체하였다.
+\textbf{출처.} 수집 장치는 \emph{우리가 설계한 것이 아니다}. HandUMI는 BrikHMP18이 오픈소스 하드웨어로 설계·공개하였다
+(\url{https://github.com/murobotics-ai/handumi-hw}, Apache-2.0)~\cite{handumi_hw}. 소프트웨어도 함께 공개되어 있다
+(\url{https://github.com/murobotics-ai/handumi-sw})~\cite{handumi_sw}. 우리는 업스트림 커밋 \texttt{e58de33}으로 제작하였다.
+하드웨어 측면에서 우리가 한 작업은 부품 세 개 수정, 업스트림 VR 추적을 대신하는 손목 IMU 추가, 고정 헤드 카메라 추가에 한정된다.
+우리의 \texttt{umihand} 저장소는 업스트림 파일과 이 추가분을 담은 제작용 사본이며, 독자적인 설계가 아니다.
 
 \textbf{업스트림 HandUMI.} HandUMI는 평행 조 그리퍼를 쓰는 로봇 팔을 위한 오픈소스 손 착용형 UMI~\cite{chi2024umi} 변형이다.
 BrikHMP18이 Apache-2.0으로 GitHub \texttt{murobotics-ai} 조직에 공개하였다(\url{https://github.com/murobotics-ai/handumi-hw}.

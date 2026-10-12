@@ -14,7 +14,7 @@ Short version; Part II covers single-arm approach data. Code, results and sample
 \maketitle
 
 \begin{abstract}
-We study how far egocentric demonstrations recorded with a hand-worn UMI-style gripper can be turned into training data for a
+We study how far egocentric demonstrations recorded with HandUMI, an open-source hand-worn UMI-style gripper by BrikHMP18 (not our design), can be turned into training data for a
 bimanual robot policy. We collected 349 demonstrations of three-cube stacking in six balanced orders and processed them in two
 generations. First, MASt3R-SLAM wrist poses with per-episode IMU scale were retargeted to robot joints; a 0.9B X-VLA model trained
 on the 561 surviving segments predicts the direction of held-out moving human motion (cosine 0.90 at 1.2\,s, 39.9\mm error) but
@@ -39,7 +39,7 @@ recorded and all six orders appear in training, so we test neither spatial nor t
 condenses the full report (kept in the repository) and brings run status to 7 October 2026.
 
 \section{Data and Poses}\label{sec:data}
-\textbf{Device and task.} Each hand wears a HandUMI unit~\cite{handumi_hw} (open source; VR tracking replaced by a wrist IMU): a 1080p30 fisheye wrist camera, a 200\,Hz IMU and a jaw encoder; a
+\textbf{Device and task.} Each hand wears a HandUMI unit~\cite{handumi_hw} (open-source design by BrikHMP18, not ours; we replaced its VR tracking with a wrist IMU): a 1080p30 fisheye wrist camera, a 200\,Hz IMU and a jaw encoder; a
 fixed Logitech C922 records the table. Three 50\mm cubes are stacked on a plate in one of six orders named by the instruction.
 One operator recorded 349 episodes in 15 sessions on 15--17 September 2026 (2.20\,h; median 23.05\,s), with the next order chosen
 as the least collected (51--64 per order), so orders are balanced, not randomized. Cube layouts varied through manual resets but

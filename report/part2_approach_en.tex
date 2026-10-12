@@ -22,7 +22,7 @@ logged stop reasons but no outcomes, so we report no success rate.
 \end{abstract}
 
 \section{Setup}
-The operator wears one HandUMI unit~\cite{handumi_hw}, a hand-worn UMI~\cite{chi2024umi} variant (wrist fisheye, IMU, jaw encoder) on the right hand; wrist poses come from
+The operator wears one HandUMI unit~\cite{handumi_hw}, a hand-worn UMI~\cite{chi2024umi} variant designed by BrikHMP18, not by us (wrist fisheye, IMU, jaw encoder) on the right hand; wrist poses come from
 MASt3R-SLAM~\cite{murai2025mast3rslam} (Part I). Labels use Part I's Cartesian contract (16 relative poses, 50.05\,ms apart, 15\,Hz
 rows); the left arm and the gripper are dummies masked out of the loss, so 9 of 20 dimensions are supervised. The model is X-VLA
 (0.9B)~\cite{zheng2025xvla} with Part I's recipe (soft-prompt slot 20, batch 8, 8-bit AdamW, bf16), trained on an RTX~4090. The

@@ -61,7 +61,8 @@ deployment. Every arrow is followed by a gate with a logged reason.}
 
 \section{Recording Rig and Collection Protocols}\label{sec:rig}
 \textbf{Rig} (\code{collection/configs/handumi/hardware_handumi_v1.yaml}). HandUMI~\cite{handumi_hw} is an open-source hand-worn
-UMI variant (\url{https://github.com/murobotics-ai/handumi-hw}, formerly \texttt{robonet-ai}); we use its body, linkage and
+UMI variant designed and published by BrikHMP18, not by us (\url{https://github.com/murobotics-ai/handumi-hw}, formerly
+\texttt{robonet-ai}); we use its body, linkage and
 servo-encoder jaw from commit \texttt{e58de33} but not its VR tracking (Part~I, Sec.~III). Each unit carries an Arducam fisheye UVC
 camera (1920$\times$1080, 30\,fps, MJPG), an ICM-42688-P IMU on a Teensy~4.1 (nominal 200\,Hz; measured 201.6 and 197.9\,Hz
 because each board has its own oscillator) and a Feetech STS3215 servo used as a jaw encoder (4096 ticks/rev, polled at

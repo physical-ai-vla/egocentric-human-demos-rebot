@@ -57,6 +57,7 @@ Code, results and sample data are available on request.}}""",
                ("Part II", "Single-Arm Approach to a Cube"),
                ("Methods and Pipeline", "How each stage works (companion to Parts I and II)")],
         front=r"""\begin{abstract}
+The capture device, HandUMI, is an open-source design by BrikHMP18 (murobotics-ai/handumi-hw), not our design.
 This document combines the three reports of version 4.1 into one file, unchanged in content: Part I (full length) on 349
 bimanual egocentric HandUMI demonstrations of three-cube stacking, the capture hardware, the processing funnel, X-VLA
 training, offline evaluation and transfer to the reBot B601; Part II (full length) on single-arm approach data, object-based
@@ -87,6 +88,7 @@ three parts is merged at the end.
                ("제2부", "단일 팔 큐브 접근(Approach)"),
                ("방법과 파이프라인", "각 단계의 작동 방식(제1부·제2부의 동반 문서)")],
         front=r"""\begin{abstract}
+수집 장치 HandUMI는 BrikHMP18의 오픈소스 설계(murobotics-ai/handumi-hw)이며, 우리가 설계한 장치가 아니다.
 이 문서는 버전 4.1의 보고서 세 편을 내용 변경 없이 하나로 묶은 것이다. 제1부(전체 버전)는 큐브 삼단 쌓기의 양팔 에고센트릭
 HandUMI 시연 349개, 수집 하드웨어, 처리 퍼널, X-VLA 학습, 오프라인 평가, reBot B601로의 전이를 다룬다. 제2부(전체 버전)는 단일 팔
 접근 데이터, 물체 기반 스케일, 로봇 측 캘리브레이션, 공유 작업 좌표계, 배포 설정을 다룬다. 방법과 파이프라인 문서는 각 단계의 결과가

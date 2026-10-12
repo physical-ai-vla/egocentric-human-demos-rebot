@@ -518,6 +518,16 @@ for need, src, ev in (("\\texttt{e58de33}", "hardware/README.md", "`e58de33`"),
     check("v41_hw", f"report: {need[:40]}", "True", str(need in tex), "report/archive/part1_stacking_en_full.tex")
     check("v41_hw", f"evidence: {ev[:40]}", "True", str(ev in hw_ev[src]), src)
 
+# HandUMI attribution: every English report must say the device is BrikHMP18's design, not ours (user requirement 2026-10-12).
+for f, need in (("report/archive/part1_stacking_en_full.tex", "The capture device is \\emph{not our design}"),
+                ("report/archive/part1_stacking_en_full.tex", "designed and published by BrikHMP18 (not our design)"),
+                ("report/part1_stacking_en.tex", "by BrikHMP18 (not our design)"),
+                ("report/part1_stacking_en.tex", "open-source design by BrikHMP18, not ours"),
+                ("report/archive/part2_approach_en_full.tex", "designed and published by BrikHMP18, not by us"),
+                ("report/part2_approach_en.tex", "designed by BrikHMP18, not by us"),
+                ("report/methods_en.tex", "designed and published by BrikHMP18, not by us")):
+    check("attribution", f"{f.split('/')[-1]}: {need[:40]}", "True", str(need in open(R / f).read()), f)
+
 # ---------------------------------------------------------------- README: the same verified values, and none of the stale ones
 rd = open(R / "README.md").read()
 for need in ("349 recorded", "284 pass sync", "259 source", "561 bimanual", "233 train", "26 held-out", "1.5 / 5.7 mm", "11.2 / 39.9 mm",

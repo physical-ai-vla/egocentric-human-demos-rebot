@@ -572,6 +572,13 @@ hand | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | v41_hw | evidence: depth 21.4 → 31.4 mm | True | True | `hardware/mods/README.md` | PASS |
 | v41_hw | report: 12.2\,V supply | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | v41_hw | evidence: 12.2 V supply against the 12.0 V EEPROM  | True | True | `collection/README.md` | PASS |
+| attribution | part1_stacking_en_full.tex: The capture device is \emph{not our desi | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| attribution | part1_stacking_en_full.tex: designed and published by BrikHMP18 (not | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
+| attribution | part1_stacking_en.tex: by BrikHMP18 (not our design) | True | True | `report/part1_stacking_en.tex` | PASS |
+| attribution | part1_stacking_en.tex: open-source design by BrikHMP18, not our | True | True | `report/part1_stacking_en.tex` | PASS |
+| attribution | part2_approach_en_full.tex: designed and published by BrikHMP18, not | True | True | `report/archive/part2_approach_en_full.tex` | PASS |
+| attribution | part2_approach_en.tex: designed by BrikHMP18, not by us | True | True | `report/part2_approach_en.tex` | PASS |
+| attribution | methods_en.tex: designed and published by BrikHMP18, not | True | True | `report/methods_en.tex` | PASS |
 | readme | value present: 349 recorded | True | True | `README.md` | PASS |
 | readme | value present: 284 pass sync | True | True | `README.md` | PASS |
 | readme | value present: 259 source | True | True | `README.md` | PASS |
@@ -617,4 +624,4 @@ hand | True | True | `report/archive/part1_stacking_en_full.tex` | PASS |
 | readme | stale text absent: This repository reports no closed-loop robot results | True | True | `README.md` | PASS |
 | readme | stale text absent: outcomes were not logged). | True | True | `README.md` | PASS |
 
-613 claims checked, 0 failed.
+620 claims checked, 0 failed.

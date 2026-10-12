@@ -17,7 +17,7 @@ Part II covers single-arm approach data. Code, results and sample data are avail
 \maketitle
 
 \begin{abstract}
-We study how far natural egocentric human demonstrations, recorded with a hand-worn UMI-style gripper, can be turned into
+We study how far natural egocentric human demonstrations, recorded with HandUMI, an open-source hand-worn UMI-style gripper designed and published by BrikHMP18 (not our design), can be turned into
 training data for a bimanual robot policy. We collected 349 bimanual demonstrations of a three-cube stacking task with six
 stacking orders balanced at collection time (51--64 episodes per order), using per-hand wrist fisheye cameras, IMUs and jaw
 encoders plus a fixed head camera. A multi-stage pipeline (MASt3R-SLAM wrist poses with per-episode visual--inertial scale,
@@ -130,8 +130,11 @@ and evaluation. No stage uses robot rollouts.}
 \end{figure*}
 
 \section{HandUMI Hardware}\label{sec:hw}
-We did not design a capture device. Each hand wears a HandUMI unit~\cite{handumi_hw}; we printed it from upstream commit
-\texttt{e58de33}, changed three parts, and replaced the upstream tracking.
+\textbf{Attribution.} The capture device is \emph{not our design}. HandUMI was designed and published as open-source hardware
+by BrikHMP18 (\url{https://github.com/murobotics-ai/handumi-hw}, Apache-2.0)~\cite{handumi_hw}, together with its software
+(\url{https://github.com/murobotics-ai/handumi-sw})~\cite{handumi_sw}. We built it from upstream commit \texttt{e58de33}. Our own
+hardware work is limited to three modified parts, a wrist IMU added in place of the upstream VR tracking, and a fixed head
+camera. Our \texttt{umihand} repository is a build copy of the upstream files plus these additions, not an original design.
 
 \textbf{Upstream HandUMI.} HandUMI is an open-source, hand-worn variant of UMI~\cite{chi2024umi} for robot arms with
 parallel-jaw grippers, published by BrikHMP18 under Apache-2.0 in the \texttt{murobotics-ai} GitHub organization
