@@ -1,13 +1,29 @@
 # Egocentric Human Demonstrations for Robot Manipulation
 
 Research code, calibration, processing records and a small data sample from one experiment. We collected bimanual
-human demonstrations with a hand-worn UMI-style gripper (HandUMI), converted them into pseudo-joint trajectories
+human demonstrations with a hand-worn UMI-style gripper ([HandUMI](https://github.com/murobotics-ai/handumi-hw), not our
+design; see [Hardware source](#hardware-source-handumi-is-not-our-design)), converted them into pseudo-joint trajectories
 for a reBot B601 dual-arm robot, and used them to pretrain X-VLA. Version 3 (October 2026) replaces the joint-space
 retargeting with a Cartesian conversion that matches the robot's own action contract, and tests what transfers to the
 robot ([Update v3](#update-v3-cartesian-ego-pretraining-and-transfer)). Version 4 (7 October 2026) adds a 30-episode
 low-data ablation and splits the write-up into two reports, each in English and Korean
 ([Update v4](#update-v4-two-reports-r30-ablation-and-single-arm-approach)). Earlier states are tagged `report-v2-2026-09-30`
 and `report-v3-2026-10-04`.
+
+### Hardware source: HandUMI is not our design
+
+The capture device is **HandUMI**, an open-source hand-worn UMI variant designed and published by **BrikHMP18**
+(Apache-2.0). It is **not** our own UMI design.
+
+| what | where | role |
+|---|---|---|
+| Original hardware design | [murobotics-ai/handumi-hw](https://github.com/murobotics-ai/handumi-hw) (first published as `robonet-ai/handumi-hw`, which now redirects) | the source of the design; we printed it from commit `e58de33` |
+| Original software | [murobotics-ai/handumi-sw](https://github.com/murobotics-ai/handumi-sw) (formerly `robonet-ai/handumi-sw`) | we forked it at `33cc437` for an early path; the reported data were not recorded with it |
+| Our build copy | [physical-ai-vla/umihand](https://github.com/physical-ai-vla/umihand) | the upstream print files and STEP/BOM as we used them, plus our own changes: 3 modified parts (`mods/`) and the wrist-IMU firmware |
+| In this repository | [`hardware/`](hardware/), [`upstream/`](upstream/) (licence, NOTICE, our patch) | same build copy; Part I full report Sec. III describes the upstream design and what we changed |
+
+Our own contributions on the hardware side are limited to the three modified parts (connector, camera mount, servo
+cover), the added Teensy 4.1 + ICM-42688-P wrist IMU that replaces upstream VR tracking, and the fixed head camera.
 
 | Report | English | 한국어 | Full-length version |
 |---|---|---|---|
@@ -24,7 +40,8 @@ All reports now cite the upstream HandUMI hardware repository.
 The Part I full version 4.1 (2026-10-12) adds Sec. III, *HandUMI hardware*: the upstream HandUMI project (murobotics-ai/handumi-hw by BrikHMP18,
 formerly robonet-ai; we built `e58de33` and forked handumi-sw at `33cc437`, the fork not used for the reported data), print and electronics, our deviations (no VR tracking, added Teensy 4.1 + ICM-42688-P wrist IMU, fixed-focus head
 C922), our three modified parts (Fig. 2, `report/figures/make_fig10_handumi_mods.py`) and device-identity pitfalls. The hardware
-files are in `hardware/` and in the standalone hardware repository [`physical-ai-vla/umihand`](https://github.com/physical-ai-vla/umihand).
+files are in `hardware/` and in our build copy [`physical-ai-vla/umihand`](https://github.com/physical-ai-vla/umihand); the design itself is
+upstream [murobotics-ai/handumi-hw](https://github.com/murobotics-ai/handumi-hw).
 
 **Status: offline evaluation and training diagnostics.** Version-3 checkpoints were executed on the robot, and an
 ego-initialized model fine-tuned on 312 robot episodes completed full three-cube stacks in closed loop (operator
@@ -327,7 +344,7 @@ The full working code of the project was added, so the repository is no longer o
 | `collection/` | latest `handumi_collector` (robot_like_v1, HRA_red, HRA_A100 origin protocol, C922-view tile), firmware, calibration configs; depends on `experimental/` (uv path dependency) |
 | `hra/` | single-arm approach pipeline: base-frame linking, robot camera and hand-eye calibration, robotcam v2 rendering, origin-plane scale, origin yaw, G frame, table-aware QP, held-out evaluation |
 | `deploy/` | inference core, robot UI (PLAN/RTC/cube-size stop/trial logger), Pink IK, checkpoint loaders, MIT robot service |
-| `hardware/` | HandUMI print package (3MF/STL), our modified parts (`mods/`) and build notes; standalone copy in `physical-ai-vla/umihand` |
+| `hardware/` | HandUMI print package (3MF/STL) from upstream [murobotics-ai/handumi-hw](https://github.com/murobotics-ai/handumi-hw) (not our design), our modified parts (`mods/`) and build notes; our build copy is [physical-ai-vla/umihand](https://github.com/physical-ai-vla/umihand) |
 | `experimental/` | wearable teleop (VIO), AprilTag V0 collector, RGB-D body tracking |
 | `upstream/` | patch and new files on top of murobotics-ai/handumi-sw (formerly robonet-ai; Apache-2.0) |
 | `training/launchers/`, `training/archivers/`, `training/umi76/` | node launchers (4090 / 5090), archivers, base widening |
