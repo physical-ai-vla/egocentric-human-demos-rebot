@@ -1,0 +1,15 @@
+{
+ "schema": "umi_world_config/v1",
+ "created": "2026-10-12",
+ "frame": "W = table/world. +Z = table plane normal (up). +X = X_L -> X_R direction projected on the table. +Y = Z x X (forward, toward the far side of the table). Origin = X_L.",
+ "markers": {
+  "X_L": {"shape": "green tape X + forward arrow", "position_W_m": [0.0, 0.0, 0.0]},
+  "X_R": {"shape": "green tape X + forward arrow", "position_W_m": [null, 0.0, 0.0]}
+ },
+ "marker_distance_m": null,
+ "marker_distance_note": "MEASURE WITH A RULER (mm) and fill marker_distance_m + X_R.position_W_m[0]. Orbbec depth estimate 2026-10-12 16:38 session: 0.355 m (frame 300) -- reference only.",
+ "orbbec_estimate_m": 0.355,
+ "start_pose": "each TCP (jaw centre) on its X, jaw closing direction per the arrow, both still 2-3 s inside the recording",
+ "alignment": "per side Sim(3): scale from |X_R - X_L| (known) vs MASt3R start TCPs; table normal from the Orbbec plane fit; X axis from X_L->X_R; marker arrows = orientation sanity check only",
+ "global_camera": "Orbbec Gemini 336 fixed overhead; extrinsic T_W_global must stay fixed between episodes (QA: marker pixel positions per episode)"
+}

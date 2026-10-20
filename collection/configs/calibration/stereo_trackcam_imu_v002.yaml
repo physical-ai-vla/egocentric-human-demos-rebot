@@ -1,0 +1,33 @@
+created: '2026-10-16T11:17:46'
+source: datasets/stereo_imu/20261016_111637_rot
+imu: right UMI Teensy 20778070
+reference_camera: cam_left = Arducam 0x03110000 (C0)
+stereo_calib: configs/calibration/stereo_trackcam_v004.yaml
+R_C0I:
+- - -0.992144
+  - -0.113979
+  - -0.051563
+- - -0.037448
+  - 0.663867
+  - -0.746912
+- - 0.119363
+  - -0.739114
+  - -0.662921
+R_C0I_rotvec_deg:
+- 7.27
+- -159.24
+- 71.3
+offset_ms: 38.75
+offset_note: t_imu_host + offset_ms = camera host time (per session); w_cam = R_C0I
+  w_imu
+quality:
+  vec_corr:
+  - 0.983
+  - 0.981
+  - 0.987
+  residual_rate_rms_deg_s: 11.57
+  rate_rms_deg_s: 62.3
+  right_check_deg: 2.45
+t_C0I_m: null
+t_C0I_note: lever not re-measured after the 10-16 camera tilt (use the previous board
+  estimate or 0)

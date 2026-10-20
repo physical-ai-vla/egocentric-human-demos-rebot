@@ -1,0 +1,82 @@
+# written by visual_teleop/tools/calib_right.py -- see calibration_log.jsonl for provenance
+imu:
+  R_I_H:
+    right:
+      measured: true
+      rotvec_deg:
+      - 70.499
+      - 63.049
+      - -61.901
+time_sync:
+  camera_imu_offset_ms:
+    right: 40.13
+cameras:
+  T_W_C:
+    measured: true
+    matrix:
+    - - -0.004159
+      - -0.567595
+      - 0.823298
+      - 0.0
+    - - -0.999973
+      - 0.007327
+      - 0.0
+      - 0.0
+    - - -0.006033
+      - -0.823275
+      - -0.56761
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+gripper:
+  close_threshold: 270.0
+  open_threshold: 300.0
+  pinch_closed: 233.0
+  pinch_open: 340.0
+tracking:
+  min_fingertip_conf: 0.6
+fusion:
+  tracker:
+    T_TB_TCP:
+      measured: true
+      pivot_measured: true
+      mount_measured: true
+      pivot_rms_mm: null
+      matrix:
+      - - 0.668568
+        - -0.733975
+        - 0.119565
+        - 0.069804
+      - - -0.367856
+        - -0.186682
+        - 0.910952
+        - 0.05997
+      - - -0.646296
+        - -0.653014
+        - -0.394806
+        - -0.08187
+      - - 0.0
+        - 0.0
+        - 0.0
+        - 1.0
+    T_W_TW:
+      measured: true
+      matrix:
+      - - 1.0
+        - 0.0
+        - 0.0
+        - 0.0
+      - - 0.0
+        - 1.0
+        - 0.0
+        - 0.0
+      - - 0.0
+        - 0.0
+        - 1.0
+        - 0.0
+      - - 0.0
+        - 0.0
+        - 0.0
+        - 1.0

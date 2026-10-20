@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""[2026-10-02] ROBOTIZED-WRIST variant of export_lerobot.py (untouched). Labels, state, head image, rows, stats: identical.
+"""[2026-10-02 user] ROBOTIZED-WRIST variant of export_lerobot.py (untouched). Labels, state, head image, rows, stats: identical.
 ONLY the two WRIST images change, per frame with probability ROBOTIZE_P (default 0.5, seeded by episode/camera/frame):
   robotized = fisheye (HandUMI KB8, ego_collector/configs/calibration/fisheye_<side>_v002.yaml) -> virtual PINHOLE with R = I
               (same optical axis, labels stay valid), C922-like FOV hfov 66 +-4 deg at 640x480, principal point shifted so the

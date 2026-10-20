@@ -1,6 +1,6 @@
 """state20 builders.
 
-MAIN (state.npy, design decision D3) -- v4 RELCART20 task-anchor state, identical semantics and layout to the reBot FT data:
+MAIN (state.npy, user decision D3) -- v4 RELCART20 task-anchor state, identical semantics and layout to the reBot FT data:
     per arm  T_rel = inv(T_task_start) @ T(t)
     state20 = [L xyz3 rot6d6 | R xyz3 rot6d6 | gL | gR]                         grippers at dims 18, 19
 DIAGNOSTIC (state_prevrel.npy) -- spec v2 previous-relative state:

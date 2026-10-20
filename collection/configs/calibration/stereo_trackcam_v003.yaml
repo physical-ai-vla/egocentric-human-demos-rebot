@@ -1,0 +1,89 @@
+created: '2026-10-15T23:39:13'
+source: datasets/stereo_imu/20261015_232959_still
+image_size:
+- 1920
+- 1080
+left:
+  location: '0x03110000'
+  model: kb4
+  fx: 778.3734687230412
+  fy: 777.8355718064801
+  cx: 990.6260919092913
+  cy: 551.427402625343
+  k1: -0.014548028759470097
+  k2: -0.02163749789236403
+  k3: 0.01582798577544142
+  k4: -0.004233521915614067
+right:
+  location: '0x00140000'
+  model: kb4
+  fx: 784.9082941909038
+  fy: 786.2477809701659
+  cx: 956.7064068557727
+  cy: 553.5892974424584
+  k1: -0.025420300047610846
+  k2: 0.003626004840401943
+  k3: -0.005718440937916758
+  k4: 0.0034394475779820684
+T_CR_CL:
+- - 0.99365851
+  - 0.04716626
+  - -0.10206914
+  - -0.02909039
+- - -0.04618249
+  - 0.99886116
+  - 0.01198128
+  - 0.00248443
+- - 0.10251802
+  - -0.00719149
+  - 0.99470515
+  - -0.01293285
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+T_CR_CL_note: maps a point in the LEFT camera frame into the RIGHT camera frame
+baseline_cm: 3.19
+ruler_cm: 3.5
+quality:
+  left_heldout:
+    n: 7276
+    median_px: 0.42
+    p95_px: 1.38
+    edge_n: 32
+    edge_median_px: 0.612
+    radial_pattern:
+    - -0.01
+    - 0.01
+    - 0.03
+    - -0.07
+    - -0.28
+    - -0.15
+  right_heldout:
+    n: 7904
+    median_px: 0.499
+    p95_px: 1.66
+    edge_n: 16
+    edge_median_px: 0.982
+    radial_pattern:
+    - 0.0
+    - 0.02
+    - -0.01
+    - -0.06
+    - -0.12
+    - -0.08
+  joint_left:
+    rms_px: 1.159
+    median_px: 0.769
+    p95_px: 2.093
+    rms_inliers_px: 1.017
+    outliers_gt3px: 251
+    n: 18036
+  joint_right:
+    rms_px: 1.093
+    median_px: 0.758
+    p95_px: 2.081
+    rms_inliers_px: 1.035
+    outliers_gt3px: 140
+    n: 18712
+  pairs: 139

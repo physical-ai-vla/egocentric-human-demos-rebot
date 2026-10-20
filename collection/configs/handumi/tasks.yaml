@@ -7,6 +7,28 @@ instruction_template: "Stack the {bottom} cube on the bottom, {middle} cube in t
 datasets:
   Vpilot_vision_only: {target_per_order: 1, note: "IMU-less V0 observability pilot; NEVER counted as H120"}
   Hpilot: {target_per_order: 50, note: "300-episode collection (6 orders x 50), AUTO loop; 2026-09-16 -- was 3 for the pre-pilot"}
+  # 2026-10-12 user: laundry folding with both HandUMI units + Orbbec head RGB-D (hardware_handumi_rgbd). One fixed prompt,
+  # no cube orders/buttons/colour cues (single-task UI); order label unused. 120 s take, 10 s rest, SPACE/N ends a take early.
+  # AUTO voice kept short: "에피소드 N" at the reset, "준비하세요", countdown, "고", "스톱", "저장 완료" (no task announcement).
+  Hfold: {target_per_order: 100, orders: [RBP], instruction: "fold the cloth", instruction_voice: "fold the cloth",
+          auto_loop: {episode_s: 120.0, reset_s: 10.0, announce_task: false, cue_reset: ""},
+          note: "laundry folding (T-shirt), both hands; prompt = Soft-Fold's 'fold the cloth'"}
+  # 2026-10-12 UMI-only spec (T-shirt folding -> X-VLA): UMIpilot = the 5-episode go/no-go pilot, UMI100 = main collection
+  # (only after the pilot passes). Start protocol: both TCPs on the green X_L / X_R markers, jaws per the arrow, still 2-3 s
+  # -- that hold is INSIDE the recording (REC -> 3 s hold countdown -> GO) and is the world-alignment window.
+  # Metadata (garment_id, initial_state, outcome, notes) from the UI panel -> episode_meta.umi_tags. IMU recorded, not used.
+  UMIpilot: {target_per_order: 5, orders: [RBP], instruction: "Fold the T-shirt.", instruction_voice: "Fold the T-shirt.",
+             auto_loop: {episode_s: 120.0, reset_s: 10.0, announce_task: false, cue_reset: "", cue_ready: "마커에 두세요"},
+             world_config: world_config_umi_v1.json, note: "UMI-only go/no-go pilot (5 eps, bright textured T-shirt)"}
+  UMI100:   {target_per_order: 100, orders: [RBP], instruction: "Fold the T-shirt.", instruction_voice: "Fold the T-shirt.",
+             auto_loop: {episode_s: 120.0, reset_s: 10.0, announce_task: false, cue_reset: "", cue_ready: "마커에 두세요"},
+             world_config: world_config_umi_v1.json, note: "UMI-only main collection, 70 normal + 30 moderate variations"}
+  # 2026-10-13 user: Stage 1 of the folding task on its own -- one long-ish episode "Flatten and align the T-shirt."
+  # (pick a semi-flat / sleeve-folded / rotated / slightly crumpled shirt, flatten it, align collar/body axis; ends in the
+  # canonical state the fold stage starts from). 30 s take. Not split into primitives.
+  UMIalign: {target_per_order: 100, orders: [RBP], instruction: "Flatten and align the T-shirt.", instruction_voice: "Flatten and align the T-shirt.",
+             auto_loop: {episode_s: 60.0, reset_s: 10.0, announce_task: false, cue_reset: "", cue_ready: "마커에 두세요"},
+             world_config: world_config_umi_v1.json, note: "UMI Stage 1 unfold/align, 60 s, start states varied (see umi_tags.initial_state)"}
   H120:   {target_per_order: 20, note: "final; only after IMU + VIO/TCP validation"}
   # 2026-09-28 robot-like ego (protocol robot_like_v1, run with --protocol robot_like_v1): first goal ~80 on top of the
   # 259 C8 episodes, compared as `old ego only` vs `old + robot-like ego`. Own dataset dir so it can never mix with Hpilot.

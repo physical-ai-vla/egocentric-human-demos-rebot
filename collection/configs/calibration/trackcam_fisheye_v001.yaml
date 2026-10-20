@@ -1,0 +1,35 @@
+created: '2026-10-15T19:20:14'
+schema: handumi_fisheye_intrinsics/v1
+model: kannala_brandt
+camera: UMI tracking fisheye (Arducam 1080P Low Light, USB location 0x00140000, faces
+  the room)
+image_size:
+- 1920
+- 1080
+K:
+- 679.9548
+- 0.0
+- 983.54905
+- 0.0
+- 678.37694
+- 552.39192
+- 0.0
+- 0.0
+- 1.0
+D:
+- 0.0162
+- 0.02315
+- -0.02593
+- 0.00525
+source: charuco 6x8 31/23mm, 56 views (20261015_190719 + 20261015_191450, 1080p, still-gated),
+  scripts/fisheye_calib_robust.py (soft-L1 LM, own init)
+val:
+  rms_px: 1.369
+  median_px: 1.001
+  p95_px: 2.709
+  rms_inliers_px: 1.265
+  outliers_gt3px: 10
+  n: 400
+notes: 'residual is RANDOM per-corner detection jitter (~1.0 px median, cell-mean
+  bias <= 0.36 px), not model error; use pixel sigma ~1.0-1.3 px in the VIO. Exposure
+  during capture: manual 60 (6 ms). Scale K by s for a resized stream.'

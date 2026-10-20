@@ -1,0 +1,202 @@
+# Visual teleop (Agent C) -- reBot bimanual, fixed RGB-D + wrist RGB + wrist IMU. 2026-10-14.
+# Every hardware constant lives here (spec section 40). Loaded by visual_teleop/config.py; unknown keys are an error.
+#
+# Frames:  W  = table/world (fixed RGB-D extrinsic defines it, +Z up)      C  = fixed Orbbec color camera
+#          G  = AHRS gravity frame of one IMU (+Z up, yaw arbitrary)      I  = IMU body
+#          H  = human virtual TCP (per hand)                              RB = reBot base (BOTH arms share it)
+#          RE = reBot IK/FK TCP (pyroki rebot_b601; NOT the dataset-TCP axes, memory rebot-tcp-frame-90deg)
+# RE axes (urdf {side}_tcp, measured 2026-10-14): z = tool/approach (wrist -> fingertips), y = jaw opening axis, x = y cross z.
+#   j6 (wrist roll) rotates about RE z; the wrist pitch axis is 0.25 m behind the TCP.
+# H is DEFINED to match: z = forearm -> thumb/index midpoint, y = index -> thumb direction (pinch axis), x = y cross z.
+#   R_I_H (IMU mount) must produce exactly these axes; then the adapter below is the identity.
+# Robot targets are expressed in RB. The table frame W is only used on the human side; the relative contract makes the robot
+# independent of W (only R_W_H0 matters for the body-frame delta).
+
+control:
+  arms_enabled: {left: false, right: false}       # staged bring-up (spec 30): Stage 1 = grippers only
+  grippers_enabled: {left: true, right: true}
+  hold_both_on_any: true         # one arm HOLD => both HOLD (bimanual cloth)
+  warn_speed_factor: 0.5
+
+rate_hz: 30                      # robot target update (spec 28: 30-50 Hz). Fusion runs on the latest sample, never blocks.
+
+cameras:
+  rgbd:  {backend: orbbec, fps: 30, width: 1280, height: 720, depth_width: 848, depth_height: 480, color_exposure: 10}
+  left_wrist:  {backend: uvc, match_name: FisheyeCamLeft, fps: 30, intrinsics: configs/calibration/fisheye_left_v002.yaml}
+  right_wrist: {backend: uvc, match_name: "Arducam 1080P Low Light", fps: 30, intrinsics: configs/calibration/fisheye_right_v003.yaml}
+  # Camera roles (user 10-15): Orbbec (rgbd) = visual-teleop position tracking ONLY; tripod C922 (top_cam) = DATA observation
+  # ONLY (top view of cloth/table for the DiT dataset, recorded per episode, never used for control).
+  top_cam: {match_name: "C922 Pro Stream Webcam", cv_index: 3, uvc_location: "0x03131410", width: 1280, height: 720, fps: 30, role: observation_only, record: true}   # record: every live_teleop episode gets frames/top_c922.mp4
+  # Fixed RGB camera for the UMI AprilTag when fusion.position.source = tag_rgb (user 10-15: C922 + tag first, RGB-D later).
+  # cv_index: OpenCV number (ffmpeg's numbering differs; null = match by name+image). Autofocus is locked at open.
+  tag_cam: {match_name: "C922 Pro Stream Webcam", cv_index: 3, uvc_location: "0x03131410",   # tripod C922 (robot-wrist C922 = 0x01140000)
+            width: 640, height: 480, fps: 30, focus: auto,   # auto = AF settles 2 s then frozen
+            intrinsics: configs/calibration/head_c922_intrinsics_v001.yaml}
+  # T_W_C: fixed position camera -> W (gravity-level). RGB-D: rgbd-level (accelerometer); C922: c922-level (tag flat on the table).
+  T_W_C: {measured: false, matrix: [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]}
+  rgbd_selfie_mirrored: false    # MediaPipe handedness convention for the fixed camera. UNVERIFIED: check LEFT/RIGHT live first
+  wrist_image_wh: [1920, 1080]
+
+init:
+  # method motion (default, 10-14): yaw from a ~10 cm push ALONG THE FINGERS at INIT (RGB-D heading + IMU push-axis check),
+  #   measured every session, no jig. method known: the fixed orientation below (needs a jig; measured: true).
+  method: motion
+  push_window_s: 4.0             # starts at the INIT click (voice cue + ding), ends with a pop
+  # Known human virtual-TCP orientation at the init points X_L / X_R (spec 5), in W, as rotvec deg. Sets the IMU yaw.
+  # UNMEASURED placeholder: hand flat, fingers pointing +Y (away from the operator) -> must match the physical init jig.
+  R_W_H_rotvec_deg: {left: [0, 0, 0], right: [0, 0, 0]}
+  measured: false
+  still_s: 1.0                   # both hands still this long before ALIGN is accepted
+
+link:                            # localhost UDP between the three processes (visual_teleop/link.py)
+  hand_port: 47810               # sensor hub -> control: fused HandEstimate per side
+  pinch_port: 47811              # fingertip node -> control: pinch metric per side
+  cmd_port: 47812                # control -> sensor hub: align / start / stop recording
+  max_age_ms: 100                # older than this => treated as missing (HOLD path)
+
+imu:
+  # 10-14 user: symmetric XIAO nRF52840 Sense Plus on both wrists (same firmware/rate/protocol). RIGHT first; LEFT = second XIAO later.
+  # Build: firmware/xiao_imu with build.extra_flags=-DTARGET_SEEED_XIAO_NRF52840_SENSE_PLUS (calibration_report.md). Flashing changes the USB serial.
+  left:  {port_glob: "/dev/cu.usbmodem*", serial_number: "2073676409D10CB3", rate_hz: 416}   # 10-17: LEFT UMI XIAO Sense Plus, flashed firmware/xiao_imu (serial was 0734B0E54E0E6FD4 before flashing)
+  right: {port_glob: "/dev/cu.usbmodem*", serial_number: "63ACF722D6DCE23F", rate_hz: 416}   # 10-16: XIAO nRF52840 Plus back on the right UMI (smaller; still noise 0.37x/0.78x Teensy). Teensy 20778070 = previous
+  max_age_ms: 50                 # newest sample older than this => IMU unhealthy
+  min_rate_hz: 100
+  ahrs: {kp: 1.0, ki: 0.01, acc_tol_m_s2: 0.6, gyro_gate_rad_s: 2.0, bias_still_s: 1.0}
+  # R_I_H: IMU body -> human virtual TCP axes (mount). UNMEASURED -> identity placeholder.
+  R_I_H: {left: {measured: false, rotvec_deg: [0, 0, 0]}, right: {measured: false, rotvec_deg: [0, 0, 0]}}
+
+time_sync:
+  camera_imu_offset_ms: {left: null, right: null}   # null = must be estimated this session (spec 12)
+  max_offset_ms: 100
+  min_peak_corr_ok: 0.8          # >= ok ; [warn, ok) WARN ; < warn => PAUSE initialisation
+  min_peak_corr_warn: 0.6
+  min_sharpness: 0.02           # PROVISIONAL: corr(peak) - corr(>=20 ms away); set from the first real wrist-wave session
+
+fusion:
+  yaw_correction_gain: 0.02      # per accepted vision/tag observation (slow drift correction only)
+  tag_reject_deg: 15             # |angle(R_tag, R_imu_pred)| above this => observation rejected (spec 14)
+  init_tilt_warn_deg: 10         # residual tilt at init alignment above this => mount R_I_H or init pose is wrong
+  position:
+    source: umi                  # umi = tape tip + tag #20 + depth (user 10-15: tape vanishes when the jaws hold cloth) | tape | tag | wrist_plus_offset | tag | tag_rgb (C922) | fingertip_midpoint_rgbd
+    tcp_offset_H_m: {left: [0.0, 0.0, 0.0], right: [0.0, 0.0, 0.0]}   # lever arm wrist -> virtual TCP, in H. UNMEASURED
+    one_euro: {min_cutoff_hz: 1.0, beta: 0.5, d_cutoff_hz: 1.0}
+    stale_warn_ms: 80            # position older than this (< hold_s) => WARN, held not extrapolated
+    hold_s: 0.3                  # visual position dropout: hold the last position (no extrapolation) up to this, then HOLD
+  tracker:                       # dedicated 6DoF tracker (vision/tracker6dof.py; any vendor bridge emits the tracker_pose UDP JSON)
+    port: 47813
+    world_preset: steamvr_y_up   # identity (z-up tracker world) | steamvr_y_up (SteamVR/OpenVR/libsurvive y-up) -- only a default
+    T_W_TW: {measured: false, matrix: [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]}   # explicit tracker world -> W; wins over the preset when measured
+    v_max_m_s: 2.0                # jump gate: > v_max*dt + margin from the last accepted pose = rejected
+    margin_m: 0.03
+    T_TB_TCP: {measured: false, pivot_measured: false, mount_measured: false, pivot_rms_mm: null, matrix: [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]}   # tracker body -> UMI jaw-tip TCP (calib_tracker pivot = t, mount = R)
+    stale_warn_ms: 50
+    hold_ms: 300
+    # 10-15 FastUMI-style: RGB-D keypoint cross-checks the tracker (vision/residual_monitor.py); action degrade = warn only, hold = HOLD on gross disagreement
+    rgbd_monitor: {enabled: true, action: degrade, learn_n: 60, min_spread_m: 0.10, warn_m: 0.03, hold_m: 0.08, hold_s: 0.5, max_pair_dt_ms: 60}
+    min_conf: 0.5
+    warn_conf: 0.8
+  umi: {offset_learn_n: 30}      # tag->tape-tip offset learned after INIT from 30 paired samples (vision/umi_pose.py)
+  kpt: {side: right, onnx: ~/finger_distill/umi_kpt.onnx, imgsz: 640, conf: 0.5, max_jump_m: 0.15, v_max_m_s: 1.5, margin_m: 0.03}   # markerless UMI jaw tip; jump gate = min(max_jump, v_max*dt + margin)
+  tape:                          # UMI orange jaw-tip tape on the fixed RGB-D (vision/tape_pose.py)
+    side: right
+    hsv_lo: [0, 120, 80]
+    hsv_hi: [22, 255, 255]
+    min_area_px: 25              # at 1280x720 the tip blob is ~90 px (848x480: ~40)
+    max_jump_px: 120
+  tag:                           # AprilTag on the UMI, seen by the fixed RGB-D (vision/tag_pose.py)
+    side: right                  # which wrist carries the tagged UMI (MVP: right only)
+    family: tag36h11
+    id: 20                       # 10-15: the tag already on the right UMI (side face) = tag36h11 #20
+    size_m: 0.02                 # black-square edge -- MEASURE it. With use_depth the POSITION comes from depth (size only affects PnP rotation)
+    min_margin: 30
+    use_depth: true
+    T_tag_tcp: {measured: false, matrix: [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]}   # tag -> UMI TCP; unmeasured = tag centre
+  orientation:
+    imu_only_max_s: null         # no vision yaw anchor for longer than this => WARN. null = off (no tag/vision source exists yet)
+
+tracking:
+  min_position_conf: 0.5
+  min_fingertip_conf: 0.6
+  warn_position_conf: 0.7
+
+retarget:
+  translation_scale: [1.0, 1.0, 1.0]     # sx sy sz (spec 17), robot-frame delta. User 10-15: start 1.0; laundry may want Z ~0.6
+  rotation_scale: 1.0
+  rotation_axis_scale: [1.0, 1.0, 1.0]   # 10-16 per-axis hand-rotation gain in RB (roll x, pitch y, yaw z), rotation_frame world only
+  rotation_heading: base                  # 10-16 base = hand heading -> RB x; robot = hand heading -> robot anchor gripper heading (rotation_frame world)
+  orientation_mode: full                  # lock -> yaw -> full (user 10-15: position worked, then "yaw roll pitch 가 전혀 없어" -> full)
+  translation_frame: heading              # heading: INIT-push forward -> robot +x, up -> +z, left -> +y (world-aligned) | body (UMI-relative)
+  pivot_human_m: 0.20                     # 10-15 rotation pivot = human wrist, 20 cm behind the UMI jaw tip (heading frame only)
+  pivot_robot_m: 0.25                     # robot wrist pitch axis (right_joint5) is 0.253 m behind right_tcp in the URDF
+  rotation_frame: world                   # 10-15 world: hand rotation applied about the SAME world axes on the gripper (body = old TCP-frame delta)
+  # Human virtual TCP axes -> robot IK TCP axes (THE adapter, spec 19). Signed permutation: robot axis i <- human axis map[i].
+  # UNVERIFIED until Stage 0/2 axis checks; the robot moves only after test_frame_adapter + a live +X/+Y/+Z dry check pass.
+  adapter: {left: {axis_map: [x, y, z], sign: [1, 1, 1]}, right: {axis_map: [x, y, z], sign: [1, 1, 1]}}
+
+workspace:                       # RB, metres. Reject (HOLD) rather than clamp (spec 18)
+  mode: hold
+  left:  {min_xyz: [0.05, -0.10, 0.03], max_xyz: [0.60, 0.50, 0.50]}
+  right: {min_xyz: [0.05, -0.50, 0.03], max_xyz: [0.60, 0.10, 0.50]}
+
+limits:
+  max_lin_vel_m_s: 0.20         # 10-15: 0.08 made the tip arc lag the rotation (wrist swung around a fixed tip)
+  max_ang_vel_deg_s: 45         # 10-15: 25 deg/s lagged wrist bends badly; bridge max_deg_s is 45
+  max_lin_acc_m_s2: 0.8
+  max_target_jump_m: 0.05        # raw target moved more than this in one tick => HOLD (tracking glitch, not motion)
+  max_target_jump_deg: 20
+  robot_obs_max_age_ms: 200
+  filter: {alpha_pos: 0.35, alpha_rot: 0.3, mode: fixed, min_cutoff_hz: 1.2, min_cutoff_rot_hz: 1.8, beta_pos: 30.0, beta_rot: 3.0, d_cutoff_hz: 1.0, deadband_m: 0.0, deadband_deg: 0.0, predict_s: 0.0, dt_s: 0.0333}   # robot-side target smoothing, TRANSACTIONAL (committed only when executed); mode one_euro = speed-adaptive (10-16)
+
+ik:
+  max_pos_err_m: 0.01
+  max_rot_err_deg: 5.0
+  max_joint_step_rad: 0.05       # per command; larger = IK branch jump => HOLD
+  limit_margin_deg: 0.0          # joint limits = MIT bridge SEEED_LIM (ego_teleop/robot/rebot_client.py)
+  # 10-15 measured (2.5 mm steps, orientation locked): rest_weight 20 (handumi default) moved the TCP forward 0.1 cm and sideways
+  # 3 cm out of 10; rest_weight 2 + max_joint_delta 6 deg reached 10 cm forward/left/right/up, max joint step 1.9 deg/tick.
+  solver_overrides: {rest_weight: 2.0, max_joint_delta_deg: 2.8}   # < ik.max_joint_step_rad (0.05 rad = 2.86 deg) or the gate rejects
+  backend: pink                  # pink (Pinocchio QP, robot/ik_pink.py; 10-15 user) | pyroki (handumi). Same URDF + <side>_tcp, FK equal to 4e-7
+  pink: {position_cost: 1.0, orientation_cost: 0.3, posture_cost: 0.001, lm_damping: 0.0001, dt: 0.1, iters: 40, max_joint_delta_deg: 2.8}   # < ik.max_joint_step_rad (0.05 rad = 2.86 deg) or the gate rejects
+
+collision:
+  min_tcp_separation_m: 0.10     # left/right TCP distance
+  min_wrist_separation_m: 0.08   # segment TCP..(0.08 m behind along -z_RE), arm-to-arm
+  forbid_crossing: true          # left TCP y must stay > right TCP y + crossing_margin_m
+  crossing_margin_m: 0.02
+
+gripper:
+  # pinch metric from the fingertip detector: thumb-index distance as % of hand size (student backend), smaller = pinched
+  mode: binary                   # binary hysteresis (user 10-15: sigmoid off again); sigmoid = continuous
+  sigmoid_k: 10.0                # steepness around half-open
+  sigmoid_ema: 0.5               # smoothing of the normalised finger opening (0.35 felt slow, 10-15)
+  sigmoid_dead: 0.2              # bottom/top 20 % of the range = fully closed / fully open
+  pinch_closed: null             # p5 / p95 of the metric from calib_right pinch (per mount)
+  pinch_open: null
+  close_threshold: 25.0
+  open_threshold: 40.0
+  rate_limit_per_s: 4.0          # g units/s (full stroke >= 0.25 s); the bridge grip_deg_s is the real jaw speed
+  lowpass_alpha: 0.5
+  short_dropout_s: 0.5           # hold last gripper target
+  long_dropout_s: 2.0            # => PAUSE/HOLD that hand
+  detector: {backend: jaw_tape}   # 10-15 user: HandUMI jaw tape drives the gripper. Finger model: {backend: student, model: ~/finger_distill/student_palm2.pt, conf: 0.6, imgsz: 640}   # 0.4 let a FACE through at 0.40 (10-14); 0.6 keeps 97 % of wearer frames
+
+operator:
+  deadman: {source: ui_heartbeat, timeout_ms: 400}   # 10-15: 150 ms timed out 46x in 50 s (hb queued behind /img polls); explicit release is still instant   # ui_heartbeat (dashboard SPACE held) | keyboard | pedal
+  clutch: {source: ui}                                 # ui key C
+  estop: {software: true, call_bridge_estop: true}     # hardware E-STOP: the bridge reports estop in /status; polled every tick
+
+robot:
+  base_url: http://127.0.0.1:8021     # MIT bridge (robot_service_mit.py). Ports by LEFT_LOC/RIGHT_LOC; verify with a one-jaw test
+  request_timeout_s: 0.2
+  live: false                         # true only with deadman + operator present (never set by a script)
+
+recording:
+  root: ~/ego_collector/datasets/VisualTeleop_v1
+  skill_id: UNFOLD_ALIGN
+  data_source: VISUAL_TELEOP
+
+qa:
+  max_hold_fraction: 0.3
+  max_translation_per_frame_m: 0.01
+  max_rotation_per_frame_deg: 5.0
+  min_valid_tracking: 0.9

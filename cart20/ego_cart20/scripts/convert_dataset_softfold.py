@@ -13,7 +13,10 @@ DEFAULT_VAL = ["0706_17pm_stage_1_stage2new_new_cam_very_slow", "0808_12am_stage
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("raw_root"); ap.add_argument("out_root")
-    ap.add_argument("--val-folders", nargs="*", default=DEFAULT_VAL); ap.add_argument("--workers", type=int, default=8); a = ap.parse_args()
+    ap.add_argument("--val-folders", nargs="*", default=DEFAULT_VAL); ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--binary-gripper", action="store_true", help="[2026-10-08] X-VLA width<2cm rule, BCE build (softfold_bin)"); a = ap.parse_args()
+    if a.binary_gripper:
+        from ego_cart20 import softfold_bin; softfold_bin.install()
     CFG = Cart20Config(max_raw_gap_s=0.10, horizon=32)
     out = pathlib.Path(a.out_root); assert not out.exists(), f"{out} exists (processed trees are write-once)"; (out / "episodes").mkdir(parents=True)
     raws = sorted(p for p in pathlib.Path(a.raw_root).iterdir() if (p / "raw_episode.json").exists())
@@ -28,7 +31,7 @@ if __name__ == "__main__":
                 if sp[r["episode_id"]] == s: f.write(json.dumps(dict(r, split=s, path=f"episodes/{r['episode_id']}")) + "\n")
     cnt = {s: dict(episodes=sum(sp[r["episode_id"]] == s for r in ok), train_rows=sum(r["train_rows"] for r in ok if sp[r["episode_id"]] == s))
            for s in ("train", "val", "test")}
-    meta = dict(schema="softfold_cart20_h32/v1", created=time.strftime("%F %T"), raw_root=str(pathlib.Path(a.raw_root).resolve()), contract=CONTRACT,
+    meta = dict(schema="softfold_cart20_h32_bin/v1" if a.binary_gripper else "softfold_cart20_h32/v1", created=time.strftime("%F %T"), raw_root=str(pathlib.Path(a.raw_root).resolve()), contract=CONTRACT,
                 config=CFG.to_dict(), split=dict(rule="folder-level", val_folders=a.val_folders), counts=cnt, conversion=res,
                 code_sha256={str(p.relative_to(pathlib.Path(__file__).resolve().parents[1])): hashlib.sha256(p.read_bytes()).hexdigest()[:16]
                              for p in sorted(pathlib.Path(__file__).resolve().parents[1].rglob("*.py"))})

@@ -34,6 +34,24 @@ cover), the added Teensy 4.1 + ICM-42688-P wrist IMU that replaces upstream VR t
 | Part II: single-arm approach to a cube, 2 pp | [`report/part2_approach_en.pdf`](report/part2_approach_en.pdf) | [`report/part2_approach_ko.pdf`](report/part2_approach_ko.pdf) | `report/archive/part2_approach_{en,ko}_full.pdf` (5 pp) |
 | Methods and pipeline (how every stage works), 6 pp | [`report/methods_en.pdf`](report/methods_en.pdf) | [`report/methods_ko.pdf`](report/methods_ko.pdf) | — |
 
+### Update 2026-10-20: servo-less HandUMI, visual gripper, T-shirt flattening data, UMI→robot calibration
+
+After the v5 report the work moved to T-shirt flattening for the laundry project. Summary in
+[`docs/UPDATE_2026-10-20.md`](docs/UPDATE_2026-10-20.md) ([한국어](docs/UPDATE_2026-10-20_ko.md)); the report itself is unchanged.
+
+- **Hardware:** jaw servos removed (10-13); red tape on the jaw tips; AprilTag rigs (200–202 / 210–212) per unit; XIAO
+  nRF52840 wrist IMUs replace the Teensy ([`hardware/README.md`](hardware/README.md)).
+- **Gripper open/close from the wrist video:** red-tape tip distance per frame (`jaw_track.py`) → hysteresis binary
+  (closed ≤ 200 px / open ≥ 260 px) in `cart20/ego_cart20/sources/jaw_visual.py`; 16/16 spot checks, corr 0.93 vs the servo.
+- **UMIalign pose pipeline** ([`pipeline/umi_laundry/`](pipeline/umi_laundry/)): MASt3R restart_v1, Orbbec canonical
+  tracker, smoother with corrected camera↔IMU rotation + fixed jaw-tip lever + AprilTag gate (TCP error p50 25–36 cm →
+  38–59 mm), 65-episode corrected dataset. The fine-tune on it was stopped at ~11k steps; no result.
+- **UMI → robot** ([`pipeline/umi_robot_parity/`](pipeline/umi_robot_parity/), `cart20/ego_cart20/robotize/`):
+  robotization (IK-ok p50 0.79, amplitude ~0.81), UMI TCP calibration by corner touch (1–4 mm static), robot camera
+  calibration and replay-parity tools built but **not yet run on the robot**.
+- **UMI as teleop device** (`experimental/visual_teleop/`): DPVO / mono VIO NO-GO, stereo VIO first robot teleop then
+  dropped (10-16).
+
 The v5 technical report is the main document. The earlier split documents remain: short versions in `report/`, full-length
 versions in `report/archive/`. LaTeX
 sources sit next to the PDFs; figures are rebuilt by `report/figures/make_figures*.py`, `analysis/v4_r30_ablation.py` and
@@ -347,7 +365,8 @@ The full working code of the project was added, so the repository is no longer o
 | `hra/` | single-arm approach pipeline: base-frame linking, robot camera and hand-eye calibration, robotcam v2 rendering, origin-plane scale, origin yaw, G frame, table-aware QP, held-out evaluation |
 | `deploy/` | inference core, robot UI (PLAN/RTC/cube-size stop/trial logger), Pink IK, checkpoint loaders, MIT robot service |
 | `hardware/` | HandUMI print package (3MF/STL) from upstream [murobotics-ai/handumi-hw](https://github.com/murobotics-ai/handumi-hw) (not our design), our modified parts (`mods/`) and build notes; our build copy is [physical-ai-vla/umihand](https://github.com/physical-ai-vla/umihand) |
-| `experimental/` | wearable teleop (VIO), AprilTag V0 collector, RGB-D body tracking |
+| `experimental/` | wearable teleop (VIO), AprilTag V0 collector, RGB-D body tracking, (10-20) `visual_teleop` HandUMI teleop and wrist-tracking evaluations |
+| `pipeline/umi_laundry/`, `pipeline/umi_robot_parity/` | (10-20) UMIalign pose + visual-gripper pipeline; UMI TCP tag-rig calibration, Kalibr, UMI → reBot replay parity |
 | `upstream/` | patch and new files on top of murobotics-ai/handumi-sw (formerly robonet-ai; Apache-2.0) |
 | `training/launchers/`, `training/archivers/`, `training/umi76/` | node launchers (4090 / 5090), archivers, base widening |
 | `docs/OPERATIONS_NOTES.md` | conventions and pitfalls (gripper signs, TCP frames, PLAN settings, GPU rules) |

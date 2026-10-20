@@ -80,7 +80,7 @@ def test_state_machine_cue_order_and_timing_in_fake_time():
     assert said()[-4:] == ["3", "2", "1", "고"]
     ev = sess.recorder.events; cues = [(e["kind"], e["detail"].get("cue"), e["detail"].get("before_rec", False)) for e in ev]
     assert cues[:3] == [("hold_still_start", None, False), ("auto_loop", "reset_start", True), ("auto_loop", "ready_cue", True)]
-    assert [c for k, c, _ in cues if k == "auto_loop"][2:] == ["arming", "rec_start", "countdown_3", "countdown_2", "countdown_1", "go"]
+    assert [c for k, c, _ in cues if k == "auto_loop"][2:] == ["arming", "still_cue", "rec_start", "countdown_3", "countdown_2", "countdown_1", "go"]   # 4.1 s gate > still_cue_s 3 s -> one "손 멈추세요"
     t = {e["detail"].get("cue"): e["t_ns"] for e in ev if e["kind"] == "auto_loop"}
     assert t["reset_start"] < t["arming"] < t["rec_start"] < t["countdown_3"] < t["countdown_1"] < t["go"], "GO and the countdown are recorded AFTER rec_start"
     _drive(lp, sess, clock, 10.1)

@@ -3,6 +3,7 @@
 replay, KEEP / DISCARD, HARDWARE CHECK, gripper calibration; POSE and QA tabs. Raw is never touched by anything drawn here
 (overlays are preview-only). Colours: GREEN ok, YELLOW optional missing / degraded, RED required failure, GREY not installed."""
 from __future__ import annotations
+import os
 import json
 import threading
 import time
@@ -147,8 +148,8 @@ class MainWindow(W.QMainWindow):
         self.setWindowTitle("HandUMI Egocentric Collector")
         self.replay = Replay(cc.replay_fps); self._prev_head = None
         tabs = W.QTabWidget(); self.setCentralWidget(tabs)
-        tabs.addTab(self._record_tab(), "RECORD"); tabs.addTab(self._pose_tab(), "POSE"); tabs.addTab(self._qa_tab(), "QA")
-        for key, fn in (("Space", self.on_space), ("D", self.on_discard), ("K", self.on_keep), ("H", self.on_mark), ("A", self.on_auto)):
+        tabs.addTab(_scroll(self._record_tab()), "RECORD"); tabs.addTab(self._pose_tab(), "POSE"); tabs.addTab(self._qa_tab(), "QA")
+        for key, fn in (("Space", self.on_space), ("N", self.on_space), ("D", self.on_discard), ("K", self.on_keep), ("H", self.on_mark), ("A", self.on_auto)):
             QtGui.QShortcut(QtGui.QKeySequence(key), self, fn)
         self.set_order(self.s.order)
         self.timer = QtCore.QTimer(self); self.timer.timeout.connect(self.refresh); self.timer.start(int(1000 / cc.preview_hz))
@@ -186,7 +187,9 @@ class MainWindow(W.QMainWindow):
                         depth=is_depth, near_m=float(dp.get("near_m", 0.30)), far_m=float(dp.get("far_m", 1.20)))
             row.addWidget(p); self.previews[name] = p
         self.c922 = None
-        if "right_wrist" in self.previews:                         # [2026-10-06] robot C922 view of the right wrist (preview only)
+        # [2026-10-12 user "robot c922 view는 없애줘도 돼"] off by default; HANDUMI_C922_PREVIEW=1 brings the preview back.
+        # (Recording right_wrist_c922.mp4 is separate: tasks.yaml record_c922_view per dataset.)
+        if "right_wrist" in self.previews and os.environ.get("HANDUMI_C922_PREVIEW", "0") == "1":   # [2026-10-06] robot C922 view (preview only)
             try:
                 self.c922 = C922View(); p = Preview("right_wrist_c922", "ROBOT C922 VIEW (pose-A overlay)")
                 p.undist.setText("A overlay"); p.undist.setEnabled(True); p.undist.setChecked(True); p.undist.setToolTip("blend the robot pose-A frame")
@@ -257,7 +260,7 @@ class MainWindow(W.QMainWindow):
         if not self.fixed_task:
             nb = W.QPushButton("next least-collected"); nb.clicked.connect(lambda: self.set_order(self.s.manager.next_order())); br.addWidget(nb)
         gl.addLayout(br); self.instr = W.QLabel(); self.instr.setWordWrap(True); gl.addWidget(self.instr); self.suggest = W.QLabel(); gl.addWidget(self.suggest)
-        proto = W.QLabel("Protocol: single task, one cube · HOME still 1–2 s at start and end" if self.fixed_task else "Protocol: HEAD C922 fixed mount · plate fixed · cubes red/blue/purple · layout ≈ robot R150 · 6 balanced orders · HOME still 1–2 s at start and end")
+        proto = W.QLabel(f"Task: {self.s.cfg.tasks.instruction_template} · HOME still 1–2 s at start and end" if self.fixed_task else "Protocol: HEAD C922 fixed mount · plate fixed · cubes red/blue/purple · layout ≈ robot R150 · 6 balanced orders · HOME still 1–2 s at start and end")
         proto.setStyleSheet("color:#555"); proto.setWordWrap(True); gl.addWidget(proto); mid.addWidget(g, 3)
         gd = W.QGroupBox("DATASET"); gdl = W.QVBoxLayout(gd); self.dataset_lab = W.QLabel(f"<b>{self.s.manager.dataset}</b>  target/order {self.s.cfg.tasks.target_per_order}"); gdl.addWidget(self.dataset_lab)
         self.counter = W.QLabel(); self.counter.setStyleSheet("font-family:monospace"); gdl.addWidget(self.counter)
@@ -267,6 +270,19 @@ class MainWindow(W.QMainWindow):
             cb = W.QCheckBox(item); cb.stateChanged.connect(self._preflight_changed); gpl.addWidget(cb); self.preflight.append(cb)
         if not cc.preflight: gpl.addWidget(W.QLabel("(no checklist configured)"))
         mid.addWidget(gp, 3); v.addLayout(mid)
+        # [2026-10-12 UMI100 spec §8] episode metadata -> episode_meta.umi_tags (garment / initial state before the take,
+        # outcome + notes after it; the outcome buttons amend the LAST kept episode, since AUTO keeps a PASS take immediately)
+        gm = W.QGroupBox("EPISODE METADATA"); gml = W.QHBoxLayout(gm)
+        gml.addWidget(W.QLabel("garment_id")); self.m_garment = W.QLineEdit("tshirt_01"); self.m_garment.setMaximumWidth(140); gml.addWidget(self.m_garment)
+        gml.addWidget(W.QLabel("initial_state")); self.m_init = W.QComboBox(); self.m_init.addItems(["crumpled", "slightly_crumpled", "semi_flat", "sleeve_folded", "rotated", "asymmetric", "flat"]); gml.addWidget(self.m_init)
+        for w in (self.m_garment,): w.editingFinished.connect(self._tags_changed)
+        self.m_init.currentTextChanged.connect(lambda _=None: self._tags_changed())
+        gml.addWidget(W.QLabel("  last episode →"))
+        for lab, val, col in (("✓ SUCCESS", "success", "#2e7d32"), ("½ PARTIAL", "partial", "#f9a825"), ("✗ FAILURE", "failure", "#c62828")):
+            b = W.QPushButton(lab); b.setStyleSheet(f"color:{col};font-weight:bold"); b.clicked.connect(lambda _=False, vv=val: self._amend(outcome=vv)); gml.addWidget(b)
+        self.m_notes = W.QLineEdit(); self.m_notes.setPlaceholderText("notes for the last episode (Enter = save)"); self.m_notes.returnPressed.connect(lambda: self._amend(outcome_notes=self.m_notes.text()))
+        gml.addWidget(self.m_notes, 1); self.m_last = W.QLabel(""); self.m_last.setStyleSheet("color:#555"); gml.addWidget(self.m_last)
+        v.addWidget(gm); self._tags_changed()
         g2 = W.QGroupBox("DEVICES"); grid = W.QGridLayout(g2); self.dots: dict[str, Dot] = {}
         names = [d.name for d in self.s.devices.all_devices()]
         for side in ("left", "right"):
@@ -289,6 +305,13 @@ class MainWindow(W.QMainWindow):
         v.addWidget(W.QLabel("Keyboard: SPACE = start/stop · K = keep · D = discard · H = HOME mark · A = AUTO loop on/off"))
         self.logbox = W.QPlainTextEdit(); self.logbox.setReadOnly(True); self.logbox.setMaximumHeight(90); v.addWidget(self.logbox); self._nlog = 0
         return root
+
+    def _tags_changed(self) -> None:
+        self.s.set_episode_tags(garment_id=self.m_garment.text().strip() or None, initial_state=self.m_init.currentText())
+
+    def _amend(self, **kw) -> None:
+        r = self.s.amend_last(**kw); self.m_last.setText(r[:80])
+        if "outcome_notes" in kw: self.m_notes.clear()
 
     @staticmethod
     def _up_nominal(pitch_deg: float = 59.0):
@@ -371,6 +394,9 @@ class MainWindow(W.QMainWindow):
     def _preflight_changed(self, *_): self.s.preflight_ok = all(cb.isChecked() for cb in self.preflight) if self.preflight else True
 
     def on_space(self) -> None:
+        a = getattr(self.s, "auto", None)
+        if a is not None and a.active and a.phase == "EPISODE":       # [2026-10-12] AUTO: Space = done early, go on to the rest
+            if a.finish_early(): self.s.say("AUTO: finished early -> stop, validate, rest"); return
         if self.s.state == "IDLE": self.on_start()
         elif self.s.state == "WAITING_FOR_STILLNESS": self.s.cancel_start()
         elif self.s.state == "RECORDING": self.on_stop()
@@ -580,7 +606,7 @@ class MainWindow(W.QMainWindow):
             ok, why = s.can_record(); lab = s.state_label()
             self.rec.setText(f'<span style="color:{GREEN if ok else GREY}">{lab}</span> {why}'); self.live.setText("")
         if s.auto is not None:
-            if s.auto.active: self.live.setText(s.auto.label() + "   (A / AUTO button stops)")
+            if s.auto.active: self.live.setText(s.auto.label() + ("   (SPACE / N = 끝났으면 넘기기 · A = AUTO 정지)" if s.auto.phase == "EPISODE" else "   (A / AUTO button stops)"))
             elif s.auto.phase == "PAUSED": self.live.setText(s.auto.label()); self.b_auto.setChecked(False)
             elif self.b_auto.isChecked(): self.b_auto.setChecked(False)
         idle = s.state == "IDLE"; can = idle and s.can_record()[0]
@@ -594,9 +620,16 @@ class MainWindow(W.QMainWindow):
         self.timer.stop(); self.replay.stop(); self.s.close(); ev.accept()
 
 
+def _scroll(widget):
+    sa = W.QScrollArea(); sa.setWidgetResizable(True); sa.setWidget(widget); return sa
+
+
 def run(cfg: AppConfig, *, session_dir=None, dataset: str | None = None) -> int:
     import sys
     app = W.QApplication.instance() or W.QApplication(sys.argv)
     session = CollectorSession.create(cfg, session_dir=session_dir, dataset=dataset)
-    w = MainWindow(session); w.resize(1500, 1000); w.show()
+    w = MainWindow(session)
+    # [2026-10-12 user "ui가 너무 커서 아래부분이 안보여"] fit the screen's free area (the RECORD tab scrolls if still taller)
+    g = app.primaryScreen().availableGeometry()
+    w.resize(min(1500, g.width() - 20), min(1000, g.height() - 40)); w.move(g.x() + 10, g.y() + 10); w.show()
     return app.exec()

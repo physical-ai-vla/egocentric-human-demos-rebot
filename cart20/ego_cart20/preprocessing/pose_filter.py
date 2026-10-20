@@ -14,7 +14,7 @@ def jump_mask(t_s, T, valid, max_lin_mps=3.0, max_ang_rps=30.0):
     return m
 
 
-# [2026-10-01] v2b discontinuity filter (raw MASt3R-SLAM silent jumps: translation jumps with no tracking-lost flag).
+# [2026-10-01 user] v2b discontinuity filter (raw MASt3R-SLAM silent jumps: translation jumps with no tracking-lost flag).
 ROW_S = 1.0 / 15.0
 
 

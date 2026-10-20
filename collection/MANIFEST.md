@@ -56,3 +56,21 @@ These were chosen because they import `handumi_collector` and serve collection, 
   The single difference is `test_pilot_episodes_report_the_broken_left_jaw`, which is SKIPPED here because it needs
   recorded pilot data.
 - Secret scan: clean. Configs contain device USB serials, product names and tailnet IPs, but no credentials.
+
+## Update 2026-10-20
+
+Re-synced from `~/ego_collector` working tree (branch `orbbec-rgbd`, HEAD still `12db478`, uncommitted changes).
+
+| source | dest | what changed |
+|---|---|---|
+| `handumi_collector/` | same | UMIpilot/UMI100/UMIalign modes, finish-early, short voice cues, `device_status.json`, `session_log.txt`, servo-less profile support |
+| `configs/handumi/` | same | `hardware_handumi_rgbd_noservo.yaml` (servos removed 10-13), `world_config_umi_v1.json`, `tasks.yaml` (UMIalign) |
+| `configs/calibration/` (files ≤ 1 MB) | same | `camera_imu_Rcb_data_v003` (corrected camera↔IMU rotation), `gripper_v015–v020`, `umi_tag_rig_v001.json`, `robot_cam_v001.json`, stereo/trackcam calibrations of the dropped teleop rig |
+| `firmware/xiao_imu/` | same | XIAO nRF52840 Sense Plus build flag + 64-bit micros wrap fix |
+| `tests/handumi/`, `docs/handumi_collector/RGBD_POSE.md` | same | |
+| `scripts/robotlike_session_check_4090.sh` | `scripts/` | session MASt3R driver (`RUNNER=restart`) |
+| `tools/orbbec_{alone,combo}_test.py` | `tools/` | Orbbec stall isolation |
+
+Excluded: `jaw_resnet18_v00{1..4}.pt` (45 MB each, teleop jaw classifier), `stereo_selfmask_*.npy`.
+Source-tree test state on 10-20: `tests/handumi` + `tests/vteleop` = 299 pass, 12 fail (m15 production UI, gripper
+calibration via session, pose-pipeline home marks); not fixed here.

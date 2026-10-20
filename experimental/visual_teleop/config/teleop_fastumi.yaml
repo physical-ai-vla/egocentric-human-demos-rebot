@@ -1,0 +1,7 @@
+# FastUMI-style pose source (2026-10-15) = the 6DoF tracker source (vision/tracker6dof.py) as PRIMARY + the markerless RGB-D
+# keypoint as a secondary residual monitor (vision/residual_monitor.py). Same as teleop_tracker.yaml with the monitor on.
+#   sudo .venv/bin/python -m visual_teleop.tools.sensor_hub --config visual_teleop/config/teleop_fastumi.yaml     (Orbbec needs sudo)
+#   ~/xvla-mac/bin/python -m visual_teleop.tools.live_teleop --config visual_teleop/config/teleop_fastumi.yaml --stage 2 --arm right
+fusion:
+  position: {source: tracker}
+  tracker: {rgbd_monitor: {enabled: true, action: degrade}}

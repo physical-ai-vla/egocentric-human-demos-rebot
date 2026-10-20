@@ -1,0 +1,63 @@
+created: '2026-10-15T22:08:51'
+source: datasets/stereo_imu/20261015_220411_calib
+model: kannala_brandt (KB4), own soft-L1 LM
+image_size_full:
+- 1920
+- 1080
+left:
+  location: '0x00140000'
+  fx: 790.5985934749109
+  fy: 793.0305581317431
+  cx: 956.5128375720542
+  cy: 555.6805392594002
+  k:
+  - -0.02561403850625108
+  - 0.023816522040750954
+  - -0.05906929543779736
+  - 0.030158890060996965
+right:
+  location: '0x03110000'
+  fx: 788.4497142117297
+  fy: 791.4724715519633
+  cx: 984.5567517926282
+  cy: 554.2516278267059
+  k:
+  - -0.021063773805738525
+  - -0.018678750855450007
+  - 0.018468163491398893
+  - -0.0060283043530823975
+T_CR_CL:
+- - 0.99755674
+  - 0.02580978
+  - 0.06491841
+  - -0.04185767
+- - -0.02288286
+  - 0.99870529
+  - -0.0454326
+  - -0.02603657
+- - -0.06600697
+  - 0.04383608
+  - 0.9968558
+  - -0.0011159
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+T_CR_CL_note: maps a point in the LEFT camera frame into the RIGHT camera frame
+baseline_cm: 4.93
+quality:
+  joint_left_reproj:
+    rms_px: 2.281
+    median_px: 1.214
+    p95_px: 4.448
+    rms_inliers_px: 1.386
+    outliers_gt3px: 2174
+    n: 17396
+  joint_right_reproj:
+    rms_px: 2.76
+    median_px: 1.372
+    p95_px: 5.949
+    rms_inliers_px: 1.434
+    outliers_gt3px: 3413
+    n: 16516
+  pairs: 178

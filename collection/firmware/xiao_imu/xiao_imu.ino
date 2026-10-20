@@ -44,7 +44,12 @@ LSM6DS3 g_imu(I2C_MODE, 0x6A);
 // ---- 64-bit monotonic micros (the 32-bit hardware counter wraps every ~71.6 min)
 static volatile uint32_t g_last_us32 = 0, g_wraps = 0;
 static inline uint64_t micros64() {
-  noInterrupts(); uint32_t now = micros(); if (now < g_last_us32) g_wraps++; g_last_us32 = now;
+  // [2026-10-14] a real wrap drops by ~2^32; mbed's micros() can also step BACK a few us (ISR vs loop readers), which
+  // the old `now < last` test counted as a wrap: one +2^32 us (71.6 min) jump in a 20 s Sense Plus bring-up. Only a drop
+  // larger than half the range is a wrap; a small backward step keeps the previous value (stays monotonic).
+  noInterrupts(); uint32_t now = micros();
+  if (now < g_last_us32) { if (g_last_us32 - now > 0x80000000u) g_wraps++; else now = g_last_us32; }
+  g_last_us32 = now;
   uint64_t v = ((uint64_t)g_wraps << 32) | now; interrupts(); return v;
 }
 

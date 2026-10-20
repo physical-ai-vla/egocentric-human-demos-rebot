@@ -228,7 +228,7 @@ def convert_tree(raw_root: pathlib.Path, out_root: pathlib.Path, *, val_frac: fl
     return meta
 
 
-# [2026-10-03] per-episode PHYSICAL sanity gate, applied after the export (the old global gates "s_pnp p95/p5 <= 1.6"
+# [2026-10-03 user-approved] per-episode PHYSICAL sanity gate, applied after the export (the old global gates "s_pnp p95/p5 <= 1.6"
 # and "HOME->cube width <= 0.35 m" were dropped: the MASt3R map scale and the start pose legitimately vary per episode).
 SANITY = dict(s_min=0.1, s_max=1.0, travel_ratio_min=0.8, travel_max_m=0.8)
 

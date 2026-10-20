@@ -1,4 +1,4 @@
-"""Synthetic contract tests (spec 27-31 + design decisions D1-D3).  Run: python -m pytest tests -q   (or python tests/test_contract.py)"""
+"""Synthetic contract tests (spec 27-31 + user decisions D1-D3).  Run: python -m pytest tests -q   (or python tests/test_contract.py)"""
 import pathlib
 import sys
 

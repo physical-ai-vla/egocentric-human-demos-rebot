@@ -1,4 +1,4 @@
-"""Gripper aperture normalization.  Contract (D2): g = aperture_mm / w_open_mm, 0 = closed, 1 = open.
+"""Gripper aperture normalization.  Contract (user D2): g = aperture_mm / w_open_mm, 0 = closed, 1 = open.
 
 Calibration happens BEFORE clipping: raw ticks -> mm through the monotone caliper knots, then mm / w_open, then the
 [0, 1] clip.  ``validate_gripper`` is a hard check on the stored values.

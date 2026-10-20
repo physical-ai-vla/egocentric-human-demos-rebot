@@ -1,0 +1,10 @@
+{
+ "created": "2026-10-15",
+ "what": "R_cb (camera <- IMU rotation, omega_cam = R_cb @ omega_imu) per wrist side, estimated from data; replaces only the ROTATION of the Kalibr extrinsic (camera_imu_left_v001 / camera_imu_right_v002 -> export IMU.T_b_c1)",
+ "files": {"left": "camera_imu_left_Rcb_data_v003.npy", "right": "camera_imu_right_Rcb_data_v003.npy"},
+ "method": "ego_collector/scripts/umi_fusion/imu_cam_extrinsic_check.py: per episode Kabsch of MASt3R restart_v1 camera angular velocity vs gyro (delay scan); rotation mean over UMIalign 160900 (30) + 112920 (33) = 63 episodes per side (IMU judged rigid there: session means agree within 1.3-3 deg, no trend)",
+ "vs_kalibr_deg": {"left": 23.74, "right": 17.52},
+ "correction_axis": "about camera x in both cases (left [23.7, 1.4, -0.3] deg, right [17.5, 0.1, 1.3] deg rotvec, camera frame)",
+ "cross_check": "right agrees within 4.7 deg with the independent 10-06 cube-based camera_imu_right_rotfix_20261006.npy applied as fix @ R_cb_kalibr (HRA shared-frame work)",
+ "not_valid_for": "UMIalign_20261015_112743 eps >= 35 (right IMU loosened)"
+}

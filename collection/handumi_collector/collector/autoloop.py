@@ -36,7 +36,7 @@ DEFAULTS = dict(enabled=True, episode_s=10.0, reset_s=10.0, min_still_s=1.0, hol
 #   the hold_after_rec_s inside the recording. 3 s + 3 s asked for 6 s of stillness per episode -- the operator felt asked all the time.
 COLOR_KO = {"R": "빨강", "B": "파랑", "P": "보라", "G": "초록", "Y": "노랑", "O": "주황", "W": "하양", "K": "검정"}
 CUES = dict(reset="리셋하세요", episode_n="에피소드 {n}", next_order="다음 순서: {colors}", ready="준비하세요", go="고", stop="스톱", saved="저장 완료",
-            fail="에피소드 실패. 확인하세요", warn="저장, 경고", done="목표 달성. 자동 녹화 종료", off="자동 녹화 종료", paused="일시 정지")
+            still="손 멈추세요", blocked="장치 확인하세요", fail="에피소드 실패. 확인하세요", warn="저장, 경고", done="목표 달성. 자동 녹화 종료", off="자동 녹화 종료", paused="일시 정지")
 
 
 class Speaker:
@@ -111,6 +111,15 @@ class AutoLoop:
             s.say("AUTO: interrupted take left in REVIEW -- KEEP (K) or DISCARD (D)")
         self.phase = "OFF"; self.speaker.say(CUES["off"]); s.say(f"AUTO loop off ({reason})")
 
+    def finish_early(self) -> bool:
+        """[2026-10-12 user "빨리 끝나면 내가 넘길수 있게"] operator ends the EPISODE before episode_s: same path as the timer
+        (스톱 cue -> stop -> validation -> KEEP/pause -> RESET), not the "recording ended during the episode" pause."""
+        if self.phase != "EPISODE":
+            return False
+        self._event("finish_early", dict(at_s=round(self.elapsed(), 2), episode_s=float(self.cfg["episode_s"])))
+        self.phase_start = self._now() - float(self.cfg["episode_s"]) - 1.0
+        return True
+
     @property
     def active(self) -> bool: return self.phase in ("RESET", "ARMING", "HOLD", "PREP", "EPISODE")
 
@@ -152,7 +161,10 @@ class AutoLoop:
             order = getattr(s, "order", "") or ""
             n_next = self._session_kept() + 1                                     # "에피소드 12" = the one about to be recorded (session count)
             nxt = getattr(s.cfg.tasks, "instruction_voice", None) or CUES['next_order'].format(colors=order_words(order))
-            self.speaker.say(f"{prefix + '. ' if prefix else ''}{CUES['reset']}. {CUES['episode_n'].format(n=n_next)}. {nxt}")
+            # [2026-10-12 user] per-mode short cues: cue_reset "" drops "리셋하세요", announce_task false drops the task / colours
+            parts = [prefix, self.cfg.get("cue_reset", CUES["reset"]), CUES["episode_n"].format(n=n_next),
+                     nxt if bool(self.cfg.get("announce_task", True)) else ""]
+            self.speaker.say(". ".join(x for x in parts if x))
             self._event("reset_start", dict(order=order, reset_s=float(self.cfg["reset_s"]), episode_n=n_next))
             s.say(f"AUTO: reset {float(self.cfg['reset_s']):.0f} s, next order {order} ({order_words(order)})")
         elif phase == "ARMING":
@@ -168,13 +180,17 @@ class AutoLoop:
         s = self.session
         if self.phase == "RESET":
             if self.left_s() <= float(self.cfg.get("ready_cue_s", 2.0)) and "ready" not in self._spoken:
-                self._spoken.add("ready"); self.speaker.say(CUES["ready"]); self._event("ready_cue")
+                self._spoken.add("ready"); self.speaker.say(str(self.cfg.get("cue_ready", CUES["ready"]))); self._event("ready_cue")   # [2026-10-12] UMI100: "마커에 두세요"
             if self.left_s() > 0: return
             if bool(self.cfg.get("stop_when_targets_met", True)) and self._targets_met():
                 self.phase = "DONE"; self.speaker.say(CUES["done"]); s.say("AUTO: all order targets met"); return
             ok, why = s.can_record()
             if not ok:
-                if "blocked" not in self._spoken: self._spoken.add("blocked"); s.say(f"AUTO: cannot start yet — {why}")
+                # [2026-10-12] this wait used to be silent: the operator heard 준비하세요 and then nothing. Say it, every 10 s.
+                k = int((self.elapsed() - float(self.cfg["reset_s"])) // 10.0)
+                if f"blocked_{k}" not in self._spoken:
+                    self._spoken.add(f"blocked_{k}"); s.say(f"AUTO: cannot start yet — {why}")
+                    self.speaker.say(CUES["blocked"]); self._event("blocked", dict(why=str(why)))
                 return
             s.request_start(); self._enter("ARMING")
             return
@@ -183,6 +199,12 @@ class AutoLoop:
                 self._flush_pending(); self._event("rec_start"); self.phase = "HOLD"; self.phase_start = self._now(); self._spoken = set()
             elif s.state == "IDLE":
                 s.say("AUTO: start was cancelled (device?), retrying after a reset"); self._enter("RESET")
+            else:
+                # [2026-10-12 user "준비하세요만 나오고 고가 안나와"] REC only starts once BOTH wrists are still; without a cue the
+                # operator heard nothing after 준비하세요 and kept moving. Say "손 멈추세요" after still_cue_s, then every still_cue_every_s.
+                k = int((self.elapsed() - float(self.cfg.get("still_cue_s", 3.0))) // float(self.cfg.get("still_cue_every_s", 8.0)))
+                if k >= 0 and f"still_{k}" not in self._spoken:
+                    self._spoken.add(f"still_{k}"); self.speaker.say(CUES["still"]); self._event("still_cue", dict(waited_s=round(self.elapsed(), 1)))
             return
         if self.phase == "HOLD":
             if s.state != "RECORDING": self._pause("recording ended during the hold"); return

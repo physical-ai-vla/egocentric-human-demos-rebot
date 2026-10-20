@@ -4,7 +4,7 @@ Position: linear.  Rotation: quaternion SLERP.  Gripper: linear.  A query time i
 raw sample, or between two consecutive VALID raw samples at most ``max_gap_s`` apart.  Nothing is extrapolated,
 padded or held: a query outside the valid raw support is invalid (pose = identity placeholder, gripper = NaN).
 State history (t - UMI_DT) and action targets (t + k UMI_DT) are evaluated with ``PoseTrack.sample`` on the RAW
-track, never on the 15 Hz rows (design decision D1).
+track, never on the 15 Hz rows (user decision D1).
 """
 import numpy as np
 from ..geometry.rotation6d import matrix_to_quaternion, quaternion_to_matrix, slerp

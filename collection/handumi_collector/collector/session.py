@@ -5,6 +5,7 @@
     RECORDING --required-device error (poll)--> ERROR_REVIEW --KEEP (with warning) / DISCARD--> IDLE
 """
 from __future__ import annotations
+import json
 import logging
 import shutil
 import time
@@ -62,6 +63,9 @@ class CollectorSession:
 
     def say(self, msg: str) -> None:
         self.log_lines.append(msg); log.info(msg)
+        try:                                                    # [2026-10-12] persisted so a stuck AUTO can be diagnosed afterwards
+            with open(self.manager.session_dir / "session_log.txt", "a") as f: f.write(f"{time.strftime('%H:%M:%S')} {msg}\n")
+        except Exception: pass
 
     # ------------------------------------------------------------- gates
     def disk(self) -> dict:
@@ -181,9 +185,29 @@ class CollectorSession:
         self.say(f"AUTO loop on: {float(c['episode_s']):.0f} s stack / {float(c['reset_s']):.0f} s reset, spoken cues")
         self.auto.start(); return True
 
+    def _dump_status(self) -> None:
+        """[2026-10-12] every 2 s: each device's connected/error/rate + can_record(), to <session>/device_status.json, so a
+        red light in the UI can be diagnosed from outside the (sudo) process."""
+        now = time.monotonic()
+        if now - getattr(self, "_last_dump", 0.0) < 2.0: return
+        self._last_dump = now
+        try:
+            devs = {}
+            for d in self.devices.all_devices():
+                st = d.status()
+                devs[d.name] = dict(connected=st.connected, error=st.error, rate_hz=round(st.rate_hz or 0.0, 1), age_ms=st.age_ms,
+                                    running_for_s=round(getattr(st, "running_for_s", 0.0) or 0.0, 1))
+            ok, why = self.can_record()
+            out = dict(t=time.strftime("%H:%M:%S"), state=self.state, can_record=[ok, why],
+                       auto=getattr(self.auto, "phase", None) if self.auto else None, errors=dict(self.devices.errors), devices=devs)
+            (self.manager.session_dir / "device_status.json").write_text(json.dumps(out, indent=1, default=str))
+        except Exception as exc:
+            log.debug("status dump failed: %s", exc)
+
     def poll(self) -> str | None:
         """Call periodically (UI timer). During RECORDING a required device error stops the episode -> ERROR_REVIEW."""
         if self.auto is not None and self.auto.active: self.auto.tick()
+        self._dump_status()
         if self.state == "WAITING_FOR_STILLNESS": return self._poll_stillness(time.monotonic_ns())
         if self.state != "RECORDING" or not self.recorder: return None
         if self._hold_until_ns is not None and self.gate is not None: self._poll_hold(time.monotonic_ns())
@@ -274,8 +298,30 @@ class CollectorSession:
                     hw_errors=sum(1 for e in r.events if e["kind"] in ("device_error", "critical_device_error", "recorder_error")),
                     events=summ["event_kinds"], n_events=summ["n_events"], verdict=verdict, notes=notes, head_video=str(r.episode_dir / "head.mp4"))
 
+    # [2026-10-12 UMI100 spec §8] per-episode metadata: garment_id / initial_state set BEFORE the take (persist across takes),
+    # outcome (success / failure / partial) + notes usually decided AFTER it -> amend_last() patches the kept episode_meta.json.
+    episode_tags: dict = None
+
+    def set_episode_tags(self, **kw) -> None:
+        self.episode_tags = dict(self.episode_tags or {}, **{k: v for k, v in kw.items() if v is not None})
+
+    def _stamp_tags(self) -> None:
+        if self.recorder is not None and self.episode_tags:
+            t = {k: v for k, v in self.episode_tags.items() if k in ("garment_id", "initial_state")}
+            self.recorder.extra_meta["umi_tags"] = dict(t, outcome=None, outcome_notes="")
+
+    def amend_last(self, **kw) -> str:
+        """Patch umi_tags of the last KEPT episode (outcome / outcome_notes / garment_id / initial_state)."""
+        ep = getattr(self, "last_episode_dir", None)
+        if ep is None or not (ep / "episode_meta.json").exists(): return "no kept episode yet"
+        m = json.loads((ep / "episode_meta.json").read_text()); t = dict(m.get("umi_tags") or {})
+        t.update({k: v for k, v in kw.items() if v is not None}); t["amended_wall"] = time.strftime("%Y-%m-%dT%H:%M:%S%z"); m["umi_tags"] = t
+        tmp = ep / "episode_meta.json.tmp"; tmp.write_text(json.dumps(m, indent=1)); tmp.replace(ep / "episode_meta.json")
+        self.say(f"amended {ep.name}: {t}"); return f"{ep.name}: {t}"
+
     def keep(self, notes: str = "") -> dict:
         assert self.recorder and self.state in ("REVIEW", "ERROR_REVIEW")
+        self._stamp_tags(); self.last_episode_dir = self.recorder.episode_dir
         auto = self.review_summary()["verdict"]
         if self.state == "ERROR_REVIEW": notes = (notes + " | KEEP_WITH_WARNING: required device failed during recording").strip(" |")
         meta = self.recorder.finalize(status="KEEP", quality=auto, notes=notes)
@@ -284,6 +330,7 @@ class CollectorSession:
 
     def discard(self, notes: str = "") -> Path:
         assert self.recorder and self.state in ("REVIEW", "ERROR_REVIEW")
+        self._stamp_tags()
         self.recorder.finalize(status="DISCARD", quality="REJECT", notes=notes)
         dst = self.manager.discard(self.recorder.episode_dir)
         self._next(); return dst

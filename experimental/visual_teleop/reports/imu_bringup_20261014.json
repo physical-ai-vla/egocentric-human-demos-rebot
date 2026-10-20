@@ -1,0 +1,53 @@
+{
+ "teensy": {
+  "serial": "20540160",
+  "port": "/dev/cu.usbmodem205401601",
+  "samples": 3979,
+  "rate_hz_device": 197.91590275672274,
+  "max_gap_ms_device": 5.053,
+  "max_gap_ms_host": 20.555292,
+  "seq_lost": 0,
+  "ahrs_ready": true,
+  "gyro_bias_rad_s": [
+   0.003565156420496241,
+   -0.0053102630167151214,
+   0.00033724452626315794
+  ],
+  "g_rest": 9.85661464730634,
+  "acc_correction_share": 1.0,
+  "ahrs_gaps": 0,
+  "tilt_deg_final": 29.312116272220646,
+  "yaw_drift_deg": -0.014204139554777085,
+  "yaw_drift_deg_per_min": -0.044661448909247295,
+  "device_status": {
+   "t_us": 4302098000,
+   "sample_rate_hz": 200,
+   "emitted": 4707,
+   "dropped": 850811,
+   "fw": "1.0",
+   "ring_high_water": 1
+  }
+ },
+ "xiao": {
+  "serial": "4A65C2BC893657D2",
+  "port": "/dev/cu.usbmodem31101",
+  "samples": 0,
+  "rate_hz_device": 0.0,
+  "max_gap_ms_device": null,
+  "max_gap_ms_host": null,
+  "seq_lost": 0,
+  "ahrs_ready": false,
+  "gyro_bias_rad_s": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "g_rest": 9.80665,
+  "acc_correction_share": 0.0,
+  "ahrs_gaps": 0,
+  "tilt_deg_final": 0.0,
+  "yaw_drift_deg": null,
+  "yaw_drift_deg_per_min": null,
+  "device_status": null
+ }
+}

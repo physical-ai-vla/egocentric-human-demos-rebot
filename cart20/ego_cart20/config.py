@@ -1,4 +1,4 @@
-"""Frozen contract constants for the ego CART20 pipeline (spec v2 + design decisions 2026-10-01).
+"""Frozen contract constants for the ego CART20 pipeline (spec v2 + user decisions 2026-10-01).
 
 Every number that defines the meaning of a stored value lives here and is written into metadata.json.
 Change nothing here without reporting it first: the reBot v4 fine-tuning data uses the same contract.

@@ -100,8 +100,9 @@ def stats(X):
     return d
 
 
-def fix_stats(root):
-    """recompute state / action stats from the written parquet; AUX12 mean 0 std 1; aux.q_t zeros"""
+def fix_stats(root, binary_gripper=False):
+    """recompute state / action stats from the written parquet; AUX12 mean 0 std 1; aux.q_t zeros.
+    [2026-10-08] binary_gripper: action grippers 9, 19 also mean 0 / std 1, so the MEAN_STD normaliser passes the 0/1 BCE target through"""
     import glob, pyarrow as pa, pyarrow.parquet as pq
     col = lambda t, c: (lambda x: x.storage if isinstance(x, pa.ExtensionArray) else x)(t.column(c).combine_chunks())
     S, A = [], []
@@ -112,6 +113,9 @@ def fix_stats(root):
     assert A.shape[1:] == (32, 32) and np.count_nonzero(A[..., 20:]) == 0 and np.isfinite(S).all() and np.isfinite(A).all()
     st = json.load(open(root / "meta/stats.json"))
     ss = stats(S); sa = stats(A.reshape(-1, 32)); sa["mean"][20:] = 0.0; sa["std"][20:] = 1.0
+    if binary_gripper:
+        G = A[..., [9, 19]]; assert G.min() >= 0.0 and G.max() <= 1.0, f"binary gripper target outside [0, 1]: {G.min()} {G.max()}"
+        sa["mean"][[9, 19]] = 0.0; sa["std"][[9, 19]] = 1.0
     st["observation.state"] = {k: v.tolist() for k, v in ss.items()}; st["action"] = {k: v.tolist() for k, v in sa.items()}
     if "aux.q_t" in st: st["aux.q_t"] = {k: ([0.0] * 12 if k != "count" else st["aux.q_t"]["count"]) for k in st["aux.q_t"]}
     json.dump(st, open(root / "meta/stats.json", "w"), indent=4)
@@ -120,7 +124,10 @@ def fix_stats(root):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("processed"); ap.add_argument("out"); ap.add_argument("--name", default="ego_cart20_v2")
-    ap.add_argument("--workers", type=int, default=6); ap.add_argument("--splits", nargs="*", default=["train", "val"]); a = ap.parse_args()
+    ap.add_argument("--workers", type=int, default=6); ap.add_argument("--splits", nargs="*", default=["train", "val"])
+    ap.add_argument("--binary-gripper", action="store_true", help="[2026-10-08] BCE build: identity stats on action dims 9, 19")
+    ap.add_argument("--shards-only", action="store_true", help="[2026-10-08] write the per-episode shards and stop (4090 disk: raw / processed "
+                    "episodes can then be deleted; a rerun skips .complete shards and only aggregates)"); a = ap.parse_args()
     P, OUT = pathlib.Path(a.processed), pathlib.Path(a.out); SH = OUT / f"{a.name}_shards"; report = {}
     import os
     if os.environ.get("AGG_PATCH", "1") == "1": sys.path.insert(0, str(AGG)); import agg_patch; agg_patch.install()   # Mac lerobot 0.5.2 only
@@ -132,14 +139,16 @@ if __name__ == "__main__":
         jobs = [(str(P / r["path"]), str(SH / s / r["episode_id"])) for r in man]
         with ProcessPoolExecutor(a.workers) as ex:
             for rec in ex.map(write_shard, jobs): print(s, json.dumps(rec), flush=True)
+        if a.shards_only: print(f"{s}: SHARDS DONE {len(jobs)}", flush=True); continue
         dst = OUT / f"{a.name}_{s}"; tmp = OUT / f"{a.name}_{s}.tmp"; shutil.rmtree(tmp, ignore_errors=True)
         aggregate_datasets(repo_ids=[f"local/{pathlib.Path(sr).name}" for _, sr in jobs], aggr_repo_id=f"local/{a.name}_{s}",
                            roots=[pathlib.Path(sr) for _, sr in jobs], aggr_root=tmp)
-        report[s] = dict(episodes=len(jobs), **fix_stats(tmp))
+        report[s] = dict(episodes=len(jobs), **fix_stats(tmp, a.binary_gripper))
         assert not dst.exists(), f"{dst} exists"; tmp.rename(dst); print(s, report[s], flush=True)
-        json.dump(dict(schema="softfold_cart20_h32_lerobot/v1", processed=str(P.resolve()), split=s, report=report[s],
+        json.dump(dict(schema="softfold_cart20_h32_bin_lerobot/v1" if a.binary_gripper else "softfold_cart20_h32_lerobot/v1", processed=str(P.resolve()), split=s, report=report[s],
                        processed_metadata_sha256=hashlib.sha256((P / "metadata.json").read_bytes()).hexdigest(),
                        exporter_sha256=hashlib.sha256(HERE.read_bytes()).hexdigest(), agg_patch_sha256=hashlib.sha256((AGG / "agg_patch.py").read_bytes()).hexdigest(),
-                       recipe="umi_bridge/RELCART20_RELONLY_D6_RECIPE.md", state="RELCART20 task anchor", aux12="zero", aux_q_t="NaN placeholder"),
+                       recipe="umi_bridge/RELCART20_RELONLY_D6_RECIPE.md", state="RELCART20 task anchor", aux12="zero", aux_q_t="NaN placeholder",
+                       gripper="binary_bce_dims_9_19_identity_norm" if a.binary_gripper else "continuous_mse"),
                   open(dst / "EXPORT.json", "w"), indent=1)
     print("EXPORT DONE", json.dumps(report))

@@ -1,0 +1,31 @@
+created: '2026-10-15T19:41:18'
+camera: trackcam fisheye on the UMI body (USB 0x00140000)
+imu: right UMI Teensy 20778070
+R_CI:
+- - -0.067869
+  - 0.997047
+  - 0.035925
+- - -0.993643
+  - -0.064308
+  - -0.092398
+- - -0.089814
+  - -0.041967
+  - 0.995074
+R_CI_rotvec_deg:
+- 2.37
+- 5.92
+- -93.71
+offset_ms: 28.0
+offset_note: t_imu_host + offset_ms = camera host time; per SESSION, never hard-code
+quality:
+  vec_corr:
+  - 0.979
+  - 0.989
+  - 0.966
+  mag_corr: 0.958
+  residual_rate_rms_deg_s: 54.65
+  rate_rms_deg_s: 246.7
+t_CI_m: null
+t_CI_note: translation not estimated (rotation-only); measure with a ruler or let
+  the VIO refine online
+source: datasets/trackcam_imu/20261015_193928/

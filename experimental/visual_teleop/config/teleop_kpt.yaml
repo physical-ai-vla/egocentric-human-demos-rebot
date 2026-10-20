@@ -1,0 +1,6 @@
+# Markerless UMI (2026-10-15): position = Orbbec RGB-D + YOLOv8n-pose jaw-tip keypoint (~/finger_distill/umi_kpt.onnx), orientation = UMI IMU.
+# No tape, no tag, no tracker. Pass to BOTH processes:
+#   sudo .venv/bin/python -m visual_teleop.tools.sensor_hub --config visual_teleop/config/teleop_kpt.yaml
+#   ~/xvla-mac/bin/python -m visual_teleop.tools.live_teleop --config visual_teleop/config/teleop_kpt.yaml --stage 2 --arm right --live
+fusion:
+  position: {source: kpt}

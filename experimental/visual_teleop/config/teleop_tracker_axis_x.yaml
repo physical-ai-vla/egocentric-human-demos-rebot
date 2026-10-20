@@ -1,0 +1,31 @@
+# 10-16 per-axis bring-up (user: "앞뒤부터 잡자, 그다음 좌우"): copy of teleop_tracker.yaml with ONE translation axis and rotation locked.
+# 6DoF tracker pose source (2026-10-15). Pass to BOTH processes:
+#   .venv/bin/python -m visual_teleop.tools.sensor_hub --config visual_teleop/config/teleop_tracker.yaml --no-rgbd --no-imu
+#   ~/xvla-mac/bin/python -m visual_teleop.tools.live_teleop --config visual_teleop/config/teleop_tracker.yaml ...
+fusion:
+  position: {source: tracker}
+cameras:
+  # 10-16 stereo VIO tracker: the two Arducams take OpenCV indices that collide with top_cam.cv_index 3 -> no top-view recording here
+  top_cam: {record: false}
+workspace:
+  # 10-16 (user: VR-style soft workspace projection first): a target outside the box is PROJECTED onto it (nearest point, orientation
+  # kept) instead of a HOLD -- the 13:05 robot run had 29 safety rejects. target_jump / NaN still HOLD.
+  mode: clamp
+retarget:
+  orientation_mode: lock   # AXIS TEST: rotation locked, position only
+  # 10-16 VR/mocap mapping layer (user priority list): attenuate wrist roll/pitch, keep yaw (laundry); revert to [1, 1, 1] if it feels sluggish
+  rotation_axis_scale: [1.0, 1.0, 1.0]   # 10-16 robot8 (user): full-scale first to see what the robot can follow (robot7 was [0.6, 0.85, 1.0])
+  rotation_heading: robot   # 10-16 ep 143849: robot gripper pointed at RB +y, hand nose-dive became gripper roll (tilt gain 0.19) -> map the hand heading onto the robot gripper heading
+  translation_scale: [1.0, 0.0, 0.0]   # AXIS TEST x: forward/back only (base teleop_tracker.yaml: [1.2, 1.2, 1.4])   # 10-16 robot8 (user: '내가 간 거리보다 덜 간다'); robot7 [1.0, 1.0, 1.3]
+  # 10-16 (SOTA retargeting advice): translation of the JAW TIP directly, rotation separately attenuated (rotation_axis_scale).
+  # The pivot matching (0.20 / 0.25 m behind the tips) turned a wrist-flex lift into a pivot that barely moved -> "위로 덜 간다"
+  # once pitch was attenuated. 0 / 0 = rotate about the TCP; restore 0.20 / 0.25 if the wrist-twist complaint of 10-15 comes back.
+  pivot_human_m: 0.0
+  pivot_robot_m: 0.0   # 10-16 user: "위로 움직이는게 좀 적다" -> vertical gain 1.3 (heading frame z = up)
+limits:
+  max_lin_vel_m_s: 0.30   # 10-16 user: "reactive하지 않다" -> 0.2 -> 0.3 (rotation stays 45 deg/s = bridge max)
+  # 10-16 speed-adaptive (One-Euro style) robot-side filter: smooth when slow, low lag when fast
+  filter: {alpha_pos: 0.35, alpha_rot: 0.3, mode: one_euro, min_cutoff_hz: 1.2, min_cutoff_rot_hz: 1.5, beta_pos: 40.0, beta_rot: 4.0, d_cutoff_hz: 1.0, deadband_m: 0.0, deadband_deg: 0.0, predict_s: 0.02, dt_s: 0.0333}   # 10-16 sim: deadband no gain with this filter; 40 ms overshoot 9 mm -> 20 ms   # user 10-16: pos 1.2 Hz / beta 0.03 per mm/s, rot 1.8 Hz / ~0.05 per deg/s
+ik:
+  # 10-16 robot8 (user): orientation tracking weight 0.3 -> 0.6. (rest_weight is pyroki-only; Pink's posture_cost 0.001 pulls to the seed, not to rest)
+  pink: {position_cost: 1.0, orientation_cost: 0.6, posture_cost: 0.001, lm_damping: 0.0001, dt: 0.1, iters: 40, max_joint_delta_deg: 2.8}

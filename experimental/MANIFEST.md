@@ -38,3 +38,12 @@ working tree. The source was only read, never modified.
 - `ego_teleop` imports `handumi_collector`, so install `../collector` in the same environment.
 - Some docs and tools hardcode `/Users/jeonghwanlee/...`, `~/robot-cockpit`, or `sudo` camera access. They were left
   as-is.
+
+## Update 2026-10-20
+
+| source | dest | notes |
+|---|---|---|
+| `~/ego_collector/visual_teleop/` | `visual_teleop/` | HandUMI-as-teleop package (tracker6dof, stereo VIO tracker, jaw-tape / ResNet18 gripper, Pink IK, safety, dashboard, tag-rig and replay tools). `*.pt` excluded. Runs with `~/xvla-mac` (venv) for `live_teleop`, `~/finger_distill/.venv` for the keypoint students |
+| `~/ego_collector/tests/vteleop/` | `tests/vteleop/` | |
+| `~/ego_collector/scripts/{trackcam_*,stereo_*,vio_verify,dpvo_eval_metrics,m3_imu_eval_metrics,fisheye_calib_robust,intrinsics_compare,umi_kpt_*,umi_body_kpt_dataset,finger_*}.py` | `scripts/umi_teleop_eval/` | wrist-tracking evaluations; mostly NO-GO results, kept as the record (see `docs/UPDATE_2026-10-20.md` Sec. 6) |
+| `~/ego_collector/docs/ego_teleop/*.md` | `docs/ego_teleop/` | adds `VISUAL_TELEOP_MVP_GAP.md` |

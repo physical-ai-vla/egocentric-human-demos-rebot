@@ -58,3 +58,11 @@ Files that exist only in `~/ego_cart20` were added, because they are newer:
 
 - `calibration/README.md` is the repo copy. `~/ego_cart20/README.md` was flagged as "newer", but only because the basename matches; it is a different document and is copied to `cart20/README.md`.
 - Scripts reference the working roots `~/c8`, `~/umi_bridge`, `~/ego_collector`, `~/ego_cart20`, `/srv/data/johann` (5090 NFS) and `/home/bh-aiteam` (4090).
+
+## Update 2026-10-20
+
+- `../cart20/ego_cart20/` (top-level `cart20/` in this repo) re-synced from `~/ego_cart20/ego_cart20`: new `umi_fusion/` (relpose, fusion, smoother,
+  `run_smoother.py`), `robotize/` (core, rebot, `run_robotize.py`), `sources/hfold_export.py`, `sources/jaw_visual.py`
+  (visual binary gripper), `sources/trim.py`, `softfold_bin.py`; tests `test_umi_fusion`, `test_umi_relpose`,
+  `test_robotize` (40/40 pass on the repo copy, `~/laundry_dit_training/.venv-mac`, needs pin/pink for robotize).
+- New `umi_laundry/` and `umi_robot_parity/`, each with its own README and MANIFEST.

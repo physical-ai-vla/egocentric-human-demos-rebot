@@ -26,7 +26,7 @@ cameras:
   required: true
   strict_identity: false
   strict_format: true
-  index: 2
+  # index removed 2026-10-12: a pinned OpenCV index broke when the Orbbec RGB node joined the listing; resolved by name + darkening probe
 - name: right_wrist
   role: pose_estimation
   backend: uvc
@@ -39,7 +39,7 @@ cameras:
   required: true
   strict_identity: false
   strict_format: true
-  index: 1
+  # index removed 2026-10-12: a pinned OpenCV index broke when the Orbbec RGB node joined the listing; resolved by name + darkening probe
 # Restored 2026-09-18. The wrist IMUs were always part of the intended design; they were absent from this profile by
 # configuration, not by decision, and that absence is why ego16's IMU-gravity R_align could not be used on the pilot.
 # Their job in the final fusion is ORIENTATION, never translation:

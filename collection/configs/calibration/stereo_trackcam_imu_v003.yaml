@@ -1,0 +1,32 @@
+created: '2026-10-16T12:46:03'
+source: datasets/stereo_imu/20261016_124454_rot
+imu: right UMI XIAO nRF52840 Plus 63ACF722D6DCE23F (416 Hz)
+reference_camera: cam_left = Arducam 0x03110000 (C0)
+stereo_calib: configs/calibration/stereo_trackcam_v004.yaml
+R_C0I:
+- - 0.993863
+  - 0.110462
+  - 0.005801
+- - 0.084226
+  - -0.721726
+  - -0.687035
+- - -0.071704
+  - 0.683308
+  - -0.726601
+R_C0I_rotvec_deg:
+- 136.41
+- 7.72
+- -2.61
+offset_ms: 37.25
+offset_note: t_imu_host + offset_ms = camera host time (per session); w_cam = R_C0I
+  w_imu
+quality:
+  vec_corr:
+  - 0.977
+  - 0.944
+  - 0.971
+  residual_rate_rms_deg_s: 32.32
+  rate_rms_deg_s: 119.7
+  right_check_deg: 2.85
+t_C0I_m: null
+t_C0I_note: lever not measured for the XIAO mount (tracker default --t-ci)

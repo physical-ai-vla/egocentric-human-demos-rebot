@@ -1,0 +1,49 @@
+{
+ "samples": 8479,
+ "rate_hz_device": 1.9646112376325435,
+ "rate_hz_host": 422.7918194951979,
+ "device_ts_monotonic": true,
+ "dt_us_p50_p99_max": [
+  2405.0,
+  2428.0,
+  4294969699
+ ],
+ "seq_gaps": 0,
+ "seq_lost": 0,
+ "host_gap_ms_max": 17.977292,
+ "acc_mean": [
+  -1.111,
+  -0.176,
+  10.131
+ ],
+ "acc_norm": 10.193565420924847,
+ "acc_std": [
+  0.0458,
+  0.0566,
+  0.0291
+ ],
+ "gyro_mean": [
+  -0.0122,
+  -0.0391,
+  0.0568
+ ],
+ "gyro_std": [
+  0.0075,
+  0.0039,
+  0.0024
+ ],
+ "acc_unique_vals": 126,
+ "ahrs_ready": true,
+ "tilt_deg": 6.199850327391935,
+ "acc_corr_share": 1.0,
+ "yaw_drift_deg_per_min": -1.083092482726543,
+ "device_status": {
+  "t_us": 4339688626,
+  "sample_rate_hz": 416,
+  "emitted": 9900,
+  "dropped": 8694,
+  "fw": "1.0",
+  "ring_high_water": 1
+ },
+ "temp_c": 27.47175927290954
+}
